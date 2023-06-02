@@ -67,6 +67,13 @@ module.exports = {
             fontWeight: "400",
           },
         ],
+        "2xs": [
+          "0.625rem",
+          {
+            lineHeight: "1",
+            fontWeight: "400",
+          },
+        ],
       },
     },
     plugins: [],
