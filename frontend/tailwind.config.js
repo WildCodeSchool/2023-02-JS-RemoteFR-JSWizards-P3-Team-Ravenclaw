@@ -15,7 +15,8 @@ module.exports = {
         neutralLightest: "#F5F5F5",
         success: "#29C04A",
         successLight: "#E0FFE5",
-        error: "#EA3829",
+        error: "#F07472",
+        errorDark: "#EA3829",
         errorLight: "#FFEBE7",
       },
 
