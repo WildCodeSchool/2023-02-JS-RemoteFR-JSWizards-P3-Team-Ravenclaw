@@ -1,7 +1,7 @@
 export default function Navbar() {
   return (
     <header>
-      <nav>Test</nav>
+      <nav>Navbar</nav>
     </header>
   );
 }
