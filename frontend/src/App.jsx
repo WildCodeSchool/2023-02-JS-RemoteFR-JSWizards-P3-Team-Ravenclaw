@@ -24,7 +24,7 @@ export default function App() {
       </header>
       <main>
         <Routes>
-          <Route index path="/Home" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/Videos" element={<Videos />} />
           <Route path="/Pricing" element={<Pricing />} />
           <Route path="/About" element={<About />} />
