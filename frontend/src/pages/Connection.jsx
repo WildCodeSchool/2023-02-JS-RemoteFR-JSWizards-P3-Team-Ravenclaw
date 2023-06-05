@@ -1,4 +1,4 @@
-import Connect from "../components/Connect";
+import Connect from "../components/Connection/Connected";
 
 export default function Connection() {
   return (
