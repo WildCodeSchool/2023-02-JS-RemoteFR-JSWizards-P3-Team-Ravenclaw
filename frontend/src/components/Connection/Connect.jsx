@@ -1,5 +1,4 @@
 import { useState } from "react";
-import * as Components from "../../helpers/connect";
 
 // assets
 import SignForm from "./SignForm";
@@ -42,9 +41,27 @@ export default function Connect() {
         />
       </div>
 
-      <Components.OverlayContainer signinIn={signIn}>
-        <Components.Overlay signinIn={signIn}>
-          <Components.LeftOverlayPanel signinIn={signIn}>
+      <div
+        className={`overlay-container ${
+          signIn !== true
+            ? " -translate-y-full transform md:-translate-x-full md:translate-y-0"
+            : null
+        }`}
+      >
+        <div
+          className={`overlay ${
+            signIn !== true
+              ? "translate-y-2/4 transform md:translate-x-2/4 md:translate-y-0"
+              : null
+          }`}
+        >
+          <div
+            className={`overlay-panel leftoverlay-panel ${
+              signIn !== true
+                ? " translate-y-0 transform md:translate-x-0"
+                : null
+            }`}
+          >
             <h2 className="font-header text-xl uppercase text-neutralLightest">
               Welcome back!
             </h2>
@@ -58,9 +75,15 @@ export default function Connect() {
             >
               Sign In
             </button>
-          </Components.LeftOverlayPanel>
+          </div>
 
-          <Components.RightOverlayPanel signinIn={signIn}>
+          <div
+            className={`overlay-panel rightoverlay-panel ${
+              signIn !== true
+                ? " translate-y-[120%] transform md:translate-x-[20%] md:translate-y-0"
+                : null
+            }`}
+          >
             <h2 className="font-header text-xl uppercase text-neutralLightest">
               Hello!
             </h2>
@@ -75,9 +98,9 @@ export default function Connect() {
             >
               Create Account
             </button>
-          </Components.RightOverlayPanel>
-        </Components.Overlay>
-      </Components.OverlayContainer>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
