@@ -6,7 +6,7 @@ export default function Contact() {
     <div className="contact-us">
       <div className="flex justify-center">
         <form
-          className=" bg-form flex flex-col items-center justify-center py-8 dark:bg-black w-11/12 rounded-lg md:w-2/4 lg:w-2/5 "
+          className=" bg-form flex flex-col items-center justify-center py-8 md:px-6 dark:bg-black w-11/12 rounded-lg md:w-2/4 lg:w-2/5 "
           onSubmit={handleFormSubmit}
         >
           <div>
