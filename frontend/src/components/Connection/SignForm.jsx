@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 // assets
 import passHide from "../../../public/assets/icon/utility/eyeSlash.svg";
 import passShow from "../../../public/assets/icon/dashboard/watch.svg";
@@ -81,3 +83,15 @@ export default function SignForm({
     </form>
   );
 }
+
+SignForm.propTypes = {
+  isSignIn: PropTypes.bool.isRequired,
+  email: PropTypes.string.isRequired,
+  setEmail: PropTypes.func.isRequired,
+  password: PropTypes.string.isRequired,
+  setPassword: PropTypes.func.isRequired,
+  passwordVisible: PropTypes.bool.isRequired,
+  passwordConfVisible: PropTypes.bool.isRequired,
+  handlePassVisibility: PropTypes.func.isRequired,
+  handlePassConfVisibility: PropTypes.func.isRequired,
+};
