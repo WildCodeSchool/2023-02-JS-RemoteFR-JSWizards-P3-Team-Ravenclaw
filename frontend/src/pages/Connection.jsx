@@ -1,7 +1,9 @@
+import Connect from "../components/Connect";
+
 export default function Connection() {
   return (
     <section>
-      <div>Connection</div>
+      <Connect />
     </section>
   );
 }
