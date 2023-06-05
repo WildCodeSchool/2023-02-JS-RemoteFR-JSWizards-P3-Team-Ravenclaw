@@ -1,7 +1,9 @@
+import DashNavbar from "../components/dashboard/DashNavbar";
+
 export default function DashLayout() {
   return (
     <section>
-      <div>DashLayout</div>
+      <DashNavbar />
     </section>
   );
 }
