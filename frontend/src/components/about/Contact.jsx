@@ -1,8 +1,7 @@
 export default function Contact() {
-
   const handleFormSubmit = (e) => {
     e.preventDefault();
-  }
+  };
   return (
     <div className="contact-us">
       <div className="flex justify-center">
@@ -41,11 +40,12 @@ export default function Contact() {
               required
             />
           </div>
-          <input
+          <button
             className="mt-2 rounded bg-gray-300 submit w-[80vw] md:w-[350px] xl:w-[500px] h-10 text-white bg-gradient-to-b from-indigo-500 to-indigo-700"
             type="submit"
-            value="Send"
-          />
+          >
+            Send
+          </button>
         </form>
       </div>
     </div>
