@@ -1,7 +1,7 @@
 export default function Videos() {
   return (
     <section>
-      <div>Test</div>
+      <div>Videos</div>
     </section>
   );
 }

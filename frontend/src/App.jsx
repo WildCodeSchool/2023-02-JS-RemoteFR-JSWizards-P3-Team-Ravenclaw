@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  RouterProvider,
-  Route,
-} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 // Pages
 import Home from "./pages/Home";
@@ -17,28 +12,31 @@ import Admin from "./pages/Admin";
 import User from "./pages/User";
 
 // Layout
-import RootLayout from "./layout/RootLayout";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import DashLayout from "./layout/DashLayout";
 
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <>
-      <Route path="/" element={<RootLayout />}>
-        <Route index path="/Home" element={<Home />} />
-        <Route path="/Videos" element={<Videos />} />
-        <Route path="/Pricing" element={<Pricing />} />
-        <Route path="/About" element={<About />} />
-        <Route path="/Connection" element={<Connection />} />
-        <Route path="*" element={<NotFound />} />
-      </Route>
-      <Route path="/" element={<DashLayout />}>
-        <Route path="/Admin" element={<Admin />} />
-        <Route path="/User" element={<User />} />
-      </Route>
-    </>
-  )
-);
-
 export default function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <header>
+        <Navbar />
+      </header>
+      <main>
+        <Routes>
+          <Route index path="/Home" element={<Home />} />
+          <Route path="/Videos" element={<Videos />} />
+          <Route path="/Pricing" element={<Pricing />} />
+          <Route path="/About" element={<About />} />
+          <Route path="/Connection" element={<Connection />} />
+          <Route path="*" element={<NotFound />} />\{" "}
+          <Route path="/" element={<DashLayout />}>
+            <Route path="/Admin" element={<Admin />} />
+            <Route path="/User" element={<User />} />
+          </Route>
+        </Routes>
+      </main>
+      <Footer />
+    </>
+  );
 }

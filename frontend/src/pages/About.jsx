@@ -1,7 +1,7 @@
 export default function About() {
   return (
     <section>
-      <div>Test</div>
+      <div>About</div>
     </section>
   );
 }
