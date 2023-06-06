@@ -1,4 +1,5 @@
 import { useState } from "react";
+import DashDropdown from "./DashDropdown";
 
 export default function DashRowDrop() {
   const [isToggled, setIsToggled] = useState(false);
@@ -22,7 +23,7 @@ export default function DashRowDrop() {
           </span>
         </td>
       </tr>
-      {isToggled && <tr>This is a test</tr>}
+      {isToggled && <DashDropdown />}
     </>
   );
 }
