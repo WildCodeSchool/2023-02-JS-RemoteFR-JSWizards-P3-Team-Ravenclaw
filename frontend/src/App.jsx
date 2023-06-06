@@ -19,20 +19,18 @@ import DashLayout from "./layout/DashLayout";
 export default function App() {
   return (
     <>
-      <header>
-        <Navbar />
-      </header>
+      <Navbar />
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/Videos" element={<Videos />} />
-          <Route path="/Pricing" element={<Pricing />} />
-          <Route path="/About" element={<About />} />
-          <Route path="/Connection" element={<Connection />} />
-          <Route path="*" element={<NotFound />} />\{" "}
-          <Route path="/" element={<DashLayout />}>
-            <Route path="/Admin" element={<Admin />} />
-            <Route path="/User" element={<User />} />
+          <Route path="videos" element={<Videos />} />
+          <Route path="pricing" element={<Pricing />} />
+          <Route path="about" element={<About />} />
+          <Route path="connection" element={<Connection />} />
+          <Route path="*" element={<NotFound />} />
+          <Route path="account" element={<DashLayout />}>
+            <Route path="admin" element={<Admin />} />
+            <Route path="user" element={<User />} />
           </Route>
         </Routes>
       </main>
