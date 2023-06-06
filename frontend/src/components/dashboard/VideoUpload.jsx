@@ -1,38 +1,15 @@
-import { useState } from "react";
-
 export default function VideoUpload() {
-  const [selectedVideo, setSelectedVideo] = useState(null);
-
-  const handleVideo = (e) => {
-    const file = e.target.files[0];
-    setSelectedVideo(file);
-  };
-
   return (
     <div className="flex flex-col gap-1.5">
       <label htmlFor="videoUpload" className="text-primaryLightest">
         Video Upload
       </label>
-      <div className="h-full rounded-md bg-primary p-3 text-center text-neutralLightest focus:outline-none">
-        <input
-          type="file"
-          id="videoUpload"
-          accept="video/*"
-          onChange={handleVideo}
-        />
-      </div>
-      {selectedVideo && (
-        <div>
-          <video controls className="max-w-full">
-            <source
-              src={URL.createObjectURL(selectedVideo)}
-              type={selectedVideo.type}
-            />
-            <track kind="captions" src="captions.vtt" label="English" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      )}
+      <input
+        type="file"
+        id="videoUpload"
+        accept="video/*"
+        className="file:hover:primaryLightest file:cursor-pointer file:rounded-md file:border-none file:bg-primary file:bg-gradient-to-b file:p-3 file:text-neutralLightest"
+      />
     </div>
   );
 }
