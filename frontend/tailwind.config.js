@@ -21,7 +21,7 @@ module.exports = {
       },
 
       fontFamily: {
-        sans: ['"Lato"', "sans-serif"],
+        sans: ['"Inter"', "sans-serif"],
         header: ['"Gilroy"', "sans-serif"],
       },
 
