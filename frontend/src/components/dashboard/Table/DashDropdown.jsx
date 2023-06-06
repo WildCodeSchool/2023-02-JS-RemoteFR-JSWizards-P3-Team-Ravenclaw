@@ -7,7 +7,7 @@ export default function DashRowDrop() {
     <tr className="border-b dark:border-neutral">
       <td colSpan="6" className="gap-4 space-y-4 px-8 py-4">
         <div className="flex flex-row gap-4">
-          <div className="flex flex-col">
+          <div className="flex flex-col gap-4">
             <div className="flex gap-4">
               <div className="flex flex-col gap-1.5">
                 <label htmlFor="title" className="text-primaryLightest">
@@ -49,8 +49,10 @@ export default function DashRowDrop() {
               </div>
             </div>
           </div>
-          <VideoUpload />
-          <ImageUpload />
+          <div className="flex flex-col gap-4">
+            <VideoUpload />
+            <ImageUpload />
+          </div>
         </div>
         <div className="flex gap-4">
           <div className="flex flex-col gap-1.5">
@@ -78,7 +80,7 @@ export default function DashRowDrop() {
               className="rounded-md bg-primary p-3 text-neutralLightest focus:outline-none"
             />
           </div>
-          <Button customCSS="bg-successLight text-success rounded-lg px-4 py-1 hover:ring-2 hover:ring-primaryLightest">
+          <Button customCSS="bg-primary text-neutralLightest rounded-lg px-4 py-1 hover:ring-2 hover:ring-primaryLightest">
             Save
           </Button>
         </div>
