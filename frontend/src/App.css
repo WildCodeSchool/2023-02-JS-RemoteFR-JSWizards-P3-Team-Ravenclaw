@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 .dash-list {
   text-decoration: none;
 }
@@ -23,4 +24,185 @@
   .dash-list:hover {
     text-decoration: none;
   }
+
+a:not(.active) svg > path:first-child {
+    fill: none;
+}
+a:not(.active) div {
+    @apply text-neutral md:text-neutralLightest md:hover:text-primaryLightest;
+}
+a.active div{
+    @apply text-neutralLightest md:text-primaryLightest md:underline md:decoration-2 md:underline-offset-8;
+}
+@media screen and (min-width: 768px) {
+.connection path:first-child {
+    fill: none;
+}   
+.connection:hover :nth-child(2){
+    fill: theme("colors.primaryLightest");
+}
+a.active svg > :nth-child(2) {
+    fill: theme("colors.primaryLightest");
+}
+}
+
+.contact-button {
+  background: linear-gradient(180deg, #9969c4 0%, #4e5db6 93.23%);
+}
+
+.bg-form {
+  background: #f5f5f5;
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.25);
+}
+
+@layer components {
+  /* Start Connect component  */
+  .signup-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+    left: 0;
+    width: 50%;
+    opacity: 0;
+    z-index: 1;
+  }
+
+  @media (max-width: 768px) {
+    .signup-container {
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  .signin-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+    left: 0;
+    width: 50%;
+    z-index: 2;
+  }
+
+  @media (max-width: 768px) {
+    .signin-container {
+      height: 50%;
+      width: 100%;
+    }
+  }
+
+  .connect-button {
+    font-family: theme("fontFamily.header");
+    font-size: theme("fontSize.base");
+    border-radius: 25px;
+    border: transparent;
+    background: -webkit-linear-gradient(to bottom, #9969c4, #4e5db6);
+    background: linear-gradient(to bottom, #9969c4, #4e5db6);
+    color: #ffffff;
+    padding: 12px 45px;
+    transition: transform 80ms ease-in;
+    &:active {
+      transform: scale(0.95);
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .connect-ghostButton {
+    @extend .connect-button;
+    background: none;
+    border: 1px solid #ffffff;
+    &:hover {
+      background-color: rgba(245, 245, 245, 0.3);
+    }
+  }
+
+  .overlay-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: transform 0.6s ease-in-out;
+    z-index: 100;
+
+    @media (max-width: 768px) {
+      top: 50%;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      transform: translateY(0);
+    }
+  }
+
+  .overlay {
+    background: #ff416c;
+    background: -webkit-linear-gradient(to right, #9969c4, #4e5db6);
+    background: linear-gradient(to right, #9969c4, #4e5db6);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0 0;
+    color: #ffffff;
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+
+    @media (max-width: 768px) {
+      background: -webkit-linear-gradient(to top, #9969c4, #4e5db6);
+      background: linear-gradient(to top, #9969c4, #4e5db6);
+      left: 0;
+      height: 100%;
+      width: 100%;
+      transform: translateY(0);
+    }
+  }
+
+  .overlay-panel {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    text-align: center;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+
+    @media (max-width: 768px) {
+      height: 50%;
+      width: 100%;
+      transform: translateY(0);
+    }
+  }
+
+  .leftoverlay-panel {
+    @extend .overlay-panel;
+    transform: translateX(-20%);
+
+    @media (max-width: 768px) {
+      transform: translateY(-120%);
+    }
+  }
+
+  .rightoverlay-panel {
+    @extend .overlay-panel;
+    right: 0;
+    transform: translateX(0);
+
+    @media (max-width: 768px) {
+      transform: translateY(0%);
+    }
+  }
+
+  /* End Connect component  */
+
 }
