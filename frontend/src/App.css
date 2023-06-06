@@ -1,3 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.dash-list {
+  text-decoration: none;
+}
+
+.dash-list:active {
+  text-decoration: underline;
+}
+
+.dash-list:focus {
+  text-decoration: underline;
+}
+
+.dash-list:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.5rem;
+}
+
+@media screen and (min-width: 768px) {
+  .dash-list:hover {
+    text-decoration: none;
+  }
+}
