@@ -64,7 +64,7 @@ module.exports = {
         xs: [
           "0.75rem",
           {
-            lineHeight: "1",
+            lineHeight: "1.333",
             fontWeight: "400",
           },
         ],
