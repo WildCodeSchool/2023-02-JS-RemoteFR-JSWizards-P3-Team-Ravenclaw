@@ -24,12 +24,12 @@ export default function App() {
       </header>
       <main>
         <Routes>
-          <Route index path="/Home" element={<Home />} />
+          <Route path="/Home" element={<Home />} />
           <Route path="/Videos" element={<Videos />} />
-          <Route path="/Pricing" element={<Pricing />} />
+          <Route path="/Plans" element={<Pricing />} />
           <Route path="/About" element={<About />} />
-          <Route path="/Connection" element={<Connection />} />
-          <Route path="*" element={<NotFound />} />\{" "}
+          <Route path="/Account" element={<Connection />} />
+          <Route path="*" element={<NotFound />} />
           <Route path="/" element={<DashLayout />}>
             <Route path="/Admin" element={<Admin />} />
             <Route path="/User" element={<User />} />
