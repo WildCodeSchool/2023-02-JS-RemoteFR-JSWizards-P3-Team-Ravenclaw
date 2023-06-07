@@ -4,7 +4,7 @@ export default function Footer() {
       <p className=" dark:text-neutralLightest md:text-neutralLightest">
         © 2013 - 2023 Origins. All rights reserved
       </p>
-      <div className="flex gap-4">
+      <div className="flex gap-4 items-center">
         <a href="https://www.instagram.com/">
           <img src="./assets/icon/socials/instagram.svg" alt="instagram" />
         </a>

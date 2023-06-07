@@ -34,7 +34,7 @@ export default function Navbar() {
     },
   ];
   return (
-    <nav className="flex justify-between fixed bottom-0 w-full bg-neutralDarkest rounded-t-[10px] h-20 md:rounded-none md:px-12 md:py-4 md:top-0 md:static">
+    <nav className="flex justify-between fixed bottom-0 w-full bg-neutralDarkest rounded-t-[10px] h-20 md:rounded-none md:px-12 md:py-4 md:top-0 md:static items-center">
       <NavLink to="/Home">
         <img
           src="../assets/icon/navbar/logo_desktop.svg"
