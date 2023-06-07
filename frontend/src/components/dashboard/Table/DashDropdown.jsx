@@ -1,8 +1,28 @@
 import ImageUpload from "../ImageUpload";
 import VideoUpload from "../VideoUpload";
-import Button from "./components/Button";
+import Button from "../../utilities/Button";
+import Input from "../../utilities/Input";
+import Dropdown from "../../utilities/Dropdown";
 
-export default function DashRowDrop() {
+export default function DashDropdown() {
+  const language = [
+    { id: 1, name: "English" },
+    { id: 2, name: "French" },
+    { id: 3, name: "Italian" },
+    { id: 4, name: "Korean" },
+    { id: 5, name: "German" },
+    { id: 6, name: "Spanish" },
+  ];
+
+  const category = [
+    { id: 1, name: "FPS" },
+    { id: 2, name: "Action" },
+    { id: 3, name: "MOBA" },
+    { id: 4, name: "Racing" },
+    { id: 5, name: "Table game" },
+    { id: 6, name: "Sport" },
+  ];
+
   return (
     <tr className="border-b dark:border-neutral">
       <td colSpan="6" className="gap-4 space-y-4 px-8 py-4">
@@ -13,38 +33,34 @@ export default function DashRowDrop() {
                 <label htmlFor="title" className="text-primaryLightest">
                   Video Name
                 </label>
-                <input
+                <Input
                   type="text"
-                  className="rounded-md bg-primary p-3 text-neutralLightest focus:outline-none"
+                  className="rounded-md bg-primary p-2.5 text-neutralLightest placeholder-neutralLight focus:outline-none"
+                  placeholder="Type video name"
                 />
               </div>
               <div className="flex flex-col gap-1.5">
-                <label htmlFor="title" className="text-primaryLightest">
+                <label htmlFor="language" className="text-primaryLightest">
                   Language
                 </label>
-                <input
-                  type="text"
-                  className="rounded-md bg-primary p-3 text-neutralLightest focus:outline-none"
-                />
+                <Dropdown title="Select Language" items={language} />
               </div>
               <div className="flex flex-col gap-1.5">
-                <label htmlFor="title" className="text-primaryLightest">
+                <label htmlFor="category" className="text-primaryLightest">
                   Category
                 </label>
-                <input
-                  type="text"
-                  className="rounded-md bg-primary p-3 text-neutralLightest focus:outline-none"
-                />
+                <Dropdown title="Select Game Category" items={category} />
               </div>
             </div>
             <div className="flex gap-4">
               <div className="flex w-full flex-col gap-1.5">
-                <label htmlFor="title" className="text-primaryLightest">
+                <label htmlFor="seo" className="text-primaryLightest">
                   SEO tags
                 </label>
-                <input
+                <Input
                   type="text"
-                  className="rounded-md bg-primary p-3 text-neutralLightest focus:outline-none"
+                  className="rounded-md bg-primary p-2.5 text-neutralLightest placeholder-neutralLight focus:outline-none"
+                  placeholder="Type seo tags"
                 />
               </div>
             </div>
@@ -56,7 +72,7 @@ export default function DashRowDrop() {
         </div>
         <div className="flex gap-4">
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="title" className="text-primaryLightest">
+            <label htmlFor="status" className="text-primaryLightest">
               Status
             </label>
             <div className="flex gap-4">
@@ -72,12 +88,13 @@ export default function DashRowDrop() {
             </div>
           </div>
           <div className="flex w-full flex-col gap-1.5">
-            <label htmlFor="title" className="text-primaryLightest">
+            <label htmlFor="description" className="text-primaryLightest">
               Video description
             </label>
-            <input
+            <Input
               type="text"
-              className="rounded-md bg-primary p-3 text-neutralLightest focus:outline-none"
+              className="rounded-md bg-primary p-2.5 text-neutralLightest placeholder-neutralLight focus:outline-none"
+              placeholder="Type video description"
             />
           </div>
           <Button customCSS="bg-primary text-neutralLightest rounded-lg px-4 py-1 hover:ring-2 hover:ring-primaryLightest">
