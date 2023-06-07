@@ -16,6 +16,9 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import DashLayout from "./layout/DashLayout";
 
+// Components
+import Player from "./components/video/Player";
+
 export default function App() {
   return (
     <>
@@ -24,7 +27,8 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="videos" element={<Videos />} />
-          <Route path="pricing" element={<Pricing />} />
+          <Route path="videos/:id" element={<Player />} />
+          <Route path="plan" element={<Pricing />} />
           <Route path="about" element={<About />} />
           <Route path="connection" element={<Connection />} />
           <Route path="*" element={<NotFound />} />
