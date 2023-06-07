@@ -47,6 +47,7 @@ a.active div {
     fill: theme("colors.primaryLightest");
   }
 }
+
 /* Contact component */
 .contact-button {
   background: linear-gradient(180deg, #9969c4 0%, #4e5db6 93.23%);

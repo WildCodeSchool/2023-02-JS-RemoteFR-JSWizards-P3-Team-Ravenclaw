@@ -11,39 +11,48 @@ export default function Navbar() {
       id: 1,
       name: "Home",
       component: <HomeNavItem />,
+      route: "",
     },
     {
       id: 2,
       name: "Videos",
       component: <VideosNavItem />,
+      route: "Videos",
     },
     {
       id: 3,
       name: "Plans",
       component: <PricingNavItem />,
+      route: "Plans",
     },
     {
       id: 4,
       name: "About",
       component: <AboutNavItem />,
+      route: "About",
     },
     {
       id: 5,
       name: "Account",
       component: <ConnectionNavItem />,
+      route: "Account",
     },
   ];
   return (
-    <nav className="fixed bottom-0 flex h-20 w-full justify-between rounded-t-[10px] bg-neutralDarkest md:static md:top-0 md:rounded-none md:px-12 md:py-4">
-      <img
-        src="../assets/icon/navbar/logo_desktop.svg"
-        alt=""
-        className="hidden md:block"
-      />
-      <ul className="flex w-full items-center justify-between px-4 md:justify-end md:gap-x-8">
+
+    <nav className="flex justify-between fixed bottom-0 w-full bg-neutralDarkest rounded-t-[10px] h-20 md:rounded-none md:px-12 md:py-4 md:top-0 md:static">
+      <NavLink to="/Home">
+        <img
+          src="../assets/icon/navbar/logo_desktop.svg"
+          alt=""
+          className="hidden md:block"
+        />
+      </NavLink>
+      <ul className="flex justify-between px-4 items-center w-full md:justify-end md:gap-x-8">
+
         {navitems.map((navitem) => (
           <li key={navitem.id}>
-            <NavLink to={`/${navitem.name}`}>
+            <NavLink to={`/${navitem.route}`}>
               <div className="flex flex-col items-center text-neutral">
                 <div className={navitem.id === 5 ? "md:block" : "md:hidden"}>
                   {navitem.component}
