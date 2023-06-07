@@ -64,7 +64,7 @@ module.exports = {
         xs: [
           "0.75rem",
           {
-            lineHeight: "1",
+            lineHeight: "1.333",
             fontWeight: "400",
           },
         ],
@@ -75,6 +75,15 @@ module.exports = {
             fontWeight: "400",
           },
         ],
+      },
+      backgroundImage: {
+        gradientPrimary: "linear-gradient(180deg, #9969c4 0%, #4e5db6 93.23%)",
+      },
+      boxShadow: {
+        innerLight:
+          "inset 5px -5px 15px rgba(255, 255, 255, 0.3), inset 0px -5px 15px rgba(255, 255, 255, 0.3)",
+        innerDark:
+          "inset 5px -5px 15px rgba(0, 0, 0, 0.4), inset 0px -5px 15px rgba(255, 255, 255, 0.4)",
       },
     },
     plugins: [],
