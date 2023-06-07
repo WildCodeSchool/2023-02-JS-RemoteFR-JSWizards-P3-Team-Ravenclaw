@@ -46,7 +46,7 @@ export default function Hero() {
       link?.img && (
         <div key={link.id} className="relative">
           <img
-            className="h-[492px] w-full leading-[160px] bg-primaryLight text-white
+            className="h-[492px] w-full bg-primaryLight leading-[160px] text-white
             md:h-[500px] md:object-cover"
             src={link.img}
             alt={link.alt}
@@ -54,9 +54,9 @@ export default function Hero() {
           <NavLink to={link.link}>
             <button
               type="button"
-              className="gap-2 text-white bg-gradient-to-b from-[#4E5DB6]/95 to-[#9969C4]
-              w-[132px] h-8 rounded-2xl font-bold font-header text-xs 
-              flex justify-center items-center absolute bottom-8 left-1/2 transform -translate-x-1/2
+              className="absolute bottom-8 left-1/2 flex h-8
+              w-[132px] -translate-x-1/2 transform items-center justify-center gap-2 
+              rounded-2xl bg-gradient-to-b from-[#4E5DB6]/95 to-[#9969C4] font-header text-xs font-bold text-white
               "
             >
               WATCH NOW

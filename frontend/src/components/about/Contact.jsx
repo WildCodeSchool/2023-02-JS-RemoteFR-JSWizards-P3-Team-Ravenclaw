@@ -6,13 +6,13 @@ export default function Contact() {
     <div className="contact-us">
       <div className="flex justify-center">
         <form
-          className=" bg-form flex flex-col items-center justify-center py-8 md:px-6 dark:bg-black w-11/12 rounded-lg md:w-2/4 lg:w-2/5 "
+          className=" bg-form flex w-11/12 flex-col items-center justify-center rounded-lg py-8 dark:bg-black md:w-2/4 md:px-6 lg:w-2/5 "
           onSubmit={handleFormSubmit}
         >
           <div>
             <p className="font-sans text-indigo-600 md:w-2/4">Name</p>
             <input
-              className="bg-gray-300 dark:bg-white form__input w-[80vw] items-start rounded px-5 py-1.5 outline-none placeholder:text-neutral-900 md:w-[350px] mt-2 xl:w-[500px]"
+              className="form__input placeholder:text-neutral-900 mt-2 w-[80vw] items-start rounded bg-gray-300 px-5 py-1.5 outline-none dark:bg-white md:w-[350px] xl:w-[500px]"
               type="text"
               placeholder="Name"
               id="text"
@@ -21,9 +21,9 @@ export default function Contact() {
             />
           </div>
           <div>
-            <p className="font-sans text-indigo-600 mt-2">Email</p>
+            <p className="mt-2 font-sans text-indigo-600">Email</p>
             <input
-              className="mt-2 bg-gray-300 dark:bg-white md:w- w-[80vw] items-start rounded px-5 py-1.5 outline-none placeholder:text-neutral-900  md:w-[350px] xl:w-[500px]"
+              className="md:w- placeholder:text-neutral-900 mt-2 w-[80vw] items-start rounded bg-gray-300 px-5 py-1.5 outline-none dark:bg-white  md:w-[350px] xl:w-[500px]"
               type="email"
               placeholder="Email"
               id="email"
@@ -32,16 +32,16 @@ export default function Contact() {
             />
           </div>
           <div>
-            <p className="text-indigo-600 mt-2">Message</p>
+            <p className="mt-2 text-indigo-600">Message</p>
             <textarea
-              className="mt-2 resize-none bg-gray-300 dark:bg-white textarea w-[80vw] items-start rounded px-5 py-1.5 outline-none placeholder:text-neutral-900  md:w-[350px] xl:w-[500px] h-64"
+              className="textarea placeholder:text-neutral-900 mt-2 h-64 w-[80vw] resize-none items-start rounded bg-gray-300 px-5 py-1.5 outline-none  dark:bg-white md:w-[350px] xl:w-[500px]"
               placeholder="Message"
               name="message"
               required
             />
           </div>
           <button
-            className="font-header font-bold contact-button mt-2 rounded bg-gray-300 submit w-[80vw] md:w-[350px] xl:w-[500px] h-10 text-white"
+            className="contact-button submit mt-2 h-10 w-[80vw] rounded bg-gray-300 font-header font-bold text-white md:w-[350px] xl:w-[500px]"
             type="submit"
           >
             Send

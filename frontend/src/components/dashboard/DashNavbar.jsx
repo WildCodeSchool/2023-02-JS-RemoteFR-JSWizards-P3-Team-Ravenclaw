@@ -18,11 +18,11 @@ export default function DashNavbar() {
     <div className="flex flex-col sm:flex-row">
       <div
         className={`${
-          open ? "md:w-72 w-11/12" : "md:w-0 w-0"
-        } duration-300 h-screen p-5 pt-8 bg-white dark:bg-neutralDarkest md:bg-white md:dark:bg-neutralDarkest relative `}
+          open ? "w-11/12 md:w-72" : "w-0 md:w-0"
+        } relative h-screen bg-white p-5 pt-8 duration-300 dark:bg-neutralDarkest md:bg-white md:dark:bg-neutralDarkest `}
       >
         <div
-          className={`text-neutralLightest origin-left font-medium text-xl text-center duration-300 ${
+          className={`origin-left text-center text-xl font-medium text-neutralLightest duration-300 ${
             !open && "scale-0"
           }`}
         >
@@ -31,12 +31,12 @@ export default function DashNavbar() {
               return (
                 <li
                   key={menu.id}
-                  className={`dash-list dark:text-neutralLightest text-neutralDarkest md:dark:text-neutralLightest md:text-neutralDarkest hover:text-primaryLightest md:active:text-primaryLightest decoration-primaryLightest ${
+                  className={`dash-list text-neutralDarkest decoration-primaryLightest hover:text-primaryLightest dark:text-neutralLightest md:text-neutralDarkest md:active:text-primaryLightest md:dark:text-neutralLightest ${
                     menu.title !== "Log Out"
-                      ? `md:hover:bg-black md:rounded-lg dark:md:hover:bg-white`
+                      ? `md:rounded-lg md:hover:bg-black dark:md:hover:bg-white`
                       : ""
-                  } text-lg
-                  flex pl-4 cursor-pointer`}
+                  } flex
+                  cursor-pointer pl-4 text-lg`}
                 >
                   <div className="flex items-center ">
                     {menu.src ? (
@@ -86,7 +86,7 @@ export default function DashNavbar() {
           onKeyDown={() => setOpen(!open)}
         >
           <svg
-            className={`side-menu absolute cursor-pointer rounded-full -right-2 top-0 w-7 md:top-80 md:-right-3  b ${
+            className={`side-menu b absolute -right-2 top-0 w-7 cursor-pointer rounded-full md:-right-3  md:top-80 ${
               !open && "rotate-180"
             }`}
             width="32"
