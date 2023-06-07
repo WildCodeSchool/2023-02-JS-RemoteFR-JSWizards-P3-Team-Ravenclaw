@@ -20,6 +20,10 @@ export default function DashHead() {
       id: 5,
       name: "Status",
     },
+    {
+      id: 6,
+      name: "Premium",
+    },
   ];
   return (
     <thead className="bg-primary text-neutralLightest ">
