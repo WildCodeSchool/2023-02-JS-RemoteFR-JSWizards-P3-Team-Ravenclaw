@@ -22,7 +22,7 @@ export default function DashNavbar() {
         } duration-300 h-screen p-5 pt-8 bg-white dark:bg-neutralDarkest md:bg-white md:dark:bg-neutralDarkest relative `}
       >
         <div
-          className={`text-white origin-left font-medium text-xl text-center duration-300 ${
+          className={`text-neutralLightest origin-left font-medium text-xl text-center duration-300 ${
             !open && "scale-0"
           }`}
         >
@@ -31,7 +31,7 @@ export default function DashNavbar() {
               return (
                 <li
                   key={menu.id}
-                  className={`dash-list dark:text-white text-black md:dark:text-white md:text-black hover:text-primaryLightest md:active:text-primaryLightest decoration-primaryLightest ${
+                  className={`dash-list dark:text-neutralLightest text-neutralDarkest md:dark:text-neutralLightest md:text-neutralDarkest hover:text-primaryLightest md:active:text-primaryLightest decoration-primaryLightest ${
                     menu.title !== "Log Out"
                       ? `md:hover:bg-black md:rounded-lg dark:md:hover:bg-white`
                       : ""
