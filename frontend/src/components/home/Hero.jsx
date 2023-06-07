@@ -60,7 +60,7 @@ export default function Hero() {
               "
             >
               WATCH NOW
-              <BsArrowRight className="text-[1.8em]" />
+              <BsArrowRight className="text-[1.8em]" stroke-width="white" />
             </button>
           </NavLink>
         </div>
