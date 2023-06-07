@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="flex flex-col items-center dark:bg-neutralDarkest md:bg-neutralDarkest h-20 justify-center md:flex-row md:justify-between px-12">
+    <footer className="flex flex-col items-center dark:bg-neutralDarkest md:bg-neutralDarkest h-20 justify-center md:flex-row md:justify-between px-12 gap-1">
       <p className=" dark:text-neutralLightest md:text-neutralLightest">
         © 2013 - 2023 Origins. All rights reserved
       </p>
