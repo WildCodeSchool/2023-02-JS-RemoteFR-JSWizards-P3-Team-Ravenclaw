@@ -39,7 +39,6 @@ export default function Navbar() {
     },
   ];
   return (
-
     <nav className="flex justify-between fixed bottom-0 w-full bg-neutralDarkest rounded-t-[10px] h-20 md:rounded-none md:px-12 md:py-4 md:top-0 md:static">
       <NavLink to="/Home">
         <img
@@ -49,7 +48,6 @@ export default function Navbar() {
         />
       </NavLink>
       <ul className="flex justify-between px-4 items-center w-full md:justify-end md:gap-x-8">
-
         {navitems.map((navitem) => (
           <li key={navitem.id}>
             <NavLink to={`/${navitem.route}`}>
