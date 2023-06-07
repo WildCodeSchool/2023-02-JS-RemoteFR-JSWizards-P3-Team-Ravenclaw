@@ -11,26 +11,31 @@ export default function Navbar() {
       id: 1,
       name: "Home",
       component: <HomeNavItem />,
+      route: "",
     },
     {
       id: 2,
       name: "Videos",
       component: <VideosNavItem />,
+      route: "Videos",
     },
     {
       id: 3,
       name: "Plans",
       component: <PricingNavItem />,
+      route: "Plans",
     },
     {
       id: 4,
       name: "About",
       component: <AboutNavItem />,
+      route: "About",
     },
     {
       id: 5,
       name: "Account",
       component: <ConnectionNavItem />,
+      route: "Account",
     },
   ];
   return (
@@ -45,7 +50,7 @@ export default function Navbar() {
       <ul className="flex justify-between px-4 items-center w-full md:justify-end md:gap-x-8">
         {navitems.map((navitem) => (
           <li key={navitem.id}>
-            <NavLink to={`/${navitem.name}`}>
+            <NavLink to={`/${navitem.route}`}>
               <div className="flex flex-col items-center text-neutral">
                 <div className={navitem.id === 5 ? "md:block" : "md:hidden"}>
                   {navitem.component}
