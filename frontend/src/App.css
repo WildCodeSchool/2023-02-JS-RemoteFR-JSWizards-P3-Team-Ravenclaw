@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+.btn-default {
+  @apply gap-3 text-white bg-gradient-to-b from-[#4E5DB6]/95 to-[#9969C4]
+  px-7 py-2 rounded-2xl font-header text-[0.75rem]
+  flex justify-center items-center text-center;
+}
+
 /* DashNavbar component */
 .dash-list {
   text-decoration: none;
