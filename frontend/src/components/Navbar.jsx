@@ -39,7 +39,7 @@ export default function Navbar() {
     },
   ];
   return (
-    <nav className="flex justify-between fixed bottom-0 w-full bg-neutralDarkest rounded-t-[10px] h-20 md:rounded-none md:px-12 md:py-4 md:top-0 md:static items-center">
+    <nav className="fixed bottom-0 flex h-20 w-full items-center justify-between rounded-t-[10px] bg-neutralDarkest md:static md:top-0 md:rounded-none md:px-12 md:py-4">
       <NavLink to="/">
         <img
           src="../assets/icon/navbar/logo_desktop.svg"
@@ -47,7 +47,7 @@ export default function Navbar() {
           className="hidden md:block"
         />
       </NavLink>
-      <ul className="flex justify-between px-4 items-center w-full md:justify-end md:gap-x-8">
+      <ul className="flex w-full items-center justify-between px-4 md:justify-end md:gap-x-8">
         {navitems.map((navitem) => (
           <li key={navitem.id}>
             <NavLink to={`/${navitem.route}`}>
