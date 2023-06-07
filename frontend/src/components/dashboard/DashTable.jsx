@@ -1,8 +1,8 @@
-import DashRow from "./DashRow";
-import DashHead from "./DashHead";
-import DashNav from "./DashNav";
-import DashSearch from "./DashSearch";
-import DashRowDrop from "./DashRowDrop";
+import DashRow from "./Table/DashRow";
+import DashHead from "./Table/DashHead";
+import DashNav from "./Table/DashNav";
+import DashSearch from "./Table/DashSearch";
+import DashRowDrop from "./Table/DashRowDrop";
 
 export default function DashTable() {
   const videos = [
