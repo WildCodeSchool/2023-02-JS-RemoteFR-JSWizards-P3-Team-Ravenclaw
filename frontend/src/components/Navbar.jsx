@@ -58,8 +58,8 @@ export default function Navbar() {
                 <span
                   className={
                     navitem.id === 5
-                      ? "md:hidden font-sans text-xs"
-                      : "md:block font-sans text-xs md:text-lg md:font-header md:font-extrabold"
+                      ? "font-sans text-xs md:hidden"
+                      : "font-sans text-xs md:block md:font-header md:text-lg md:font-extrabold"
                   }
                 >
                   {navitem.name}
