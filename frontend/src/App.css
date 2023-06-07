@@ -2,25 +2,49 @@
 @tailwind components;
 @tailwind utilities;
 
+
+.dash-list {
+  text-decoration: none;
+}
+
+.dash-list:active {
+  text-decoration: underline;
+}
+
+.dash-list:focus {
+  text-decoration: underline;
+}
+
+.dash-list:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.5rem;
+}
+
+@media screen and (min-width: 768px) {
+  .dash-list:hover {
+    text-decoration: none;
+  }
+}
+
 a:not(.active) svg > path:first-child {
-    fill: none;
+  fill: none;
 }
 a:not(.active) div {
-    @apply text-neutral md:text-neutralLightest md:hover:text-primaryLightest;
+  @apply text-neutral md:text-neutralLightest md:hover:text-primaryLightest;
 }
-a.active div{
-    @apply text-neutralLightest md:text-primaryLightest md:underline md:decoration-2 md:underline-offset-8;
+a.active div {
+  @apply text-neutralLightest md:text-primaryLightest md:underline md:decoration-2 md:underline-offset-8;
 }
 @media screen and (min-width: 768px) {
-.connection path:first-child {
+  .connection path:first-child {
     fill: none;
-}   
-.connection:hover :nth-child(2){
+  }
+  .connection:hover :nth-child(2) {
     fill: theme("colors.primaryLightest");
-}
-a.active svg > :nth-child(2) {
+  }
+  a.active svg > :nth-child(2) {
     fill: theme("colors.primaryLightest");
-}
+  }
 }
 
 .contact-button {
@@ -181,4 +205,5 @@ a.active svg > :nth-child(2) {
   }
 
   /* End Connect component  */
+
 }
