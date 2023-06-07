@@ -1,7 +1,3 @@
 export default function Home() {
-  return (
-    <section>
-      <div>Home</div>
-    </section>
-  );
+  return <section className="flex items-center justify-center">test</section>;
 }
