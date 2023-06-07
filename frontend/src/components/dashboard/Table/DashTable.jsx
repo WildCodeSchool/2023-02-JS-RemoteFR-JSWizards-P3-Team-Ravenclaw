@@ -12,6 +12,7 @@ export default function DashTable() {
       category: "MOBA",
       language: "English",
       status: "Online",
+      visible: true,
     },
     {
       id: 1001,
@@ -19,6 +20,7 @@ export default function DashTable() {
       category: "FPS",
       language: "French",
       status: "Offline",
+      visible: false,
     },
     {
       id: 1002,
@@ -26,11 +28,12 @@ export default function DashTable() {
       category: "MOBA",
       language: "Korean",
       status: "Archived",
+      visible: true,
     },
   ];
 
   return (
-    <section className="sm:p-5">
+    <section className="relative sm:p-5">
       <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
         <div className="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
           <DashSearch />
@@ -39,15 +42,9 @@ export default function DashTable() {
               <DashHead />
               <tbody>
                 {videos.map((video) => (
-                  <DashRow
-                    key={video.id}
-                    id={video.id}
-                    name={video.name}
-                    category={video.category}
-                    language={video.language}
-                    status={video.status}
-                  />
+                  <DashRow key={video.id} video={video} />
                 ))}
+
                 <DashRowDrop />
               </tbody>
             </table>
