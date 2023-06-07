@@ -38,7 +38,7 @@ const displayedLinks = [
 
 export default function Hero() {
   const settings = {
-    // autoplay: true,
+    autoplay: true,
     autoplaySpeed: 7000,
   };
   const links = displayedLinks.map((link) => {
