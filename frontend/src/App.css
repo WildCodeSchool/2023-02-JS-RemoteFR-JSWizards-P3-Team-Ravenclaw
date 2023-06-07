@@ -24,6 +24,7 @@
   .dash-list:hover {
     text-decoration: none;
   }
+}
 
 a:not(.active) svg > path:first-child {
     fill: none;
