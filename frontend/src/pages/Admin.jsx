@@ -1,4 +1,4 @@
-import DashTable from "../components/dashboard/Table/DashTable";
+import DashTable from "../components/dashboard/table/DashTable";
 
 export default function Admin() {
   return (
