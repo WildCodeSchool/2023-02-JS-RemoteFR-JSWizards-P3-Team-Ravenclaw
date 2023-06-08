@@ -1,0 +1,53 @@
+.toggle {
+  position: relative;
+  padding: 8px 16px;
+  display: inline-flex;
+  justify-content: center;
+  gap: 32px;
+
+  background-color: theme("colors.neutralLightest");
+  border-radius: 100px;
+
+  font-family: theme("fontFamily.sans");
+  font-size: theme("fontSize.xs");
+  text-transform: uppercase;
+
+  @media screen and (min-width: 768px) {
+    font-size: theme("fontSize.base");
+  }
+}
+
+.toggle:after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: calc(50%);
+  border-radius: 100px;
+  background: theme("backgroundImage.gradientPrimary");
+  transition: 0.3s;
+}
+
+.toggle:has(.option2:checked):after {
+  left: 100%;
+  transform: translateX(-100%);
+  background: theme("backgroundImage.gradientPrimary");
+  box-shadow: theme("boxShadow.innerLight");
+  transition: 0.3s;
+}
+
+.toggle__option {
+  z-index: 10;
+  color: theme("colors.neutral");
+  cursor: pointer;
+}
+
+.toggle__option:has(input[type="radio"]:checked) {
+  color: theme("colors.neutralLightest");
+}
+
+.toggle input[type="radio"] {
+  -webkit-appearance: none;
+  appearance: none;
+}
