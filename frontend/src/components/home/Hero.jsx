@@ -2,25 +2,25 @@ import { Carousel } from "antd";
 import { NavLink } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
 import { useState } from "react";
-import Button from "../Button";
+import Button from "../utilities/Button";
 
 const lienVersLaVideo = 3; // à changer, lien pour aller sur le http:// ... /videos/id:${lienVersLaVideo}
 const displayedLinks = [
   {
     id: 1,
-    img: "./src/components/home/picturesForHome/cs.jpg",
+    img: "./public/assets/img/picturesForHome/cs.jpg",
     link: `/videos/id:${lienVersLaVideo}`,
     alt: "cs",
   },
   {
     id: 2,
-    img: "./src/components/home/picturesForHome/ow.jpg",
+    img: "./public/assets/img/picturesForHome/ow.jpg",
     link: `/videos/id:${lienVersLaVideo}`,
     alt: "ow",
   },
   {
     id: 3,
-    img: "./src/components/home/picturesForHome/valo.jpg",
+    img: "./public/assets/img/picturesForHome/valo.jpg",
     link: `/videos/id:${lienVersLaVideo}`,
     alt: "valo",
   },
