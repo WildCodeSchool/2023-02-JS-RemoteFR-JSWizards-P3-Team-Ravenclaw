@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
-import Button from "../components/Button";
+import Button from "../components/utilities/Button";
 
 export default function NotFound() {
   const navigate = useNavigate();

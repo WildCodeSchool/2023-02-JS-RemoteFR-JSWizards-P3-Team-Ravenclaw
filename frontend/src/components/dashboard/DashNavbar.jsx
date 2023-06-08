@@ -15,7 +15,7 @@ export default function DashNavbar() {
     { title: "Log Out", src: true, id: 10 },
   ];
   return (
-    <div className="flex flex-col sm:flex-row">
+    <div className="flex flex-col sm:flex-row md:absolute md:z-10">
       <div
         className={`${
           open ? "w-11/12 md:w-72" : "w-0 md:w-0"
