@@ -7,6 +7,8 @@ import VideosNavItem from "./navbar/VideosNavItem";
 import PricingNavItem from "./navbar/PricingNavItem";
 import HomeNavItem from "./navbar/HomeNavItem";
 import AboutNavItem from "./navbar/AboutNavItem";
+// import Notification from "./Notification";
+// doit faire <Notification /> ligne 72 pour faire apparaitre la cloche
 
 export default function Navbar() {
   const navitems = [

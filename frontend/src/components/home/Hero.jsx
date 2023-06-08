@@ -1,6 +1,8 @@
 import { Carousel } from "antd";
 import { NavLink } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
+import { useState } from "react";
+import Button from "../Button";
 
 const lienVersLaVideo = 3; // à changer, lien pour aller sur le http:// ... /videos/id:${lienVersLaVideo}
 const displayedLinks = [
@@ -37,14 +39,20 @@ const displayedLinks = [
 ];
 
 export default function Hero() {
+  const [free, setFree] = useState(true);
   const settings = {
-    autoplay: true,
-    autoplaySpeed: 7000,
+    autoplay: free,
+    autoplaySpeed: 5000,
   };
   const links = displayedLinks.map((link) => {
     return (
       link?.img && (
-        <div key={link.id} className="relative">
+        <div
+          onMouseEnter={() => setFree(false)}
+          onMouseLeave={() => setFree(true)}
+          key={link.id}
+          className="relative"
+        >
           <img
             className="h-[492px] w-full bg-primaryLight leading-[160px] text-white
             md:h-[500px] md:object-cover"
@@ -52,16 +60,10 @@ export default function Hero() {
             alt={link.alt}
           />
           <NavLink to={link.link}>
-            <button
-              type="button"
-              className="absolute bottom-8 left-1/2 flex h-8
-              w-[132px] -translate-x-1/2 transform items-center justify-center gap-2 
-              rounded-2xl bg-gradient-to-b from-[#4E5DB6]/95 to-[#9969C4] font-header text-xs font-bold text-white
-              "
-            >
+            <Button customCSS="btn-default absolute -translate-x-1/2 left-1/2 bottom-8 transform">
               WATCH NOW
               <BsArrowRight className="text-[1.8em]" stroke-width="white" />
-            </button>
+            </Button>
           </NavLink>
         </div>
       )
