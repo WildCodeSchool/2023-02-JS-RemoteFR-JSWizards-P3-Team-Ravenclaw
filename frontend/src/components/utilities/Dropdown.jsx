@@ -16,7 +16,7 @@ export default function Dropdown({ title, items }) {
       >
         {title}
         <svg
-          className="ml-2 flex h-4 w-4 justify-end"
+          className="flex h-4 w-4 justify-end"
           aria-hidden="true"
           fill="none"
           stroke="currentColor"
