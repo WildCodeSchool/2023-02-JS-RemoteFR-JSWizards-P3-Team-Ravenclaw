@@ -7,8 +7,7 @@ import VideosNavItem from "./navbar/VideosNavItem";
 import PricingNavItem from "./navbar/PricingNavItem";
 import HomeNavItem from "./navbar/HomeNavItem";
 import AboutNavItem from "./navbar/AboutNavItem";
-// import Notification from "./Notification";
-// doit faire <Notification /> ligne 72 pour faire apparaitre la cloche
+import Notification from "./Notification";
 
 export default function Navbar() {
   const navitems = [
@@ -57,7 +56,10 @@ export default function Navbar() {
 
       <ul className={styles.navlist}>
         {navitems.map((navitem) => (
-          <li key={navitem.id}>
+          <li
+            key={navitem.id}
+            className={navitem.id === 5 ? `${styles.userAccount}` : ""}
+          >
             <NavLink
               to={`/${navitem.route}`}
               className={({ isActive }) =>
@@ -87,6 +89,9 @@ export default function Navbar() {
             </NavLink>
           </li>
         ))}
+        <li className={styles.notification}>
+          <Notification />
+        </li>
       </ul>
     </nav>
   );

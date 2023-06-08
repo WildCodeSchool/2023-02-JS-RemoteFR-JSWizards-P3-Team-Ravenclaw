@@ -10,7 +10,6 @@ export default function ConnectionNavItem() {
   }
   return (
     <svg
-      className="connection"
       width="48"
       height="48"
       viewBox="0 0 64 64"
