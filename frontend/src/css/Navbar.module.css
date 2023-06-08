@@ -112,3 +112,14 @@
     fill: theme("colors.primaryLightest");
   }
 }
+
+.userAccount {
+  order: 10;
+}
+
+.notification {
+  display: none;
+  @media screen and (min-width: 768px) {
+    display: block;
+  }
+}
