@@ -10,13 +10,13 @@ export default function Dropdown({ title, items }) {
   return (
     <div>
       <Button
-        customCSS="mb-2 inline-flex items-center rounded-lg bg-primary p-3 text-center text-sm font-medium text-white hover:bg-primaryLight focus:outline-none dark:bg-primary dark:hover:bg-primaryLight"
+        customCSS="mb-2 flex items-center justify-between items-center rounded-lg bg-primary p-3 text-center text-sm text-white hover:bg-primaryLight focus:outline-none dark:bg-primary dark:hover:bg-primaryLight min-w-[200px]"
         type="button"
         onClick={() => setIsToggled(!isToggled)}
       >
         {title}
         <svg
-          className="ml-2 h-4 w-4"
+          className="ml-2 flex h-4 w-4 justify-end"
           aria-hidden="true"
           fill="none"
           stroke="currentColor"
