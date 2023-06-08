@@ -7,7 +7,13 @@
   bg-gradient-to-b from-[#4E5DB6]/95 to-[#9969C4] px-7 py-2
   text-center font-header text-[0.75rem] text-white;
 }
-
+/* VideoGrid component */
+.video-grid{
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+  justify-items: center;
+}
 /* DashNavbar component */
 .dash-list {
   text-decoration: none;
