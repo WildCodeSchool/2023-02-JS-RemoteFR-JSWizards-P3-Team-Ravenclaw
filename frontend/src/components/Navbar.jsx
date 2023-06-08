@@ -1,4 +1,7 @@
 import { NavLink } from "react-router-dom";
+
+import styles from "../css/Navbar.module.css";
+
 import ConnectionNavItem from "./navbar/ConnectionNavItem";
 import VideosNavItem from "./navbar/VideosNavItem";
 import PricingNavItem from "./navbar/PricingNavItem";
@@ -40,33 +43,47 @@ export default function Navbar() {
       route: "Account",
     },
   ];
+
   return (
-    <nav className="fixed bottom-0 flex h-20 w-full items-center justify-between rounded-t-[10px] bg-neutralDarkest md:static md:top-0 md:rounded-none md:px-12 md:py-4">
+    <nav className={styles.navbar}>
       <NavLink to="/">
         <img
           src="../assets/icon/navbar/logo_desktop.svg"
-          alt=""
-          className="hidden md:block"
+          alt="logo origins-digital"
+          height="48"
+          className={styles.logo}
         />
       </NavLink>
-      <ul className="flex w-full items-center justify-between px-4 md:justify-end md:gap-x-8">
+
+      <ul className={styles.navlist}>
         {navitems.map((navitem) => (
           <li key={navitem.id}>
-            <NavLink to={`/${navitem.route}`}>
-              <div className="flex flex-col items-center text-neutral">
-                <div className={navitem.id === 5 ? "md:block" : "md:hidden"}>
-                  {navitem.component}
-                </div>
-                <span
-                  className={
-                    navitem.id === 5
-                      ? "font-sans text-xs md:hidden"
-                      : "font-sans text-xs md:block md:font-header md:text-lg md:font-extrabold"
-                  }
-                >
-                  {navitem.name}
-                </span>
+            <NavLink
+              to={`/${navitem.route}`}
+              className={({ isActive }) =>
+                `${styles.navitem} ${
+                  isActive
+                    ? `${styles.isLinkActive}`
+                    : `${styles.isLinkNotActive}`
+                }`
+              }
+            >
+              <div
+                className={
+                  navitem.id === 5
+                    ? `${styles.isIconActive}`
+                    : `${styles.isIconHidden}`
+                }
+              >
+                {navitem.component}
               </div>
+              <span
+                className={`${styles.navitem__description} ${
+                  navitem.id === 5 ? `${styles.isDescriptionHidden}` : ""
+                }`}
+              >
+                {navitem.name}
+              </span>
             </NavLink>
           </li>
         ))}
