@@ -20,7 +20,7 @@ export default function Searchbar({ className }) {
       </div>
       <input
         type="search"
-        className="block w-full rounded-lg border border-neutralLight bg-neutralLightest p-2 pl-10 text-sm text-neutralDarkest focus:border-primaryLight focus:outline-none dark:border-neutralDark/50 dark:bg-gray-600 dark:text-neutralLightest dark:placeholder-neutralLight"
+        className="block w-full rounded-lg border border-neutralLight bg-neutralLightest p-3 pl-10 text-sm text-neutralDarkest focus:border-primaryLight focus:outline-none dark:border-neutralDark/50 dark:bg-gray-600 dark:text-neutralLightest dark:placeholder-neutralLight"
         placeholder="Search..."
       />
     </div>
