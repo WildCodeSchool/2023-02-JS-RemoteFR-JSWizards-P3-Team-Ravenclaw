@@ -78,9 +78,9 @@ export default function VideoGrid() {
         </div>
       </div>
       <div className="hidden sm:block">
-        <div className=" mt-10 flex flex-wrap">
+        <div className="video-grid">
           {videoData.map((video) => (
-            <div className="card m-auto mb-16 w-1/4" key={video.id}>
+            <div className="card" key={video.id}>
               <img src={video.img} alt="" />
             </div>
           ))}
