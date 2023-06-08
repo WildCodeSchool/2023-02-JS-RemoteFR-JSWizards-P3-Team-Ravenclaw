@@ -33,27 +33,6 @@
 }
 /* End DashNavbar component */
 
-a:not(.active) svg > path:first-child {
-  fill: none;
-}
-a:not(.active) div {
-  @apply text-neutral md:text-neutralLightest md:hover:text-primaryLightest;
-}
-a.active div {
-  @apply text-neutralLightest md:text-primaryLightest md:underline md:decoration-2 md:underline-offset-8;
-}
-@media screen and (min-width: 768px) {
-  .connection path:first-child {
-    fill: none;
-  }
-  .connection:hover :nth-child(2) {
-    fill: theme("colors.primaryLightest");
-  }
-  a.active svg > :nth-child(2) {
-    fill: theme("colors.primaryLightest");
-  }
-}
-
 /* Contact component */
 .contact-button {
   background: linear-gradient(180deg, #9969c4 0%, #4e5db6 93.23%);
