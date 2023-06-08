@@ -3,51 +3,48 @@ export default function Contact() {
     e.preventDefault();
   };
   return (
-    <div className="contact-us">
-      <div className="flex justify-center">
-        <form
-          className=" bg-form flex w-11/12 flex-col items-center justify-center rounded-lg py-8 dark:bg-black md:w-2/4 md:px-6 lg:w-2/5 "
-          onSubmit={handleFormSubmit}
-        >
-          <div>
-            <p className="font-sans text-indigo-600 md:w-2/4">Name</p>
-            <input
-              className="form__input placeholder:text-neutral-900 mt-2 w-[80vw] items-start rounded bg-gray-300 px-5 py-1.5 outline-none dark:bg-white md:w-[350px] xl:w-[500px]"
-              type="text"
-              placeholder="Name"
-              id="text"
-              name="name"
-              required
-            />
-          </div>
-          <div>
-            <p className="mt-2 font-sans text-indigo-600">Email</p>
-            <input
-              className="md:w- placeholder:text-neutral-900 mt-2 w-[80vw] items-start rounded bg-gray-300 px-5 py-1.5 outline-none dark:bg-white  md:w-[350px] xl:w-[500px]"
-              type="email"
-              placeholder="Email"
-              id="email"
-              name="user_email"
-              required
-            />
-          </div>
-          <div>
-            <p className="mt-2 text-indigo-600">Message</p>
-            <textarea
-              className="textarea placeholder:text-neutral-900 mt-2 h-64 w-[80vw] resize-none items-start rounded bg-gray-300 px-5 py-1.5 outline-none  dark:bg-white md:w-[350px] xl:w-[500px]"
-              placeholder="Message"
-              name="message"
-              required
-            />
-          </div>
-          <button
-            className="contact-button submit mt-2 h-10 w-[80vw] rounded bg-gray-300 font-header font-bold text-white md:w-[350px] xl:w-[500px]"
-            type="submit"
-          >
-            Send
-          </button>
-        </form>
-      </div>
-    </div>
+    <form
+      className="flex max-w-xl flex-col items-center justify-center gap-3 rounded-lg bg-neutralLightest px-6 py-8 shadow-[0_10px_15px_rgba(0,0,0,0.25)] md:m-auto md:w-[50%] md:min-w-[576px]"
+      onSubmit={handleFormSubmit}
+    >
+      <label htmlFor="name" className="w-full text-primaryLight">
+        Name
+        <input
+          className="mt-1 block w-full items-start rounded bg-neutralLight px-5 py-1.5 outline-primaryLight placeholder:text-neutral"
+          type="text"
+          placeholder="Name"
+          id="name"
+          name="name"
+          required
+        />
+      </label>
+      <label htmlFor="email" className="w-full text-primaryLight">
+        Email
+        <input
+          className="mt-1 block w-full items-start rounded bg-neutralLight px-5 py-1.5 outline-primaryLight placeholder:text-neutral"
+          type="email"
+          placeholder="Email"
+          id="email"
+          name="user_email"
+          required
+        />
+      </label>
+      <label htmlFor="message" className="w-full text-primaryLight">
+        Message
+        <textarea
+          className="mt-1 block h-[200px] w-full items-start rounded bg-neutralLight px-5 py-1.5 outline-primaryLight placeholder:text-neutral"
+          placeholder="Message"
+          id="message"
+          name="message"
+          required
+        />
+      </label>
+      <button
+        className="w-full rounded bg-gradient-to-t from-[#4E5DB6]/95 to-[#9969C4] py-3 font-header font-extrabold text-neutralLightest"
+        type="submit"
+      >
+        Send
+      </button>
+    </form>
   );
 }
