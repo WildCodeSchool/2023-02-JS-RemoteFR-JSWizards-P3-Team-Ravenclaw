@@ -59,5 +59,9 @@ Dropdown.propTypes = {
       id: PropTypes.number,
       name: PropTypes.string,
     })
-  ).isRequired,
+  ),
+};
+
+Dropdown.defaultProps = {
+  items: null,
 };
