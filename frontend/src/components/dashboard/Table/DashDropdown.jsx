@@ -56,15 +56,30 @@ export default function DashDropdown() {
                 <Dropdown title="Select Game Category" items={category} />
               </div>
             </div>
-            <div className="flex w-full flex-col gap-1.5">
-              <label htmlFor="seo" className="text-primaryLightest">
-                SEO tags
-              </label>
-              <Input
-                type="text"
-                className={`${styles.input__style}`}
-                placeholder="Type seo tags"
-              />
+
+            <div className="flex w-full gap-4">
+              <div className="flex w-full flex-col gap-1.5">
+                <label htmlFor="seo" className="text-primaryLightest">
+                  SEO tags
+                </label>
+                <Input
+                  type="text"
+                  className={`${styles.input__style}`}
+                  placeholder="Type seo tags"
+                />
+              </div>
+              <div className="flex  min-w-fit flex-col gap-1.5">
+                <label
+                  htmlFor="premium status"
+                  className="text-primaryLightest"
+                >
+                  Premium video
+                </label>
+                <Input
+                  type="checkbox"
+                  className="m-3.5 flex h-full items-center justify-center "
+                />
+              </div>
             </div>
           </div>
           <div className=" flex w-full flex-col gap-1.5">
@@ -78,6 +93,7 @@ export default function DashDropdown() {
             />
           </div>
         </form>
+
         <div className="flex gap-4">
           <div className="flex flex-col gap-1.5">
             <label htmlFor="status" className="text-primaryLightest">
@@ -101,7 +117,6 @@ export default function DashDropdown() {
               </Button>
             </div>
           </div>
-
           <div className="flex gap-4">
             <VideoUpload />
             <ImageUpload />
