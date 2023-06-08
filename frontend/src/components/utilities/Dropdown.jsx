@@ -10,7 +10,7 @@ export default function Dropdown({ title, items }) {
   return (
     <div>
       <Button
-        customCSS="mb-2 flex items-center justify-between items-center rounded-lg bg-primary p-3 text-center text-sm text-white hover:bg-primaryLight focus:outline-none dark:bg-primary dark:hover:bg-primaryLight min-w-[200px]"
+        customCSS="mb-2 flex items-center justify-between rounded-lg bg-primary p-3 text-center text-sm text-white hover:bg-primaryLight focus:outline-none dark:bg-primary dark:hover:bg-primaryLight min-w-[200px]"
         type="button"
         onClick={() => setIsToggled(!isToggled)}
       >
