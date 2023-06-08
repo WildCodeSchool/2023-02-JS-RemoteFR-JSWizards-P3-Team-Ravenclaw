@@ -22,25 +22,25 @@ export default function Navbar() {
       id: 2,
       name: "Videos",
       component: <VideosNavItem />,
-      route: "Videos",
+      route: "videos",
     },
     {
       id: 3,
       name: "Plans",
       component: <PricingNavItem />,
-      route: "Plans",
+      route: "plans",
     },
     {
       id: 4,
       name: "About",
       component: <AboutNavItem />,
-      route: "About",
+      route: "about",
     },
     {
       id: 5,
       name: "Account",
       component: <ConnectionNavItem />,
-      route: "Account",
+      route: "account",
     },
   ];
 
