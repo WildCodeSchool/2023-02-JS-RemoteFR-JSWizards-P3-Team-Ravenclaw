@@ -8,7 +8,7 @@ export default function NotFound() {
     <section className="h-full ">
       <div className="flex flex-col items-center gap-6">
         <img src="../assets/img/notfound/404_dark.svg" alt="error_404" />
-        <p className="font-extrabold text-lg text-neutralDark dark:text-neutralLight">
+        <p className="text-lg font-extrabold text-neutralDark dark:text-neutralLight">
           Ooops... Page Not Found!
         </p>
         <p className="text-neutral">Looks like you lost your way</p>
