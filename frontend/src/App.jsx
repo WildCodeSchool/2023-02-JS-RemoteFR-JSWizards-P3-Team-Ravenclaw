@@ -28,7 +28,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="videos" element={<Videos />} />
           <Route path="videos/:id" element={<Player />} />
-          <Route path="plan" element={<Pricing />} />
+          <Route path="plans" element={<Pricing />} />
           <Route path="about" element={<About />} />
           <Route path="connection" element={<Connection />} />
           <Route path="*" element={<NotFound />} />
