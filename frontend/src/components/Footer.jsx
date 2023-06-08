@@ -1,10 +1,10 @@
 export default function Footer() {
   return (
-    <footer className="flex flex-col items-center dark:bg-neutralDarkest md:bg-neutralDarkest h-20 justify-center md:flex-row md:justify-between px-12 gap-1">
+    <footer className="flex h-20 flex-col items-center justify-center gap-1 px-12 dark:bg-neutralDarkest md:flex-row md:justify-between md:bg-neutralDarkest">
       <p className=" dark:text-neutralLightest md:text-neutralLightest">
         © 2013 - 2023 Origins. All rights reserved
       </p>
-      <div className="flex gap-4 items-center">
+      <div className="flex items-center gap-4">
         <a href="https://www.instagram.com/">
           <img src="./assets/icon/socials/instagram.svg" alt="instagram" />
         </a>
