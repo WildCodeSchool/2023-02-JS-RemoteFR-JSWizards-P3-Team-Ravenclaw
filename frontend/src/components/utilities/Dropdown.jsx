@@ -10,7 +10,7 @@ export default function Dropdown({ title, items }) {
   return (
     <div>
       <Button
-        customCSS="mb-2 flex items-center justify-between rounded-lg bg-primary p-3 text-center text-sm text-white hover:bg-primaryLight focus:outline-none dark:bg-primary dark:hover:bg-primaryLight min-w-[200px]"
+        customCSS="flex items-center justify-between rounded-lg bg-primary p-3 text-center text-sm text-white hover:bg-primaryLight focus:outline-none dark:bg-primary dark:hover:bg-primaryLight min-w-[200px]"
         type="button"
         onClick={() => setIsToggled(!isToggled)}
       >
@@ -32,7 +32,7 @@ export default function Dropdown({ title, items }) {
         </svg>
       </Button>
       {isToggled && (
-        <div className="w-50 absolute z-10 rounded-lg bg-white shadow dark:bg-gray-700">
+        <div className="w-50 absolute z-10 mt-2 rounded-lg bg-white shadow dark:bg-gray-700">
           <div className="p-3">
             <Searchbar className="relative w-full" />
           </div>
