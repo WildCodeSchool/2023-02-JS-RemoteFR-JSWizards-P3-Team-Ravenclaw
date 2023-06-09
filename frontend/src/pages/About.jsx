@@ -1,3 +1,4 @@
+import SliderKeyFigures from "../components/about/SliderKeyFigures";
 import Contact from "../components/about/Contact";
 
 export default function About() {
@@ -58,6 +59,7 @@ export default function About() {
       </article>
       <article className="flex flex-col gap-3">
         <h1>KEY FIGURES</h1>
+        <SliderKeyFigures />
         {/* Slider component */}
       </article>
       <article className="flex flex-col gap-3">
