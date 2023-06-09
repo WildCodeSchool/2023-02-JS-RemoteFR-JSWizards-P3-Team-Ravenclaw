@@ -27,3 +27,32 @@
 .label__style {
   color: theme("colors.primaryLightest");
 }
+
+.tab__style {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  gap: 0.5rem;
+  border-bottom-width: 2px;
+  border-color: transparent;
+  color: theme("colors.neutral");
+}
+
+.tab__style:hover {
+  border-color: theme("colors.neutralLight");
+  color: theme("colors.neutralLight");
+}
+
+.active_tab__style {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  gap: 0.5rem;
+  border-bottom-width: 2px;
+  border-color: theme("colors.primaryLight");
+  color: theme("colors.primaryLight");
+}
+
+.active_tab__style svg {
+  fill: theme("colors.primaryLight");
+}
