@@ -1,3 +1,4 @@
+/* Start table input style  */
 .input__style {
   padding: 10px;
   border-radius: 0.5rem;
@@ -14,6 +15,7 @@
   color: theme("colors.neutralLight");
 }
 
+/* Start table btn style  */
 .btn__style {
   min-width: 100px;
   padding: 0.25rem 1rem;
@@ -24,6 +26,55 @@
   border: 2px solid theme("colors.primaryLightest");
 }
 
+/* Start table label style  */
 .label__style {
   color: theme("colors.primaryLightest");
+}
+
+/* Start table tab style  */
+.tab__style {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  gap: 0.5rem;
+  border-bottom-width: 2px;
+  border-color: transparent;
+  color: theme("colors.neutral");
+}
+
+.tab__style:hover {
+  border-color: theme("colors.neutralLight");
+  color: theme("colors.neutralLight");
+}
+
+.tab__style:hover svg {
+  fill: theme("colors.neutralLight");
+}
+
+.active_tab__style {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  gap: 0.5rem;
+  border-bottom-width: 2px;
+  border-color: theme("colors.primaryLight");
+  color: theme("colors.primaryLight");
+}
+
+.active_tab__style svg {
+  fill: theme("colors.primaryLight");
+}
+
+.active_tab__style:hover {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  gap: 0.5rem;
+  border-bottom-width: 2px;
+  border-color: theme("colors.primaryLightest");
+  color: theme("colors.primaryLightest");
+}
+
+.active_tab__style:hover svg {
+  fill: theme("colors.primaryLightest");
 }
