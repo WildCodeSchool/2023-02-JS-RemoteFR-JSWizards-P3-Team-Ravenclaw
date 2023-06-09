@@ -30,7 +30,7 @@
     }
 }
   
-.card_figure p, span {
+.card_figure p, .card_figure span {
     color: theme("colors.neutralLightest");
 }
 
