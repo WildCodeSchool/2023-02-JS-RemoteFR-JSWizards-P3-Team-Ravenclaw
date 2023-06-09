@@ -23,3 +23,7 @@
 .btn__style:hover {
   border: 2px solid theme("colors.primaryLightest");
 }
+
+.label__style {
+  color: theme("colors.primaryLightest");
+}

@@ -1,9 +1,17 @@
+// Style
+import styles from "../../css/Table.module.css";
+
+// Components
+import Label from "../utilities/Label";
+
 export default function VideoUpload() {
   return (
     <div className="flex flex-col gap-1.5">
-      <label htmlFor="videoUpload" className="text-primaryLightest">
-        Video Upload
-      </label>
+      <Label
+        htmlFor="video-upload"
+        className={`${styles.label__style}`}
+        title="Video Upload"
+      />
       <input
         type="file"
         id="videoUpload"

@@ -2,8 +2,8 @@ import DashTable from "../components/dashboard/DashTable";
 
 export default function Admin() {
   return (
-    <section>
+    <div>
       <DashTable />
-    </section>
+    </div>
   );
 }
