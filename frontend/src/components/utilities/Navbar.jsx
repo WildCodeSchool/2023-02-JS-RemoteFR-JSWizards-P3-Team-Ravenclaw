@@ -1,12 +1,12 @@
 import { NavLink } from "react-router-dom";
 
-import styles from "../css/Navbar.module.css";
+import styles from "../../css/Navbar.module.css";
 
-import ConnectionNavItem from "./navbar/ConnectionNavItem";
-import VideosNavItem from "./navbar/VideosNavItem";
-import PricingNavItem from "./navbar/PricingNavItem";
-import HomeNavItem from "./navbar/HomeNavItem";
-import AboutNavItem from "./navbar/AboutNavItem";
+import ConnectionNavItem from "../navbar/ConnectionNavItem";
+import VideosNavItem from "../navbar/VideosNavItem";
+import PricingNavItem from "../navbar/PricingNavItem";
+import HomeNavItem from "../navbar/HomeNavItem";
+import AboutNavItem from "../navbar/AboutNavItem";
 import Notification from "./Notification";
 
 export default function Navbar() {

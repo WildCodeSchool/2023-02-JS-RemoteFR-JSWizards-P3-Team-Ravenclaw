@@ -12,8 +12,9 @@ import Admin from "./pages/Admin";
 import User from "./pages/User";
 
 // Layout
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+import Navbar from "./components/utilities/Navbar";
+import MobileSettings from "./components/navsettings/MobileSettings";
+import Footer from "./components/utilities/Footer";
 import DashLayout from "./layout/DashLayout";
 
 // Components
@@ -23,6 +24,7 @@ export default function App() {
   return (
     <>
       <Navbar />
+      <MobileSettings />
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
