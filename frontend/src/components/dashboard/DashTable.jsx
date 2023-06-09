@@ -33,7 +33,7 @@ export default function DashTable() {
   ];
 
   return (
-    <section className="relative sm:p-5">
+    <div className="relative sm:p-5">
       <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
         <div className="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
           <DashSearch />
@@ -53,6 +53,6 @@ export default function DashTable() {
           <DashNav />
         </div>
       </div>
-    </section>
+    </div>
   );
 }
