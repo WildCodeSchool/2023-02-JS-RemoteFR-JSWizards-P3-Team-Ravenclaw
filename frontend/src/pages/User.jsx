@@ -1,7 +1,7 @@
 export default function User() {
   return (
-    <section>
+    <div>
       <div>Test</div>
-    </section>
+    </div>
   );
 }
