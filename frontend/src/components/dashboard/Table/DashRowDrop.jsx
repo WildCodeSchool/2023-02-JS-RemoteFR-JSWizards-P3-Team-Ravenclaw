@@ -25,16 +25,10 @@ export default function DashRowDrop({ video }) {
                     onClick={() => setIsToggled(!isToggled)}
                     customCSS="flex items-center"
                   >
-                    <img
-                      src="../public/assets/icon/dashboard/edit.svg"
-                      alt=""
-                    />
+                    <img src="../assets/icon/dashboard/edit.svg" alt="" />
                   </Button>
                   <Button type="button" customCSS="flex items-center">
-                    <img
-                      src="../public/assets/icon/dashboard/delete.svg"
-                      alt=""
-                    />
+                    <img src="../assets/icon/dashboard/delete.svg" alt="" />
                   </Button>
                 </span>
               ) : (
