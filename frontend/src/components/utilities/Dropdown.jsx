@@ -10,13 +10,13 @@ export default function Dropdown({ title, items }) {
   return (
     <div>
       <Button
-        customCSS="mb-2 inline-flex items-center rounded-lg bg-primary p-3 text-center text-sm font-medium text-white hover:bg-primaryLight focus:outline-none dark:bg-primary dark:hover:bg-primaryLight"
+        customCSS="flex items-center justify-between rounded-lg bg-primary p-3 text-center text-sm text-white hover:bg-primaryLight focus:outline-none dark:bg-primary dark:hover:bg-primaryLight min-w-[200px]"
         type="button"
         onClick={() => setIsToggled(!isToggled)}
       >
         {title}
         <svg
-          className="ml-2 h-4 w-4"
+          className="flex h-4 w-4 justify-end"
           aria-hidden="true"
           fill="none"
           stroke="currentColor"
@@ -32,7 +32,7 @@ export default function Dropdown({ title, items }) {
         </svg>
       </Button>
       {isToggled && (
-        <div className="w-50 absolute z-10 rounded-lg bg-white shadow dark:bg-gray-700">
+        <div className="w-50 absolute z-10 mt-2 rounded-lg bg-white shadow dark:bg-gray-700">
           <div className="p-3">
             <Searchbar className="relative w-full" />
           </div>
@@ -59,5 +59,9 @@ Dropdown.propTypes = {
       id: PropTypes.number,
       name: PropTypes.string,
     })
-  ).isRequired,
+  ),
+};
+
+Dropdown.defaultProps = {
+  items: null,
 };

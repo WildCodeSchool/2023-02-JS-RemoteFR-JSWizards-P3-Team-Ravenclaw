@@ -1,11 +1,11 @@
 import Hero from "../components/home/Hero";
-import Caroussel from "./components/Caroussel";
+import VideoGrid from "../components/VideoGrid";
 
 export default function Home() {
   return (
-    <section>
+    <>
       <Hero />
-      <Caroussel />
-    </section>
+      <VideoGrid />
+    </>
   );
 }

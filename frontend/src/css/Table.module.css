@@ -1,0 +1,25 @@
+.input__style {
+  padding: 10px;
+  border-radius: 0.5rem;
+  background-color: theme("colors.primary");
+  color: theme("colors.neutralLightest");
+}
+
+.input__style:focus {
+  outline: 1px solid theme("colors.primaryLightest");
+  outline-offset: -1px;
+}
+
+.input__style::placeholder {
+  color: theme("colors.neutralLight");
+}
+
+.btn__style {
+  min-width: 100px;
+  padding: 0.25rem 1rem;
+  border-radius: 0.5rem;
+}
+
+.btn__style:hover {
+  border: 2px solid theme("colors.primaryLightest");
+}

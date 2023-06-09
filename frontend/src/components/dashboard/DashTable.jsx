@@ -44,8 +44,9 @@ export default function DashTable() {
                 {videos.map((video) => (
                   <DashRow key={video.id} video={video} />
                 ))}
-
-                <DashRowDrop />
+                {videos.map((video) => (
+                  <DashRowDrop key={video.id} video={video} />
+                ))}
               </tbody>
             </table>
           </div>
