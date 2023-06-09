@@ -3,6 +3,7 @@ import DashHead from "./Table/DashHead";
 import DashNav from "./Table/DashNav";
 import DashSearch from "./Table/DashSearch";
 import DashRowDrop from "./Table/DashRowDrop";
+import SubCategory from "./SubCategory";
 
 export default function DashTable() {
   const videos = [
@@ -36,6 +37,7 @@ export default function DashTable() {
     <div className="relative sm:p-5">
       <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
         <div className="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
+          <SubCategory />
           <DashSearch />
           <div className="overflow-x-auto">
             <table className="w-full text-left text-base text-neutralDarkest dark:text-neutralLightest">
