@@ -62,7 +62,7 @@ export default function Hero() {
           <NavLink to={link.link}>
             <Button customCSS="btn-default absolute -translate-x-1/2 left-1/2 bottom-8 transform">
               WATCH NOW
-              <BsArrowRight className="text-[1.8em]" stroke-width="white" />
+              <BsArrowRight className="text-[1.8em]" strokeWidth="white" />
             </Button>
           </NavLink>
         </div>
