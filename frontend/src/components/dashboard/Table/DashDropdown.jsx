@@ -7,6 +7,7 @@ import VideoUpload from "../VideoUpload";
 import Button from "../../utilities/Button";
 import Input from "../../utilities/Input";
 import Dropdown from "../../utilities/Dropdown";
+import Label from "../../utilities/Label";
 
 export default function DashDropdown() {
   const language = [
@@ -30,14 +31,16 @@ export default function DashDropdown() {
   return (
     <tr className="border-b dark:border-neutral">
       <td colSpan="6" className="gap-4 space-y-4 px-8 py-4">
-        <form>
-          <div className="flex flex-row gap-4">
+        <form className="flex flex-col gap-4">
+          <div className="flex gap-4">
             <div className="flex flex-col gap-4">
               <div className="flex gap-4">
                 <div className="flex flex-col gap-1.5">
-                  <label htmlFor="title" className="text-primaryLightest">
-                    Video Name
-                  </label>
+                  <Label
+                    htmlFor="title"
+                    className={`${styles.label__style}`}
+                    title="Video Name"
+                  />
                   <Input
                     type="text"
                     className={`${styles.input__style}`}
@@ -45,24 +48,30 @@ export default function DashDropdown() {
                   />
                 </div>
                 <div className="flex flex-col gap-1.5">
-                  <label htmlFor="language" className="text-primaryLightest">
-                    Language
-                  </label>
+                  <Label
+                    htmlFor="language"
+                    className={`${styles.label__style}`}
+                    title="Language"
+                  />
                   <Dropdown title="Select Language" items={language} />
                 </div>
                 <div className="flex flex-col gap-1.5">
-                  <label htmlFor="category" className="text-primaryLightest">
-                    Category
-                  </label>
+                  <Label
+                    htmlFor="category"
+                    className={`${styles.label__style}`}
+                    title="Category"
+                  />
                   <Dropdown title="Select Game Category" items={category} />
                 </div>
               </div>
 
               <div className="flex w-full gap-4">
                 <div className="flex w-full flex-col gap-1.5">
-                  <label htmlFor="seo" className="text-primaryLightest">
-                    SEO tags
-                  </label>
+                  <Label
+                    htmlFor="seo"
+                    className={`${styles.label__style}`}
+                    title="SEO"
+                  />
                   <Input
                     type="text"
                     className={`${styles.input__style}`}
@@ -70,12 +79,11 @@ export default function DashDropdown() {
                   />
                 </div>
                 <div className="flex min-w-fit flex-col gap-1.5">
-                  <label
-                    htmlFor="premium status"
-                    className="text-primaryLightest"
-                  >
-                    Premium video
-                  </label>
+                  <Label
+                    htmlFor="premium-video"
+                    className={`${styles.label__style}`}
+                    title="Premium"
+                  />
                   <Input
                     type="checkbox"
                     className="m-3.5 flex h-full items-center justify-center "
@@ -84,9 +92,11 @@ export default function DashDropdown() {
               </div>
             </div>
             <div className="flex w-full flex-col gap-1.5">
-              <label htmlFor="description" className="text-primaryLightest">
-                Video description
-              </label>
+              <Label
+                htmlFor="description"
+                className={`${styles.label__style}`}
+                title="Video description"
+              />
               <textarea
                 type="text"
                 className={`${styles.input__style} h-full w-full`}
@@ -97,9 +107,11 @@ export default function DashDropdown() {
 
           <div className="flex gap-4">
             <div className="flex flex-col gap-1.5">
-              <label htmlFor="status" className="text-primaryLightest">
-                Status
-              </label>
+              <Label
+                htmlFor="status"
+                className={`${styles.label__style}`}
+                title="Status"
+              />
               <div className="flex h-full gap-4">
                 <Button
                   customCSS={`${styles.btn__style} bg-successLight text-success `}
