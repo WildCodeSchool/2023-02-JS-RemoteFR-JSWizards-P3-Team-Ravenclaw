@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "img": "../public/assets/icon/about/phone.svg",
+    "name": "App Download",
+    "info": "+100M"
+  },
+  {
+    "id": 2,
+    "img": "../public/assets/icon/about/web.svg",
+    "name": "World Offices",
+    "info": "6"
+  },
+  {
+    "id": 3,
+    "img": "../public/assets/icon/about/user-stroke.svg",
+    "name": "Employees",
+    "info": "78"
+  },
+  {
+    "id": 4,
+    "img": "../public/assets/icon/about/calendar.svg",
+    "name": "Experience",
+    "info": "+14 years"
+  },
+  {
+    "id": 5,
+    "img": "../public/assets/icon/about/sport.svg",
+    "name": "Sporting Events",
+    "info": "114"
+  }
+]

@@ -59,7 +59,7 @@ export default function VideoGrid() {
     setVideos(videoData);
   }, []);
   return (
-    <div>
+    <>
       <div className="block sm:hidden">
         <div className="container">
           <Swiper
@@ -67,7 +67,7 @@ export default function VideoGrid() {
             grabCursor
             modules={FreeMode}
             className="mySwiper"
-            slidesPerView={5}
+            slidesPerView={2}
           >
             {videos.map((video) => (
               <SwiperSlide key={video.id}>
@@ -86,6 +86,6 @@ export default function VideoGrid() {
           ))}
         </div>
       </div>
-    </div>
+    </>
   );
 }

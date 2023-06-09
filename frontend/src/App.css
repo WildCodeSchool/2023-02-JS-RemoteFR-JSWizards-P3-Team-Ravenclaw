@@ -61,7 +61,22 @@
 }
 
 @layer components {
+  .slider {
+    padding: 16px 0px;
+    display: flex;
+    overflow-x: scroll;
+    gap: 8px;
+  
+    @media screen and (min-width: 768px) {
+      gap: 16px;
+    }
+  }
+  
+  .slider::-webkit-scrollbar {
+    display: none;
+  }
   /* Start Connect component  */
+
   .signup-container {
     position: absolute;
     top: 0;
