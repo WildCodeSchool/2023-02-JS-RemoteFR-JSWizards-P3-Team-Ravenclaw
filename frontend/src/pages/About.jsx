@@ -60,7 +60,6 @@ export default function About() {
       <article className="flex flex-col gap-3">
         <h1>KEY FIGURES</h1>
         <SliderKeyFigures />
-        {/* Slider component */}
       </article>
       <article className="flex flex-col gap-3">
         <h1>CONTACT US</h1>
