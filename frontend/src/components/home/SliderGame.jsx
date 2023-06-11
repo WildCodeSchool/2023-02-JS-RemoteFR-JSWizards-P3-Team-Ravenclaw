@@ -1,9 +1,9 @@
 import Card from "../utilities/Card";
 import games from "../../data/games.json";
 
-import styles from "../../css/SwipperGame.module.css";
+import styles from "../../css/SliderGame.module.css";
 
-export default function SwipperGame() {
+export default function SliderGame() {
   return (
     <ul className="slider">
       {games.map((game) => (
