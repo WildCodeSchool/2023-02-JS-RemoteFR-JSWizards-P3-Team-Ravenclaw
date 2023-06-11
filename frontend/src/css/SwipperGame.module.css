@@ -1,4 +1,4 @@
-.slider {
+/* .slider {
   padding: 16px 0px;
   display: flex;
   overflow-x: scroll;
@@ -11,7 +11,7 @@
 
 .slider::-webkit-scrollbar {
   display: none;
-}
+} */
 
 .card__game {
   position: relative;
