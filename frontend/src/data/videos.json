@@ -1,0 +1,116 @@
+[
+  {
+    "id": 1,
+    "img": "../public/assets/img/miniatures/overwatch.png",
+    "video": "https://www.youtube.com/watch?v=tF2ss2mU-Yc",
+    "title": "LIP WITH A SPICY SYMMETRA 💥 | OWL TOP 5"
+  },
+  {
+    "id": 2,
+    "img": "../public/assets/img/miniatures/hearthstone1.png",
+    "video": "https://www.youtube.com/watch?v=pIT4uWcfy54",
+    "title": "Mull it Over - Ping Mage - Masters Tour: Maw and Disorder"
+  },
+  {
+    "id": 3,
+    "img": "../public/assets/img/miniatures/dota.png",
+    "video": "https://www.youtube.com/watch?v=aG15JM07Dt4",
+    "title": "PSG LGD vs ASTER - BEST DPC CHINA TEAM! - DPC 2023 CN SUMMER TOUR 3 Dota 2 Highlights"
+  },
+  {
+    "id": 4,
+    "img": "../public/assets/img/miniatures/valorant2.png",
+    "video": "https://www.youtube.com/watch?v=PiOfqf6RFPk",
+    "title": "TSM vs Disguised Highlights | Challengers League: North America 2023"
+  },
+  {
+    "id": 5,
+    "img": "../public/assets/img/miniatures/GT1.png",
+    "video": "https://www.youtube.com/watch?v=qoU2jyTuyn8",
+    "title": "Manufacturers Cup Showdown Highlights | GT World Series 2022"
+  },
+  {
+    "id": 6,
+    "img": "../public/assets/img/miniatures/valorant1.png",
+    "video": "https://www.youtube.com/watch?v=acs0y78XG7s",
+    "title": "LOUD vs FURIA All Maps | Valorant Champions Tour 2023: Americas League"
+  },
+  {
+    "id": 7,
+    "img": "../public/assets/img/miniatures/astervspandas.png",
+    "video": "https://www.youtube.com/watch?v=NrQcIBzBSTk",
+    "title": "ASTER vs 9 PANDAS - SUMAIL vs RAMZSES666 - DREAMLEAGUE 2023 S20 Dota 2 Highlights"
+  },
+  {
+    "id": 8,
+    "img": "../public/assets/img/miniatures/gladiatorsvsaster.png",
+    "video": "https://www.youtube.com/watch?v=9qAs3EaZzQ0",
+    "title": "Dota2 - Gladiators vs Team Aster - Game 2 - DreamLeague Season 20 - Group B"
+  },
+  {
+    "id": 9,
+    "img": "../public/assets/img/miniatures/nationscup2.png",
+    "video": "https://www.youtube.com/watch?v=O6DyBwgymSY",
+    "title": "Nations Cup Round 2 Highlights | GT World Series 2022"
+  },
+  {
+    "id": 10,
+    "img": "../public/assets/img/miniatures/fifa.png",
+    "video": "https://www.youtube.com/watch?v=yjaBoDvWe_Y",
+    "title": "Master Moments Ep. 2 | FIFA 22 Ft. DUX Gravesen"
+  },
+  {
+    "id": 11,
+    "img": "../public/assets/img/miniatures/fortnite.png",
+    "video": "https://www.youtube.com/watch?v=Gw3lMBveOHA",
+    "title": "😨 IL DÉCOUVRE 2 NOUVELLES ROTAS COMPLÈTEMENT FOLLES ?!! 😱 | BEST OF FORTNITE #15"
+  },
+  {
+    "id": 12,
+    "img": "../public/assets/img/miniatures/nba.png",
+    "video": "https://www.youtube.com/watch?v=prCd0aZeTmA",
+    "title": "Raptors Uprising GC vs Knicks Gaming - 5v5 Full Highlights | THE TIPOFF | May 30, 2023"
+  },
+  {
+    "id": 13,
+    "img": "../public/assets/img/miniatures/madden.png",
+    "video": "https://www.youtube.com/watch?v=E3XrsWwuxxE",
+    "title": "14 Top Madden Plays of 2022! | MCS | Madden 23"
+  },
+  {
+    "id": 14,
+    "img": "../public/assets/img/miniatures/rocketleague.png",
+    "video": "https://www.youtube.com/watch?v=_HXFCrf0xbg",
+    "title": "Top 10 Plays | EU Spring Cup"
+  },
+  {
+    "id": 15,
+    "img": "../public/assets/img/miniatures/streetfighter.png",
+    "video": "https://www.youtube.com/watch?v=MRxTHkJd0u8",
+    "title": "Manon (Damascus) vs Blanka (Tyrant) - Street Fighter 6 Gameplay"
+  },
+  {
+    "id": 16,
+    "img": "../public/assets/img/miniatures/tekken.png",
+    "video": "https://www.youtube.com/watch?v=7mWWqyXvMiQ",
+    "title": "DRX Knee (Steve/Feng) vs GOBACK Chand NY (Leo) - 2023 TWT Masters - BAM 13 2023: Winners Semifinals"
+  },
+  {
+    "id": 17,
+    "img": "../public/assets/img/miniatures/smash.png",
+    "video": "https://www.youtube.com/watch?v=fb7GtosBk9M",
+    "title": "Show Me Your Moose Losers Semis - DannyDVito (Young Link) Vs. Big Stew (Kazuya) Smash Ultimate - SSB"
+  },
+  {
+    "id": 18,
+    "img": "../public/assets/img/miniatures/cod.png",
+    "video": "https://www.youtube.com/watch?v=HCFPBZLt-pg",
+    "title": "Simp And Abezy Ace BACK TO BACK 💥 | Best of the Week - Major V Week 2"
+  },
+  {
+    "id": 19,
+    "img": "../public/assets/img/miniatures/apex.png",
+    "video": "https://www.youtube.com/watch?v=yfoJtqE5b-s",
+    "title": "NA Regional CHAMPIONS! ALGS Winners’ POV | DarkZero | Year 3 Split 2 | Apex Legends"
+  }
+]
