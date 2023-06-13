@@ -2,8 +2,7 @@
 import styles from "../../../css/Table.module.css";
 
 // Components
-import ImageUpload from "../ImageUpload";
-import VideoUpload from "../VideoUpload";
+import Upload from "../Upload";
 import Button from "../../utilities/Button";
 import Input from "../../utilities/Input";
 import Dropdown from "../../utilities/Dropdown";
@@ -131,8 +130,8 @@ export default function DashDropdown() {
               </div>
             </div>
             <div className="flex gap-4">
-              <VideoUpload />
-              <ImageUpload />
+              <Upload title="Video Upload" type="file" accept="video/*" />
+              <Upload title="Image Upload" type="file" accept="image/*" />
             </div>
             <span className="flex w-full items-end justify-center">
               <Button
