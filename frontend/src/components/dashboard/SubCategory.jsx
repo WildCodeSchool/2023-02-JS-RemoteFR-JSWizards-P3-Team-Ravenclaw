@@ -1,13 +1,15 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 // Style
 import styles from "../../css/Table.module.css";
 
-export default function SubCategory() {
+export default function SubCategory({ setActiveTabItem }) {
   const [activeTab, setActiveTab] = useState("video");
 
   const handleActive = (tab) => {
     setActiveTab(tab);
+    setActiveTabItem(tab);
   };
 
   const getTabClassName = (tab) => {
@@ -75,3 +77,7 @@ export default function SubCategory() {
     </div>
   );
 }
+
+SubCategory.propTypes = {
+  setActiveTabItem: PropTypes.func.isRequired,
+};
