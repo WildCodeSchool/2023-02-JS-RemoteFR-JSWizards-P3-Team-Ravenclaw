@@ -1,4 +1,6 @@
-export default function DashHead() {
+import PropTypes from "prop-types";
+
+export default function DashHead({ activeTab }) {
   const titles = [
     {
       id: 1,
@@ -24,11 +26,26 @@ export default function DashHead() {
       id: 6,
       name: "Premium",
     },
+    {
+      id: 7,
+      name: "Actions",
+    },
   ];
+
+  const filteredTitles = titles.filter((title) => {
+    if (activeTab === "video" && title.name === "Premium") {
+      return false; // Exclude "Premium" for video tab
+    }
+    if (activeTab === "category" && title.name === "Actions") {
+      return false; // Exclude "Actions" for category tab
+    }
+    return true; // Include other titles
+  });
+
   return (
-    <thead className="bg-primary text-neutralLightest ">
+    <thead className="bg-primary text-neutralLightest">
       <tr>
-        {titles.map((title) => (
+        {filteredTitles.map((title) => (
           <th key={title.id} scope="col" className="px-4 py-3 text-base">
             {title.name}
           </th>
@@ -37,3 +54,7 @@ export default function DashHead() {
     </thead>
   );
 }
+
+DashHead.propTypes = {
+  activeTab: PropTypes.func.isRequired,
+};
