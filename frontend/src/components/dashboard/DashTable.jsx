@@ -49,7 +49,7 @@ export default function DashTable() {
           <DashSearch />
           <div className="overflow-x-auto">
             <table className="w-full text-left text-base text-neutralDarkest dark:text-neutralLightest">
-              <DashHead />
+              <DashHead activeTab={activeTab} />
               <tbody>
                 {/* eslint-disable */}
                 {activeTab === "video"
