@@ -1,3 +1,10 @@
+.slider__figures {
+    @media screen and (min-width: 1920px) {
+        overflow-x: inherit;
+        justify-content: space-around;
+    } 
+}
+
 .card_figure {
     width: 136px;
     height: 184px;
@@ -12,12 +19,12 @@
   
     @apply drop-shadow-[0px_5px_10px_rgba(0,0,0,0.3)];
   
-    cursor: pointer;
+    cursor: default;
     overflow: hidden;
   
     @media screen and (min-width: 768px) {
-        width: 224px;
-        height: 288px;
+        width: 176px;
+        height: 216px;
         gap: 30px;
     }
 }
