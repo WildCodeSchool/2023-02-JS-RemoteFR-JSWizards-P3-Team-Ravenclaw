@@ -4,7 +4,7 @@ import figures from "../../data/keyFigures.json";
 
 export default function SliderKeyFigures() {
   return (
-    <ul className="slider md:justify-around">
+    <ul className={`slider ${styles.slider__figures}`}>
       {figures.map((figure) => (
         <li key={figure.id}>
           <Card classCSS={`${styles.card_figure}`}>
