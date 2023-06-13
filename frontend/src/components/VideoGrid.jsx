@@ -4,6 +4,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
 import { FreeMode } from "swiper";
 
+import styles from "../css/VideoGrid.module.css";
+
 // à remplacer par des vidéos
 const videoData = [
   {
@@ -78,7 +80,7 @@ export default function VideoGrid() {
         </div>
       </div>
       <div className="hidden sm:block">
-        <div className="video-grid">
+        <div className={styles.videoGrid}>
           {videoData.map((video) => (
             <div className="card" key={video.id}>
               <img src={video.img} alt="" />
