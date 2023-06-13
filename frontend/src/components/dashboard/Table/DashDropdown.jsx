@@ -2,7 +2,6 @@
 import styles from "../../../css/Table.module.css";
 
 // Components
-import Upload from "../Upload";
 import Button from "../../utilities/Button";
 import Input from "../../utilities/Input";
 import Dropdown from "../../utilities/Dropdown";
@@ -35,12 +34,9 @@ export default function DashDropdown() {
             <div className="flex flex-col gap-4">
               <div className="flex gap-4">
                 <div className="flex flex-col gap-1.5">
-                  <Label
-                    htmlFor="title"
-                    className={`${styles.label__style}`}
-                    title="Video Name"
-                  />
                   <Input
+                    htmlFor="title"
+                    title="Video Name"
                     type="text"
                     className={`${styles.input__style}`}
                     placeholder="Type video name"
@@ -66,24 +62,18 @@ export default function DashDropdown() {
 
               <div className="flex w-full gap-4">
                 <div className="flex w-full flex-col gap-1.5">
-                  <Label
-                    htmlFor="seo"
-                    className={`${styles.label__style}`}
-                    title="SEO"
-                  />
                   <Input
+                    htmlFor="seo"
+                    title="SEO"
                     type="text"
                     className={`${styles.input__style}`}
                     placeholder="Type seo tags"
                   />
                 </div>
                 <div className="flex min-w-fit flex-col gap-1.5">
-                  <Label
-                    htmlFor="premium-video"
-                    className={`${styles.label__style}`}
-                    title="Premium"
-                  />
                   <Input
+                    htmlFor="premium-video"
+                    title="Premium"
                     type="checkbox"
                     className="m-3.5 flex h-full items-center justify-center "
                   />
@@ -130,8 +120,18 @@ export default function DashDropdown() {
               </div>
             </div>
             <div className="flex gap-4">
-              <Upload title="Video Upload" type="file" accept="video/*" />
-              <Upload title="Image Upload" type="file" accept="image/*" />
+              <Input
+                title="Video Upload"
+                type="file"
+                accept="video/*"
+                className="file:hover:primaryLightest file:cursor-pointer file:rounded-md file:border-none file:bg-primary file:p-3 file:text-neutralLightest"
+              />
+              <Input
+                title="Image Upload"
+                type="file"
+                accept="image/*"
+                className="file:hover:primaryLightest file:cursor-pointer file:rounded-md file:border-none file:bg-primary file:p-3 file:text-neutralLightest"
+              />
             </div>
             <span className="flex w-full items-end justify-center">
               <Button
