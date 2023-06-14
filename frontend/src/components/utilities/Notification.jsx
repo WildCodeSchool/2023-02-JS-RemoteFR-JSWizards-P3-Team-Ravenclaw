@@ -1,15 +1,21 @@
+import PropTypes from "prop-types";
 import { useState } from "react";
 
-export default function Notification() {
-  const [calcul, setCalcul] = useState(0);
+export default function Notification({ onClick }) {
+  const [counter, setCounter] = useState("0");
 
-  const changer = () => {
-    return calcul >= 15 ? setCalcul("+15") : setCalcul(calcul + 1);
+  const handleCLick = () => {
+    if (Number(counter) >= 15) {
+      setCounter("+15");
+    } else {
+      setCounter(Number(counter) + 1);
+    }
+    onClick();
   };
   return (
     <button
       type="button"
-      onClick={() => changer()}
+      onClick={handleCLick}
       className="relative flex items-center"
     >
       <img
@@ -17,13 +23,21 @@ export default function Notification() {
         alt="notification"
         className="block h-6"
       />
-      {calcul === 0 ? (
+      {Number(counter) === 0 ? (
         ""
       ) : (
         <div className="absolute -right-2 -top-1 rounded-full bg-red-600 px-1 pt-[1.2px] text-xs text-white">
-          {calcul}
+          {counter}
         </div>
       )}
     </button>
   );
 }
+
+Notification.propTypes = {
+  onClick: PropTypes.func,
+};
+
+Notification.defaultProps = {
+  onClick: null,
+};
