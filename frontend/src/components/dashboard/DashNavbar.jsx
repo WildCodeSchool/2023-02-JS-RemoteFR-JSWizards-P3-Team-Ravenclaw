@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import styles from "../../css/DashNavbar.module.css";
+
 export default function DashNavbar() {
   const [open, setOpen] = useState(true);
   const Menus = [
@@ -31,7 +33,9 @@ export default function DashNavbar() {
               return (
                 <li
                   key={menu.id}
-                  className={`dash-list text-neutralDarkest decoration-primaryLightest hover:text-primaryLightest dark:text-neutralLightest md:text-neutralDarkest md:active:text-primaryLightest md:dark:text-neutralLightest ${
+                  className={`${
+                    styles.dashList
+                  } text-neutralDarkest decoration-primaryLightest hover:text-primaryLightest dark:text-neutralLightest md:text-neutralDarkest md:active:text-primaryLightest md:dark:text-neutralLightest ${
                     menu.title !== "Log Out"
                       ? `md:rounded-lg md:hover:bg-black dark:md:hover:bg-white`
                       : ""
