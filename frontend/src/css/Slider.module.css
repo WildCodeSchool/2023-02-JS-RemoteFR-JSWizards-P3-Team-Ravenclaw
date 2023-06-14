@@ -9,7 +9,7 @@
       gap: 16px;
     }
   }
-  
+
   .slider::-webkit-scrollbar {
     display: none;
   }
@@ -67,7 +67,7 @@
         @apply drop-shadow-[0px_10px_15px_rgba(0,0,0,0.3)];
     }
 }
-  
+
 .card__figure span {
     font-weight: 900;
     font-family: theme("fontFamily.header");
@@ -85,5 +85,16 @@
         width: 248px;
         height: 176px;
         gap: 30px;
+    }
+}
+
+.card__partners {
+    display: flex;
+    justify-content: center;
+    width: 192px;
+    height: 35px;
+    
+    @media screen and (min-width: 768px) {
+        height: 50px;
     }
 }
