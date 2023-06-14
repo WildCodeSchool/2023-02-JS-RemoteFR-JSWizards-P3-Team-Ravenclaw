@@ -1,5 +1,11 @@
-import SliderKeyFigures from "../components/about/SliderKeyFigures";
 import Contact from "../components/about/Contact";
+import Slider from "../components/utilities/Slider";
+import Card from "../components/utilities/Card";
+
+import figures from "../data/keyFigures.json";
+import infos from "../data/findUs.json";
+
+import styles from "../css/Slider.module.css";
 
 export default function About() {
   return (
@@ -45,6 +51,7 @@ export default function About() {
           />
         </div>
       </article>
+
       <article className="flex flex-col gap-3">
         <h1>WHAT WE PROVIDE</h1>
         <p>
@@ -57,18 +64,50 @@ export default function About() {
           audiences.
         </p>
       </article>
+
       <article className="flex flex-col gap-3">
         <h1>KEY FIGURES</h1>
-        <SliderKeyFigures />
+        <Slider
+          infos={figures}
+          customCSS={`${styles.slider} ${styles.slider__about}`}
+        >
+          {figures.map((figure) => (
+            <li key={figure.id}>
+              <Card classCSS={`${styles.card__about} ${styles.card__figure}`}>
+                <img
+                  height="40"
+                  width="40"
+                  src={figure.img}
+                  alt={figure.name}
+                />
+                <p>{figure.name}</p>
+                <span>{figure.info}</span>
+              </Card>
+            </li>
+          ))}
+        </Slider>
       </article>
+
       <article className="flex flex-col gap-3">
         <h1>CONTACT US</h1>
-        {/* Slider component */}
         <Contact />
       </article>
+
       <article className="flex flex-col gap-3">
         <h1>WHERE TO FIND US</h1>
-        {/* Slider component */}
+        <Slider
+          infos={infos}
+          customCSS={`${styles.slider} ${styles.slider__about}`}
+        >
+          {infos.map((info) => (
+            <li key={info.id}>
+              <Card classCSS={`${styles.card__about} ${styles.card__info}`}>
+                <img height="40" width="40" src={info.img} alt={info.name} />
+                <p>{info.text}</p>
+              </Card>
+            </li>
+          ))}
+        </Slider>
       </article>
     </section>
   );
