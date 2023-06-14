@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-export default function DashHead({ activeTab }) {
+export default function RowHead({ activeTab }) {
   const titles = [
     {
       id: 1,
@@ -36,8 +36,13 @@ export default function DashHead({ activeTab }) {
     if (activeTab === "video" && title.name === "Premium") {
       return false; // Exclude "Premium" for video tab
     }
-    if (activeTab === "category" && title.name === "Actions") {
-      return false; // Exclude "Actions" for category tab
+    if (
+      activeTab === "category" &&
+      (title.name === "Category" ||
+        title.name === "Language" ||
+        title.name === "Premium")
+    ) {
+      return false; // Exclude headers for category tab
     }
     return true; // Include other titles
   });
@@ -55,6 +60,6 @@ export default function DashHead({ activeTab }) {
   );
 }
 
-DashHead.propTypes = {
-  activeTab: PropTypes.func.isRequired,
+RowHead.propTypes = {
+  activeTab: PropTypes.string.isRequired,
 };
