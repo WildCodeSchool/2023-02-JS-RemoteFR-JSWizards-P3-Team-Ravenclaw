@@ -1,0 +1,6 @@
+.videoGrid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+  justify-items: center;
+}

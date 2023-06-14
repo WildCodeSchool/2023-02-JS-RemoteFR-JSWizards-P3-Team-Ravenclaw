@@ -34,24 +34,25 @@
     border: 3px solid theme("colors.primaryLightest");
     transform: scale(1.05);
     @apply drop-shadow-[0px_10px_15px_rgba(0,0,0,0.3)];
-    }
+  }
 }
-  
-.card_figure p, .card_figure span {
-    color: theme("colors.neutralLightest");
+
+.card_figure p,
+.card_figure span {
+  color: theme("colors.neutralLightest");
 }
 
 .card_figure span {
-    font-weight: 900;
-    font-family: theme("fontFamily.header");
-    font-size: theme("fontSize.lg");
-    @media screen and (min-width: 768px) {
-        font-size: theme("fontSize.xl")
-    }
+  font-weight: 900;
+  font-family: theme("fontFamily.header");
+  font-size: theme("fontSize.lg");
+  @media screen and (min-width: 768px) {
+    font-size: theme("fontSize.xl");
+  }
 }
 
 .card_figure img {
-    @media screen and (min-width: 768px) {
-        width: 56px;
-    }
+  @media screen and (min-width: 768px) {
+    width: 56px;
+  }
 }

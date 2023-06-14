@@ -8,45 +8,12 @@
   text-center font-header text-[0.75rem] text-white;
 }
 
-/* VideoGrid component */
-.video-grid{
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
-  justify-items: center;
-}
-
-/* DashNavbar component */
-.dash-list {
-  text-decoration: none;
-}
-
-.dash-list:active {
-  text-decoration: underline;
-}
-
-.dash-list:focus {
-  text-decoration: underline;
-}
-
-.dash-list:hover {
-  text-decoration: underline;
-  text-underline-offset: 0.5rem;
-}
-
-@media screen and (min-width: 768px) {
-  .dash-list:hover {
-    text-decoration: none;
-  }
-}
-/* End DashNavbar component */
-
 @layer base {
   h1 {
     @apply text-xl;
   }
   p {
-    @apply text-sm md:text-base font-sans;
+    @apply font-sans text-sm md:text-base;
   }
   section {
     margin-bottom: 32px;
@@ -66,12 +33,12 @@
     display: flex;
     overflow-x: scroll;
     gap: 8px;
-  
+
     @media screen and (min-width: 768px) {
       gap: 16px;
     }
   }
-  
+
   .slider::-webkit-scrollbar {
     display: none;
   }
