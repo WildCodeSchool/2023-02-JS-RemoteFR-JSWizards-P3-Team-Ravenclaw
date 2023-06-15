@@ -22,7 +22,10 @@ export default function NavBarDesktop({ navitems }) {
         {/* navitems */}
         <ul className={styles.navlistDesktop}>
           {navitems.map((navitem) => (
-            <li key={navitem.id}>
+            <li
+              key={navitem.id}
+              className={navitem.id === 5 ? `${styles.userAccount}` : ""}
+            >
               <NavLink
                 to={navitem.route}
                 className={({ isActive }) =>
@@ -31,15 +34,18 @@ export default function NavBarDesktop({ navitems }) {
                   }`
                 }
               >
-                <span>{navitem.name}</span>
+                <div className={navitem.id === 5 ? `${styles.showIcon}` : ""}>
+                  {navitem.component}
+                  <span>{navitem.name}</span>
+                </div>
               </NavLink>
             </li>
           ))}
+          {/* navbuttons */}
+          <li className={`${styles.inline__list} ${styles.navbar__btn}`}>
+            <Notification onClick={() => null} />
+          </li>
         </ul>
-        {/* navbuttons */}
-        <div className={`${styles.inline__list} ${styles.navbar__btn}`}>
-          <Notification onClick={() => null} />
-        </div>
       </div>
     </nav>
   );

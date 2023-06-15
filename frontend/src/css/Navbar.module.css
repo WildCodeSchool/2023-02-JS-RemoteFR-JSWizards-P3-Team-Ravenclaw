@@ -132,3 +132,23 @@
 .navbarDesktop__navitem:hover {
   color: theme("colors.primaryLightest");
 }
+
+.navbarDesktop__navitem svg {
+  display: none;
+}
+
+.navbarDesktop__navitem .showIcon svg {
+  display: block;
+}
+
+.navbarDesktop__navitem .showIcon svg > path:first-child {
+  fill: none;
+}
+
+.navbarDesktop__navitem .showIcon span {
+  display: none;
+}
+
+.userAccount {
+  order: 10;
+}
