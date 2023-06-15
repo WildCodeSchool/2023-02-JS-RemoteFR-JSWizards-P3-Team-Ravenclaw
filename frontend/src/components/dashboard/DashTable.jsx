@@ -6,6 +6,7 @@ import VideoTable from "./video/VideoTable";
 import DashNav from "./DashNav";
 import RowHead from "./RowHead";
 import CategoryTable from "./category/CategoryTable";
+// import GameTable from "./game/GameTable";
 
 export default function DashTable() {
   const [activeTab, setActiveTab] = useState("video");
@@ -27,6 +28,8 @@ export default function DashTable() {
               <VideoTable />
             ) : activeTab === "category" ? (
               <CategoryTable />
+            ) : activeTab === "game" ? (
+              <GameTable />
             ) : null}
             {/* eslint-enable */}
           </tbody>
