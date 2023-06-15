@@ -36,20 +36,3 @@ export default function DashTable() {
     </div>
   );
 }
-
-// {
-//   /* <Table ({children})>
-//   <table className="w-full overflow-x-auto text-left text-base text-neutralDarkest dark:text-neutralLightest">
-//     <DashHead activeTab={activeTab} />
-//     <tbody>
-//       {children}
-//     </tbody>
-//   </table>
-// </Table> */
-// }
-
-// <Table>
-//  {activeTab === 'videos'} && <DashRowsVideo></DashRowsVideo>
-//  {activeTab === 'category'} && <DashRowsCategory></DashRowsCategory>
-//  {activeTab === 'pages'} && <DashRowsPages></DashRowsPages>
-// </Table>;
