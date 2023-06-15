@@ -13,7 +13,6 @@ import User from "./pages/User";
 
 // Layout
 import Navbar from "./components/utilities/Navbar";
-import MobileSettings from "./components/navsettings/MobileSettings";
 import Footer from "./components/utilities/Footer";
 import DashLayout from "./layout/DashLayout";
 
@@ -24,8 +23,7 @@ export default function App() {
   return (
     <>
       <Navbar />
-      <MobileSettings />
-      <main>
+      <main className="min-h-screen bg-gradientDarkTheme">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="videos" element={<Videos />} />

@@ -78,6 +78,8 @@ module.exports = {
       },
       backgroundImage: {
         gradientPrimary: "linear-gradient(180deg, #9969c4 0%, #4e5db6 93.23%)",
+        gradientDarkTheme:
+          "linear-gradient(164.77deg, #0F152B 1.54%, #201940 76.34%)",
       },
       boxShadow: {
         innerLight:
