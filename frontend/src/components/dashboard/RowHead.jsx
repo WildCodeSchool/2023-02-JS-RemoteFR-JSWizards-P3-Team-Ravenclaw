@@ -44,6 +44,24 @@ export default function RowHead({ activeTab }) {
     ) {
       return false; // Exclude headers for category tab
     }
+    if (
+      activeTab === "language" &&
+      (title.name === "Category" ||
+        title.name === "Language" ||
+        title.name === "Status" ||
+        title.name === "Premium")
+    ) {
+      return false; // Exclude headers for game tab
+    }
+    if (
+      activeTab === "game" &&
+      (title.name === "Category" ||
+        title.name === "Language" ||
+        title.name === "Status" ||
+        title.name === "Premium")
+    ) {
+      return false; // Exclude headers for game tab
+    }
     return true; // Include other titles
   });
 
