@@ -2,7 +2,6 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import CatDropdown from "./CatDropdown";
 import Button from "../../utilities/Button";
-import checkRowStatus from "../../../helpers/checkRowStatus";
 
 export default function RowCategory({ category }) {
   const [isToggled, setIsToggled] = useState(false);
@@ -12,11 +11,6 @@ export default function RowCategory({ category }) {
       <tr className="w-full justify-between border-b dark:border-neutral">
         <td className="px-4 py-3 text-sm">{category.id}</td>
         <td className="px-4 py-3 text-sm">{category.name}</td>
-        <td className="px-4 py-3 text-sm">
-          <span className={`${checkRowStatus("status", category.status)}`}>
-            {category.status}
-          </span>
-        </td>
         <td className="px-4 py-3 text-sm">
           <span className="flex gap-4">
             <Button
@@ -41,6 +35,5 @@ RowCategory.propTypes = {
   category: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
-    status: PropTypes.string,
   }).isRequired,
 };

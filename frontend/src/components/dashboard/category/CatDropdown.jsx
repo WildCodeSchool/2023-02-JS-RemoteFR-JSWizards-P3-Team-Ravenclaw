@@ -17,12 +17,6 @@ export default function CatDropdown() {
             className={`${styles.input__style} h-full`}
             placeholder="Type category name"
           />
-          <Input
-            title="Category Image"
-            type="file"
-            accept="image/*"
-            className="file:hover:primaryLightest file:cursor-pointer file:rounded-md file:border-none file:bg-primary file:p-3 file:text-neutralLightest"
-          />
           <span className="flex w-full items-end justify-end">
             <Button
               type="submit"
