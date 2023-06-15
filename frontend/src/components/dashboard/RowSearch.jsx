@@ -13,6 +13,12 @@ export default function RowSearch({ activeTab }) {
     if (activeTab === "category") {
       return "Add category";
     }
+    if (activeTab === "language") {
+      return "Add language";
+    }
+    if (activeTab === "game") {
+      return "Add game";
+    }
     if (activeTab === "page") {
       return "Add component";
     }
