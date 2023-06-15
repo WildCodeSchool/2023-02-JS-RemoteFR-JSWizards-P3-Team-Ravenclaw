@@ -1,10 +1,10 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import DashDropdown from "./DashDropdown";
+import VideoDropdown from "./VideoDropdown";
 import checkRowStatus from "../../../helpers/checkRowStatus";
 import Button from "../../utilities/Button";
 
-export default function DashRowDrop({ video }) {
+export default function RowVideo({ video }) {
   const [isToggled, setIsToggled] = useState(false);
 
   const fields = Object.keys(video);
@@ -40,12 +40,12 @@ export default function DashRowDrop({ video }) {
           );
         })}
       </tr>
-      {isToggled && <DashDropdown />}
+      {isToggled && <VideoDropdown />}
     </>
   );
 }
 
-DashRowDrop.propTypes = {
+RowVideo.propTypes = {
   video: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,

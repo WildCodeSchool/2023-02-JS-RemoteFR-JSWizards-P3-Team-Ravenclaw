@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
-import checkRowStatus from "../../../helpers/checkRowStatus";
+import checkRowStatus from "../../helpers/checkRowStatus";
 
-export default function DashRow({ video }) {
+export default function RowStatic({ video }) {
   const fields = Object.keys(video);
   const values = Object.values(video);
   let counter = 0;
@@ -25,7 +25,7 @@ export default function DashRow({ video }) {
   );
 }
 
-DashRow.propTypes = {
+RowStatic.propTypes = {
   video: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,

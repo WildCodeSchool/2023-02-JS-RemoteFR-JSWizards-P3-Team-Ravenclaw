@@ -7,7 +7,7 @@ import Input from "../../utilities/Input";
 import Dropdown from "../../utilities/Dropdown";
 import Label from "../../utilities/Label";
 
-export default function DashDropdown() {
+export default function VideoDropdown() {
   const language = [
     { id: 1, name: "English" },
     { id: 2, name: "French" },
