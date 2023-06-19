@@ -9,6 +9,9 @@
 }
 
 @layer base {
+  body {
+    color: theme("colors.neutralLightest");
+  }
   h1 {
     @apply text-xl;
   }
@@ -16,7 +19,7 @@
     @apply font-sans text-sm md:text-base;
   }
   section {
-    margin-bottom: 32px;
+    padding: 64px 0 32px 0;
     margin-inline: clamp(24px, 7.5vw, 192px);
     @media screen and (min-width: theme("screens.xl")) {
       margin-inline: clamp(192px, 7.5vw, 288px);
