@@ -1,11 +1,11 @@
 import Card from "../utilities/Card";
 import games from "../../data/games.json";
 
-import styles from "../../css/SliderGame.module.css";
+import styles from "../../css/Slider.module.css";
 
 export default function SliderGame() {
   return (
-    <ul className="slider">
+    <ul className={styles.slider}>
       {games.map((game) => (
         <li key={game.id}>
           <Card
