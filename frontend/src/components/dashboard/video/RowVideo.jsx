@@ -17,7 +17,6 @@ export default function RowVideo({ video }) {
           counter += 1;
           return (
             <td key={counter} className="px-4 py-3 text-sm">
-              {/* We'll need to adjust function below to display with action column */}
               {typeof value === "boolean" ? (
                 <span className="flex gap-4">
                   <Button
