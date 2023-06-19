@@ -6,6 +6,7 @@ import VideoTable from "./video/VideoTable";
 import DashNav from "./DashNav";
 import RowHead from "./RowHead";
 import CategoryTable from "./category/CategoryTable";
+import LanguageTable from "./language/LanguageTable";
 import GameTable from "./game/GameTable";
 
 export default function DashTable() {
@@ -28,6 +29,8 @@ export default function DashTable() {
               <VideoTable />
             ) : activeTab === "category" ? (
               <CategoryTable />
+            ) : activeTab === "language" ? (
+              <LanguageTable />
             ) : activeTab === "game" ? (
               <GameTable />
             ) : null}
