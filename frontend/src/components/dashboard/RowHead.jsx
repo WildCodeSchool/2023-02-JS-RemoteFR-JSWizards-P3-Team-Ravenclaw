@@ -40,6 +40,7 @@ export default function RowHead({ activeTab }) {
       activeTab === "category" &&
       (title.name === "Category" ||
         title.name === "Language" ||
+        title.name === "Status" ||
         title.name === "Premium")
     ) {
       return false; // Exclude headers for category tab

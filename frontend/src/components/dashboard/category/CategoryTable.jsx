@@ -5,17 +5,14 @@ export default function CategoryTable() {
     {
       id: 1,
       name: "MOBA",
-      status: "In use",
     },
     {
       id: 2,
       name: "FPS",
-      status: "Not Used",
     },
     {
       id: 3,
       name: "Racing",
-      status: "Archived",
     },
   ];
 
