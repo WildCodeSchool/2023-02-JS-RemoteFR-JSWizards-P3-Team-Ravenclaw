@@ -1,38 +1,16 @@
-import DashRow from "./Table/DashRow";
+import PropTypes from "prop-types";
+
 import DashHead from "./Table/DashHead";
-import DashNav from "./Table/DashNav";
 import DashSearch from "./Table/DashSearch";
-import DashRowDrop from "./Table/DashRowDrop";
 import SubCategory from "./SubCategory";
 
-export default function DashTable() {
-  const videos = [
-    {
-      id: 1000,
-      name: "Title of the video",
-      category: "MOBA",
-      language: "English",
-      status: "Online",
-      visible: true,
-    },
-    {
-      id: 1001,
-      name: "Title of the video",
-      category: "FPS",
-      language: "French",
-      status: "Offline",
-      visible: false,
-    },
-    {
-      id: 1002,
-      name: "Title of the video",
-      category: "MOBA",
-      language: "Korean",
-      status: "Archived",
-      visible: true,
-    },
-  ];
-
+export default function DashTable({
+  videos,
+  columns,
+  renderRow,
+  offset,
+  nextPage,
+}) {
   return (
     <div className="relative sm:p-5">
       <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
@@ -41,20 +19,39 @@ export default function DashTable() {
           <DashSearch />
           <div className="overflow-x-auto">
             <table className="w-full text-left text-base text-neutralDarkest dark:text-neutralLightest">
-              <DashHead />
+              <DashHead columns={columns} />
               <tbody>
-                {videos.map((video) => (
+                {/*eslint-disable*/}
+                {videos
+                  .slice(offset, nextPage) //calcul des pages restantes
+                  .map((video) => renderRow(video, video.id))}
+                {/* équivalent à envoyer dans admin.jsx {videos.map((video) => (
                   <DashRow key={video.id} video={video} />
-                ))}
-                {videos.map((video) => (
-                  <DashRowDrop key={video.id} video={video} />
-                ))}
+                ))} */}
               </tbody>
+
+              {/* eslint-enable */}
             </table>
           </div>
-          <DashNav />
         </div>
       </div>
     </div>
   );
 }
+
+DashTable.propTypes = {
+  offset: PropTypes.number.isRequired,
+  nextPage: PropTypes.number.isRequired,
+  columns: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+  }).isRequired,
+  videos: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    category: PropTypes.string,
+    language: PropTypes.string,
+    status: PropTypes.string,
+  }).isRequired,
+  renderRow: PropTypes.func.isRequired,
+};

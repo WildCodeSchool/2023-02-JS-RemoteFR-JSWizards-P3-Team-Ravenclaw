@@ -35,7 +35,8 @@ export default function App() {
           <Route path="connection" element={<Connection />} />
           <Route path="*" element={<NotFound />} />
           <Route path="account" element={<DashLayout />}>
-            <Route path="admin" element={<Admin />} />
+            <Route path="dashboard" element={<Admin />} />
+            <Route path="edit" element={<Admin edit />} />
             <Route path="user" element={<User />} />
           </Route>
         </Routes>

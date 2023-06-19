@@ -1,39 +1,24 @@
-export default function DashHead() {
-  const titles = [
-    {
-      id: 1,
-      name: "ID",
-    },
-    {
-      id: 2,
-      name: "Name",
-    },
-    {
-      id: 3,
-      name: "Category",
-    },
-    {
-      id: 4,
-      name: "Language",
-    },
-    {
-      id: 5,
-      name: "Status",
-    },
-    {
-      id: 6,
-      name: "Premium",
-    },
-  ];
+import PropTypes from "prop-types";
+
+export default function DashHead({ columns }) {
   return (
     <thead className="bg-primary text-neutralLightest ">
       <tr>
-        {titles.map((title) => (
-          <th key={title.id} scope="col" className="px-4 py-3 text-base">
-            {title.name}
+        {/* eslint-disable */}
+        {columns.map((column) => (
+          <th key={column.id} scope="col" className="px-4 py-3 text-center">
+            {column.name}
           </th>
         ))}
+        {/* eslint-enable */}
       </tr>
     </thead>
   );
 }
+
+DashHead.propTypes = {
+  columns: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+  }).isRequired,
+};

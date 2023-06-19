@@ -1,19 +1,24 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function DashNavbar() {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
   const Menus = [
-    { title: "Dashboard", src: false, id: 1 },
-    { title: "Manage Content", src: false, id: 2 },
-    { title: "Favorites Videos", src: false, id: 3 },
-    { title: "Users", src: false, id: 4 },
-    { title: "Support", src: false, id: 5 },
-    { title: "Contact Messages", src: false, id: 6 },
-    { title: "Messages", src: false, id: 7 },
-    { title: "Tickets", src: false, id: 8 },
-    { title: "Bug Report", src: false, id: 9 },
-    { title: "Log Out", src: true, id: 10 },
+    { title: "Dashboard", id: 1, path: "dashboard" },
+    { title: "Manage Content", id: 2, path: "edit" },
+    { title: "Favorites Videos", id: 3 },
+    { title: "Users", id: 4 },
+    { title: "Support", id: 5 },
+    { title: "Contact Messages", id: 6 },
+    { title: "Messages", id: 7 },
+    { title: "Tickets", id: 8 },
+    { title: "Bug Report", id: 9 },
+    { title: "Log Out", id: 10 },
   ];
+  const clicked = (path) => {
+    navigate(path);
+  };
   return (
     <div className="flex flex-col sm:flex-row md:absolute md:z-10">
       <div
@@ -39,7 +44,7 @@ export default function DashNavbar() {
                   cursor-pointer pl-4 text-lg`}
                 >
                   <div className="flex items-center ">
-                    {menu.src ? (
+                    {menu.id === 10 && (
                       <svg
                         width="64"
                         height="64"
@@ -70,10 +75,14 @@ export default function DashNavbar() {
                           </clipPath>
                         </defs>
                       </svg>
-                    ) : (
-                      ""
                     )}
-                    <span className="underline-text">{menu.title}</span>
+                    <button
+                      type="button"
+                      className="underline-text"
+                      onClick={() => clicked(menu.path)}
+                    >
+                      {menu.title}
+                    </button>
                   </div>
                 </li>
               );

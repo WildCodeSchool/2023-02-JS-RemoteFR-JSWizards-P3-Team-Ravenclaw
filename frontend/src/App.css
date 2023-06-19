@@ -9,7 +9,7 @@
 }
 
 /* VideoGrid component */
-.video-grid{
+.video-grid {
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
@@ -46,7 +46,7 @@
     @apply text-xl;
   }
   p {
-    @apply text-sm md:text-base font-sans;
+    @apply font-sans text-sm md:text-base;
   }
   section {
     margin-bottom: 32px;
@@ -66,12 +66,12 @@
     display: flex;
     overflow-x: scroll;
     gap: 8px;
-  
+
     @media screen and (min-width: 768px) {
       gap: 16px;
     }
   }
-  
+
   .slider::-webkit-scrollbar {
     display: none;
   }
