@@ -16,12 +16,9 @@ export default function NotFound() {
           Ooops... Page Not Found!
         </p>
         <p className="text-neutral md:text-lg">Looks like you lost your way</p>
-        <Button
-          customCSS="btn-default md:text-base"
-          onClick={() => navigate("/")}
-        >
+        <Button customCSS="btn-default" onClick={() => navigate("/")}>
           Take Me Home
-          <BsArrowRight stroke-width="white" />
+          <BsArrowRight className="text-base" stroke-width="white" />
         </Button>
       </div>
     </section>

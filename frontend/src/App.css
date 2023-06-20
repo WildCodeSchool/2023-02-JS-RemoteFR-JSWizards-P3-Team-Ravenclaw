@@ -5,7 +5,7 @@
 .btn-default {
   @apply flex items-center justify-center gap-3 rounded-2xl
   bg-gradient-to-b from-[#4E5DB6]/95 to-[#9969C4] px-7 py-2
-  text-center font-header text-xs text-neutralLightest;
+  text-center font-header text-xs text-neutralLightest leading-6 font-extrabold;
 }
 
 @layer base {
