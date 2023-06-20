@@ -79,7 +79,7 @@ export default function VideoGrid() {
                         />
                       </button>
                     </div>
-                    <p className="mt-2 w-full font-bold text-black blur-sm hover:text-primaryLight">
+                    <p className="mt-2 w-full font-bold text-black hover:text-primaryLight">
                       {video.title.length > maxLength
                         ? `${video.title.substring(0, maxLength)}...`
                         : video.title}
@@ -130,7 +130,7 @@ export default function VideoGrid() {
                       />
                     </button>
                   </li>
-                  <p className="mt-2 w-full font-bold text-black blur-sm hover:text-primaryLight">
+                  <p className="mt-2 w-full font-bold text-black hover:text-primaryLight">
                     {video.title.length > maxLength
                       ? `${video.title.substring(0, maxLength)}...`
                       : video.title}
