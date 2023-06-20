@@ -115,14 +115,6 @@
   }
 }
 
-@media screen and (min-width: 768px) {
-  .card__about:hover {
-    border: 3px solid theme("colors.primaryLightest");
-    transform: scale(1.05);
-    @apply drop-shadow-[0px_10px_15px_rgba(0,0,0,0.3)];
-  }
-}
-
 .card__figure span {
   font-weight: 900;
   font-family: theme("fontFamily.header");

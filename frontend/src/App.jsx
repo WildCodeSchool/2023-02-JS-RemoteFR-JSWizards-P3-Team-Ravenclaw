@@ -21,9 +21,9 @@ import Player from "./components/video/Player";
 
 export default function App() {
   return (
-    <>
+    <div className="min-h-screen bg-gradientDarkTheme">
       <Navbar />
-      <main className="min-h-screen bg-gradientDarkTheme">
+      <main>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="videos" element={<Videos />} />
@@ -39,6 +39,6 @@ export default function App() {
         </Routes>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }
