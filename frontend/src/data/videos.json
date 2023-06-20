@@ -8,8 +8,8 @@
     "status": "Online",
     "visible": true,
     "video": "https://www.youtube.com/watch?v=tF2ss2mU-Yc",
-    "thumbnail_game": "../public/assets/img/games/Overwatch2.jpg",
-    "thumbnail_video": "../public/assets/img/miniatures/overwatch.png"
+    "thumbnail_game": "../assets/img/games/Overwatch2.jpg",
+    "thumbnail_video": "../assets/img/miniatures/overwatch.png"
   },
   {
     "id": 2,
@@ -20,8 +20,8 @@
     "status": "Online",
     "visible": false,
     "video": "https://www.youtube.com/watch?v=pIT4uWcfy54",
-    "thumbnail_game": "../public/assets/img/miniatures/HearthStone.png",
-    "thumbnail_video": "../public/assets/img/miniatures/hearthstone1.png"
+    "thumbnail_game": "../assets/img/miniatures/HearthStone.png",
+    "thumbnail_video": "../assets/img/miniatures/hearthstone1.png"
   },
   {
     "id": 3,
@@ -32,8 +32,8 @@
     "status": "Online",
     "visible": true,
     "video": "https://www.youtube.com/watch?v=aG15JM07Dt4",
-    "thumbnail_game": "../public/assets/img/miniatures/Dota2.png",
-    "thumbnail_video": "../public/assets/img/miniatures/dota.png"
+    "thumbnail_game": "../assets/img/miniatures/Dota2.png",
+    "thumbnail_video": "../assets/img/miniatures/dota.png"
   },
   {
     "id": 4,
@@ -44,8 +44,8 @@
     "status": "Online",
     "visible": true,
     "video": "https://www.youtube.com/watch?v=PiOfqf6RFPk",
-    "thumbnail_game": "../public/assets/img/miniatures/Valorant.png",
-    "thumbnail_video": "../public/assets/img/miniatures/valorant2.png"
+    "thumbnail_game": "../assets/img/miniatures/Valorant.png",
+    "thumbnail_video": "../assets/img/miniatures/valorant2.png"
   },
   {
     "id": 5,
@@ -57,7 +57,7 @@
     "visible": false,
     "video": "https://www.youtube.com/watch?v=qoU2jyTuyn8",
     "thumbnail_game": "",
-    "thumbnail_video": "../public/assets/img/miniatures/GT1.png"
+    "thumbnail_video": "../assets/img/miniatures/GT1.png"
   },
   {
     "id": 6,
@@ -68,8 +68,8 @@
     "status": "Online",
     "visible": true,
     "video": "https://www.youtube.com/watch?v=acs0y78XG7s",
-    "thumbnail_game": "../public/assets/img/miniatures/Valorant.png",
-    "thumbnail_video": "../public/assets/img/miniatures/valorant1.png"
+    "thumbnail_game": "../assets/img/miniatures/Valorant.png",
+    "thumbnail_video": "../assets/img/miniatures/valorant1.png"
   },
   {
     "id": 7,
@@ -80,8 +80,8 @@
     "status": "Online",
     "visible": false,
     "video": "https://www.youtube.com/watch?v=NrQcIBzBSTk",
-    "thumbnail_game": "../public/assets/img/miniatures/Dota2.png",
-    "thumbnail_video": "../public/assets/img/miniatures/astervspandas.png"
+    "thumbnail_game": "../assets/img/miniatures/Dota2.png",
+    "thumbnail_video": "../assets/img/miniatures/astervspandas.png"
   },
   {
     "id": 8,
@@ -92,8 +92,8 @@
     "status": "Online",
     "visible": true,
     "video": "https://www.youtube.com/watch?v=9qAs3EaZzQ0",
-    "thumbnail_game": "../public/assets/img/miniatures/Dota2.png",
-    "thumbnail_video": "../public/assets/img/miniatures/gladiatorsvsaster.png"
+    "thumbnail_game": "../assets/img/miniatures/Dota2.png",
+    "thumbnail_video": "../assets/img/miniatures/gladiatorsvsaster.png"
   },
   {
     "id": 9,
@@ -105,7 +105,7 @@
     "visible": true,
     "video": "https://www.youtube.com/watch?v=O6DyBwgymSY",
     "thumbnail_game": "",
-    "thumbnail_video": "../public/assets/img/miniatures/nationscup2.png"
+    "thumbnail_video": "../assets/img/miniatures/nationscup2.png"
   },
   {
     "id": 10,
@@ -116,8 +116,8 @@
     "status": "Online",
     "visible": false,
     "video": "https://www.youtube.com/watch?v=yjaBoDvWe_Y",
-    "thumbnail_game": "../public/assets/img/miniatures/Fifa23.png",
-    "thumbnail_video": "../public/assets/img/miniatures/fifa.png"
+    "thumbnail_game": "../assets/img/miniatures/Fifa23.png",
+    "thumbnail_video": "../assets/img/miniatures/fifa.png"
   },
   {
     "id": 11,
@@ -128,8 +128,8 @@
     "status": "Online",
     "visible": true,
     "video": "https://www.youtube.com/watch?v=Gw3lMBveOHA",
-    "thumbnail_game": "../public/assets/img/miniatures/Fortnite.png",
-    "thumbnail_video": "../public/assets/img/miniatures/fortnite.png"
+    "thumbnail_game": "../assets/img/miniatures/Fortnite.png",
+    "thumbnail_video": "../assets/img/miniatures/fortnite.png"
   },
   {
     "id": 12,
@@ -140,8 +140,8 @@
     "status": "Online",
     "visible": true,
     "video": "https://www.youtube.com/watch?v=prCd0aZeTmA",
-    "thumbnail_game": "../public/assets/img/miniatures/NBA2K23.png",
-    "thumbnail_video": "../public/assets/img/miniatures/nba.png"
+    "thumbnail_game": "../assets/img/miniatures/NBA2K23.png",
+    "thumbnail_video": "../assets/img/miniatures/nba.png"
   },
   {
     "id": 13,
@@ -152,8 +152,8 @@
     "status": "Online",
     "visible": false,
     "video": "https://www.youtube.com/watch?v=E3XrsWwuxxE",
-    "thumbnail_game": "../public/assets/img/miniatures/Madden23.png",
-    "thumbnail_video": "../public/assets/img/miniatures/madden.png"
+    "thumbnail_game": "../assets/img/miniatures/Madden23.png",
+    "thumbnail_video": "../assets/img/miniatures/madden.png"
   },
   {
     "id": 14,
@@ -164,8 +164,8 @@
     "status": "Online",
     "visible": true,
     "video": "https://www.youtube.com/watch?v=_HXFCrf0xbg",
-    "thumbnail_game": "../public/assets/img/miniatures/RocketLeague.png",
-    "thumbnail_video": "../public/assets/img/miniatures/rocketleague.png"
+    "thumbnail_game": "../assets/img/miniatures/RocketLeague.png",
+    "thumbnail_video": "../assets/img/miniatures/rocketleague.png"
   },
   {
     "id": 15,
@@ -176,8 +176,8 @@
     "status": "Online",
     "visible": true,
     "video": "https://www.youtube.com/watch?v=MRxTHkJd0u8",
-    "thumbnail_game": "../public/assets/img/miniatures/StreetFighter.png",
-    "thumbnail_video": "../public/assets/img/miniatures/streetfighter.png"
+    "thumbnail_game": "../assets/img/miniatures/StreetFighter.png",
+    "thumbnail_video": "../assets/img/miniatures/streetfighter.png"
   },
   {
     "id": 16,
@@ -188,8 +188,8 @@
     "status": "Online",
     "visible": false,
     "video": "https://www.youtube.com/watch?v=7mWWqyXvMiQ",
-    "thumbnail_game": "../public/assets/img/miniatures/Tekken.png",
-    "thumbnail_video": "../public/assets/img/miniatures/tekken.png"
+    "thumbnail_game": "../assets/img/miniatures/Tekken.png",
+    "thumbnail_video": "../assets/img/miniatures/tekken.png"
   },
   {
     "id": 17,
@@ -200,8 +200,8 @@
     "status": "Online",
     "visible": true,
     "video": "https://www.youtube.com/watch?v=fb7GtosBk9M",
-    "thumbnail_game": "../public/assets/img/miniatures/SuperSmashBros.png",
-    "thumbnail_video": "../public/assets/img/miniatures/smash.png"
+    "thumbnail_game": "../assets/img/miniatures/SuperSmashBros.png",
+    "thumbnail_video": "../assets/img/miniatures/smash.png"
   },
   {
     "id": 18,
@@ -212,8 +212,8 @@
     "status": "Online",
     "visible": false,
     "video": "https://www.youtube.com/watch?v=HCFPBZLt-pg",
-    "thumbnail_game": "../public/assets/img/miniatures/CallOfDuty.png",
-    "thumbnail_video": "../public/assets/img/miniatures/cod.png"
+    "thumbnail_game": "../assets/img/miniatures/CallOfDuty.png",
+    "thumbnail_video": "../assets/img/miniatures/cod.png"
   },
   {
     "id": 19,
@@ -224,7 +224,7 @@
     "status": "Online",
     "visible": true,
     "video": "https://www.youtube.com/watch?v=yfoJtqE5b-s",
-    "thumbnail_game": "../public/assets/img/miniatures/Apex.png",
-    "thumbnail_video": "../public/assets/img/miniatures/apex.png"
+    "thumbnail_game": "../assets/img/miniatures/Apex.png",
+    "thumbnail_video": "../assets/img/miniatures/apex.png"
   }
 ]
