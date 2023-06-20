@@ -1,16 +1,10 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
 import checkRowStatus from "../../../helpers/checkRowStatus";
 
 export default function DashRow({ video }) {
   const fields = Object.keys(video);
   const values = Object.values(video);
 
-  const [isPremium, setIsPremium] = useState(values[5]);
-
-  const changer = () => {
-    setIsPremium(!isPremium);
-  };
   let counter = 0;
   return (
     <tr className="border-b dark:border-neutral">
@@ -19,12 +13,7 @@ export default function DashRow({ video }) {
         return (
           <td key={counter} className="px-4 py-3 text-sm">
             {typeof value === "boolean" ? (
-              <input
-                type="checkbox"
-                checked={isPremium}
-                onClick={() => changer()}
-                readOnly
-              />
+              <input type="checkbox" checked={values[5]} readOnly />
             ) : (
               <span className={checkRowStatus(fields[index], value)}>
                 {value}

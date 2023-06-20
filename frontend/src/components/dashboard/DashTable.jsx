@@ -24,11 +24,10 @@ export default function DashTable({
                 {/*eslint-disable*/}
                 {videos
                   .slice(offset, nextPage) //calcul des pages restantes
-                  .map((video) => renderRow(video, video.id))}  
-                  {/* équivalent à envoyer dans admin.jsx {videos.map((video) => (
+                  .map((video) => renderRow(video, video.id))}
+                {/* équivalent à envoyer dans admin.jsx {videos.map((video) => (
                     <DashRow key={video.id} video={video} />
                   ))} */}
-               
               </tbody>
 
               {/* eslint-enable */}
