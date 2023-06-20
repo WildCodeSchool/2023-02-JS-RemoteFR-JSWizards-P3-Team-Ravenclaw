@@ -13,7 +13,7 @@ import User from "./pages/User";
 
 // Layout
 import Navbar from "./components/utilities/Navbar";
-import Footer from "./components/utilities/Footer";
+
 import DashLayout from "./layout/DashLayout";
 
 // Components
@@ -38,7 +38,6 @@ export default function App() {
           </Route>
         </Routes>
       </main>
-      <Footer />
     </div>
   );
 }
