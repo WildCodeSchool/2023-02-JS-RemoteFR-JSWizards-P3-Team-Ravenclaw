@@ -7,7 +7,7 @@ import VideosNavItem from "../navbar/VideosNavItem";
 import PricingNavItem from "../navbar/PricingNavItem";
 import HomeNavItem from "../navbar/HomeNavItem";
 import AboutNavItem from "../navbar/AboutNavItem";
-import Notification from "./Notification";
+import Notification from "../utilities/Notification";
 
 export default function Navbar() {
   const navitems = [

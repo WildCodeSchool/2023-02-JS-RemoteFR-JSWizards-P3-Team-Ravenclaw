@@ -37,7 +37,7 @@ export default function About() {
               experience through every sport and every device.
             </p>
           </div>
-          <div className="flex items-center justify-center gap-6 md:h-96 md:basis-1/3 md:flex-col">
+          <div className="flex items-center justify-center gap-6 md:basis-1/3 md:flex-col">
             <img
               className="min-w-[80px]"
               width="80"
