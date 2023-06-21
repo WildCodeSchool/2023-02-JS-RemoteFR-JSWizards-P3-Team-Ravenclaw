@@ -13,7 +13,6 @@ import User from "./pages/User";
 
 // Layout
 import Navbar from "./components/utilities/Navbar";
-import Footer from "./components/utilities/Footer";
 import DashLayout from "./layout/DashLayout";
 
 // Components
@@ -21,9 +20,9 @@ import Player from "./components/video/Player";
 
 export default function App() {
   return (
-    <>
+    <div className="min-h-screen bg-gradientDarkTheme">
       <Navbar />
-      <main className="min-h-screen bg-gradientDarkTheme">
+      <main>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="videos" element={<Videos />} />
@@ -38,7 +37,6 @@ export default function App() {
           </Route>
         </Routes>
       </main>
-      <Footer />
-    </>
+    </div>
   );
 }
