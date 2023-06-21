@@ -1,14 +1,48 @@
 import PropTypes from "prop-types";
+import { useState } from "react";
 
 // component
 import Searchbar from "../utilities/Searchbar";
 import Button from "../utilities/Button";
 import Dropdown from "../utilities/Dropdown";
+import ModalVideo from "./video/ModalVideo";
 
 export default function RowSearch({ activeTab }) {
+  const [open, setOpen] = useState(false);
+
+  const showModal = () => {
+    setOpen(true);
+  };
+
   const addButton = () => {
     if (activeTab === "video") {
       return "Add video";
+    }
+    if (activeTab === "category") {
+      return "Add category";
+    }
+    if (activeTab === "language") {
+      return "Add language";
+    }
+    if (activeTab === "game") {
+      return "Add game";
+    }
+    if (activeTab === "page") {
+      return "Add component";
+    }
+    return null;
+  };
+
+  const addModal = () => {
+    if (activeTab === "video") {
+      return (
+        <ModalVideo
+          open={open}
+          onOk={() => setOpen(false)}
+          onCancel={() => setOpen(false)}
+          onClick={() => setOpen(false)}
+        />
+      );
     }
     if (activeTab === "category") {
       return "Add category";
@@ -37,6 +71,7 @@ export default function RowSearch({ activeTab }) {
         <Button
           type="button"
           customCSS="flex items-center justify-between rounded-lg bg-primary px-4 py-3 text-center text-sm text-white hover:bg-primaryLight focus:outline-none gap-2"
+          onClick={() => showModal(true)}
         >
           <svg
             className="flex h-4 w-4 justify-end"
@@ -53,6 +88,7 @@ export default function RowSearch({ activeTab }) {
           </svg>
           {addButton()}
         </Button>
+        {addModal()}
       </div>
     </div>
   );
