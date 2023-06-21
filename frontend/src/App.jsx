@@ -10,14 +10,14 @@ import Connection from "./pages/Connection";
 import NotFound from "./pages/NotFound";
 import Admin from "./pages/Admin";
 import User from "./pages/User";
+import VideoPlayer from "./pages/VideoPlayer";
+
 // import RowStatic from "./components/dashboard/RowStatic";
+
 // Layout
 import Navbar from "./components/utilities/Navbar";
 
 import DashLayout from "./layout/DashLayout";
-
-// Components
-import Player from "./components/video/Player";
 
 export default function App() {
   return (
@@ -27,7 +27,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="videos" element={<Videos />} />
-          <Route path="videos/:id" element={<Player />} />
+          <Route path="videos/:id" element={<VideoPlayer />} />
           <Route path="plans" element={<Pricing />} />
           <Route path="about" element={<About />} />
           <Route path="connection" element={<Connection />} />
