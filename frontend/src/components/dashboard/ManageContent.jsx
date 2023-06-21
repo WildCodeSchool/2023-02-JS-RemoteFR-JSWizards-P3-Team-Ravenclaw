@@ -139,14 +139,16 @@ const categories = [
 
 export default function DashTable() {
   const [activeTab, setActiveTab] = useState("video");
+  const setActiveTabItem = (tab) => {
+    setActiveTab(tab);
+  };
+
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
   const [objectNumber, setObjectNumber] = useState(null);
   const offset = pageSize * currentPage - pageSize; // pages parcourues
   const nextPage = offset + pageSize;
-  const setActiveTabItem = (tab) => {
-    setActiveTab(tab);
-  };
+
   useEffect(() => {
     setCurrentPage(1);
     if (activeTab === "category") {
