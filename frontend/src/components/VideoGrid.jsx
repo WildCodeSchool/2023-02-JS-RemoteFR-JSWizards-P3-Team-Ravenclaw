@@ -73,7 +73,7 @@ export default function VideoGrid() {
                       />
                       <button onClick={handleVideoClick} type="button">
                         <img
-                          src="../../public/assets/img/miniatures/Vector.png"
+                          src="../../assets/img/miniatures/Vector.png"
                           alt={video.title}
                           className="absolute bottom-1/2 left-1/4 translate-x-1/2 translate-y-1/2 blur-none"
                         />
@@ -124,7 +124,7 @@ export default function VideoGrid() {
                     />
                     <button onClick={handleVideoClick} type="button">
                       <img
-                        src="../../public/assets/img/miniatures/Vector.png"
+                        src="../../assets/img/miniatures/Vector.png"
                         alt={video.title}
                         className="absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 blur-none"
                       />
