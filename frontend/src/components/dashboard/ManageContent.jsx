@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Pagination } from "antd";
+import { Pagination, ConfigProvider } from "antd";
 import RowSearch from "./RowSearch";
 import NavTab from "./NavTab";
 import RowHead from "./RowHead";
@@ -191,18 +191,32 @@ export default function DashTable() {
             {/* eslint-enable */}
           </tbody>
         </table>
-        <Pagination
-          pageSizeOptions={[5, 10, 20, 50, 100]}
-          className="text-center"
-          pageSize={pageSize}
-          current={currentPage}
-          total={objectNumber}
-          onChange={(pageClicked, onPageSize) => {
-            setCurrentPage(pageClicked);
-            setPageSize(onPageSize);
+        <ConfigProvider
+          theme={{
+            token: {
+              colorPrimary: "#9596FB",
+              colorText: "#9596FB",
+              colorBgContainer: "#1f2937",
+              colorBgTextHover: "#374151",
+              colorTextPlaceholder: "#9596FB",
+              colorBorder: "#9596FB",
+              controlOutlineWidth: "0",
+            },
           }}
-          showSizeChanger
-        />
+        >
+          <Pagination
+            pageSizeOptions={[5, 10, 20, 50, 100]}
+            className="py-2 text-center"
+            pageSize={pageSize}
+            current={currentPage}
+            total={objectNumber}
+            onChange={(pageClicked, onPageSize) => {
+              setCurrentPage(pageClicked);
+              setPageSize(onPageSize);
+            }}
+            showSizeChanger
+          />
+        </ConfigProvider>
       </div>
     </div>
   );
