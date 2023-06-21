@@ -1,9 +1,9 @@
-import DashTable from "../components/dashboard/DashTable";
+import ManageContent from "../components/dashboard/ManageContent";
 
 export default function Admin() {
   return (
     <div>
-      <DashTable />
+      <ManageContent />
     </div>
   );
 }
