@@ -5,7 +5,7 @@
 .btn-default {
   @apply flex items-center justify-center gap-3 rounded-2xl
   bg-gradient-to-b from-[#4E5DB6]/95 to-[#9969C4] px-7 py-2
-  text-center font-header text-xs text-white;
+  text-center font-header text-xs text-neutralLightest;
 }
 
 @layer base {
@@ -19,6 +19,9 @@
     @apply font-sans text-sm md:text-base;
   }
   section {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
     padding: 64px 0 32px 0;
     margin-inline: clamp(24px, 7.5vw, 192px);
     @media screen and (min-width: theme("screens.xl")) {
