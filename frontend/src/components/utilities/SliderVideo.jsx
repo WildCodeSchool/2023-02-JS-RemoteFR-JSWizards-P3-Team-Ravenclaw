@@ -17,8 +17,6 @@ export default function SliderVideo({
     isLinkAvailable ? navigate(`${linkURL}`) : navigate("connection");
 
   return (
-    // <ul className={`${styles.slider} ${styles.slider__video}`}>
-    // <ul className={`${styles.slider}`}>
     <ul className={`${styles.slider} ${customClassSlider}`}>
       {videos.map((video) => (
         <li key={video.id}>
@@ -28,8 +26,6 @@ export default function SliderVideo({
             onClick={() => handleClick(video?.visible, `/videos/${video.id}`)}
           >
             <Card
-              // classCSS={`${styles.card} ${styles.card__video} bg-cover`}
-              // classCSS={`${styles.card} bg-cover`}
               classCSS={`${styles.card} ${customClassCard} bg-cover`}
               styleCSS={{
                 backgroundImage: `url(${video.thumbnail_video})`,
@@ -38,8 +34,6 @@ export default function SliderVideo({
               {!video.visible && (
                 <div className={styles.card__overlay}>
                   <div
-                    // className={`${styles.overlay__wrapper} ${styles.overlay__wrapper__grid}`}
-                    // className={`${styles.overlay__wrapper}`}
                     className={`${styles.overlay__wrapper} ${customClassOverlayWrapper}`}
                   >
                     <img
