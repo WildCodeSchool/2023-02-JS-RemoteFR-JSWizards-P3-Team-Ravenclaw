@@ -30,7 +30,7 @@ export default function RowSearch({ activeTab }) {
       <div className="w-full md:w-1/2">
         <div className="flex items-center gap-4">
           <Searchbar className="relative w-full" />
-          <Dropdown title="Search filters" />
+          {activeTab === "video" && <Dropdown title="Search filters" />}
         </div>
       </div>
       <div className="flex w-full justify-center space-y-2 md:w-auto md:flex-row md:items-center md:space-x-3 md:space-y-0">
