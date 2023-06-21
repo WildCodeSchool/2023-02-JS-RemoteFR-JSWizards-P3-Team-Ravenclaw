@@ -2,21 +2,24 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 // Pages
+import Navbar from "./components/utilities/Navbar";
 import Home from "./pages/Home";
 import Videos from "./pages/Videos";
 import Pricing from "./pages/Pricing";
 import About from "./pages/About";
-import Connection from "./pages/Connection";
+// import Connection from "./pages/Connection";
 import NotFound from "./pages/NotFound";
 import Admin from "./pages/Admin";
 import User from "./pages/User";
 
+
 // Layout
 import Navbar from "./components/utilities/Navbar";
-import DashLayout from "./layout/DashLayout";
+import VideoPlayer from "./pages/VideoPlayer";
 
-// Components
-import Player from "./components/video/Player";
+// import RowStatic from "./components/dashboard/RowStatic";
+
+import DashLayout from "./layout/DashLayout";
 
 export default function App() {
   return (
@@ -26,10 +29,10 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="videos" element={<Videos />} />
-          <Route path="videos/:id" element={<Player />} />
+          <Route path="videos/:id" element={<VideoPlayer />} />
           <Route path="plans" element={<Pricing />} />
           <Route path="about" element={<About />} />
-          <Route path="connection" element={<Connection />} />
+          {/* <Route path="connection" element={<Connection />} /> */}
           <Route path="*" element={<NotFound />} />
           <Route path="account" element={<DashLayout />}>
             <Route path="dashboard" element={<Admin dashboard />} />
