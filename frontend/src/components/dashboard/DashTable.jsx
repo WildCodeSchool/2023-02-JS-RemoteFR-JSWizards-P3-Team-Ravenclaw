@@ -3,7 +3,7 @@ import { Pagination } from "antd";
 import RowSearch from "./RowSearch";
 import NavTab from "./NavTab";
 import RowHead from "./RowHead";
-import RowVideo from "./Video/RowVideo";
+import RowVideo from "./video/RowVideo";
 import RowCategory from "./category/RowCategory";
 import RowLanguage from "./language/RowLanguage";
 import RowGame from "./game/RowGame";
