@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import Player from "../components/video/Player";
 import videos from "../data/videos.json";
+import Label from "../components/utilities/Label";
+import Button from "../components/utilities/Button";
 
 export default function VideoPlayer() {
   const [data, setData] = useState({});
@@ -20,11 +22,24 @@ export default function VideoPlayer() {
       <Player video={data} />
       <div className="head-infos flex justify-between md:justify-end md:gap-8">
         <div className="fps-language ml-8 flex gap-2 md:gap-6">
-          <img src="../public/assets//img/player/fps.png" alt="fps" />
-          <img src="../public/assets//img/player/language.png" alt="language" />
+          <Label
+            htmlFor="FPS"
+            className="rounded-2xl bg-primaryLightest px-4 py-1 font-bold"
+            title="FPS"
+          />
+          <Label
+            htmlFor="ENGLISH"
+            className="rounded-2xl bg-primaryLightest px-4 py-1 font-bold"
+            title="ENGLISH"
+          />
         </div>
-        <div className="like-share mr-8">
-          <img src="../public/assets//img/player/like&share.png" alt="" />
+        <div className="fav-share mr-8">
+          <Button customCSS="text-neutralDark mr-4">
+            <img src="../../public/assets/img/player/fav-btn.png" alt="" />
+          </Button>
+          <Button customCSS="text-neutralDark">
+            <img src="../../public/assets/img/player/share-btn.png" alt="" />
+          </Button>
         </div>
       </div>
       <div className="video-description">
