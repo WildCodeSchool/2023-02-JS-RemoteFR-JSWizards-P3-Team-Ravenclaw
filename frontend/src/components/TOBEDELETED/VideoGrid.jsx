@@ -10,12 +10,12 @@ import { toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 
-import styles from "../css/VideoGrid.module.css";
+import styles from "./VideoGrid.module.css";
 
-import videosData from "../data/videos.json";
+import videosData from "../../data/videos.json";
 
 export default function VideoGrid() {
-  const maxLength = 18;
+  const maxLength = 36;
   const [videos, setVideos] = useState([]);
 
   const handleVideoClick = () => {
@@ -141,6 +141,7 @@ export default function VideoGrid() {
           ))}
         </ul>
       </div>
+      Comp1 mobile Comp2 desktop
     </>
   );
 }

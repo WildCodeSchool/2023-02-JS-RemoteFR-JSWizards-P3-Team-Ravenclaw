@@ -1,9 +1,116 @@
+import PropTypes from "prop-types";
 import DashTable from "../components/dashboard/DashTable";
+import Dashboard from "../components/Dashboard";
 
-export default function Admin() {
+const videos = [
+  {
+    id: 1000,
+    name: "Title of the video",
+    category: "MOBA",
+    language: "English",
+    status: "Online",
+    visible: true,
+  },
+  {
+    id: 1001,
+    name: "Title of the video",
+    category: "FPS",
+    language: "French",
+    status: "Offline",
+    visible: false,
+  },
+  {
+    id: 1002,
+    name: "Title of the video",
+    category: "Racing",
+    language: "Korean",
+    status: "Archived",
+    visible: true,
+  },
+  {
+    id: 1003,
+    name: "Title of the video",
+    category: "MOBA",
+    language: "English",
+    status: "Online",
+    visible: true,
+  },
+  {
+    id: 1004,
+    name: "Title of the video",
+    category: "FPS",
+    language: "French",
+    status: "Offline",
+    visible: false,
+  },
+  {
+    id: 1005,
+    name: "Title of the video",
+    category: "Racing",
+    language: "Korean",
+    status: "Archived",
+    visible: true,
+  },
+  {
+    id: 1006,
+    name: "Title of the video",
+    category: "MOBA",
+    language: "English",
+    status: "Online",
+    visible: true,
+  },
+  {
+    id: 1007,
+    name: "Title of the video",
+    category: "FPS",
+    language: "French",
+    status: "Offline",
+    visible: false,
+  },
+  {
+    id: 1008,
+    name: "Title of the video",
+    category: "Racing",
+    language: "Korean",
+    status: "Archived",
+    visible: true,
+  },
+  {
+    id: 1009,
+    name: "Title of the video",
+    category: "MOBA",
+    language: "English",
+    status: "Online",
+    visible: true,
+  },
+  {
+    id: 1010,
+    name: "Title of the video",
+    category: "FPS",
+    language: "French",
+    status: "Offline",
+    visible: false,
+  },
+  {
+    id: 1011,
+    name: "Title of the video",
+    category: "Racing",
+    language: "Korean",
+    status: "Archived",
+    visible: true,
+  },
+];
+
+export default function Admin({ dashboard, edit }) {
   return (
     <div>
-      <DashTable />
+      {edit && <DashTable videos={videos} />}
+      {dashboard && <Dashboard videos={videos} />}
     </div>
   );
 }
+
+Admin.propTypes = {
+  dashboard: PropTypes.bool.isRequired,
+  edit: PropTypes.bool.isRequired,
+};
