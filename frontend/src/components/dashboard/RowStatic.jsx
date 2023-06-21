@@ -4,6 +4,7 @@ import checkRowStatus from "../../helpers/checkRowStatus";
 export default function RowStatic({ video }) {
   const fields = Object.keys(video);
   const values = Object.values(video);
+
   let counter = 0;
   return (
     <tr className="border-b dark:border-neutral">
@@ -12,7 +13,7 @@ export default function RowStatic({ video }) {
         return (
           <td key={counter} className="px-4 py-3 text-sm">
             {typeof value === "boolean" ? (
-              <input type="checkbox" checked={value} readOnly />
+              <input type="checkbox" checked={values[5]} readOnly />
             ) : (
               <span className={checkRowStatus(fields[index], value)}>
                 {value}

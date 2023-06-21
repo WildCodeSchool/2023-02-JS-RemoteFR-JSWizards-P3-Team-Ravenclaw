@@ -182,6 +182,17 @@
 }
 
 /* ------------------------ ABOUT ------------------------ */
+.slider__about {
+  @media screen and (max-width: theme("screens.md")) {
+    padding-inline: 0px;
+  }
+
+  @media screen and (min-width: 1000px) {
+    overflow-x: inherit;
+    justify-content: space-between;
+  }
+}
+
 .card__about {
   padding: 16px 8px;
   display: flex;
@@ -217,14 +228,6 @@
     width: 176px;
     height: 216px;
     gap: 30px;
-  }
-}
-
-@media screen and (min-width: theme("screens.md")) {
-  .card__about:hover {
-    border: 3px solid theme("colors.primaryLightest");
-    transform: scale(var(--card-scale));
-    @apply drop-shadow-[0px_10px_15px_rgba(0,0,0,0.3)];
   }
 }
 

@@ -2,7 +2,7 @@ import Connect from "../components/connection/Connect";
 
 export default function Connection() {
   return (
-    <section>
+    <section className="flex items-center">
       <Connect />
     </section>
   );
