@@ -71,7 +71,7 @@ module.exports = {
         "2xs": [
           "0.625rem",
           {
-            lineHeight: "1",
+            lineHeight: "1.6",
             fontWeight: "400",
           },
         ],

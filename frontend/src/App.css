@@ -9,15 +9,20 @@
 }
 
 @layer base {
-  h1 {
-    @apply text-xl;
+  body {
+    color: theme("colors.neutralLightest");
+    font-family: theme("fontFamily.sans");
+    font-size: theme("fontSize.base");
   }
-  p {
-    @apply font-sans text-sm md:text-base;
-  }
+
   section {
     margin-bottom: 32px;
     margin-inline: clamp(24px, 7.5vw, 192px);
+
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+
     @media screen and (min-width: theme("screens.xl")) {
       margin-inline: clamp(192px, 7.5vw, 288px);
     }
@@ -25,9 +30,42 @@
       margin-inline: clamp(288px, 20vw, 576px);
     }
   }
+
+  article {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    @media screen and (min-width: theme("screens.md")) {
+      gap: 16px;
+    }
+  }
+
+  h1 {
+    font-size: theme("fontSize.xl");
+    font-family: theme("fontFamily.header");
+    font-weight: theme("fontWeight.extrabold");
+    text-transform: uppercase;
+  }
+
+  p {
+    @apply font-sans text-sm md:text-base;
+  }
 }
 
 @layer components {
+  .home {
+    margin-top: 32px;
+    @media screen and (max-width: theme("screens.md")) {
+      margin-inline: 0px;
+    }
+  }
+
+  .home h1 {
+    @media screen and (max-width: theme("screens.md")) {
+      margin-inline: 24px;
+    }
+  }
+
   /* Start Connect component  */
   .signup-container {
     position: absolute;
@@ -174,6 +212,5 @@
       transform: translateY(0%);
     }
   }
-
   /* End Connect component  */
 }
