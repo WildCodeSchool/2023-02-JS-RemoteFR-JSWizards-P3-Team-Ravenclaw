@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
-import SwitchLightIcon from "../navsettings/SwitchLightIcon";
-import SwitchDarkIcon from "../navsettings/SwitchDarkIcon";
+import SwitchLightIcon from "./navsettings/SwitchLightIcon";
+import SwitchDarkIcon from "./navsettings/SwitchDarkIcon";
 
 import styles from "../../css/SwitchTheme.module.css";
 
