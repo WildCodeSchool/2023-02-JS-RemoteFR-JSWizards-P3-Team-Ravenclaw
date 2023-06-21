@@ -10,7 +10,7 @@ import Connection from "./pages/Connection";
 import NotFound from "./pages/NotFound";
 import Admin from "./pages/Admin";
 import User from "./pages/User";
-
+// import RowStatic from "./components/dashboard/RowStatic";
 // Layout
 import Navbar from "./components/utilities/Navbar";
 
@@ -33,7 +33,8 @@ export default function App() {
           <Route path="connection" element={<Connection />} />
           <Route path="*" element={<NotFound />} />
           <Route path="account" element={<DashLayout />}>
-            <Route path="admin" element={<Admin />} />
+            {/* <Route path="dashboard" element={<RowStatic />} /> */}
+            <Route path="edit" element={<Admin />} />
             <Route path="user" element={<User />} />
           </Route>
         </Routes>
