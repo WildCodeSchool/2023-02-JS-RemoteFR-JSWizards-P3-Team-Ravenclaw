@@ -1,10 +1,9 @@
 import Card from "../utilities/Card";
-
 import games from "../../data/games.json";
 
-import styles from "../../css/SwipperGame.module.css";
+import styles from "../../css/Slider.module.css";
 
-function SwipperGame() {
+export default function SliderGame() {
   return (
     <ul className={styles.slider}>
       {games.map((game) => (
@@ -22,5 +21,3 @@ function SwipperGame() {
     </ul>
   );
 }
-
-export default SwipperGame;

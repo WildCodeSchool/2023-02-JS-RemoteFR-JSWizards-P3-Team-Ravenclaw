@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "img": "../assets/icon/about/mail_2.svg",
+    "text": "contact@origins-digital.com"
+  },
+  {
+    "id": 2,
+    "img": "../assets/icon/about/location.svg",
+    "text": "Headquarters Paris"
+  },
+  {
+    "id": 3,
+    "img": "../assets/icon/about/phone.svg",
+    "text": "+33 1 44 83 02 95"
+  }
+]

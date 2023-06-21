@@ -44,7 +44,7 @@ export default function Contact() {
     <form
       ref={form}
       onSubmit={sendEmail}
-      className="flex max-w-xl flex-col items-center justify-center gap-3 rounded-lg bg-neutralLightest px-6 py-8 shadow-[0_10px_15px_rgba(0,0,0,0.25)] md:m-auto md:w-[50%] md:min-w-[576px]"
+      className="flex max-w-xl flex-col items-center justify-center gap-3 rounded-lg bg-neutralDarkest/60 px-6 py-8 shadow-[0_10px_15px_rgba(0,0,0,0.25)] md:m-auto md:w-[50%] md:min-w-[576px]"
     >
       <label htmlFor="name" className="w-full text-primaryLight">
         Name

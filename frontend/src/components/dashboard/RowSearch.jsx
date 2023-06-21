@@ -1,8 +1,30 @@
-import Searchbar from "../../utilities/Searchbar";
-import Button from "../../utilities/Button";
-import Dropdown from "../../utilities/Dropdown";
+import PropTypes from "prop-types";
 
-export default function DashSearch() {
+// component
+import Searchbar from "../utilities/Searchbar";
+import Button from "../utilities/Button";
+import Dropdown from "../utilities/Dropdown";
+
+export default function RowSearch({ activeTab }) {
+  const addButton = () => {
+    if (activeTab === "video") {
+      return "Add video";
+    }
+    if (activeTab === "category") {
+      return "Add category";
+    }
+    if (activeTab === "language") {
+      return "Add language";
+    }
+    if (activeTab === "game") {
+      return "Add game";
+    }
+    if (activeTab === "page") {
+      return "Add component";
+    }
+    return null;
+  };
+
   return (
     <div className="flex flex-col items-center justify-between space-y-3 p-4 md:flex-row md:space-x-4 md:space-y-0">
       <div className="w-full md:w-1/2">
@@ -29,9 +51,13 @@ export default function DashSearch() {
               d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
             />
           </svg>
-          Add video
+          {addButton()}
         </Button>
       </div>
     </div>
   );
 }
+
+RowSearch.propTypes = {
+  activeTab: PropTypes.string.isRequired,
+};

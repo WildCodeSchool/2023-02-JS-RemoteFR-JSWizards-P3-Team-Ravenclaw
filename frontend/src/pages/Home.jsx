@@ -1,13 +1,15 @@
 import Hero from "../components/home/Hero";
 import VideoGrid from "../components/VideoGrid";
-import SwipperGame from "../components/home/SwipperGame";
+import SliderGame from "../components/home/SliderGame";
+import Partners from "../components/home/Partners";
 
 export default function Home() {
   return (
     <div className="flex flex-col">
       <Hero />
-      <SwipperGame />
+      <SliderGame />
       <VideoGrid />
+      <Partners />
     </div>
   );
 }

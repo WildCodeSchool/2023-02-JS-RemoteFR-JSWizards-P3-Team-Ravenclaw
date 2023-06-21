@@ -10,10 +10,9 @@ import Connection from "./pages/Connection";
 import NotFound from "./pages/NotFound";
 import Admin from "./pages/Admin";
 import User from "./pages/User";
-
+// import RowStatic from "./components/dashboard/RowStatic";
 // Layout
 import Navbar from "./components/utilities/Navbar";
-import MobileSettings from "./components/navsettings/MobileSettings";
 import Footer from "./components/utilities/Footer";
 import DashLayout from "./layout/DashLayout";
 
@@ -22,9 +21,8 @@ import Player from "./components/video/Player";
 
 export default function App() {
   return (
-    <>
+    <div className="min-h-screen bg-gradientDarkTheme">
       <Navbar />
-      <MobileSettings />
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -35,13 +33,13 @@ export default function App() {
           <Route path="connection" element={<Connection />} />
           <Route path="*" element={<NotFound />} />
           <Route path="account" element={<DashLayout />}>
-            <Route path="dashboard" element={<Admin />} />
-            <Route path="edit" element={<Admin edit />} />
+            {/* <Route path="dashboard" element={<RowStatic />} /> */}
+            <Route path="edit" element={<Admin />} />
             <Route path="user" element={<User />} />
           </Route>
         </Routes>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }
