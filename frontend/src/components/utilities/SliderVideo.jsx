@@ -10,15 +10,19 @@ export default function SliderVideo({
   customClassSlider,
   customClassCard,
   customClassOverlayWrapper,
+  displayCount,
+  isPaginated,
 }) {
   const navigate = useNavigate();
 
   const handleClick = (isLinkAvailable, linkURL) =>
     isLinkAvailable ? navigate(`${linkURL}`) : navigate("connection");
 
+  const videosToDisplay = isPaginated ? videos.slice(0, displayCount) : videos;
+
   return (
     <ul className={`${styles.slider} ${customClassSlider}`}>
-      {videos.map((video) => (
+      {videosToDisplay.map((video) => (
         <li key={video.id}>
           <button
             type="button"
@@ -61,10 +65,14 @@ SliderVideo.propTypes = {
   customClassSlider: PropTypes.string,
   customClassCard: PropTypes.string,
   customClassOverlayWrapper: PropTypes.string,
+  displayCount: PropTypes.number,
+  isPaginated: PropTypes.bool,
 };
 
 SliderVideo.defaultProps = {
   customClassSlider: "",
   customClassCard: "",
   customClassOverlayWrapper: "",
+  displayCount: null,
+  isPaginated: false,
 };
