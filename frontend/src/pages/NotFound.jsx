@@ -24,7 +24,7 @@ export default function NotFound() {
           onClick={() => navigate("/")}
         >
           Take Me Home
-          <BsArrowRight stroke-width="white" />
+          <BsArrowRight strokeWidth="white" />
         </Button>
       </div>
     </section>
