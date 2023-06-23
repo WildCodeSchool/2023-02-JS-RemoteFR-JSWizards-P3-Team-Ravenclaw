@@ -62,15 +62,19 @@ export default function VideoPlayer() {
 
 VideoPlayer.propTypes = {
   video: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    game: PropTypes.string.isRequired,
-    category: PropTypes.string.isRequired,
-    language: PropTypes.string.isRequired,
-    status: PropTypes.string.isRequired,
-    visible: PropTypes.bool.isRequired,
-    video: PropTypes.string.isRequired,
-    thumbnail_game: PropTypes.string.isRequired,
-    thumbnail_video: PropTypes.string.isRequired,
-  }).isRequired,
+    id: PropTypes.number,
+    title: PropTypes.string,
+    game: PropTypes.string,
+    category: PropTypes.string,
+    language: PropTypes.string,
+    status: PropTypes.string,
+    visible: PropTypes.bool,
+    video: PropTypes.string,
+    thumbnail_game: PropTypes.string,
+    thumbnail_video: PropTypes.string,
+  }),
+};
+
+VideoPlayer.defaultProps = {
+  video: null,
 };
