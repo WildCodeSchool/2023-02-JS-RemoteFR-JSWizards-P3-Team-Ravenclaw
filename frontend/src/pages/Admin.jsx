@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+
 import ManageContent from "../components/dashboard/ManageContent";
 import Dashboard from "../components/Dashboard";
 

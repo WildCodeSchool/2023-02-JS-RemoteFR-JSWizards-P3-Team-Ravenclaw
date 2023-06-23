@@ -1,6 +1,8 @@
+// import PropTypes from "prop-types";
+
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import PropTypes from "prop-types";
+
 import Player from "../components/video/Player";
 import videos from "../data/videos.json";
 import Label from "../components/utilities/Label";
@@ -55,17 +57,17 @@ export default function VideoPlayer() {
   );
 }
 
-VideoPlayer.propTypes = {
-  video: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    game: PropTypes.string.isRequired,
-    category: PropTypes.string.isRequired,
-    language: PropTypes.string.isRequired,
-    status: PropTypes.string.isRequired,
-    visible: PropTypes.bool.isRequired,
-    video: PropTypes.string.isRequired,
-    thumbnail_game: PropTypes.string.isRequired,
-    thumbnail_video: PropTypes.string.isRequired,
-  }).isRequired,
-};
+// VideoPlayer.propTypes = {
+//   video: PropTypes.shape({
+//     id: PropTypes.number.isRequired,
+//     title: PropTypes.string.isRequired,
+//     game: PropTypes.string.isRequired,
+//     category: PropTypes.string.isRequired,
+//     language: PropTypes.string.isRequired,
+//     status: PropTypes.string.isRequired,
+//     visible: PropTypes.bool.isRequired,
+//     video: PropTypes.string.isRequired,
+//     thumbnail_game: PropTypes.string.isRequired,
+//     thumbnail_video: PropTypes.string.isRequired,
+//   }).isRequired,
+// };
