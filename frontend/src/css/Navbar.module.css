@@ -46,8 +46,9 @@
 
 .navlistMobile {
   position: fixed;
-  top: 0;
+  top: -16px;
   right: 0;
+  padding-top: 16px;
 
   min-height: 100dvh;
   width: 100%;
