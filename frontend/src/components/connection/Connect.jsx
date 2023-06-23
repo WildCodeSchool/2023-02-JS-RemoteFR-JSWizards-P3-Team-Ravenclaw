@@ -89,7 +89,7 @@ export default function Connect() {
             </h2>
             <p className="my-6 text-sm">
               New to Origins E-sport? Create an account by clicking the button
-              bellow.
+              below.
             </p>
             <button
               type="button"

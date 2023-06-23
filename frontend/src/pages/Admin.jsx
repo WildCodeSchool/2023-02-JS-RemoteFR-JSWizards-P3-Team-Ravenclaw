@@ -101,16 +101,15 @@ const videos = [
   },
 ];
 
-export default function Admin({ dashboard, edit }) {
+export default function Admin({ edit }) {
   return (
     <div>
       {edit && <DashTable videos={videos} />}
-      {dashboard && <Dashboard videos={videos} />}
+      {!edit && <Dashboard videos={videos} />}
     </div>
   );
 }
 
 Admin.propTypes = {
-  dashboard: PropTypes.bool.isRequired,
   edit: PropTypes.bool.isRequired,
 };

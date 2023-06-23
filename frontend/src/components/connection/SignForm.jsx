@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
-
+import { useContext } from "react";
+import LoginContext from "../../contexts/LoginContext";
 // assets
 import passHide from "../../../public/assets/icon/utility/eyeSlash.svg";
 import passShow from "../../../public/assets/icon/dashboard/watch.svg";
@@ -17,6 +18,7 @@ export default function SignForm({
 }) {
   const passwordType = passwordVisible ? "text" : "password";
   const passwordConfType = passwordConfVisible ? "text" : "password";
+  const { setLoggedIn } = useContext(LoginContext);
 
   return (
     <form className="flex h-full flex-col items-center justify-center gap-4 bg-neutralLightest px-12 text-center dark:bg-primaryDark ">
@@ -77,7 +79,11 @@ export default function SignForm({
         </div>
       )}
 
-      <button type="submit" className="connect-button">
+      <button
+        type="submit"
+        className="connect-button"
+        onClick={() => setLoggedIn(true)}
+      >
         {isSignIn ? "Sign In" : "Register"}
       </button>
     </form>

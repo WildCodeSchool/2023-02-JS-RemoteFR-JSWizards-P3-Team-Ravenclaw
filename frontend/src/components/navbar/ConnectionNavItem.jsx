@@ -5,9 +5,9 @@ export default function ConnectionNavItem() {
   // const changer = () => {
   // setLogged("hey");d
   // };d
-  if (logged === true) {
-    return <p>image une fois connecté</p>;
-  }
+  // if (logged) {
+  // return <p>image une fois connecté</p>;
+  // }
   return (
     <svg
       width="48"
