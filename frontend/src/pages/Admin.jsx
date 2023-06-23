@@ -114,6 +114,11 @@ export default function Admin({ dashboard, edit }) {
 }
 
 Admin.propTypes = {
-  dashboard: PropTypes.bool.isRequired,
-  edit: PropTypes.bool.isRequired,
+  dashboard: PropTypes.bool,
+  edit: PropTypes.bool,
+};
+
+Admin.defaultProps = {
+  dashboard: null,
+  edit: null,
 };
