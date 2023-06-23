@@ -1,9 +1,8 @@
-// Packages
+// Package
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import PropTypes from "prop-types";
 
-// Components
+// Component
 import Player from "../components/video/Player";
 import Label from "../components/utilities/Label";
 import Button from "../components/utilities/Button";
@@ -59,22 +58,3 @@ export default function VideoPlayer() {
     </>
   );
 }
-
-VideoPlayer.propTypes = {
-  video: PropTypes.shape({
-    id: PropTypes.number,
-    title: PropTypes.string,
-    game: PropTypes.string,
-    category: PropTypes.string,
-    language: PropTypes.string,
-    status: PropTypes.string,
-    visible: PropTypes.bool,
-    video: PropTypes.string,
-    thumbnail_game: PropTypes.string,
-    thumbnail_video: PropTypes.string,
-  }),
-};
-
-VideoPlayer.defaultProps = {
-  video: null,
-};
