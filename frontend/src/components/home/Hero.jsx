@@ -66,7 +66,7 @@ export default function Hero() {
             <Button customCSS="btn-default absolute -translate-x-1/2 left-1/2 bottom-8 transform md:text-base md:font-extrabold group">
               WATCH NOW
               <BsArrowRight
-                stroke-width="1"
+                strokeWidth="1"
                 className="text-base text-neutralLightest group-hover:text-primaryLight md:text-xl"
               />
             </Button>
