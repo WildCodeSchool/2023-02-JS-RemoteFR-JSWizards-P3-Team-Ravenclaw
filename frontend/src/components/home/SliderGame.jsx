@@ -9,7 +9,7 @@ import games from "../../data/games.json";
 
 export default function SliderGame() {
   return (
-    <ul className={`${styles.slider}`}>
+    <ul className={`${styles.slider} ${styles.slider__game}`}>
       {games.map((game) => (
         <li key={game.id}>
           <Card

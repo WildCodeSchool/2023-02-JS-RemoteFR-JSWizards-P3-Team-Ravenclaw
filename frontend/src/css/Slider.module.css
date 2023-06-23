@@ -65,6 +65,12 @@
 }
 
 /* ------------------------ HOME ------------------------ */
+.slider__game {
+  @media screen and (min-width: theme("screens.md")) {
+    padding-bottom: 12px;
+  }
+}
+
 .card__game h2 {
   position: absolute;
   bottom: 0;
