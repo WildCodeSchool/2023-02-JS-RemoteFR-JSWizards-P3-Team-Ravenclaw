@@ -1,6 +1,6 @@
+// Components
 import NavbarMobile from "./NavbarMobile";
 import NavBarDesktop from "./NavbarDesktop";
-
 import ConnectionNavItem from "../navbar/ConnectionNavItem";
 import VideosNavItem from "../navbar/VideosNavItem";
 import PricingNavItem from "../navbar/PricingNavItem";

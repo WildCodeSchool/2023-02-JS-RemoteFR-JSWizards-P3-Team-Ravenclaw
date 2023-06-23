@@ -1,4 +1,7 @@
+// Packages
 import PropTypes from "prop-types";
+
+// Components
 import DashTable from "../components/dashboard/DashTable";
 import Dashboard from "../components/Dashboard";
 

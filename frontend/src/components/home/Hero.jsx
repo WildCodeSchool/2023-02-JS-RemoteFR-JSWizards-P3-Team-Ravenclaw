@@ -1,7 +1,10 @@
+// Packages
 import { Carousel } from "antd";
 import { NavLink } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
 import { useState } from "react";
+
+// Components
 import Button from "../utilities/Button";
 
 const lienVersLaVideo = 3; // à changer, lien pour aller sur le http:// ... /videos/id:${lienVersLaVideo}

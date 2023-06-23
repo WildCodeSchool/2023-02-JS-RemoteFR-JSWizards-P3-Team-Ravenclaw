@@ -1,6 +1,10 @@
-import Slider from "../utilities/Slider";
+// Style
 import styles from "../../css/Slider.module.css";
 
+// Components
+import Slider from "../utilities/Slider";
+
+// Data
 import partners from "../../data/partners.json";
 
 export default function Partners() {

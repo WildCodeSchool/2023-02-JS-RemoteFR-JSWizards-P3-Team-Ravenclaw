@@ -1,3 +1,4 @@
+// Packages
 import PropTypes from "prop-types";
 
 export default function RowHead({ activeTab }) {
@@ -55,7 +56,7 @@ export default function RowHead({ activeTab }) {
         title.name === "Status" ||
         title.name === "Premium")
     ) {
-      return false; // Exclude headers for game tab
+      return false; // Exclude headers for language tab
     }
     if (
       activeTab === "game" &&

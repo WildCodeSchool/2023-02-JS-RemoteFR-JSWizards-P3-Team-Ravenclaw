@@ -1,6 +1,7 @@
+// Packages
 import PropTypes from "prop-types";
 
-// component
+// Components
 import Searchbar from "../utilities/Searchbar";
 import Button from "../utilities/Button";
 import Dropdown from "../utilities/Dropdown";

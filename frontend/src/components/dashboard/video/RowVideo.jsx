@@ -1,8 +1,13 @@
+// Packages
 import { useState } from "react";
 import PropTypes from "prop-types";
+
+// Components
 import VideoDropdown from "./VideoDropdown";
-import checkRowStatus from "../../../helpers/checkRowStatus";
 import Button from "../../utilities/Button";
+
+// Helpers
+import checkRowStatus from "../../../helpers/checkRowStatus";
 
 export default function RowVideo({ video }) {
   const [isToggled, setIsToggled] = useState(false);

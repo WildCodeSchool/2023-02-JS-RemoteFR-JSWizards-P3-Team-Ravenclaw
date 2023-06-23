@@ -1,5 +1,8 @@
+// Packages
 import { useNavigate } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
+
+// Components
 import Button from "../components/utilities/Button";
 
 export default function NotFound() {

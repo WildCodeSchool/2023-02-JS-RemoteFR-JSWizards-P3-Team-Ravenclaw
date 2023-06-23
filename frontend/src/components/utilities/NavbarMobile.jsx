@@ -1,14 +1,16 @@
+// Packages
 import PropTypes from "prop-types";
-
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 
+// Style
+import styles from "../../css/Navbar.module.css";
+
+// Components
 import Notification from "./Notification";
 import MenuOpen from "../navbar/MenuOpen";
 import MenuClose from "../navbar/MenuClose";
 import LogOut from "../navbar/LogOut";
-
-import styles from "../../css/Navbar.module.css";
 
 export default function NavbarMobile({ navitems }) {
   const [isOpen, setIsOpen] = useState(false);

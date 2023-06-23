@@ -1,6 +1,9 @@
+// Packages
 import { useEffect, useState } from "react";
 import { Pagination } from "antd";
 import PropTypes from "prop-types";
+
+// Components
 import RowSearch from "./RowSearch";
 import NavTab from "./NavTab";
 import RowHead from "./RowHead";
@@ -8,6 +11,8 @@ import RowVideo from "./video/RowVideo";
 import RowCategory from "./category/RowCategory";
 import RowLanguage from "./language/RowLanguage";
 import RowGame from "./game/RowGame";
+
+// Data
 import games from "../../data/games.json";
 
 const languages = [

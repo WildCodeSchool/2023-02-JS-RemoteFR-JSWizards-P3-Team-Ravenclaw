@@ -1,12 +1,14 @@
+// Style
+import styles from "../css/Slider.module.css";
+
+// Components
 import Contact from "../components/about/Contact";
 import Slider from "../components/utilities/Slider";
 import Card from "../components/utilities/Card";
 
+// Data
 import figures from "../data/keyFigures.json";
 import infos from "../data/findUs.json";
-
-import styles from "../css/Slider.module.css";
-
 import Footer from "../components/utilities/Footer";
 
 export default function About() {

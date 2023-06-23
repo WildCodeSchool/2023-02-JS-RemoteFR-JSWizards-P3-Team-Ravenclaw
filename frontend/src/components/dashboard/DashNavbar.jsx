@@ -1,6 +1,8 @@
+// Packages
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+// Style
 import styles from "../../css/DashNavbar.module.css";
 
 export default function DashNavbar() {

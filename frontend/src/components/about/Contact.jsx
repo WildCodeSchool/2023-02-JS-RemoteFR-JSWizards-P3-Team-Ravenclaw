@@ -1,8 +1,9 @@
+// Packages
 import React, { useRef } from "react";
 import emailjs from "@emailjs/browser";
-
 import { ToastContainer, toast } from "react-toastify";
 
+// Styles
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Contact() {

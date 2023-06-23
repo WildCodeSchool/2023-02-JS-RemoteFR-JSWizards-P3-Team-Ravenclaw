@@ -1,6 +1,7 @@
+// Packages
 import PropTypes from "prop-types";
 
-// assets
+// Assets
 import passHide from "../../../public/assets/icon/utility/eyeSlash.svg";
 import passShow from "../../../public/assets/icon/dashboard/watch.svg";
 

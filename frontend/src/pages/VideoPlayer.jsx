@@ -1,10 +1,15 @@
+// Packages
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import PropTypes from "prop-types";
+
+// Components
 import Player from "../components/video/Player";
-import videos from "../data/videos.json";
 import Label from "../components/utilities/Label";
 import Button from "../components/utilities/Button";
+
+// Data
+import videos from "../data/videos.json";
 
 export default function VideoPlayer() {
   const [data, setData] = useState({});

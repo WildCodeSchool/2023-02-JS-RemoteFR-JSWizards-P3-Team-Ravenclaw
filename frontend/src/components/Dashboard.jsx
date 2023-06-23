@@ -1,6 +1,9 @@
+// Packages
 import { Pagination } from "antd";
 import { useState } from "react";
 import PropTypes from "prop-types";
+
+// Components
 import RowStatic from "./dashboard/RowStatic";
 import RowHead from "./dashboard/RowHead";
 import RowSearch from "./dashboard/RowSearch";
@@ -38,7 +41,8 @@ export default function Dashboard({ videos }) {
                 setPageSize(onPageSize);
               }}
               showSizeChanger
-            />{/* eslint-enable */}
+            />
+            {/* eslint-enable */}
           </div>
         </div>
       </div>

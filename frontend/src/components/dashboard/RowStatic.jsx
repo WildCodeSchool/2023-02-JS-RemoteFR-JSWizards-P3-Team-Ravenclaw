@@ -1,4 +1,7 @@
+// Packages
 import PropTypes from "prop-types";
+
+// Helpers
 import checkRowStatus from "../../helpers/checkRowStatus";
 
 export default function RowStatic({ video }) {
