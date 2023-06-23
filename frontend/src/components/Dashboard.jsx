@@ -38,7 +38,8 @@ export default function Dashboard({ videos }) {
                 setPageSize(onPageSize);
               }}
               showSizeChanger
-            />{/* eslint-enable */}
+            />
+            {/* eslint-enable */}
           </div>
         </div>
       </div>
