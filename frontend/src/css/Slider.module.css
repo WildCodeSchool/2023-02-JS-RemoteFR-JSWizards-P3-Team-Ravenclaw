@@ -64,7 +64,7 @@
   color: theme("colors.neutralLightest");
   font-family: theme("fontFamily.header");
   font-size: theme("fontSize.sm");
-  font-weight: 900;
+  font-weight: theme("fontWeight.extrabold");
   text-align: center;
   text-transform: capitalize;
   white-space: nowrap;
@@ -140,7 +140,7 @@
 }
 
 .overlay__wrapper__description {
-  font-size: theme("fontSize.xs");
+  font-size: theme("fontSize.2xs");
   font-family: theme("fontFamily.header");
   font-weight: theme("fontWeight.extrabold");
   text-transform: uppercase;
@@ -179,6 +179,97 @@
 .card__partners__img {
   max-height: 32px;
   min-width: 192px;
+}
+
+/* ------------------------ PLANS ------------------------ */
+.slide__active {
+  background-color: none;
+  background: theme("backgroundImage.gradientPrimary");
+  color: theme("colors.neutralLightest");
+}
+
+.card__plan {
+  padding: 12px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  background-color: theme("colors.neutralLightest");
+  border: 1px solid theme("colors.primaryLightest");
+  border-radius: 10px;
+
+  color: theme("colors.neutralDark");
+  font-family: theme("fontFamily.sans");
+  font-size: theme("fontSize.xs");
+}
+
+.card__plan__wrapper__content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.card__plan__price {
+  color: theme("colors.primaryLight");
+  font-family: theme("fontFamily.header");
+  font-size: theme("fontSize.lg");
+  font-weight: theme("fontWeight.extrabold");
+}
+
+.card__plan__billing {
+  color: theme("colors.neutral");
+  font-size: theme("fontSize.sm");
+}
+
+.slide__active .card__plan__billing {
+  color: theme("colors.neutralLight");
+}
+
+.card__plan__name {
+  color: theme("colors.neutralDarkest");
+  font-family: theme("fontFamily.header");
+  font-size: theme("fontSize.sm");
+  font-weight: theme("fontWeight.extrabold");
+}
+
+.card__plan__perk {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.card__plan__description {
+  font-size: theme("fontSize.xs");
+}
+
+.card__plan__bullet {
+  width: 12px;
+}
+
+.slide__active .card__plan__price,
+.slide__active .card__plan__name,
+.slide__active .card__plan__description,
+.slide__active .card__plan__perk {
+  color: theme("colors.neutralLightest");
+}
+
+.card__plan__btn {
+  padding: 8px 16px;
+  gap: 10px;
+  border: 1px solid theme("colors.primaryLight");
+}
+
+.slide__active .card__plan__btn {
+  background: none;
+  background-color: theme("colors.neutralLightest");
+  color: theme("colors.primaryLight");
+}
+
+.slide__active .card__plan__btn:hover {
+  background-color: theme("colors.primaryLight");
+  border-color: theme("colors.neutralLightest");
+  color: theme("colors.neutralLightest");
 }
 
 /* ------------------------ ABOUT ------------------------ */
