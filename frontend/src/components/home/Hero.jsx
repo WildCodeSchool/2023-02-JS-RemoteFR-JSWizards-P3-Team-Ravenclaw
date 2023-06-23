@@ -77,5 +77,4 @@ export default function Hero() {
   });
   /* eslint-disable */
   return <Carousel {...settings}>{links}</Carousel>;
-  /* eslint-enable */
 }
