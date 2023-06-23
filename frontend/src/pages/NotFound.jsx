@@ -17,11 +17,14 @@ export default function NotFound() {
         </p>
         <p className="text-neutral md:text-lg">Looks like you lost your way</p>
         <Button
-          customCSS="btn-default md:text-base"
+          customCSS="btn-default md:text-base md:font-extrabold group"
           onClick={() => navigate("/")}
         >
           Take Me Home
-          <BsArrowRight stroke-width="white" />
+          <BsArrowRight
+            stroke-width="1"
+            className="text-base text-neutralLightest group-hover:text-primaryLight"
+          />
         </Button>
       </div>
     </section>

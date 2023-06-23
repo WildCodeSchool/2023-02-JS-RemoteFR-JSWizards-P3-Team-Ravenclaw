@@ -60,9 +60,12 @@ export default function Hero() {
             alt={link.alt}
           />
           <NavLink to={link.link}>
-            <Button customCSS="btn-default absolute -translate-x-1/2 left-1/2 bottom-8 transform">
+            <Button customCSS="btn-default absolute -translate-x-1/2 left-1/2 bottom-8 transform md:text-base md:font-extrabold group">
               WATCH NOW
-              <BsArrowRight className="text-[1.8em]" strokeWidth="white" />
+              <BsArrowRight
+                stroke-width="1"
+                className="text-base text-neutralLightest group-hover:text-primaryLight md:text-xl"
+              />
             </Button>
           </NavLink>
         </div>
