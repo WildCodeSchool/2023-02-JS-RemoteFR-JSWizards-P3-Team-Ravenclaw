@@ -5,11 +5,11 @@ import styles from "../../css/Slider.module.css";
 
 export default function SliderGame() {
   return (
-    <ul className={styles.slider}>
+    <ul className={`${styles.slider}`}>
       {games.map((game) => (
         <li key={game.id}>
           <Card
-            classCSS={`${styles.card__game} bg-cover`}
+            classCSS={`${styles.card} ${styles.card__game} bg-cover`}
             styleCSS={{
               backgroundImage: `url(${game.thumbnail})`,
             }}

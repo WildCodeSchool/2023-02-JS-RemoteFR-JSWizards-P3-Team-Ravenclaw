@@ -36,6 +36,9 @@ export default function RowHead({ activeTab }) {
     if (activeTab === "video" && title.name === "Premium") {
       return false; // Exclude "Premium" for video tab
     }
+    if (activeTab === "dashboard" && title.name === "Actions") {
+      return false; // Exclude "Actions" for video tab
+    }
     if (
       (activeTab === "category" ||
         activeTab === "language" ||

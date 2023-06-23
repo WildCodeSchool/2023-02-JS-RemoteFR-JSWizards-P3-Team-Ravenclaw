@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Pagination, ConfigProvider } from "antd";
+import PropTypes from "prop-types";
 import RowSearch from "./RowSearch";
 import NavTab from "./NavTab";
 import RowHead from "./RowHead";
@@ -23,104 +24,6 @@ const languages = [
     name: "German",
   },
 ];
-const videos = [
-  {
-    id: 1000,
-    name: "Title of the video",
-    category: "MOBA",
-    language: "English",
-    status: "Online",
-    visible: true,
-  },
-  {
-    id: 1001,
-    name: "Title of the video",
-    category: "FPS",
-    language: "French",
-    status: "Offline",
-    visible: false,
-  },
-  {
-    id: 1002,
-    name: "Title of the video",
-    category: "Racing",
-    language: "Korean",
-    status: "Archived",
-    visible: true,
-  },
-  {
-    id: 1003,
-    name: "Title of the video",
-    category: "MOBA",
-    language: "English",
-    status: "Online",
-    visible: true,
-  },
-  {
-    id: 1004,
-    name: "Title of the video",
-    category: "FPS",
-    language: "French",
-    status: "Offline",
-    visible: false,
-  },
-  {
-    id: 1005,
-    name: "Title of the video",
-    category: "Racing",
-    language: "Korean",
-    status: "Archived",
-    visible: true,
-  },
-  {
-    id: 1006,
-    name: "Title of the video",
-    category: "MOBA",
-    language: "English",
-    status: "Online",
-    visible: true,
-  },
-  {
-    id: 1007,
-    name: "Title of the video",
-    category: "FPS",
-    language: "French",
-    status: "Offline",
-    visible: false,
-  },
-  {
-    id: 1008,
-    name: "Title of the video",
-    category: "Racing",
-    language: "Korean",
-    status: "Archived",
-    visible: true,
-  },
-  {
-    id: 1009,
-    name: "Title of the video",
-    category: "MOBA",
-    language: "English",
-    status: "Online",
-    visible: true,
-  },
-  {
-    id: 1010,
-    name: "Title of the video",
-    category: "FPS",
-    language: "French",
-    status: "Offline",
-    visible: false,
-  },
-  {
-    id: 1011,
-    name: "Title of the video",
-    category: "Racing",
-    language: "Korean",
-    status: "Archived",
-    visible: true,
-  },
-];
 
 const categories = [
   {
@@ -137,7 +40,7 @@ const categories = [
   },
 ];
 
-export default function DashTable() {
+export default function DashTable({ videos }) {
   const [activeTab, setActiveTab] = useState("video");
   const setActiveTabItem = (tab) => {
     setActiveTab(tab);
@@ -156,12 +59,15 @@ export default function DashTable() {
     } else if (activeTab === "language") {
       setObjectNumber(languages.length);
     } else {
+      /*eslint-disable*/
       setObjectNumber(videos.length);
+      /*eslint-disable*/
     }
   }, [activeTab]);
 
   return (
     <div className="relative mx-auto max-w-screen-xl px-4 sm:p-5 lg:px-12">
+      <h1>Manage Content</h1>
       <div className="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
         <NavTab setActiveTabItem={setActiveTabItem} />
         <RowSearch activeTab={activeTab} />
@@ -223,3 +129,13 @@ export default function DashTable() {
     </div>
   );
 }
+
+DashTable.propTypes = {
+  videos: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    category: PropTypes.string,
+    language: PropTypes.string,
+    status: PropTypes.string,
+  }).isRequired,
+};
