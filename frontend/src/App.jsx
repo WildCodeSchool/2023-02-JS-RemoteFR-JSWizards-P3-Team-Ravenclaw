@@ -1,10 +1,14 @@
+// Packages
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
+// Layout
+import DashLayout from "./layout/DashLayout";
+
 // Pages
-import Navbar from "./components/utilities/Navbar";
 import Home from "./pages/Home";
 import Videos from "./pages/Videos";
+import VideoPlayer from "./pages/VideoPlayer";
 import Pricing from "./pages/Pricing";
 import About from "./pages/About";
 import Connection from "./pages/Connection";
@@ -12,13 +16,8 @@ import NotFound from "./pages/NotFound";
 import Admin from "./pages/Admin";
 import User from "./pages/User";
 
-// Layout
-import VideoPlayer from "./pages/VideoPlayer";
-
-// import RowStatic from "./components/dashboard/RowStatic";
-
-// Layout
-import DashLayout from "./layout/DashLayout";
+// Components
+import Navbar from "./components/utilities/Navbar";
 
 export default function App() {
   return (
