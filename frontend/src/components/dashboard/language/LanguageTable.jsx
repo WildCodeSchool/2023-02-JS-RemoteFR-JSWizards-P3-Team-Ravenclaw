@@ -1,3 +1,4 @@
+// Components
 import RowLanguage from "./RowLanguage";
 
 export default function CategoryTable() {

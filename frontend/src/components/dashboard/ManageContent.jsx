@@ -1,6 +1,9 @@
+// Packages
 import { useEffect, useState } from "react";
 import { Pagination, ConfigProvider } from "antd";
 import PropTypes from "prop-types";
+
+// Components
 import RowSearch from "./RowSearch";
 import NavTab from "./NavTab";
 import RowHead from "./RowHead";
@@ -8,6 +11,8 @@ import RowVideo from "./video/RowVideo";
 import RowCategory from "./category/RowCategory";
 import RowLanguage from "./language/RowLanguage";
 import RowGame from "./game/RowGame";
+
+// Data
 import games from "../../data/games.json";
 
 const languages = [
@@ -59,9 +64,7 @@ export default function DashTable({ videos }) {
     } else if (activeTab === "language") {
       setObjectNumber(languages.length);
     } else {
-      /*eslint-disable*/
       setObjectNumber(videos.length);
-      /*eslint-disable*/
     }
   }, [activeTab]);
 
@@ -131,11 +134,13 @@ export default function DashTable({ videos }) {
 }
 
 DashTable.propTypes = {
-  videos: PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    category: PropTypes.string,
-    language: PropTypes.string,
-    status: PropTypes.string,
-  }).isRequired,
+  videos: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+      category: PropTypes.string,
+      language: PropTypes.string,
+      status: PropTypes.string,
+    })
+  ).isRequired,
 };

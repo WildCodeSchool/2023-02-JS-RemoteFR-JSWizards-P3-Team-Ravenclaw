@@ -1,3 +1,4 @@
+// Components
 import RowVideo from "./RowVideo";
 
 export default function VideoTable() {

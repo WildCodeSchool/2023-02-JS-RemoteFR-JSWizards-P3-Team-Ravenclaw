@@ -1,5 +1,8 @@
+// Packages
 import { useNavigate } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
+
+// Components
 import Button from "../components/utilities/Button";
 
 export default function NotFound() {
@@ -22,7 +25,7 @@ export default function NotFound() {
         >
           Take Me Home
           <BsArrowRight
-            stroke-width="1"
+            strokeWidth="1"
             className="text-base text-neutralLightest group-hover:text-primaryLight"
           />
         </Button>

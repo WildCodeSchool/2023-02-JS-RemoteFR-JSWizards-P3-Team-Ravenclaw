@@ -1,10 +1,8 @@
+// Packages
 import { useState } from "react";
 
 export default function ConnectionNavItem() {
-  const logged = useState(false); // devrait être const [logged, setLogged] mais linter..
-  // const changer = () => {
-  // setLogged("hey");d
-  // };d
+  const logged = useState(false);
   if (logged === true) {
     return <p>image une fois connecté</p>;
   }

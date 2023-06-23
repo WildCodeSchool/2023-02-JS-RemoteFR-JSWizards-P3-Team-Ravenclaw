@@ -1,4 +1,8 @@
+// Packages
 import React, { useState, useEffect } from "react";
+
+// Style
+import styles from "../css/Slider.module.css";
 
 // Components
 import Dropdown from "../components/utilities/Dropdown";
@@ -7,9 +11,6 @@ import Button from "../components/utilities/Button";
 import Label from "../components/utilities/Label";
 import SliderVideo from "../components/utilities/SliderVideo";
 import Footer from "../components/utilities/Footer";
-
-// Style
-import styles from "../css/Slider.module.css";
 
 // Data
 import videosData from "../data/videos.json";

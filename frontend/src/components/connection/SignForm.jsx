@@ -1,6 +1,7 @@
+// Packages
 import PropTypes from "prop-types";
 
-// assets
+// Assets
 import passHide from "../../../public/assets/icon/utility/eyeSlash.svg";
 import passShow from "../../../public/assets/icon/dashboard/watch.svg";
 
@@ -54,7 +55,6 @@ export default function SignForm({
             onClick={handlePassVisibility}
           />
         </span>
-        {/* eslint-enable */}
       </div>
 
       {!isSignIn && (
@@ -65,7 +65,6 @@ export default function SignForm({
             className=" w-full rounded border-none bg-neutralLight p-3 outline-none dark:bg-neutralLightest"
             required
           />
-          {/* eslint-disable */}
           <span className="absolute right-3 flex w-5">
             <img
               src={passwordConfVisible ? passHide : passShow}

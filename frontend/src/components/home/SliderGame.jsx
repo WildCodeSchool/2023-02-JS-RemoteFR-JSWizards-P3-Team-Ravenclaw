@@ -1,7 +1,11 @@
-import Card from "../utilities/Card";
-import games from "../../data/games.json";
-
+// Style
 import styles from "../../css/Slider.module.css";
+
+// Components
+import Card from "../utilities/Card";
+
+// Data
+import games from "../../data/games.json";
 
 export default function SliderGame() {
   return (

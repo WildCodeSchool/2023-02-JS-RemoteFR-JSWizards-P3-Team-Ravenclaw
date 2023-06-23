@@ -1,3 +1,4 @@
+// Components
 import RowCategory from "./RowCategory";
 
 export default function CategoryTable() {

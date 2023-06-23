@@ -1,9 +1,12 @@
+// Packages
 import { useState } from "react";
 
+// Components
 import SwitchBilling from "../components/plans/SwitchBilling";
 import Caroussel from "../components/plans/Caroussel";
 import Footer from "../components/utilities/Footer";
 
+// Data
 import plans from "../data/plans.json";
 
 export default function Pricing() {

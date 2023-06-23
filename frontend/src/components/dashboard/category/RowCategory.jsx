@@ -1,5 +1,8 @@
+// Packages
 import { useState } from "react";
 import PropTypes from "prop-types";
+
+// Components
 import CatDropdown from "./CatDropdown";
 import Button from "../../utilities/Button";
 

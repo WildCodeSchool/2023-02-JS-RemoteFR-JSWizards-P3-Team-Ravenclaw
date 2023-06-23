@@ -1,10 +1,15 @@
+// Packages
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 
-import Card from "./Card";
-import videos from "../../data/videos.json";
-
+// Style
 import styles from "../../css/Slider.module.css";
+
+// Components
+import Card from "./Card";
+
+// Data
+import videos from "../../data/videos.json";
 
 export default function SliderVideo({
   customClassSlider,
