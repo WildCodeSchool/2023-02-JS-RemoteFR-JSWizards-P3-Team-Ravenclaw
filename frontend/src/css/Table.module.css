@@ -26,6 +26,19 @@
   border: 2px solid theme("colors.primaryLightest");
 }
 
+/* Start modal btn style  */
+.btn_modal__style {
+  padding: 0.25rem 1rem;
+  border-radius: 0.5rem;
+  color: theme("colors.neutralLightest");
+  background: theme("colors.primaryLightest");
+}
+
+.btn_modal__style:hover {
+  color: theme("colors.neutralLightest");
+  background-color: theme("colors.primaryLightest");
+}
+
 /* Start table label style  */
 .label__style {
   color: theme("colors.primaryLightest");
