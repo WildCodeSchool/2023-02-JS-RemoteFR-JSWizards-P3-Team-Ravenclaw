@@ -62,9 +62,7 @@ export default function DashTable({ videos }) {
     } else if (activeTab === "language") {
       setObjectNumber(languages.length);
     } else {
-      /*eslint-disable*/
       setObjectNumber(videos.length);
-      /*eslint-disable*/
     }
   }, [activeTab]);
 
@@ -120,11 +118,13 @@ export default function DashTable({ videos }) {
 }
 
 DashTable.propTypes = {
-  videos: PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    category: PropTypes.string,
-    language: PropTypes.string,
-    status: PropTypes.string,
-  }).isRequired,
+  videos: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+      category: PropTypes.string,
+      language: PropTypes.string,
+      status: PropTypes.string,
+    })
+  ).isRequired,
 };
