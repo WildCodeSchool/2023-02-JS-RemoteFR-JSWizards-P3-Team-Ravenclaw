@@ -4,8 +4,12 @@
 
 .btn-default {
   @apply flex items-center justify-center gap-3 rounded-2xl
-  bg-gradient-to-b from-[#4E5DB6]/95 to-[#9969C4] px-7 py-2
-  text-center font-header text-xs text-neutralLightest;
+  border border-transparent bg-gradient-to-b from-[#4E5DB6]/95 to-[#9969C4]
+  px-7 py-2 text-center font-header text-xs font-extrabold text-neutralLightest;
+}
+
+.btn-default:hover {
+  @apply border-primaryLight bg-neutralLightest bg-none text-primaryLight;
 }
 
 @layer base {
@@ -222,3 +226,28 @@
   }
   /* End Connect component  */
 }
+
+/* Start Swiper component  */
+.swiper {
+  width: 100%;
+}
+
+.swiper-slide {
+  width: 164px;
+}
+
+.swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  opacity: 1;
+  background-color: theme("colors.neutral");
+  border: 1px solid theme("colors.neutralLightest");
+}
+
+.swiper-pagination-bullet-active {
+  background-color: transparent;
+  background: theme("backgroundImage.gradientPrimary");
+  width: 12px;
+  height: 12px;
+}
+/* End Swiper component  */
