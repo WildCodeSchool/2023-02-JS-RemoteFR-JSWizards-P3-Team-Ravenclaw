@@ -11,7 +11,7 @@ export default function Pricing() {
 
   return (
     <>
-      <section className="flex h-[calc(100vh-160px)]">
+      <section className="flex h-[calc(100vh-76px)] md:h-[calc(100vh-160px)]">
         <article>
           <h1>Plans & Pricing</h1>
           <p>

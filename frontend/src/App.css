@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .btn-default {
-  @apply flex items-center justify-center gap-3 rounded-2xl
+  @apply flex items-center justify-center gap-3 rounded-full
   border border-transparent bg-gradient-to-b from-[#4E5DB6]/95 to-[#9969C4]
   px-7 py-2 text-center font-header text-xs font-extrabold text-neutralLightest;
 }

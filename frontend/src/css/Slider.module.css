@@ -233,13 +233,18 @@
   font-weight: theme("fontWeight.extrabold");
 }
 
-.card__plan__listPerks {
-  list-style-type: disc;
-  list-style-position: inside;
+.card__plan__perk {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .card__plan__description {
   font-size: theme("fontSize.xs");
+}
+
+.card__plan__bullet {
+  width: 12px;
 }
 
 .slide__active .card__plan__price,

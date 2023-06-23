@@ -33,13 +33,13 @@ export default function Caroussel({ plans, billing }) {
         effect="coverflow"
         grabCursor
         centeredSlides
-        initialSlide={3}
+        initialSlide={1}
         slidesPerView="auto"
         coverflowEffect={{
           rotate: 0,
           stretch: 0,
           depth: 150,
-          modifier: 2.5,
+          modifier: 4.5,
         }}
         pagination={{ el: ".pagination", clickable: true }}
         navigation={{
@@ -72,10 +72,15 @@ export default function Caroussel({ plans, billing }) {
                   <p className={styles.card__plan__description}>
                     {description}
                   </p>
-                  <ul className={styles.card__plan__listPerks}>
+                  <ul>
                     {perks.map((perk) => (
                       <li key={perk} className={styles.card__plan__perk}>
-                        {perk}
+                        <img
+                          src="../assets/icon/utility/tick.svg"
+                          alt={perk}
+                          className={styles.card__plan__bullet}
+                        />
+                        <span>{perk}</span>
                       </li>
                     ))}
                   </ul>
