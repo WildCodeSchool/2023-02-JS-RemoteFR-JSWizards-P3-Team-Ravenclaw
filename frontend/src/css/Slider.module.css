@@ -24,6 +24,18 @@
   display: none;
 }
 
+@media screen and (min-width: theme("screens.md")) {
+  .slider::-webkit-scrollbar {
+    display: block;
+    height: 0.8rem;
+  }
+
+  .slider::-webkit-scrollbar-thumb {
+    background: theme("backgroundImage.gradientPrimary");
+    border-radius: 100px;
+  }
+}
+
 .card {
   position: relative;
 
