@@ -1,15 +1,16 @@
+// Packages
 import PropTypes from "prop-types";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { EffectCoverflow, Pagination, Navigation } from "swiper";
-import "swiper/swiper-bundle.min.css";
-
 import { toast } from "react-toastify";
+
+// Style
+import "swiper/swiper-bundle.min.css";
+import styles from "../../css/Slider.module.css";
 import "react-toastify/dist/ReactToastify.css";
 
+// Components
 import Card from "../utilities/Card";
-
-import styles from "../../css/Slider.module.css";
 
 SwiperCore.use([EffectCoverflow, Pagination, Navigation]);
 
@@ -50,7 +51,7 @@ export default function Caroussel({ plans, billing }) {
         className="swiper__container"
       >
         {plans.map(({ name, price, description, perks }) => (
-          <SwiperSlide key={name} s>
+          <SwiperSlide key={name}>
             {({ isActive }) => (
               <Card
                 classCSS={`${styles.card__plan} ${
@@ -110,7 +111,7 @@ Caroussel.propTypes = {
   plans: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string,
-      price: PropTypes.string,
+      price: PropTypes.arrayOf(PropTypes.string),
       description: PropTypes.string,
       perks: PropTypes.arrayOf(PropTypes.string),
     })
