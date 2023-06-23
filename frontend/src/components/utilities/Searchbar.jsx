@@ -28,6 +28,10 @@ export default function Searchbar({ className }) {
   );
 }
 
+Searchbar.defaultProps = {
+  className: null,
+};
+
 Searchbar.propTypes = {
-  className: PropTypes.string.isRequired,
+  className: PropTypes.string,
 };
