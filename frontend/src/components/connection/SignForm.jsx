@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { useContext } from "react";
 import LoginContext from "../../contexts/LoginContext";
 
-
 // Assets
 import passHide from "../../../public/assets/icon/utility/eyeSlash.svg";
 import passShow from "../../../public/assets/icon/dashboard/watch.svg";
@@ -60,7 +59,6 @@ export default function SignForm({
           />
         </span>
       </div>
-
       {!isSignIn && (
         <div className="relative flex w-full items-center">
           <input
@@ -79,7 +77,6 @@ export default function SignForm({
           {/* eslint-enable */}
         </div>
       )}
-
       <button
         type="submit"
         className="connect-button"
