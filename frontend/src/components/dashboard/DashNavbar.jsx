@@ -1,6 +1,6 @@
 // Packages
 import { useNavigate } from "react-router-dom";
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import LoginContext from "../../contexts/LoginContext";
 
 // Style
