@@ -1,22 +1,10 @@
 // Components
 import RowCategory from "./RowCategory";
 
-export default function CategoryTable() {
-  const categories = [
-    {
-      id: 1,
-      name: "MOBA",
-    },
-    {
-      id: 2,
-      name: "FPS",
-    },
-    {
-      id: 3,
-      name: "Racing",
-    },
-  ];
+// Data
+import categories from "../../../data/language.json";
 
+export default function CategoryTable() {
   return (
     <>
       {categories.map((category) => (

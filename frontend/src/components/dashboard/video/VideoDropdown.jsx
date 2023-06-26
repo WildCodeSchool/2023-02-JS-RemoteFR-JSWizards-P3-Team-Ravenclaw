@@ -7,25 +7,11 @@ import Input from "../../utilities/Input";
 import Dropdown from "../../utilities/Dropdown";
 import Label from "../../utilities/Label";
 
+// Data
+import language from "../../../data/language.json";
+import category from "../../../data/category.json";
+
 export default function VideoDropdown() {
-  const language = [
-    { id: 1, name: "English" },
-    { id: 2, name: "French" },
-    { id: 3, name: "Italian" },
-    { id: 4, name: "Korean" },
-    { id: 5, name: "German" },
-    { id: 6, name: "Spanish" },
-  ];
-
-  const category = [
-    { id: 1, name: "FPS" },
-    { id: 2, name: "Action" },
-    { id: 3, name: "MOBA" },
-    { id: 4, name: "Racing" },
-    { id: 5, name: "Table game" },
-    { id: 6, name: "Sport" },
-  ];
-
   return (
     <tr className="border-b dark:border-neutral">
       <td colSpan="6" className="gap-4 space-y-4 px-8 py-4">
