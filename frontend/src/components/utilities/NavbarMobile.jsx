@@ -16,7 +16,7 @@ export default function NavbarMobile({ navitems }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleNavMenu = () => setIsOpen(!isOpen);
-  const logOutSesstion = () => {
+  const logOutSession = () => {
     toggleNavMenu();
   };
 
@@ -60,7 +60,7 @@ export default function NavbarMobile({ navitems }) {
               <NavLink to="/">
                 <LogOut
                   customCSS={`${styles.navbarMobile__navitem} ${styles.navitem__logout}`}
-                  onClick={logOutSesstion}
+                  onClick={logOutSession}
                 />
               </NavLink>
             </li>

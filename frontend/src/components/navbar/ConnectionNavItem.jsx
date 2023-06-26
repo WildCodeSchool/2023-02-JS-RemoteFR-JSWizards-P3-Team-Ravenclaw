@@ -1,11 +1,4 @@
-// Packages
-import { useState } from "react";
-
 export default function ConnectionNavItem() {
-  const logged = useState(false);
-  if (logged === true) {
-    return <p>image une fois connecté</p>;
-  }
   return (
     <svg
       width="48"

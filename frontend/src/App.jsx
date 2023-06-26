@@ -1,9 +1,5 @@
-// Packages
-import React from "react";
+import { useMemo, useState } from "react";
 import { Routes, Route } from "react-router-dom";
-
-// Layout
-import DashLayout from "./layout/DashLayout";
 
 // Pages
 import Home from "./pages/Home";
@@ -16,29 +12,43 @@ import NotFound from "./pages/NotFound";
 import Admin from "./pages/Admin";
 import User from "./pages/User";
 
+// Layout
+import DashLayout from "./layout/DashLayout";
+import LoginContext from "./contexts/LoginContext";
+
 // Components
 import Navbar from "./components/utilities/Navbar";
 
 export default function App() {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const accountRender = useMemo(() => ({ setLoggedIn }), []);
+
   return (
     <div className="min-h-screen bg-gradientDarkTheme">
-      <Navbar />
-      <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="videos" element={<Videos />} />
-          <Route path="videos/:id" element={<VideoPlayer />} />
-          <Route path="plans" element={<Pricing />} />
-          <Route path="about" element={<About />} />
-          <Route path="connection" element={<Connection />} />
-          <Route path="*" element={<NotFound />} />
-          <Route path="account" element={<DashLayout />}>
-            <Route path="dashboard" element={<Admin dashboard />} />
-            <Route path="edit" element={<Admin edit />} />
-            <Route path="user" element={<User />} />
-          </Route>
-        </Routes>
-      </main>
+      <LoginContext.Provider value={accountRender}>
+        <Navbar />
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="videos" element={<Videos />} />
+            <Route path="videos/:id" element={<VideoPlayer />} />
+            <Route path="plans" element={<Pricing />} />
+            <Route path="about" element={<About />} />
+            <Route path="*" element={<NotFound />} />
+            {loggedIn ? (
+              <Route path="account" element={<DashLayout />}>
+                <Route path="" element={<Admin />} />
+                <Route path="edit" element={<Admin edit />} />
+                <Route path="user" element={<User />} />
+              </Route>
+            ) : (
+              <Route>
+                <Route path="account" element={<Connection />} />
+              </Route>
+            )}
+          </Routes>
+        </main>
+      </LoginContext.Provider>
     </div>
   );
 }

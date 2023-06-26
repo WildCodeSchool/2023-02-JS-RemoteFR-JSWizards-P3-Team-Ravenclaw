@@ -1,5 +1,7 @@
 // Packages
 import PropTypes from "prop-types";
+import { useContext } from "react";
+import LoginContext from "../../contexts/LoginContext";
 
 // Assets
 import passHide from "../../../public/assets/icon/utility/eyeSlash.svg";
@@ -18,6 +20,7 @@ export default function SignForm({
 }) {
   const passwordType = passwordVisible ? "text" : "password";
   const passwordConfType = passwordConfVisible ? "text" : "password";
+  const { setLoggedIn } = useContext(LoginContext);
 
   return (
     <form className="flex h-full flex-col items-center justify-center gap-4 bg-neutralLightest px-12 text-center dark:bg-primaryDark ">
@@ -56,7 +59,6 @@ export default function SignForm({
           />
         </span>
       </div>
-
       {!isSignIn && (
         <div className="relative flex w-full items-center">
           <input
@@ -75,8 +77,11 @@ export default function SignForm({
           {/* eslint-enable */}
         </div>
       )}
-
-      <button type="submit" className="connect-button">
+      <button
+        type="submit"
+        className="connect-button"
+        onClick={() => setLoggedIn(true)}
+      >
         {isSignIn ? "Sign In" : "Register"}
       </button>
     </form>
