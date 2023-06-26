@@ -60,7 +60,6 @@ export default function Dashboard({ videos }) {
           </div>
         </div>
       </div>
-    </div>
   );
 }
 
