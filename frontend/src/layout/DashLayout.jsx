@@ -3,7 +3,7 @@ import DashNavbar from "../components/dashboard/DashNavbar";
 
 export default function DashLayout() {
   return (
-    <div>
+    <div className="flex ">
       <DashNavbar />
       <Outlet />
     </div>

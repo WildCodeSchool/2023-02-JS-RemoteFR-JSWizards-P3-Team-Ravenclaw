@@ -30,9 +30,9 @@ export default function DashNavbar() {
   };
 
   return (
-    <div className="flex flex-col sm:flex-row md:absolute md:z-10 ">
+    <div className="hidden md:flex md:flex-col ">
       <div
-        className={`relative h-screen w-11/12 bg-neutralDarkest/80 p-5 pt-8 duration-300  md:w-72  `}
+        className={`relative h-screen w-11/12 bg-neutralDarkest p-5 pt-8 duration-300  md:w-72  `}
       >
         <div
           className={`origin-left text-center text-xl font-medium text-neutralLightest duration-300 `}
