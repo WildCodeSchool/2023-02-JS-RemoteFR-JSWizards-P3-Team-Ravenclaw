@@ -18,8 +18,6 @@ export default function Dashboard({ videos }) {
       <h1>Dashboard</h1>
       <div className="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
         <RowSearch activeTab="dashboard" />
-
-
         <div className="overflow-x-auto">
           <table className="w-full text-left text-base text-neutralDarkest dark:text-neutralLightest">
             <RowHead activeTab="dashboard" />
@@ -42,7 +40,6 @@ export default function Dashboard({ videos }) {
                   controlOutlineWidth: "0",
                 },
               }}
-
             >
               <Pagination
                 pageSizeOptions={[5, 10, 20, 50, 100]}
