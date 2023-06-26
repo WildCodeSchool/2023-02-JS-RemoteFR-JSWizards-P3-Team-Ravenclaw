@@ -1,0 +1,35 @@
+[
+  {
+    "name": "Starter",
+    "price": ["$9", "$99"],
+    "description": "Unleash the power of on-demand video",
+    "perks": [
+      "Limited to 1 user",
+      "No ads interruption",
+      "High quality video",
+      "Cancel anytime"
+    ]
+  },
+  {
+    "name": "Standard",
+    "price": ["$14", "$159"],
+    "description": "Best deal for amateurs of e-sport",
+    "perks": [
+      "Up to 3 users",
+      "Multi-devices",
+      "High quality video",
+      "Cancel anytime"
+    ]
+  },
+  {
+    "name": "Premium",
+    "description": "For the real fans of e-sport",
+    "price": ["$19", "$219"],
+    "perks": [
+      "Up to 5 users",
+      "Multi-devices",
+      "Premium quality video",
+      "Cancel anytime"
+    ]
+  }
+]

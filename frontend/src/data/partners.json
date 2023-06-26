@@ -1,27 +1,27 @@
 [
   {
     "id": 1,
-    "img": "../../assets/img/partners/riot_games.svg",
+    "img": "../assets/img/partners/riot_games.svg",
     "name": "Riot Games"
   },
   {
     "id": 2,
-    "img": "../../assets/img/partners/chesscom.svg",
+    "img": "../assets/img/partners/chesscom.svg",
     "name": "Chess.com"
   },
   {
     "id": 3,
-    "img": "../../assets/img/partners/EA_Sports.svg",
+    "img": "../assets/img/partners/EA_Sports.svg",
     "name": "EA Sport"
   },
   {
     "id": 4,
-    "img": "../../assets/img/partners/Capcom.svg",
+    "img": "../assets/img/partners/Capcom.svg",
     "name": "Capcom"
   },
   {
     "id": 5,
-    "img": "../../assets/img/partners/Blast.svg",
+    "img": "../assets/img/partners/Blast.svg",
     "name": "Blast.tv"
   }
 ]

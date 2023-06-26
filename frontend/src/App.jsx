@@ -1,10 +1,11 @@
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
+
 import { Routes, Route } from "react-router-dom";
 
 // Pages
-import Navbar from "./components/utilities/Navbar";
 import Home from "./pages/Home";
 import Videos from "./pages/Videos";
+import VideoPlayer from "./pages/VideoPlayer";
 import Pricing from "./pages/Pricing";
 import About from "./pages/About";
 import Connection from "./pages/Connection";
@@ -12,10 +13,13 @@ import NotFound from "./pages/NotFound";
 import Admin from "./pages/Admin";
 import User from "./pages/User";
 
+
 // Layout
-import VideoPlayer from "./pages/VideoPlayer";
 import DashLayout from "./layout/DashLayout";
 import LoginContext from "./contexts/LoginContext";
+
+// Components
+import Navbar from "./components/utilities/Navbar";
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);

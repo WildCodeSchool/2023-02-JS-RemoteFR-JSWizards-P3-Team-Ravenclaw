@@ -1,5 +1,8 @@
+// Packages
 import { useNavigate } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
+
+// Components
 import Button from "../components/utilities/Button";
 
 export default function NotFound() {
@@ -17,11 +20,14 @@ export default function NotFound() {
         </p>
         <p className="text-neutral md:text-lg">Looks like you lost your way</p>
         <Button
-          customCSS="btn-default md:text-base"
+          customCSS="btn-default md:text-base md:font-extrabold group"
           onClick={() => navigate("/")}
         >
           Take Me Home
-          <BsArrowRight stroke-width="white" />
+          <BsArrowRight
+            strokeWidth="1"
+            className="text-base text-neutralLightest group-hover:text-primaryLight"
+          />
         </Button>
       </div>
     </section>

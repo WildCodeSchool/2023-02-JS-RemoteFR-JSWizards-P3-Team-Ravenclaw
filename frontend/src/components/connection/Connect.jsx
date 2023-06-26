@@ -1,6 +1,7 @@
+// Packages
 import { useState } from "react";
 
-// assets
+// Assets
 import SignForm from "./SignForm";
 
 export default function Connect() {

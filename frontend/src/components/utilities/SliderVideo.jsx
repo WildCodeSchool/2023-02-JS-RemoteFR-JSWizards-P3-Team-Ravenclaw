@@ -1,24 +1,33 @@
+// Packages
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 
-import Card from "./Card";
-import videos from "../../data/videos.json";
-
+// Style
 import styles from "../../css/Slider.module.css";
+
+// Components
+import Card from "./Card";
+
+// Data
+import videos from "../../data/videos.json";
 
 export default function SliderVideo({
   customClassSlider,
   customClassCard,
   customClassOverlayWrapper,
+  displayCount,
+  isPaginated,
 }) {
   const navigate = useNavigate();
 
   const handleClick = (isLinkAvailable, linkURL) =>
     isLinkAvailable ? navigate(`${linkURL}`) : navigate("connection");
 
+  const videosToDisplay = isPaginated ? videos.slice(0, displayCount) : videos;
+
   return (
     <ul className={`${styles.slider} ${customClassSlider}`}>
-      {videos.map((video) => (
+      {videosToDisplay.map((video) => (
         <li key={video.id}>
           <button
             type="button"
@@ -61,10 +70,14 @@ SliderVideo.propTypes = {
   customClassSlider: PropTypes.string,
   customClassCard: PropTypes.string,
   customClassOverlayWrapper: PropTypes.string,
+  displayCount: PropTypes.number,
+  isPaginated: PropTypes.bool,
 };
 
 SliderVideo.defaultProps = {
   customClassSlider: "",
   customClassCard: "",
   customClassOverlayWrapper: "",
+  displayCount: null,
+  isPaginated: false,
 };

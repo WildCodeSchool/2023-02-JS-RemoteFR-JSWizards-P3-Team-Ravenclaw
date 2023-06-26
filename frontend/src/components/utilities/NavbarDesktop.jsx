@@ -1,10 +1,12 @@
+// Packages
 import PropTypes from "prop-types";
-
 import { NavLink } from "react-router-dom";
 
-import Notification from "./Notification";
-
+// Style
 import styles from "../../css/Navbar.module.css";
+
+// Components
+import Notification from "./Notification";
 
 export default function NavBarDesktop({ navitems }) {
   return (

@@ -1,5 +1,8 @@
+// Packages
 import { useState } from "react";
 import PropTypes from "prop-types";
+
+// Components
 import LanguageDropdown from "./LanguageDropdown";
 import Button from "../../utilities/Button";
 

@@ -3,6 +3,8 @@
  * use @param classCSS to pass custom class as a props (CSS and/or Tailwind)
  * use @param styleCSS to pass custom style as a props (CSS only) like dynamic url for background-image (not working using Tailwind class)
  */
+
+// Packages
 import PropTypes from "prop-types";
 
 export default function Card({ children, classCSS, styleCSS }) {

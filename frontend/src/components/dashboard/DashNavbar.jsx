@@ -1,6 +1,9 @@
+// Packages
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import LoginContext from "../../contexts/LoginContext";
+
+// Style
 import styles from "../../css/DashNavbar.module.css";
 
 export default function DashNavbar() {

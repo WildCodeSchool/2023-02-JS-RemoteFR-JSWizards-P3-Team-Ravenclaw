@@ -1,6 +1,9 @@
+// Packages
 import { useEffect, useState } from "react";
-import { Pagination } from "antd";
+import { Pagination, ConfigProvider } from "antd";
 import PropTypes from "prop-types";
+
+// Components
 import RowSearch from "./RowSearch";
 import NavTab from "./NavTab";
 import RowHead from "./RowHead";
@@ -8,6 +11,8 @@ import RowVideo from "./video/RowVideo";
 import RowCategory from "./category/RowCategory";
 import RowLanguage from "./language/RowLanguage";
 import RowGame from "./game/RowGame";
+
+// Data
 import games from "../../data/games.json";
 
 const languages = [
@@ -42,14 +47,16 @@ const categories = [
 
 export default function DashTable({ videos }) {
   const [activeTab, setActiveTab] = useState("video");
+  const setActiveTabItem = (tab) => {
+    setActiveTab(tab);
+  };
+
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
   const [objectNumber, setObjectNumber] = useState(null);
   const offset = pageSize * currentPage - pageSize; // pages parcourues
   const nextPage = offset + pageSize;
-  const setActiveTabItem = (tab) => {
-    setActiveTab(tab);
-  };
+
   useEffect(() => {
     setCurrentPage(1);
     if (activeTab === "category") {
@@ -57,9 +64,7 @@ export default function DashTable({ videos }) {
     } else if (activeTab === "language") {
       setObjectNumber(languages.length);
     } else {
-      /*eslint-disable*/
       setObjectNumber(videos.length);
-      /*eslint-disable*/
     }
   }, [activeTab]);
 
@@ -97,29 +102,45 @@ export default function DashTable({ videos }) {
             {/* eslint-enable */}
           </tbody>
         </table>
-        <Pagination
-          pageSizeOptions={[5, 10, 20, 50, 100]}
-          className="text-center"
-          pageSize={pageSize}
-          current={currentPage}
-          total={objectNumber}
-          onChange={(pageClicked, onPageSize) => {
-            setCurrentPage(pageClicked);
-            setPageSize(onPageSize);
+        <ConfigProvider
+          theme={{
+            token: {
+              colorPrimary: "#9596FB",
+              colorText: "#9596FB",
+              colorBgContainer: "#1f2937",
+              colorBgTextHover: "#374151",
+              colorTextPlaceholder: "#9596FB",
+              colorBorder: "#9596FB",
+              controlOutlineWidth: "0",
+            },
           }}
-          showSizeChanger
-        />
+        >
+          <Pagination
+            pageSizeOptions={[5, 10, 20, 50, 100]}
+            className="py-2 text-center"
+            pageSize={pageSize}
+            current={currentPage}
+            total={objectNumber}
+            onChange={(pageClicked, onPageSize) => {
+              setCurrentPage(pageClicked);
+              setPageSize(onPageSize);
+            }}
+            showSizeChanger
+          />
+        </ConfigProvider>
       </div>
     </div>
   );
 }
 
 DashTable.propTypes = {
-  videos: PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    category: PropTypes.string,
-    language: PropTypes.string,
-    status: PropTypes.string,
-  }).isRequired,
+  videos: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+      category: PropTypes.string,
+      language: PropTypes.string,
+      status: PropTypes.string,
+    })
+  ).isRequired,
 };

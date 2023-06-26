@@ -1,5 +1,8 @@
+// Packages
 import PropTypes from "prop-types";
-import DashTable from "../components/dashboard/DashTable";
+
+// Components
+import ManageContent from "../components/dashboard/ManageContent";
 import Dashboard from "../components/Dashboard";
 
 const videos = [
@@ -104,7 +107,7 @@ const videos = [
 export default function Admin({ edit }) {
   return (
     <div>
-      {edit && <DashTable videos={videos} />}
+      {edit && <ManageContent videos={videos} />}
       {!edit && <Dashboard videos={videos} />}
     </div>
   );
