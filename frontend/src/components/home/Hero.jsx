@@ -7,37 +7,24 @@ import { useState } from "react";
 // Components
 import Button from "../utilities/Button";
 
-const lienVersLaVideo = 3; // à changer, lien pour aller sur le http:// ... /videos/id:${lienVersLaVideo}
 const displayedLinks = [
   {
     id: 1,
     img: "./public/assets/img/picturesForHome/cs.jpg",
-    link: `/videos/id:${lienVersLaVideo}`,
+    link: "/videos/18",
     alt: "cs",
   },
   {
     id: 2,
     img: "./public/assets/img/picturesForHome/ow.jpg",
-    link: `/videos/id:${lienVersLaVideo}`,
+    link: "/videos/1",
     alt: "ow",
   },
   {
     id: 3,
     img: "./public/assets/img/picturesForHome/valo.jpg",
-    link: `/videos/id:${lienVersLaVideo}`,
+    link: "/videos/4",
     alt: "valo",
-  },
-  {
-    id: 4,
-    img: "",
-    link: `/videos/id:${lienVersLaVideo}`,
-    alt: "",
-  },
-  {
-    id: 5,
-    img: "",
-    link: `/videos/id:${lienVersLaVideo}`,
-    alt: "",
   },
 ];
 
@@ -47,6 +34,7 @@ export default function Hero() {
     autoplay: free,
     autoplaySpeed: 5000,
   };
+
   const links = displayedLinks.map((link) => {
     return (
       link?.img && (
@@ -63,8 +51,8 @@ export default function Hero() {
             alt={link.alt}
           />
           <NavLink to={link.link}>
-            <Button customCSS="btn-default absolute -translate-x-1/2 left-1/2 bottom-8 transform md:text-base md:font-extrabold group">
-              WATCH NOW
+            <Button customCSS="btn-default absolute -translate-x-1/2 left-1/2 bottom-8 transform md:text-base md:font-extrabold group uppercase">
+              Watch Now
               <BsArrowRight
                 strokeWidth="1"
                 className="text-base text-neutralLightest group-hover:text-primaryLight md:text-xl"
