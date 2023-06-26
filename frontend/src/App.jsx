@@ -1,5 +1,4 @@
 import { useMemo, useState } from "react";
-
 import { Routes, Route } from "react-router-dom";
 
 // Pages
@@ -12,7 +11,6 @@ import Connection from "./pages/Connection";
 import NotFound from "./pages/NotFound";
 import Admin from "./pages/Admin";
 import User from "./pages/User";
-
 
 // Layout
 import DashLayout from "./layout/DashLayout";
