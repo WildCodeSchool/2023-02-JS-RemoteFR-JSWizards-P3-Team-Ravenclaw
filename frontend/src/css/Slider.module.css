@@ -1,0 +1,361 @@
+/* ------------------------ COMMON ------------------------ */
+:root {
+  --card-width: 144px;
+  --card-width-desktop: 240px;
+  --card-height: 240px;
+  --card-scale: 0.95;
+}
+
+.slider {
+  display: flex;
+  overflow-x: scroll;
+  gap: 24px;
+
+  @media screen and (max-width: theme("screens.md")) {
+    padding-inline: 24px;
+  }
+
+  @media screen and (min-width: theme("screens.md")) {
+    gap: 16px;
+  }
+}
+
+.slider::-webkit-scrollbar {
+  display: none;
+}
+
+@media screen and (min-width: theme("screens.md")) {
+  .slider::-webkit-scrollbar {
+    display: block;
+    height: 0.8rem;
+  }
+
+  .slider::-webkit-scrollbar-thumb {
+    background: theme("backgroundImage.gradientPrimary");
+    border-radius: 100px;
+  }
+}
+
+.card {
+  position: relative;
+
+  width: var(--card-width);
+  height: var(--card-height);
+  display: flex;
+  align-items: flex-end;
+
+  @apply drop-shadow-[0px_5px_10px_rgba(0,0,0,0.3)];
+  border-radius: 8px;
+
+  cursor: pointer;
+  overflow: hidden;
+  transform: scale(1);
+  transition: all 0.3s ease;
+
+  @media screen and (min-width: theme("screens.md")) {
+    width: 184px;
+    height: 280px;
+  }
+}
+
+.card:hover {
+  border: 3px solid theme("colors.primaryLightest");
+  transform: scale(var(--card-scale));
+  @apply drop-shadow-[0px_10px_15px_rgba(0,0,0,0.3)];
+}
+
+/* ------------------------ HOME ------------------------ */
+.slider__game {
+  @media screen and (min-width: theme("screens.md")) {
+    padding-bottom: 12px;
+  }
+}
+
+.card__game h2 {
+  position: absolute;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  padding: 4px 16px;
+
+  @apply bg-neutralDarkest/50 backdrop-blur-sm;
+  color: theme("colors.neutralLightest");
+  font-family: theme("fontFamily.header");
+  font-size: theme("fontSize.sm");
+  font-weight: theme("fontWeight.extrabold");
+  text-align: center;
+  text-transform: capitalize;
+  white-space: nowrap;
+
+  transform: translateY(88%);
+  transition: all 0.3s ease;
+
+  @media screen and (min-width: theme("screens.md")) {
+    font-size: theme("fontSize.base");
+  }
+}
+
+.card__game:hover h2 {
+  transform: translate(0%);
+}
+
+.slider__video {
+  @media screen and (min-width: theme("screens.md")) {
+    display: grid;
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(var(--card-width-desktop), 1fr)
+    );
+    gap: 24px;
+    overflow-x: scroll;
+    font-size: theme("fontSize.base");
+  }
+}
+
+.card__video {
+  @media screen and (min-width: theme("screens.md")) {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+.card__overlay {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @apply bg-neutralDarkest/50 backdrop-blur-lg;
+}
+
+.overlay__wrapper {
+  padding: 6px 12px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  justify-items: center;
+
+  @apply bg-neutralDarkest/80;
+  border-radius: 8px;
+}
+
+.overlay__wrapper__grid {
+  @media screen and (min-width: theme("screens.md")) {
+    flex-direction: row;
+    padding: 12px 24px;
+    border-radius: 100px;
+  }
+}
+
+.overlay__wrapper__lock {
+  height: 16px;
+  width: auto;
+}
+
+.overlay__wrapper__description {
+  font-size: theme("fontSize.2xs");
+  font-family: theme("fontFamily.header");
+  font-weight: theme("fontWeight.extrabold");
+  text-transform: uppercase;
+
+  @media screen and (min-width: theme("screens.md")) {
+    font-size: theme("fontSize.sm");
+  }
+}
+
+.slider__video__title {
+  width: 100%;
+
+  display: -webkit-box;
+
+  line-clamp: 2;
+  overflow: hidden;
+  text-align: left;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.slider__partners {
+  padding-inline: 0;
+  @media screen and (min-width: 1080px) {
+    overflow-x: initial;
+    justify-content: space-between;
+  }
+}
+
+.card__partners {
+  @media screen and (min-width: 1080px) {
+    justify-content: space-between;
+  }
+}
+
+.card__partners__img {
+  max-height: 32px;
+  min-width: 192px;
+}
+
+/* ------------------------ PLANS ------------------------ */
+.slide__active {
+  background-color: none;
+  background: theme("backgroundImage.gradientPrimary");
+  color: theme("colors.neutralLightest");
+}
+
+.card__plan {
+  padding: 12px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  background-color: theme("colors.neutralLightest");
+  border: 1px solid theme("colors.primaryLightest");
+  border-radius: 10px;
+
+  color: theme("colors.neutralDark");
+  font-family: theme("fontFamily.sans");
+  font-size: theme("fontSize.xs");
+}
+
+.card__plan__wrapper__content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.card__plan__price {
+  color: theme("colors.primaryLight");
+  font-family: theme("fontFamily.header");
+  font-size: theme("fontSize.lg");
+  font-weight: theme("fontWeight.extrabold");
+}
+
+.card__plan__billing {
+  color: theme("colors.neutral");
+  font-size: theme("fontSize.sm");
+}
+
+.slide__active .card__plan__billing {
+  color: theme("colors.neutralLight");
+}
+
+.card__plan__name {
+  color: theme("colors.neutralDarkest");
+  font-family: theme("fontFamily.header");
+  font-size: theme("fontSize.sm");
+  font-weight: theme("fontWeight.extrabold");
+}
+
+.card__plan__perk {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.card__plan__description {
+  font-size: theme("fontSize.xs");
+}
+
+.card__plan__bullet {
+  width: 12px;
+}
+
+.slide__active .card__plan__price,
+.slide__active .card__plan__name,
+.slide__active .card__plan__description,
+.slide__active .card__plan__perk {
+  color: theme("colors.neutralLightest");
+}
+
+.card__plan__btn {
+  padding: 8px 16px;
+  gap: 10px;
+  border: 1px solid theme("colors.primaryLight");
+}
+
+.slide__active .card__plan__btn {
+  background: none;
+  background-color: theme("colors.neutralLightest");
+  color: theme("colors.primaryLight");
+}
+
+.slide__active .card__plan__btn:hover {
+  background-color: theme("colors.primaryLight");
+  border-color: theme("colors.neutralLightest");
+  color: theme("colors.neutralLightest");
+}
+
+/* ------------------------ ABOUT ------------------------ */
+.slider__about {
+  @media screen and (max-width: theme("screens.md")) {
+    padding-inline: 0px;
+  }
+
+  @media screen and (min-width: 1000px) {
+    overflow-x: inherit;
+    justify-content: space-between;
+  }
+}
+
+.card__about {
+  padding: 16px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  background-color: theme("colors.neutralDarkest");
+  border-radius: 8px;
+  @apply drop-shadow-[0px_5px_10px_rgba(0,0,0,0.3)];
+  cursor: default;
+  overflow: hidden;
+}
+
+.card__about p,
+.card__about span {
+  color: theme("colors.neutralLightest");
+}
+
+.card__about img {
+  @media screen and (min-width: theme("screens.md")) {
+    height: 56px;
+    width: auto;
+  }
+}
+
+.card__figure {
+  width: 136px;
+  height: 184px;
+
+  @media screen and (min-width: theme("screens.md")) {
+    width: 176px;
+    height: 216px;
+    gap: 30px;
+  }
+}
+
+.card__figure span {
+  font-weight: 900;
+  font-family: theme("fontFamily.header");
+  font-size: theme("fontSize.lg");
+  @media screen and (min-width: theme("screens.md")) {
+    font-size: theme("fontSize.xl");
+  }
+}
+
+.card__info {
+  width: 192px;
+  height: 104px;
+
+  @media screen and (min-width: theme("screens.md")) {
+    width: 248px;
+    height: 176px;
+    gap: 30px;
+  }
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "FPS"
+  },
+  {
+    "id": 2,
+    "name": "Action"
+  },
+  {
+    "id": 3,
+    "name": "MOBA"
+  },
+  {
+    "id": 4,
+    "name": "Racing"
+  },
+  {
+    "id": 5,
+    "name": "Table game"
+  },
+  {
+    "id": 6,
+    "name": "Sport"
+  }
+]

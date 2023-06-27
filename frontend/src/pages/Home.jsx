@@ -1,36 +1,33 @@
-import Counter from "../components/Counter";
-import logo from "../assets/logo.svg";
+// Style
+import styles from "../css/Slider.module.css";
+
+// Components
+import Hero from "../components/home/Hero";
+import SliderGame from "../components/home/SliderGame";
+import SliderVideo from "../components/utilities/SliderVideo";
+import Partners from "../components/home/Partners";
+import Footer from "../components/utilities/Footer";
 
 export default function Home() {
   return (
-    <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <p>Hello Vite + React !</p>
-
-      <Counter />
-
-      <p>
-        Edit <code>App.jsx</code> and save to test HMR updates.
-      </p>
-      <p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        {" | "}
-        <a
-          className="App-link"
-          href="https://vitejs.dev/guide/features.html"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Vite Docs
-        </a>
-      </p>
-    </header>
+    <>
+      <Hero />
+      <section className="home">
+        <article>
+          <h1>Games</h1>
+          <SliderGame />
+        </article>
+        <article>
+          <h1>Popular Videos</h1>
+          <SliderVideo
+            customClassSlider={styles.slider__video}
+            customClassCard={styles.card__video}
+            customClassOverlayWrapper={styles.overlay__wrapper__grid}
+          />
+        </article>
+      </section>
+      <Partners />
+      <Footer />
+    </>
   );
 }

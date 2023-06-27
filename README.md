@@ -1,44 +1,40 @@
-## Concept
+<!-- Header section -->
+<h1 align="center">Origins E-sport<img src="./frontend/public/assets/icon/logo.svg" width="30px" height="30px" alt="logo"></h1>
 
-This template is meant to serve as a foundation for every P2/P3 following the React-Express-MySQL stack, as learned in Wild Code School.
-It's pre-configured with a set of tools which'll help students produce industry-quality and easier-to-maintain code, while staying as simple as possible to use.
+### 🧰 Languages & Frameworks used :
 
-## Setup & Use
+<p>
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=html,css,js,nodejs,react,tailwind,mysql,express&theme=dark" />
+  </a>
+</p>
+</br>
+</br>
 
-### Project Initialization
+### 🖥️ Software & Tools used :
 
-- In VSCode, install plugins **Prettier - Code formatter** and **ESLint** and configure them
-- Clone this repo, enter it
-- If you are using `yarn` or `pnpm`, adapt the `config/cli` in `package.json`
-- Run command `npm install`
-- _NB: To launch the backend server, you'll need an environment file with database credentials. You'll find a template one in `backend/.env.sample`_
+<p>
+<img alt="Visual Studio Code" style="padding-right:0.5rem;" src="https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?logo=visual-studio-code&logoColor=white"/>
+<img alt="Git" style="padding-right:0.5rem;" src="https://img.shields.io/badge/Git-F05033.svg?logo=git&logoColor=white"/>
+<img alt="Bash" style="padding-right:0.5rem;" src="https://img.shields.io/badge/Bash-4EAA25.svg?logo=gnu-bash&logoColor=white"/>
+<img alt="GitHub Desktop" style="padding-right:0.5rem;" src="https://img.shields.io/badge/GitHub%20Desktop-8034A9.svg?logo=github&logoColor=white"/>
+<img alt="Clickup" src="https://img.shields.io/badge/Clickup-7B68EE.svg?logo=clickup&logoColor=white"/>
+<img alt="Figma" style="padding-right:0.5rem;" src="https://img.shields.io/badge/-Figma-F24E1E.svg?logo=figma&logoColor=white"/>
+<img alt="Discord" style="padding-right:0.5rem;" src="https://img.shields.io/badge/-Discord-5865F2.svg?logo=discord&logoColor=white"/>
+<img alt="Google suite" style="padding-right:0.5rem;" src="https://img.shields.io/badge/-Google Suite-yellow.svg?logo=meistertask&logoColor=white"/>
+</p>
+</br>
 
-### Available Commands
+#
 
-- `migrate` : Run the database migration script
-- `dev` : Starts both servers (frontend + backend) in one terminal
-- `dev-front` : Starts the React frontend server
-- `dev-back` : Starts the Express backend server
-- `lint` : Runs validation tools, and refuses unclean code (will be executed on every _commit_)
-- `fix` : Fixes linter errors (run it if `lint` growls on your code !)
+### 👨‍💻 Team of developers :
 
-## FAQ
+- Alexis Chesneau : https://github.com/AlexisChesneau
+- Denis Dezest: https://github.com/ddZ6ii
+- Hafsa Aït Ouarraou : https://github.com/hxfsa
+- Jeremy Dohin : https://github.com/Arkantik
+- Thibaut Resse : https://github.com/neolink78
 
-### Tools
+</br>
 
-- _Concurrently_ : Allows for several commands to run concurrently in the same CLI
-- _Husky_ : Allows to execute specific commands that trigger on _git_ events
-- _Vite_ : Alternative to _Create-React-App_, packaging less tools for a more fluid experience
-- _ESLint_ : "Quality of code" tool, ensures chosen rules will be enforced
-- _Prettier_ : "Quality of code" tool as well, focuses on the styleguide
-- _ Airbnb Standard_ : One of the most known "standards", even though it's not officially linked to ES/JS
-- _Nodemon_ : Allows to restart the server everytime a .js file is udated
-
-### Deployment
-
-For deployment, you have to go to `secrets` → app `actions` on the github repo to insert via `New repository secret` :
-
-- CAPROVER_BACK_APPNAME : name app on caprover
-- CAPROVER_FRONT_APPNAME : name app on caprover
-- CAPROVER_PASSWORD : password caprover
-- CAPROVER_SERVER : link of domain
+<em><strong>Note</strong>: This project has been created following the Project 3 of the Web & Mobile developer certification at WildCodeSchool.</em>

@@ -1,0 +1,22 @@
+.dashList {
+  text-decoration: none;
+}
+
+.dashList:active {
+  text-decoration: underline;
+}
+
+.dashList:focus {
+  text-decoration: underline;
+}
+
+.dashList:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.5rem;
+}
+
+@media screen and (min-width: 768px) {
+  .dashList:hover {
+    text-decoration: none;
+  }
+}

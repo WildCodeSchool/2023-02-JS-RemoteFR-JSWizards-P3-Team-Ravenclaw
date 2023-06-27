@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "name": "Apex",
+    "thumbnail": "../assets/img/games/Apex.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Call Of Duty",
+    "thumbnail": "../assets/img/games/CallOfDuty.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Chess",
+    "thumbnail": "../assets/img/games/Chess.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Counter Strike",
+    "thumbnail": "../assets/img/games/CounterStrike.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Dota",
+    "thumbnail": "../assets/img/games/Dota2.jpg"
+  },
+  {
+    "id": 6,
+    "name": "Fifa 23",
+    "thumbnail": "../assets/img/games/Fifa23.jpg"
+  },
+  {
+    "id": 7,
+    "name": "Fortnite",
+    "thumbnail": "../assets/img/games/Fortnite.jpg"
+  },
+  {
+    "id": 8,
+    "name": "Hearth Stone",
+    "thumbnail": "../assets/img/games/HearthStone.jpg"
+  },
+  {
+    "id": 9,
+    "name": "League Of Legend",
+    "thumbnail": "../assets/img/games/LeagueOfLegends.jpg"
+  },
+  {
+    "id": 10,
+    "name": "Madden 23",
+    "thumbnail": "../assets/img/games/Madden23.jpg"
+  },
+  {
+    "id": 11,
+    "name": "NBA 23",
+    "thumbnail": "../assets/img/games/NBA2K23.jpg"
+  },
+  {
+    "id": 12,
+    "name": "Overwatch 2",
+    "thumbnail": "../assets/img/games/Overwatch2.jpg"
+  },
+  {
+    "id": 13,
+    "name": "Rocket League",
+    "thumbnail": "../assets/img/games/RocketLeague.jpg"
+  },
+  {
+    "id": 14,
+    "name": "Starcraft 2",
+    "thumbnail": "../assets/img/games/StarCraft2.jpg"
+  },
+  {
+    "id": 15,
+    "name": "Street Fighter",
+    "thumbnail": "../assets/img/games/StreetFighter.jpg"
+  },
+  {
+    "id": 16,
+    "name": "Super Smash Bros",
+    "thumbnail": "../assets/img/games/SuperSmashBros.jpg"
+  },
+  {
+    "id": 17,
+    "name": "Tekken",
+    "thumbnail": "../assets/img/games/Tekken.jpg"
+  },
+  {
+    "id": 18,
+    "name": "Valorant",
+    "thumbnail": "../assets/img/games/Valorant.jpg"
+  }
+]
