@@ -9,7 +9,7 @@ import styles from "../../css/Slider.module.css";
 import Card from "./Card";
 
 // Data
-import videos from "../../data/videos.json";
+import videos from "../../data/video.json";
 
 export default function SliderVideo({
   customClassSlider,
@@ -37,7 +37,7 @@ export default function SliderVideo({
             <Card
               classCSS={`${styles.card} ${customClassCard} bg-cover`}
               styleCSS={{
-                backgroundImage: `url(${video.thumbnail_video})`,
+                backgroundImage: `url(${video.thumbnail})`,
               }}
             >
               {!video.visible && (

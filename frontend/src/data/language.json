@@ -1,30 +1,30 @@
 [
   {
     "id": 1,
-    "name": "English"
+    "name": "english"
   },
   {
     "id": 2,
-    "name": "French"
+    "name": "french"
   },
   {
     "id": 3,
-    "name": "Italian"
+    "name": "italian"
   },
   {
     "id": 4,
-    "name": "Korean"
+    "name": "korean"
   },
   {
     "id": 5,
-    "name": "German"
+    "name": "german"
   },
   {
     "id": 6,
-    "name": "Spanish"
+    "name": "spanish"
   },
   {
     "id": 7,
-    "name": "Chinese"
+    "name": "chinese"
   }
 ]
