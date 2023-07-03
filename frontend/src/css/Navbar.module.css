@@ -60,7 +60,7 @@
   gap: 16px;
 
   color: theme("colors.neutralLightest");
-  @apply bg-neutralDarkest/95 backdrop-blur;
+  @apply bg-neutralDarkest/[99%] backdrop-blur;
   font-family: theme("fontFamily.header");
   font-size: theme("fontSize.lg");
 

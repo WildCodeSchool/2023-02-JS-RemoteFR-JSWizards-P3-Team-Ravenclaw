@@ -12,6 +12,9 @@ import "react-toastify/dist/ReactToastify.css";
 // Components
 import Card from "../utilities/Card";
 
+// Helpers
+import capitalize from "../../helpers/capitalize";
+
 SwiperCore.use([EffectCoverflow, Pagination, Navigation]);
 
 export default function Caroussel({ plans, billing }) {
@@ -50,8 +53,8 @@ export default function Caroussel({ plans, billing }) {
         }}
         className="swiper__container"
       >
-        {plans.map(({ name, price, description, perks }) => (
-          <SwiperSlide key={name}>
+        {plans.map((plan) => (
+          <SwiperSlide key={plan.id}>
             {({ isActive }) => (
               <Card
                 classCSS={`${styles.card__plan} ${
@@ -61,35 +64,43 @@ export default function Caroussel({ plans, billing }) {
                 <div className={styles.card__plan__wrapper__content}>
                   <div>
                     <span className={styles.card__plan__price}>
-                      {billing.toLowerCase() === "monthly"
-                        ? price[0]
-                        : price[1]}
+                      {"$" +
+                        `${
+                          billing.toLowerCase() === "monthly"
+                            ? plan.price_monthly
+                            : plan.price_yearly
+                        }`}
                     </span>
                     <span className={styles.card__plan__billing}>
                       &nbsp;/{billing.toLowerCase()}
                     </span>
                   </div>
-                  <span className={styles.card__plan__name}>{name}</span>
+                  <span className={styles.card__plan__name}>
+                    {capitalize(plan.name)}
+                  </span>
                   <p className={styles.card__plan__description}>
-                    {description}
+                    {plan.description}
                   </p>
                   <ul>
-                    {perks.map((perk) => (
-                      <li key={perk} className={styles.card__plan__perk}>
-                        <img
-                          src="../assets/icon/utility/tick.svg"
-                          alt={perk}
-                          className={styles.card__plan__bullet}
-                        />
-                        <span>{perk}</span>
-                      </li>
-                    ))}
+                    {Object.keys(plan)
+                      .filter((el) => el.includes("perk"))
+                      .map((key) => plan[key])
+                      .map((perk) => (
+                        <li key={perk} className={styles.card__plan__perk}>
+                          <img
+                            src="../assets/icon/utility/tick.svg"
+                            alt={perk}
+                            className={styles.card__plan__bullet}
+                          />
+                          <span>{capitalize(perk)}</span>
+                        </li>
+                      ))}
                   </ul>
                 </div>
                 <button
                   type="button"
                   className={`btn-default ${styles.card__plan__btn}`}
-                  onClick={() => handleClick(name)}
+                  onClick={() => handleClick(capitalize(plan.name))}
                 >
                   Choose Plan
                 </button>
@@ -111,9 +122,13 @@ Caroussel.propTypes = {
   plans: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string,
-      price: PropTypes.arrayOf(PropTypes.string),
+      price_monthly: PropTypes.number,
+      price_yearly: PropTypes.number,
       description: PropTypes.string,
-      perks: PropTypes.arrayOf(PropTypes.string),
+      perk_1: PropTypes.string,
+      perk_2: PropTypes.string,
+      perk_3: PropTypes.string,
+      perk_4: PropTypes.string,
     })
   ).isRequired,
   billing: PropTypes.string.isRequired,

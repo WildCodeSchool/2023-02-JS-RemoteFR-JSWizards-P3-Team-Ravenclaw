@@ -1,26 +1,26 @@
 [
   {
     "id": 1,
-    "name": "FPS"
+    "name": "fps"
   },
   {
     "id": 2,
-    "name": "Action"
+    "name": "action"
   },
   {
     "id": 3,
-    "name": "MOBA"
+    "name": "moba"
   },
   {
     "id": 4,
-    "name": "Racing"
+    "name": "racing"
   },
   {
     "id": 5,
-    "name": "Table game"
+    "name": "table game"
   },
   {
     "id": 6,
-    "name": "Sport"
+    "name": "sport"
   }
 ]

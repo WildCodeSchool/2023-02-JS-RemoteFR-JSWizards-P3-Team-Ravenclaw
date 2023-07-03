@@ -13,37 +13,9 @@ import RowLanguage from "./language/RowLanguage";
 import RowGame from "./game/RowGame";
 
 // Data
-import games from "../../data/games.json";
-
-const languages = [
-  {
-    id: 1,
-    name: "English",
-  },
-  {
-    id: 2,
-    name: "French",
-  },
-  {
-    id: 3,
-    name: "German",
-  },
-];
-
-const categories = [
-  {
-    id: 1,
-    name: "MOBA",
-  },
-  {
-    id: 2,
-    name: "FPS",
-  },
-  {
-    id: 3,
-    name: "Racing",
-  },
-];
+import games from "../../data/game.json";
+import languages from "../../data/language.json";
+import categories from "../../data/category.json";
 
 export default function DashTable({ videos }) {
   const [activeTab, setActiveTab] = useState("video");

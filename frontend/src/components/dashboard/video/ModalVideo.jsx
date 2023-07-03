@@ -11,7 +11,7 @@ import Label from "../../utilities/Label";
 import Dropdown from "../../utilities/Dropdown";
 
 // Data
-import games from "../../../data/games.json";
+import games from "../../../data/game.json";
 
 export default function ModalVideo({ open, onOk, onCancel, onClick }) {
   const language = [

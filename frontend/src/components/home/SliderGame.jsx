@@ -5,7 +5,7 @@ import styles from "../../css/Slider.module.css";
 import Card from "../utilities/Card";
 
 // Data
-import games from "../../data/games.json";
+import games from "../../data/game.json";
 
 export default function SliderGame() {
   return (
