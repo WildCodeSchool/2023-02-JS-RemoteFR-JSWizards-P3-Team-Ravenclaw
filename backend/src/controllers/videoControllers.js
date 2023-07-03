@@ -1,27 +1,22 @@
 const models = require("../models");
+const handleVideoQuery = require("../services/handleVideoQuery");
 
-const getAll = (req, res) => {
-  models.video
-    .findAll()
-    .then(([rows]) => {
-      res.send(rows);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
-};
-
-const browse = async (req, res) => {
-  const { game } = req.query;
+const getAll = async (req, res) => {
   try {
-    const [filteredVideos] = await models.video.filterVideosByGame(game);
+    // destructure only if the client request contains a query
+    const [sql, sqlDependencies] = handleVideoQuery(req.query);
 
-    res.status(200).json(filteredVideos);
+    const [videos] = await models.video.filterVideosByGame(
+      sql,
+      sqlDependencies
+    );
+    res.json(videos);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal server error" });
+    res
+      .status(500)
+      .send("oops...an error occured when retrieving videos from database");
   }
 };
 
-module.exports = { getAll, browse };
+module.exports = { getAll };
