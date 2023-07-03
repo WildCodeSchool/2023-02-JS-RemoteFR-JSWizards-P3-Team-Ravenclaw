@@ -8,7 +8,7 @@ import Label from "../components/utilities/Label";
 import Button from "../components/utilities/Button";
 
 // Data
-import videos from "../data/videos.json";
+import videos from "../data/video.json";
 
 export default function VideoPlayer() {
   const [data, setData] = useState({});

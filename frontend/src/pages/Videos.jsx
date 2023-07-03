@@ -13,14 +13,14 @@ import SliderVideo from "../components/utilities/SliderVideo";
 import Footer from "../components/utilities/Footer";
 
 // Data
-import videosData from "../data/videos.json";
+import videos from "../data/video.json";
 
 export default function Videos() {
   const [displayCount, setDisplayCount] = useState(10);
   const [totalElements, setTotalElements] = useState(0);
 
   const fetchTotalElements = () => {
-    const totalCount = videosData.length;
+    const totalCount = videos.length;
     setTotalElements(totalCount);
   };
 

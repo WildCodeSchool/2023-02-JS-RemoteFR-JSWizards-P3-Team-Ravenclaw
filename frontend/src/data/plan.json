@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "name": "starter",
+    "price_monthly": 9,
+    "price_yearly": 99,
+    "description": "unleash the power of on-demand video",
+    "perk_1": "limited to 1 user",
+    "perk_2": "no ads interruption",
+    "perk_3": "high quality video",
+    "perk_4": "cancel anytime"
+  },
+  {
+    "id": 2,
+    "name": "standard",
+    "price_monthly": 14,
+    "price_yearly": 159,
+    "description": "Best deal for amateurs of e-sport",
+    "perk_1": "up to 3 users",
+    "perk_2": "multi-devices",
+    "perk_3": "high quality video",
+    "perk_4": "cancel anytime"
+  },
+  {
+    "id": 3,
+    "name": "premium",
+    "price_monthly": 19,
+    "price_yearly": 219,
+    "description": "For the real fans of e-sport",
+    "perk_1": "up to 5 users",
+    "perk_2": "multi-devices",
+    "perk_3": "premium quality video",
+    "perk_4": "cancel anytime"
+  }
+]
