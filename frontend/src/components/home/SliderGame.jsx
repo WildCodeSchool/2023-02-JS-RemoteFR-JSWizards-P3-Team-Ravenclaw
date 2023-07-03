@@ -18,15 +18,15 @@ export default function SliderGame() {
   useEffect(() => {
     axios
       .get("/videos")
-      .then((response) => setVideos(response.data))
-      .catch((error) => console.error("Error fetching video data:", error));
+      .then((res) => setVideos(res.data))
+      .catch((err) => console.error("Error fetching video data:", err));
   }, []);
 
   return (
     <ul className={`${styles.slider} ${styles.slider__game}`}>
       {videos.map((game) => (
         <li key={game.id}>
-          <Link to={`/videos/browse?game=${game.name.toLowerCase()}`}>
+          <Link to={`/videos?game=${game.name.toLowerCase()}`}>
             <Card
               classCSS={`${styles.card} ${styles.card__game} bg-cover`}
               styleCSS={{
