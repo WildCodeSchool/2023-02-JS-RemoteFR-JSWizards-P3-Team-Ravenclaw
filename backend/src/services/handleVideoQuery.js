@@ -6,16 +6,27 @@
  */
 
 function handleVideoQuery(query) {
-  // if (!Object.keys(query).length) return;
-
-  let sql = `SELECT v.*, g.name AS game_name FROM video AS v INNER JOIN game AS g ON v.game_id = g.id`;
+  // let sql = `SELECT v.*, g.name AS game_name FROM video AS v INNER JOIN game AS g ON v.game_id = g.id`;
+  // let sql = `SELECT * FROM video`;
+  let sql = `SELECT v.*`;
   const sqlInitialValues = [];
 
   // check for query strings (filters)
   if (query.name) {
+    sql +=
+      ", g.name AS game_name FROM video AS v INNER JOIN game AS g ON v.game_id = g.id";
     sqlInitialValues.push({
       field: "name",
       value: query.name,
+      operator: "=",
+    });
+  }
+
+  if (query.isPromoted) {
+    sql += " FROM video AS v";
+    sqlInitialValues.push({
+      field: "is_promoted",
+      value: query.isPromoted,
       operator: "=",
     });
   }
