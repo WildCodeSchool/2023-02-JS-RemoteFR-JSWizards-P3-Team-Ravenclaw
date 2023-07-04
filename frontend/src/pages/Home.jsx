@@ -13,7 +13,7 @@ import SliderGame from "../components/home/SliderGame";
 // import SliderVideo from "../components/utilities/SliderVideo";
 import Partners from "../components/home/Partners";
 import Footer from "../components/utilities/Footer";
-import LoaderFullPage from "../components/utilities/LoaderFullPage";
+import Loader from "../components/utilities/Loader";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -36,7 +36,7 @@ export default function Home() {
   return (
     <>
       {isLoading ? (
-        <LoaderFullPage />
+        <Loader />
       ) : (
         <>
           <Hero />
