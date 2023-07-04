@@ -1,4 +1,4 @@
-export default function LoaderFullPage() {
+export default function Loader() {
   return (
     <div
       role="status"
