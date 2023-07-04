@@ -23,7 +23,12 @@ CREATE TABLE `video` (
   `status` VARCHAR(255) NOT NULL,
   `thumbnail` VARCHAR(255) NOT NULL,
   `url_video` VARCHAR(255) NOT NULL,
-  `is_promoted` TINYINT(1) NULL,
+  `is_promoted` TINYINT DEFAULT 0,
+	-- 'visibility' controls which user (not connected, connected with plan...) can access the videos
+  -- 0: all users
+  -- 1: connected w/o plan
+  -- 2: connected with plan
+  `visibility` TINYINT DEFAULT 0,
 	`game_id` INT NOT NULL,
   CONSTRAINT fk_video_game FOREIGN KEY (`game_id`) REFERENCES `game`(`id`),
 	`language_id` INT NOT NULL,
@@ -150,10 +155,10 @@ VALUES
 INSERT INTO `video` (`title`, `upload_date`, `description`, `slug`, `status`, `thumbnail`, `url_video`, `is_promoted`, `game_id`, `language_id`) 
 VALUES 
 ('LIP WITH A SPICY SYMMETRA 💥 | OWL TOP 5', '2023-06-26' , '', '', 'offline', './assets/videos/overwatch.png', 'https://www.youtube.com/watch?v=tF2ss2mU-Yc', '1', '12' , '1'),
-('Mull it Over - Ping Mage - Masters Tour: Maw and Disorder', '2023-06-26', '' , '', 'offline', './assets/videos/hearthstone1.png', 'https://www.youtube.com/watch?v=pIT4uWcfy54', '0', '8' , '1'),
-('PSG LGD vs ASTER - BEST DPC CHINA TEAM! - DPC 2023 CN SUMMER TOUR 3 Dota 2 Highlights', '2023-06-26' , '', '', 'offline', './assets/videos/dota.png', 'https://www.youtube.com/watch?v=aG15JM07Dt4', '0', '5' , '1'),
-('TSM vs Disguised Highlights | Challengers League: North America 2023', '2023-06-26' , '', '', 'offline', './assets/videos/valorant2.png', 'https://www.youtube.com/watch?v=PiOfqf6RFPk', '0', '18' , '1'),
-('LOUD vs FURIA All Maps | Valorant Champions Tour 2023: Americas League', '2023-06-26' , '', '', 'offline', './assets/videos/valorant1.png', 'https://www.youtube.com/watch?v=acs0y78XG7s', '0', '18' , '1'),
+('Mull it Over - Ping Mage - Masters Tour: Maw and Disorder', '2023-06-26', '' , '', 'offline', './assets/videos/hearthstone1.png', 'https://www.youtube.com/watch?v=pIT4uWcfy54', '1', '8' , '1'),
+('PSG LGD vs ASTER - BEST DPC CHINA TEAM! - DPC 2023 CN SUMMER TOUR 3 Dota 2 Highlights', '2023-06-26' , '', '', 'offline', './assets/videos/dota.png', 'https://www.youtube.com/watch?v=aG15JM07Dt4', '1', '5' , '1'),
+('TSM vs Disguised Highlights | Challengers League: North America 2023', '2023-06-26' , '', '', 'offline', './assets/videos/valorant2.png', 'https://www.youtube.com/watch?v=PiOfqf6RFPk', '1', '18' , '1'),
+('LOUD vs FURIA All Maps | Valorant Champions Tour 2023: Americas League', '2023-06-26' , '', '', 'offline', './assets/videos/valorant1.png', 'https://www.youtube.com/watch?v=acs0y78XG7s', '1', '18' , '1'),
 ('ASTER vs 9 PANDAS - SUMAIL vs RAMZSES666 - DREAMLEAGUE 2023 S20 Dota 2 Highlights', '2023-06-26' , '', '', 'offline', './assets/videos/astervspandas.png', 'https://www.youtube.com/watch?v=NrQcIBzBSTk', '0', '5' , '1'),
 ('Dota2 - Gladiators vs Team Aster - Game 2 - DreamLeague Season 20 - Group B', '2023-06-26' , '', '', 'offline', './assets/videos/gladiatorsvsaster.png', 'https://www.youtube.com/watch?v=9qAs3EaZzQ0', '0', '5' , '1'),
 ('Master Moments Ep. 2 | FIFA 22 Ft. DUX Gravesen', '2023-06-26' , '', '', 'offline', './assets/videos/fifa.png', 'https://www.youtube.com/watch?v=yjaBoDvWe_Y', '0', '6', '1'),
