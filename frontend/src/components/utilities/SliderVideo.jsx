@@ -8,10 +8,8 @@ import styles from "../../css/Slider.module.css";
 // Components
 import Card from "./Card";
 
-// Data
-import videos from "../../data/video.json";
-
 export default function SliderVideo({
+  videos,
   customClassSlider,
   customClassCard,
   customClassOverlayWrapper,
@@ -67,6 +65,20 @@ export default function SliderVideo({
 }
 
 SliderVideo.propTypes = {
+  videos: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      title: PropTypes.string,
+      upload_date: PropTypes.string,
+      description: PropTypes.string,
+      slug: PropTypes.string,
+      status: PropTypes.string,
+      thumbnail: PropTypes.string,
+      url_video: PropTypes.string,
+      game_id: PropTypes.number,
+      language_id: PropTypes.number,
+    })
+  ),
   customClassSlider: PropTypes.string,
   customClassCard: PropTypes.string,
   customClassOverlayWrapper: PropTypes.string,
@@ -75,6 +87,7 @@ SliderVideo.propTypes = {
 };
 
 SliderVideo.defaultProps = {
+  videos: null,
   customClassSlider: "",
   customClassCard: "",
   customClassOverlayWrapper: "",
