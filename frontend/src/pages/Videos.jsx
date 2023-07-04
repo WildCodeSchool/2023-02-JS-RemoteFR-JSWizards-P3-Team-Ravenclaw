@@ -15,7 +15,7 @@ import Searchbar from "../components/utilities/Searchbar";
 import Label from "../components/utilities/Label";
 import SliderVideo from "../components/utilities/SliderVideo";
 import Footer from "../components/utilities/Footer";
-import LoaderFullPage from "../components/utilities/LoaderFullPage";
+import Loader from "../components/utilities/Loader";
 
 export default function Videos() {
   // retrieve query parameters from URL
@@ -60,7 +60,7 @@ export default function Videos() {
   return (
     <>
       {isLoading ? (
-        <LoaderFullPage />
+        <Loader />
       ) : (
         <section className="home">
           <div className="flex flex-wrap gap-4 px-6 pt-12 md:flex-nowrap md:px-0">
