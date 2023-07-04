@@ -12,10 +12,10 @@ function handleVideoQuery(query) {
   const sqlInitialValues = [];
 
   // check for query strings (filters)
-  if (query.game) {
+  if (query.name) {
     sqlInitialValues.push({
       field: "name",
-      value: query.game,
+      value: query.name,
       operator: "=",
     });
   }

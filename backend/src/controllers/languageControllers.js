@@ -8,7 +8,7 @@ const getAll = async (req, res) => {
     console.error(error);
     res
       .status(500)
-      .send("oops...an error occured when retrieving language from database");
+      .send("oops...an error occured when retrieving languages from database");
   }
 };
 
