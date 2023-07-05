@@ -1,5 +1,4 @@
 const argon2 = require("argon2");
-
 const models = require("../models");
 
 /**
@@ -9,7 +8,7 @@ const models = require("../models");
 const verifyEmail = async (req, res, next) => {
   try {
     if (!Object.keys(req.body).length)
-      return res.status(400).send("bad request! empty body...");
+      return res.status(400).send("Bad request. Body cannot be empty...");
 
     const [[user]] = await models.user.findByEmail(req.body.email);
 
@@ -32,29 +31,26 @@ const verifyEmail = async (req, res, next) => {
 };
 
 /**
- * @desc middleware to check user password at authentication (POST login route)
+ * @desc middleware to verify user password at authentication (POST login route)
  * check user redentials are valid, and if so proceed to the next handler
  */
 const verifyPassword = async (req, res, next) => {
-  console.log(req.user.password);
-  console.log(req.body.password);
-
   try {
     const isUserVerified = await argon2.verify(
       req.user.password,
       req.body.password
     );
 
-    console.log(isUserVerified);
-
-    if (isUserVerified) next();
     // authentication failded (password did not match)
-    res
-      .status(401)
-      .send("Your email and password do not match. Please try again.");
+    if (!isUserVerified)
+      return res
+        .status(401)
+        .send("Your email and password do not match. Please try again.");
+
+    return next();
   } catch (err) {
     console.error(err);
-    res
+    return res
       .status(500)
       .send("oops...an error occured during user's password verification...");
   }
@@ -66,7 +62,7 @@ const verifyPassword = async (req, res, next) => {
 const checkForExistingAccount = async (req, res, next) => {
   try {
     if (!Object.keys(req.body).length)
-      return res.status(400).send("bad request! empty body...");
+      return res.status(400).send("Bad request. Body cannot be empty...");
 
     const [[user]] = await models.user.findByEmail(req.body.email);
     if (user) {

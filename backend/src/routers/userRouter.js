@@ -3,6 +3,7 @@ const express = require("express");
 const userController = require("../controllers/userController");
 const validateUserInfo = require("../middlewares/validators/userValidator");
 const {
+  verifyEmail,
   checkForExistingAccount,
   hashPassword,
 } = require("../middlewares/authMiddleware");
@@ -21,14 +22,13 @@ router.post(
   hashPassword,
   userController.create
 );
-router.put("/:id", userController.editById);
-// router.put(
-//   "/:id",
-//   validateUserInfo,
-//   checkForExistingAccount,
-//   hashPassword,
-//   userController.editById
-// );
+router.put(
+  "/:id",
+  validateUserInfo,
+  verifyEmail,
+  hashPassword,
+  userController.editById
+);
 router.delete("/:id", userController.remove);
 
 module.exports = router;

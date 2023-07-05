@@ -8,9 +8,10 @@ const {
 
 const router = express.Router();
 
+/**
+ * TODO: register route...
+ * TODO: logout route...
+ */
 router.post("/login", verifyEmail, verifyPassword, authController.login);
-
-// logout
-// register
 
 module.exports = router;
