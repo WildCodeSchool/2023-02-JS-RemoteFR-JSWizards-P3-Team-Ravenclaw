@@ -6,10 +6,13 @@
  */
 
 function handleVideoQuery(query) {
-  // let sql = `SELECT v.*, g.name AS game_name FROM video AS v INNER JOIN game AS g ON v.game_id = g.id`;
-  // let sql = `SELECT * FROM video`;
   let sql = `SELECT v.*`;
   const sqlInitialValues = [];
+
+  if (!Object.keys(query).length) {
+    sql += " FROM video AS v";
+    return [sql, sqlInitialValues];
+  }
 
   // check for query strings (filters)
   if (query.name) {
@@ -41,7 +44,6 @@ function handleVideoQuery(query) {
   // format sql query array of dependencies
   const sqlDependencies = sqlInitialValues.map(({ value }) => value);
 
-  // eslint-disable-next-line consistent-return
   return [sql, sqlDependencies];
 }
 

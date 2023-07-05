@@ -1,5 +1,4 @@
--- SQLBook: Code
---  _____________________________________________ CREATE TABLES _____________________________________________  
+-- _____________________________________________ CREATE TABLES _____________________________________________
 DROP TABLE IF EXISTS `language`;
 CREATE TABLE `language` (
   `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -23,12 +22,12 @@ CREATE TABLE `video` (
   `status` VARCHAR(255) NOT NULL,
   `thumbnail` VARCHAR(255) NOT NULL,
   `url_video` VARCHAR(255) NOT NULL,
-  `is_promoted` TINYINT DEFAULT 0,
+  `is_promoted` TINYINT UNSIGNED DEFAULT 0,
 	-- 'visibility' controls which user (not connected, connected with plan...) can access the videos
   -- 0: all users
   -- 1: connected w/o plan
   -- 2: connected with plan
-  `visibility` TINYINT DEFAULT 0,
+  `visibility` TINYINT UNSIGNED DEFAULT 0,
 	`game_id` INT NOT NULL,
   CONSTRAINT fk_video_game FOREIGN KEY (`game_id`) REFERENCES `game`(`id`),
 	`language_id` INT NOT NULL,
@@ -44,7 +43,10 @@ CREATE TABLE `category` (
 DROP TABLE IF EXISTS `user_type`;
 CREATE TABLE `user_type` (
   `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `role` VARCHAR(50) NOT NULL
+	-- 'role' controls user privileges
+  -- 0: common user
+  -- 1: admin
+  `is_admin` TINYINT NOT NULL DEFAULT 0
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 DROP TABLE IF EXISTS `plan`;
@@ -79,7 +81,7 @@ CREATE TABLE `user_video` (
   CONSTRAINT fk_user_video FOREIGN KEY (`user_id`) REFERENCES `user`(`id`),
 	`video_id` INT NULL,
   CONSTRAINT fk_video_user FOREIGN KEY (`video_id`) REFERENCES `video`(`id`),
-  `is_favorite` BOOL NULL
+  `is_favorite` TINYINT UNSIGNED DEFAULT 0
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 DROP TABLE IF EXISTS `video_category`;
@@ -90,16 +92,12 @@ CREATE TABLE `video_category` (
   CONSTRAINT fk_category_video FOREIGN KEY (`category_id`) REFERENCES `category`(`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
---  _____________________________________________ POPULAR TABLES _____________________________________________  
--- Create roles
-INSERT INTO `user_type` (`role`) 
+-- _____________________________________________ POPULATE TABLES _____________________________________________
+-- Create user types
+INSERT INTO `user_type` (`is_admin`) 
 VALUES
-('admin'),
-('user');
-
--- Create admin
-INSERT INTO `user` (`email`, `password`, `pseudo`, `user_type_id`) 
-VALUES ('admin@gmail.com', 'admin', 'admin', 1);
+(0),
+(1);
 
 -- Create categories
 INSERT INTO `category` (`name`) 
@@ -150,6 +148,13 @@ VALUES
 ('starter', 9, 99, 'Unleash the power of on-demand video', 'Limited to 1 user', 'No ads interruption', 'High quality video', 'Cancel anytime'),
 ('standard', 14, 159, 'Best deal for amateurs of e-sport', 'Up to 3 users', 'Multi-devices', 'High quality video', 'Cancel anytime'),
 ('premium', 19, 219, 'For the real fans of e-sport', 'Up to 5 users', 'Multi-devices', 'Premium quality video', 'Cancel anytime');
+
+-- Create users
+INSERT INTO `user` (`email`, `password`, `pseudo`, `plan_id`, `user_type_id`) 
+VALUES
+('user_freemium@gmail.com', 'freemium', 'user', 1, 1),
+('user_premium@gmail.com', 'premium', 'user', 3, 1),
+('admin@gmail.com', 'admin', 'admin', NULL ,2);
 
 -- Create video
 INSERT INTO `video` (`title`, `upload_date`, `description`, `slug`, `status`, `thumbnail`, `url_video`, `is_promoted`, `game_id`, `language_id`) 

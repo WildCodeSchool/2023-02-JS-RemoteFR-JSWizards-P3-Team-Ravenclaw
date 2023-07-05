@@ -1,22 +1,38 @@
 const models = require("../models");
 const handleVideoQuery = require("../services/handleVideoQuery");
 
-const getAll = async (req, res) => {
+const getAllWiltFilters = async (req, res) => {
   try {
-    // destructure only if the client request contains a query
+    // handle query filters from client request (if any)
     const [sql, sqlDependencies] = handleVideoQuery(req.query);
 
-    const [videos] = await models.video.filterVideosByGame(
+    const [videos] = await models.video.findAllWithFilters(
       sql,
       sqlDependencies
     );
-    res.json(videos);
-  } catch (error) {
-    console.error(error);
-    res
+
+    if (!videos.length)
+      return res.status(404).send("no result matched the requested filter!");
+    return res.json(videos);
+  } catch (err) {
+    console.error(err);
+    return res
       .status(500)
       .send("oops...an error occured when retrieving videos from database");
   }
 };
 
-module.exports = { getAll };
+const getById = async (req, res) => {
+  try {
+    const [[video]] = await models.video.find(req.params.id);
+    if (!video) res.status(404).send("video not found...");
+    res.json(video);
+  } catch (err) {
+    console.error(err);
+    res
+      .status(500)
+      .send("oops...an error occured when retrieving video from database");
+  }
+};
+
+module.exports = { getAllWiltFilters, getById };

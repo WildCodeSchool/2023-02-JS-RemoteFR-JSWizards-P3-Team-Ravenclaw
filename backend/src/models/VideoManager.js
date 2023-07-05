@@ -5,7 +5,7 @@ class VideoManager extends AbstractManager {
     super({ table: "video" });
   }
 
-  filterVideosByGame(sql, sqlDependencies) {
+  findAllWithFilters(sql, sqlDependencies) {
     return this.database.query(sql, [sqlDependencies]);
   }
 }
