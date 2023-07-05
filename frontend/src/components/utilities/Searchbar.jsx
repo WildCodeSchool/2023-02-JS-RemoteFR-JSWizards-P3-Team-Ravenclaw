@@ -6,7 +6,7 @@ export default function Searchbar({ className }) {
   const [videoSearch, setVideoSearch] = useState("");
 
   return (
-    <div className={className}>
+    <form className={className}>
       <div className="absolute inset-y-0 left-0 flex items-center pl-3">
         <svg
           aria-hidden="true"
@@ -29,7 +29,7 @@ export default function Searchbar({ className }) {
         value={videoSearch}
         onChange={(e) => setVideoSearch(e.target.value)}
       />
-    </div>
+    </form>
   );
 }
 
