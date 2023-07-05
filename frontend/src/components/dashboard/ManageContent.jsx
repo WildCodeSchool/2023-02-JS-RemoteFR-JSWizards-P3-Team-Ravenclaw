@@ -41,7 +41,7 @@ export default function DashTable({ videos }) {
   }, [activeTab]);
 
   return (
-    <div className="relative mx-auto max-w-screen-xl px-4 sm:p-5 lg:px-12">
+    <div className="w-screen max-w-[calc(100vw-320px)] px-[100px]">
       <h1>Manage Content</h1>
       <div className="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
         <NavTab setActiveTabItem={setActiveTabItem} />
