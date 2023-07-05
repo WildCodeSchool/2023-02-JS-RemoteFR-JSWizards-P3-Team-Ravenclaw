@@ -10,24 +10,23 @@ import Label from "../../utilities/Label";
 // Data
 import language from "../../../data/language.json";
 import category from "../../../data/category.json";
+import game from "../../../data/game.json";
 
 export default function VideoDropdown() {
   return (
     <tr className="border-b dark:border-neutral">
       <td colSpan="6" className="gap-4 space-y-4 px-8 py-4">
         <form className="flex flex-col gap-4">
-          <div className="flex gap-4">
+          <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-4">
-              <div className="flex gap-4">
-                <div className="flex flex-col gap-1.5">
-                  <Input
-                    htmlFor="title"
-                    title="Video Name"
-                    type="text"
-                    className={`${styles.input__style}`}
-                    placeholder="Type video name"
-                  />
-                </div>
+              <div className="flex flex-wrap gap-4">
+                <Input
+                  htmlFor="title"
+                  title="Video Name"
+                  type="text"
+                  className={`${styles.input__style}`}
+                  placeholder="Type video name"
+                />
                 <div className="flex flex-col gap-1.5">
                   <Label
                     htmlFor="language"
@@ -44,29 +43,36 @@ export default function VideoDropdown() {
                   />
                   <Dropdown title="Select Game Category" items={category} />
                 </div>
-              </div>
-
-              <div className="flex w-full gap-4">
-                <div className="flex w-full flex-col gap-1.5">
-                  <Input
-                    htmlFor="seo"
-                    title="SEO"
-                    type="text"
-                    className={`${styles.input__style}`}
-                    placeholder="Type seo tags"
+                <div className="flex flex-col gap-1.5">
+                  <Label
+                    htmlFor="game"
+                    className={`${styles.label__style}`}
+                    title="Game"
                   />
+                  <Dropdown title="Select Game" items={game} />
                 </div>
-                <div className="flex min-w-fit flex-col gap-1.5">
-                  <Input
-                    htmlFor="premium-video"
-                    title="Premium"
-                    type="checkbox"
-                    className="m-3.5 flex h-full items-center justify-center "
-                  />
-                </div>
+                <Input
+                  htmlFor="premium-video"
+                  title="Premium"
+                  type="checkbox"
+                  className="m-3.5 flex items-center justify-center "
+                />
+                <Input
+                  htmlFor="promoted-video"
+                  title="Promoted"
+                  type="checkbox"
+                  className="m-3.5 flex items-center justify-center "
+                />
               </div>
             </div>
-            <div className="flex w-full flex-col gap-1.5">
+            <Input
+              htmlFor="seo"
+              title="SEO"
+              type="text"
+              className={`${styles.input__style}`}
+              placeholder="Type seo tags"
+            />
+            <div className="flex flex-col gap-1.5">
               <Label
                 htmlFor="description"
                 className={`${styles.label__style}`}
@@ -74,20 +80,20 @@ export default function VideoDropdown() {
               />
               <textarea
                 type="text"
-                className={`${styles.input__style} h-full w-full`}
+                className={`${styles.input__style}`}
                 placeholder="Type video description"
               />
             </div>
           </div>
 
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4">
             <div className="flex flex-col gap-1.5">
               <Label
                 htmlFor="status"
                 className={`${styles.label__style}`}
                 title="Status"
               />
-              <div className="flex h-full gap-4">
+              <div className="flex h-full gap-2">
                 <Button
                   customCSS={`${styles.btn__style} bg-successLight text-success `}
                 >
@@ -105,21 +111,19 @@ export default function VideoDropdown() {
                 </Button>
               </div>
             </div>
-            <div className="flex gap-4">
-              <Input
-                title="Video Upload"
-                type="file"
-                accept="video/*"
-                className="file:hover:primaryLightest file:cursor-pointer file:rounded-md file:border-none file:bg-primary file:p-3 file:text-neutralLightest"
-              />
-              <Input
-                title="Image Upload"
-                type="file"
-                accept="image/*"
-                className="file:hover:primaryLightest file:cursor-pointer file:rounded-md file:border-none file:bg-primary file:p-3 file:text-neutralLightest"
-              />
-            </div>
-            <span className="flex w-full items-end justify-center">
+            <Input
+              title="Video Upload"
+              type="file"
+              accept="video/*"
+              className="file:hover:primaryLightest file:cursor-pointer file:rounded-md file:border-none file:bg-primary file:p-3 file:text-neutralLightest"
+            />
+            <Input
+              title="Image Upload"
+              type="file"
+              accept="image/*"
+              className="file:hover:primaryLightest file:cursor-pointer file:rounded-md file:border-none file:bg-primary file:p-3 file:text-neutralLightest"
+            />
+            <span className="flex items-end">
               <Button
                 type="submit"
                 customCSS={`${styles.btn__style} bg-primaryLight text-neutralLightest h-12`}
