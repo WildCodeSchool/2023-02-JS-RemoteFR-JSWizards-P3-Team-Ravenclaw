@@ -66,7 +66,7 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(150) NOT NULL,
-  `password` VARCHAR(150) NOT NULL,
+  `password` VARCHAR(255) NOT NULL,
   `pseudo` VARCHAR(150) NOT NULL,
   `plan_id` INT NULL,
   CONSTRAINT fk_user_plan FOREIGN KEY (`plan_id`) REFERENCES `plan`(`id`),
@@ -152,9 +152,9 @@ VALUES
 -- Create users
 INSERT INTO `user` (`email`, `password`, `pseudo`, `plan_id`, `user_type_id`) 
 VALUES
-('user_freemium@gmail.com', 'freemium', 'user', 1, 1),
-('user_premium@gmail.com', 'premium', 'user', 3, 1),
-('admin@gmail.com', 'admin', 'admin', NULL ,2);
+('user_freemium@gmail.com', '$argon2id$v=19$m=19893.36898592844,t=2,p=1$y/F65lSZ40xAVxes2YWvPw$4GTu0y5B2DnzDWVe93u/ai5vI5+9yU8yoB2tNKQC678', 'user_freemium', 1, 1),
+('user_premium@gmail.com', '$argon2id$v=19$m=19893.36898592844,t=2,p=1$yqlfBNhiugXAFJy6wVY17Q$l7x0JTBsOjLch9YzWSGPwRtlO7w+ZC/SybDqtOk+2VQ', 'user_premium', 3, 1),
+('admin@gmail.com', '$argon2id$v=19$m=19893.36898592844,t=2,p=1$RzN1/toefZqgTmUm3YSIDA$PevcNEmCjdb63rOjUtrhoCcdTQRwsHHCrZNNaT3yq48', 'admin', null, 2);
 
 -- Create video
 INSERT INTO `video` (`title`, `upload_date`, `description`, `slug`, `status`, `thumbnail`, `url_video`, `is_promoted`, `game_id`, `language_id`) 
