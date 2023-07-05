@@ -1,3 +1,9 @@
+// Package
+import { useState, useEffect } from "react";
+
+// Hooks
+import useAxios from "../hooks/useAxios";
+
 // Style
 import styles from "../css/Slider.module.css";
 
@@ -7,26 +13,59 @@ import SliderGame from "../components/home/SliderGame";
 import SliderVideo from "../components/utilities/SliderVideo";
 import Partners from "../components/home/Partners";
 import Footer from "../components/utilities/Footer";
+import Loader from "../components/utilities/Loader";
 
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  const baseUrl = import.meta.env.VITE_BACKEND_URL;
+
+  // fetch data fron databse using custom hook
+  const { data: games, isLoading: isGameLoading } = useAxios(
+    `${baseUrl}/games`
+  );
+  const { data: promotedVideos, isLoading: isPromotedLoading } = useAxios(
+    `${baseUrl}/videos?isPromoted=1`
+  );
+
+  useEffect(() => {
+    if (!isGameLoading && !isPromotedLoading) setIsLoading(false);
+  }, []);
+
   return (
     <>
-      <Hero />
-      <section className="home">
-        <article>
-          <h1>Games</h1>
-          <SliderGame />
-        </article>
-        <article>
-          <h1>Popular Videos</h1>
-          <SliderVideo
-            customClassSlider={styles.slider__video}
-            customClassCard={styles.card__video}
-            customClassOverlayWrapper={styles.overlay__wrapper__grid}
-          />
-        </article>
-      </section>
-      <Partners />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <Hero />
+          <section className="home">
+            <article>
+              <h1>Games</h1>
+              <SliderGame games={games} />
+            </article>
+            <article>
+              <h1>Promoted Videos</h1>
+              <SliderVideo
+                customClassSlider={styles.slider__video}
+                customClassCard={styles.card__video}
+                customClassOverlayWrapper={styles.overlay__wrapper__grid}
+                videos={promotedVideos}
+              />
+            </article>
+            <article>
+              <h1>Popular Videos</h1>
+              {/* <SliderVideo
+                customClassSlider={styles.slider__video}
+                customClassCard={styles.card__video}
+                customClassOverlayWrapper={styles.overlay__wrapper__grid}
+                videos={popularVideos}
+              /> */}
+            </article>
+          </section>
+          <Partners />
+        </>
+      )}
       <Footer />
     </>
   );

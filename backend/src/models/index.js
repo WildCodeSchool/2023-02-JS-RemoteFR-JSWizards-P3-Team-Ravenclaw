@@ -26,13 +26,20 @@ pool.getConnection().catch(() => {
 });
 
 // declare and fill models: that's where you should register your own managers
-
 const models = {};
 
-const ItemManager = require("./ItemManager");
+const VideoManager = require("./VideoManager");
+const LanguageManager = require("./LanguageManager");
+const GameManager = require("./GameManager");
 
-models.item = new ItemManager();
-models.item.setDatabase(pool);
+models.video = new VideoManager();
+models.video.setDatabase(pool);
+
+models.language = new LanguageManager();
+models.language.setDatabase(pool);
+
+models.game = new GameManager();
+models.game.setDatabase(pool);
 
 // bonus: use a proxy to personalize error message,
 // when asking for a non existing model
