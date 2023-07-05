@@ -44,7 +44,6 @@ function handleVideoQuery(query) {
   // format sql query array of dependencies
   const sqlDependencies = sqlInitialValues.map(({ value }) => value);
 
-  // eslint-disable-next-line consistent-return
   return [sql, sqlDependencies];
 }
 
