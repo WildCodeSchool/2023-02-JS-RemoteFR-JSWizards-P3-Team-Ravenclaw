@@ -10,10 +10,13 @@ const getAllWiltFilters = async (req, res) => {
       sql,
       sqlDependencies
     );
-    res.json(videos);
+
+    if (!videos.length)
+      return res.status(404).send("no result matched the requested filter!");
+    return res.json(videos);
   } catch (err) {
     console.error(err);
-    res
+    return res
       .status(500)
       .send("oops...an error occured when retrieving videos from database");
   }
@@ -22,7 +25,7 @@ const getAllWiltFilters = async (req, res) => {
 const getById = async (req, res) => {
   try {
     const [[video]] = await models.video.find(req.params.id);
-    if (!video) return res.status(404).send("video not found...");
+    if (!video) res.status(404).send("video not found...");
     res.json(video);
   } catch (err) {
     console.error(err);
