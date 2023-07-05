@@ -1,9 +1,9 @@
 const express = require("express");
 
-const languageControllers = require("../controllers/languageControllers");
+const languageController = require("../controllers/languageController");
 
 const router = express.Router();
 
-router.get("/", languageControllers.getAll);
+router.get("/", languageController.getAll);
 
 module.exports = router;
