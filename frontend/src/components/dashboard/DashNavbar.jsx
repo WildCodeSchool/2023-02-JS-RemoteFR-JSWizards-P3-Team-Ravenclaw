@@ -34,7 +34,7 @@ export default function DashNavbar() {
 
   return (
     <aside className="hidden md:flex md:flex-col ">
-      <nav className="relative min-h-screen w-11/12 bg-neutralDarkest p-5 pt-8 text-xl font-medium duration-300 md:w-72">
+      <nav className="relative h-full min-h-[calc(100vh-80px)] w-11/12 bg-neutralDarkest p-5 pt-8 text-xl font-medium duration-300 md:w-72">
         <ul className="pt-6">
           {Menus.map((menu) => {
             return (
