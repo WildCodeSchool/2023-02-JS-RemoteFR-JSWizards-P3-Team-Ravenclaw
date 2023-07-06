@@ -41,9 +41,9 @@ export default function DashTable({ videos }) {
   }, [activeTab]);
 
   return (
-    <div className="w-screen max-w-[calc(100vw-320px)] px-[100px]">
+    <div className="flex w-screen max-w-[calc(100vw-320px)] flex-col gap-8 px-[100px] py-8">
       <h1>Manage Content</h1>
-      <div className="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
+      <div className="relative min-w-[600px] overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
         <NavTab setActiveTabItem={setActiveTabItem} />
         <RowSearch activeTab={activeTab} />
         <table className="w-full overflow-x-auto text-left text-base text-neutralDarkest dark:text-neutralLightest">
