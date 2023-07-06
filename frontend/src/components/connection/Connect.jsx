@@ -21,7 +21,7 @@ export default function Connect() {
   };
 
   return (
-    <div className="relative flex min-h-[700px] w-[678px] max-w-full flex-col overflow-hidden bg-neutralLightest shadow-lg dark:bg-primaryDark md:min-h-[400px] md:rounded-lg">
+    <div className="relative flex min-h-[700px] w-[678px] max-w-full flex-col overflow-hidden bg-neutralLightest shadow-md shadow-primaryLight dark:bg-primaryDark md:min-h-[400px] md:rounded-lg">
       <div
         className={`signin-container ${
           signIn !== true
