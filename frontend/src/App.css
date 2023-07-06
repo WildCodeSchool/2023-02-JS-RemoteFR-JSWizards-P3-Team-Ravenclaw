@@ -9,14 +9,14 @@
   font-family: "Gilroy";
   font-weight: 800;
   src: local("Gilroy-ExtraBold"),
-    url(".public/assets/font/Gilroy-ExtraBold.otf") format("opentype");
+    url("./public/assets/font/Gilroy-ExtraBold.otf") format("opentype");
 }
 
 @font-face {
   font-family: "Gilroy";
   font-weight: 300;
   src: local("Gilroy-Light"),
-    url(".public/assets/font/Gilroy-Light.otf") format("opentype");
+    url("./public/assets/font/Gilroy-Light.otf") format("opentype");
 }
 
 /* ______________________________________________________________________ *\
