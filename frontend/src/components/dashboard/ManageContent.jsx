@@ -13,37 +13,9 @@ import RowLanguage from "./language/RowLanguage";
 import RowGame from "./game/RowGame";
 
 // Data
-import games from "../../data/games.json";
-
-const languages = [
-  {
-    id: 1,
-    name: "English",
-  },
-  {
-    id: 2,
-    name: "French",
-  },
-  {
-    id: 3,
-    name: "German",
-  },
-];
-
-const categories = [
-  {
-    id: 1,
-    name: "MOBA",
-  },
-  {
-    id: 2,
-    name: "FPS",
-  },
-  {
-    id: 3,
-    name: "Racing",
-  },
-];
+import games from "../../data/game.json";
+import languages from "../../data/language.json";
+import categories from "../../data/category.json";
 
 export default function DashTable({ videos }) {
   const [activeTab, setActiveTab] = useState("video");
@@ -69,9 +41,9 @@ export default function DashTable({ videos }) {
   }, [activeTab]);
 
   return (
-    <div className="relative mx-auto max-w-screen-xl px-4 sm:p-5 lg:px-12">
+    <div className="flex w-screen max-w-[calc(100vw-320px)] flex-col gap-8 px-[100px] py-8">
       <h1>Manage Content</h1>
-      <div className="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
+      <div className="relative min-w-[600px] overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
         <NavTab setActiveTabItem={setActiveTabItem} />
         <RowSearch activeTab={activeTab} />
         <table className="w-full overflow-x-auto text-left text-base text-neutralDarkest dark:text-neutralLightest">

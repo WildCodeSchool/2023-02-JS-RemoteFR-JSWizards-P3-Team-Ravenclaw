@@ -7,7 +7,7 @@ import Caroussel from "../components/plans/Caroussel";
 import Footer from "../components/utilities/Footer";
 
 // Data
-import plans from "../data/plans.json";
+import plans from "../data/plan.json";
 
 export default function Pricing() {
   const [currentBilling, setCurrentBilling] = useState("Monthly");

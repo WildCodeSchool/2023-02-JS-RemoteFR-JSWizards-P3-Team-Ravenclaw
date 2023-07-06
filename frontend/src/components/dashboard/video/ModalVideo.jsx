@@ -11,27 +11,11 @@ import Label from "../../utilities/Label";
 import Dropdown from "../../utilities/Dropdown";
 
 // Data
-import games from "../../../data/games.json";
+import games from "../../../data/game.json";
+import language from "../../../data/language.json";
+import category from "../../../data/category.json";
 
 export default function ModalVideo({ open, onOk, onCancel, onClick }) {
-  const language = [
-    { id: 1, name: "English" },
-    { id: 2, name: "French" },
-    { id: 3, name: "Italian" },
-    { id: 4, name: "Korean" },
-    { id: 5, name: "German" },
-    { id: 6, name: "Spanish" },
-  ];
-
-  const category = [
-    { id: 1, name: "FPS" },
-    { id: 2, name: "Action" },
-    { id: 3, name: "MOBA" },
-    { id: 4, name: "Racing" },
-    { id: 5, name: "Table game" },
-    { id: 6, name: "Sport" },
-  ];
-
   return (
     <Modal
       centered
@@ -60,28 +44,35 @@ export default function ModalVideo({ open, onOk, onCancel, onClick }) {
     >
       <form>
         <div className="flex flex-col gap-4">
+          <Input
+            htmlFor="title"
+            title="Video Name"
+            type="text"
+            className={`${styles.input__style}`}
+            placeholder="Type video name"
+            required
+          />
           <div className="flex flex-wrap justify-between gap-y-4 md:flex-nowrap">
-            <Input
-              htmlFor="title"
-              title="Video Name"
-              type="text"
-              className={`${styles.input__style}`}
-              placeholder="Type video name"
-            />
-            <Input
-              htmlFor="premium-video"
-              className="m-3.5"
-              title="Premium"
-              type="checkbox"
-            />
             <div className="flex flex-col gap-1.5">
               <Label
                 htmlFor="game"
                 className={`${styles.label__style}`}
                 title="Game"
               />
-              <Dropdown title="Select game" items={games} />
+              <Dropdown title="Select game" items={games} required />
             </div>
+            <Input
+              htmlFor="premium-video"
+              className="m-3.5"
+              title="Premium"
+              type="checkbox"
+            />
+            <Input
+              htmlFor="promoted-video"
+              className="m-3.5"
+              title="Promoted"
+              type="checkbox"
+            />
           </div>
           <div className="flex flex-wrap justify-between gap-4 md:flex-nowrap">
             <div className="flex flex-col gap-1.5">
@@ -90,7 +81,7 @@ export default function ModalVideo({ open, onOk, onCancel, onClick }) {
                 className={`${styles.label__style}`}
                 title="Language"
               />
-              <Dropdown title="Select Language" items={language} />
+              <Dropdown title="Select Language" items={language} required />
             </div>
             <div className="flex flex-col gap-1.5">
               <Label
@@ -98,7 +89,11 @@ export default function ModalVideo({ open, onOk, onCancel, onClick }) {
                 className={`${styles.label__style}`}
                 title="Category"
               />
-              <Dropdown title="Select Game Category" items={category} />
+              <Dropdown
+                title="Select Game Category"
+                items={category}
+                required
+              />
             </div>
           </div>
           <div className="flex w-full flex-col gap-1.5">
@@ -120,6 +115,7 @@ export default function ModalVideo({ open, onOk, onCancel, onClick }) {
               type="file"
               accept="video/*"
               className="file:hover:primaryLightest file:cursor-pointer file:rounded-md file:border-none file:bg-primary file:p-3 file:text-neutralLightest"
+              required
             />
             <Input
               title="Image Upload"
