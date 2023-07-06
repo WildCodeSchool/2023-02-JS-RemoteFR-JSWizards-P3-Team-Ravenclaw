@@ -88,7 +88,7 @@ export default function RowSearch({ activeTab }) {
     <div className="flex flex-col items-center justify-between space-y-3 p-4 md:flex-row md:space-x-4 md:space-y-0">
       <div className="w-full md:w-1/2">
         <div className="flex items-center gap-4">
-          <Searchbar className="relative w-full" />
+          <Searchbar className="relative w-full min-w-[200px]" />
           {activeTab === "video" && <Dropdown title="Search filters" />}
         </div>
       </div>
