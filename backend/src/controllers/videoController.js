@@ -5,14 +5,16 @@ const getAllWiltFilters = async (req, res) => {
   try {
     // handle query filters from client request (if any)
     const [sql, sqlDependencies] = handleVideoQuery(req.query);
-
     const [videos] = await models.video.findAllWithFilters(
       sql,
       sqlDependencies
     );
-
     if (!videos.length)
-      return res.status(404).send("no result matched the requested filter!");
+      return res
+        .status(404)
+        .send(
+          "No result matched the requested filter. Please check your query and try again"
+        );
     return res.json(videos);
   } catch (err) {
     console.error(err);
@@ -25,7 +27,7 @@ const getAllWiltFilters = async (req, res) => {
 const getById = async (req, res) => {
   try {
     const [[video]] = await models.video.find(req.params.id);
-    if (!video) res.status(404).send("video not found...");
+    if (!video) res.status(404).send("Video not found");
     res.json(video);
   } catch (err) {
     console.error(err);

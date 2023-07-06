@@ -6,14 +6,14 @@ class ItemManager extends AbstractManager {
   }
 
   insert(item) {
-    return this.database.query(`insert into ${this.table} (title) values (?)`, [
+    return this.database.query(`INSERT INTO ${this.table} (title) VALUES (?)`, [
       item.title,
     ]);
   }
 
   update(item) {
     return this.database.query(
-      `update ${this.table} set title = ? where id = ?`,
+      `UPDATE ${this.table} SET title = ? WHERE id = ?`,
       [item.title, item.id]
     );
   }
