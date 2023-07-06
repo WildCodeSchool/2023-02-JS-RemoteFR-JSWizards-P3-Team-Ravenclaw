@@ -5,9 +5,6 @@ import { NavLink } from "react-router-dom";
 // Style
 import styles from "../../css/Navbar.module.css";
 
-// Components
-import Notification from "./Notification";
-
 export default function NavBarDesktop({ navitems }) {
   return (
     <nav className={`${styles.navbar} ${styles.navbarDesktop}`}>
@@ -43,10 +40,6 @@ export default function NavBarDesktop({ navitems }) {
               </NavLink>
             </li>
           ))}
-          {/* navbuttons */}
-          <li className={`${styles.inline__list} ${styles.navbar__btn}`}>
-            <Notification onClick={() => null} />
-          </li>
         </ul>
       </div>
     </nav>
