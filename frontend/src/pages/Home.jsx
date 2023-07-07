@@ -18,17 +18,13 @@ import Loader from "../components/utilities/Loader";
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
 
-  const baseUrl = import.meta.env.VITE_BACKEND_URL;
-
   // fetch data fron databse using custom hook
-  const { data: games, isLoading: isGameLoading } = useAxios(
-    `${baseUrl}/games`
-  );
+  const { data: games, isLoading: isGameLoading } = useAxios("/games");
   const { data: promotedVideos, isLoading: isPromotedLoading } = useAxios(
-    `${baseUrl}/videos?isPromoted=1`
+    "/videos?isPromoted=1"
   );
   const { data: popularVideos, isLoading: isPopularLoading } = useAxios(
-    `${baseUrl}/videos?isPopular=1&treshold=1`
+    "/videos?isPopular=1&treshold=1"
   );
 
   useEffect(() => {
