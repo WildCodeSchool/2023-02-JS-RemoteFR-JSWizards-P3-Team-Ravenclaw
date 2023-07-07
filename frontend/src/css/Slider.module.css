@@ -59,7 +59,7 @@
 
 .card__game:hover {
   transform: scale(var(--card-scale));
-} 
+}
 
 /* ------------------------ HOME ------------------------ */
 .slider__game {
@@ -155,6 +155,10 @@
     overflow-x: initial;
     justify-content: space-between;
   }
+}
+
+.slider__partners::-webkit-scrollbar {
+  display: none;
 }
 
 .card__partners {
