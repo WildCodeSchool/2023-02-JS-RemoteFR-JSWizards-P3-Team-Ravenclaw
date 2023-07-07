@@ -1,4 +1,5 @@
 // Package
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
@@ -17,21 +18,18 @@ import Player from "../components/video/Player";
 import Label from "../components/utilities/Label";
 import Button from "../components/utilities/Button";
 
-// Data
-import videos from "../data/video.json";
-
 export default function VideoPlayer() {
   const [data, setData] = useState({});
   const [isToggled, setIsToggled] = useState(false);
   const { id } = useParams();
 
-  const shareUrl = "https://www.google.com/"; // to be modified with dynamic url of the video
+  const shareUrl = `http://localhost:5000/videos/${id}`;
 
   useEffect(() => {
-    const filteredVideo = videos.filter((video) => {
-      return video.id === parseInt(id, 10);
+    axios.get(shareUrl).then((res) => {
+      const fetchedData = res.data;
+      setData(fetchedData);
     });
-    setData(filteredVideo[0]);
   }, []);
 
   return (
