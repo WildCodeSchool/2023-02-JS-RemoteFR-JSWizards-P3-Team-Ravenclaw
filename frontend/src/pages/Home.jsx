@@ -59,7 +59,7 @@ export default function Home() {
                 customClassSlider={styles.slider__video}
                 customClassCard={styles.card__video}
                 customClassOverlayWrapper={styles.overlay__wrapper__grid}
-                // videos={popularVideos}
+                videos={promotedVideos}
               />
             </article>
           </section>
