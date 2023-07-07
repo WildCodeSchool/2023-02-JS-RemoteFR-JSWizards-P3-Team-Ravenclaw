@@ -13,11 +13,6 @@ export default function DashNavbar() {
     { title: "Manage Content", id: 2, path: "edit" },
     { title: "Favorites Videos", id: 3 },
     { title: "Users", id: 4 },
-    { title: "Support", id: 5 },
-    { title: "Contact Messages", id: 6 },
-    { title: "Messages", id: 7 },
-    { title: "Tickets", id: 8 },
-    { title: "Bug Report", id: 9 },
     { title: "Log Out", id: 10 },
   ];
   const { setLoggedIn } = useContext(LoginContext);
@@ -33,7 +28,7 @@ export default function DashNavbar() {
   };
 
   return (
-    <aside className="hidden md:flex md:flex-col ">
+    <aside className="hidden md:flex md:flex-col">
       <nav className="relative h-full min-h-[calc(100vh-80px)] w-11/12 bg-neutralDarkest p-5 pt-8 text-xl font-medium duration-300 md:w-72">
         <ul className="pt-6">
           {Menus.map((menu) => {

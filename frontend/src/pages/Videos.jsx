@@ -27,10 +27,8 @@ export default function Videos() {
   // const [displayCount, setDisplayCount] = useState(10);
   // const [totalElements, setTotalElements] = useState(0);
 
-  const baseUrl = import.meta.env.VITE_BACKEND_URL;
-
   const { data: premiumVideos, isLoading: isPremiumLoading } = useAxios(
-    `${baseUrl}/videos?name=${gameName}`
+    `/videos?name=${gameName}`
   );
 
   // const { data: freemiumVideos, isFreemiumLoading } = useAxios(

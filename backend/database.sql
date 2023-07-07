@@ -66,7 +66,7 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(150) NOT NULL,
-  `password` VARCHAR(150) NOT NULL,
+  `password` VARCHAR(255) NOT NULL,
   `pseudo` VARCHAR(150) NOT NULL,
   `plan_id` INT NULL,
   CONSTRAINT fk_user_plan FOREIGN KEY (`plan_id`) REFERENCES `plan`(`id`),
@@ -152,27 +152,62 @@ VALUES
 -- Create users
 INSERT INTO `user` (`email`, `password`, `pseudo`, `plan_id`, `user_type_id`) 
 VALUES
-('user_freemium@gmail.com', 'freemium', 'user', 1, 1),
-('user_premium@gmail.com', 'premium', 'user', 3, 1),
-('admin@gmail.com', 'admin', 'admin', NULL ,2);
+('user_freemium@gmail.com', '$argon2id$v=19$m=19893.36898592844,t=2,p=1$y/F65lSZ40xAVxes2YWvPw$4GTu0y5B2DnzDWVe93u/ai5vI5+9yU8yoB2tNKQC678', 'user_freemium', 1, 1),
+('user_premium@gmail.com', '$argon2id$v=19$m=19893.36898592844,t=2,p=1$yqlfBNhiugXAFJy6wVY17Q$l7x0JTBsOjLch9YzWSGPwRtlO7w+ZC/SybDqtOk+2VQ', 'user_premium', 3, 1),
+('admin@gmail.com', '$argon2id$v=19$m=19893.36898592844,t=2,p=1$RzN1/toefZqgTmUm3YSIDA$PevcNEmCjdb63rOjUtrhoCcdTQRwsHHCrZNNaT3yq48', 'admin', null, 2);
 
 -- Create video
-INSERT INTO `video` (`title`, `upload_date`, `description`, `slug`, `status`, `thumbnail`, `url_video`, `is_promoted`, `game_id`, `language_id`) 
+INSERT INTO `video` (`title`, `upload_date`, `description`, `slug`, `status`, `thumbnail`, `url_video`, `is_promoted`, `visibility`, `game_id`, `language_id`) 
 VALUES 
-('LIP WITH A SPICY SYMMETRA 💥 | OWL TOP 5', '2023-06-26' , '', '', 'offline', './assets/videos/overwatch.png', 'https://www.youtube.com/watch?v=tF2ss2mU-Yc', '1', '12' , '1'),
-('Mull it Over - Ping Mage - Masters Tour: Maw and Disorder', '2023-06-26', '' , '', 'offline', './assets/videos/hearthstone1.png', 'https://www.youtube.com/watch?v=pIT4uWcfy54', '1', '8' , '1'),
-('PSG LGD vs ASTER - BEST DPC CHINA TEAM! - DPC 2023 CN SUMMER TOUR 3 Dota 2 Highlights', '2023-06-26' , '', '', 'offline', './assets/videos/dota.png', 'https://www.youtube.com/watch?v=aG15JM07Dt4', '1', '5' , '1'),
-('TSM vs Disguised Highlights | Challengers League: North America 2023', '2023-06-26' , '', '', 'offline', './assets/videos/valorant2.png', 'https://www.youtube.com/watch?v=PiOfqf6RFPk', '1', '18' , '1'),
-('LOUD vs FURIA All Maps | Valorant Champions Tour 2023: Americas League', '2023-06-26' , '', '', 'offline', './assets/videos/valorant1.png', 'https://www.youtube.com/watch?v=acs0y78XG7s', '1', '18' , '1'),
-('ASTER vs 9 PANDAS - SUMAIL vs RAMZSES666 - DREAMLEAGUE 2023 S20 Dota 2 Highlights', '2023-06-26' , '', '', 'offline', './assets/videos/astervspandas.png', 'https://www.youtube.com/watch?v=NrQcIBzBSTk', '0', '5' , '1'),
-('Dota2 - Gladiators vs Team Aster - Game 2 - DreamLeague Season 20 - Group B', '2023-06-26' , '', '', 'offline', './assets/videos/gladiatorsvsaster.png', 'https://www.youtube.com/watch?v=9qAs3EaZzQ0', '0', '5' , '1'),
-('Master Moments Ep. 2 | FIFA 22 Ft. DUX Gravesen', '2023-06-26' , '', '', 'offline', './assets/videos/fifa.png', 'https://www.youtube.com/watch?v=yjaBoDvWe_Y', '0', '6', '1'),
-('😨 IL DÉCOUVRE 2 NOUVELLES ROTAS COMPLÈTEMENT FOLLES ?!! 😱 | BEST OF FORTNITE #15', '2023-06-26' , '', '', 'offline', './assets/videos/fortnite.png', 'https://www.youtube.com/watch?v=Gw3lMBveOHA', '0', '7' , '1'),
-('Raptors Uprising GC vs Knicks Gaming - 5v5 Full Highlights | THE TIPOFF | May 30, 2023', '2023-06-26' , '', '', 'offline', './assets/videos/nba.png', 'https://www.youtube.com/watch?v=prCd0aZeTmA', '0', '11' , '1'),
-('14 Top Madden Plays of 2022! | MCS | Madden 23', '2023-06-26' , '', '', 'offline', './assets/videos/madden.png', 'https://www.youtube.com/watch?v=E3XrsWwuxxE', '0', '10' , '1'),
-('Top 10 Plays | EU Spring Cup', '2023-06-26' , '', '', 'offline', './assets/videos/rocketleague.png', 'https://www.youtube.com/watch?v=_HXFCrf0xbg', '0','13' , '1'),
-('Manon (Damascus) vs Blanka (Tyrant) - Street Fighter 6 Gameplay', '2023-06-26' , '', '', 'offline', './assets/videos/streetfighter.png', 'https://www.youtube.com/watch?v=MRxTHkJd0u8', '0', '15' , '1'),
-('DRX Knee (Steve/Feng) vs GOBACK Chand NY (Leo) - 2023 TWT Masters - BAM 13 2023: Winners Semifinals', '2023-06-26' , '', '', 'offline', './assets/videos/tekken.png', 'https://www.youtube.com/watch?v=7mWWqyXvMiQ','0', '17' , '1'),
-('Show Me Your Moose Losers Semis - DannyDVito (Young Link) Vs. Big Stew (Kazuya) Smash Ultimate - SSB', '2023-06-26' , '', '', 'offline', './assets/videos/smash.png', 'https://www.youtube.com/watch?v=fb7GtosBk9M', '0', '16' , '1'),
-('Simp And Abezy Ace BACK TO BACK 💥 | Best of the Week - Major V Week 2', '2023-06-26' , '', '', 'offline', './assets/videos/cod.png', 'https://www.youtube.com/watch?v=HCFPBZLt-pg', '0', '2' , '1'),
-('NA Regional CHAMPIONS! ALGS Winners’ POV | DarkZero | Year 3 Split 2 | Apex Legends', '2023-06-26' , '', '', 'offline', './assets/videos/apex.png', 'https://www.youtube.com/watch?v=yfoJtqE5b-s', '0', '1' , '1');
+('LIP WITH A SPICY SYMMETRA 💥 | OWL TOP 5', '2023-06-26' , 'Welcome to Top 5 Plays, where were highlighting the five craziest plays each week of the #OWL2023 season! Which one holds your #1 spot? Let us know in the comments!', '', 'offline', './assets/videos/overwatch.png', 'https://www.youtube.com/watch?v=tF2ss2mU-Yc', 1, 0, 12, 1),
+('Mull it Over - Ping Mage - Masters Tour: Maw and Disorder', '2023-06-26', 'Subscribe!' , '', 'offline', './assets/videos/hearthstone1.png', 'https://www.youtube.com/watch?v=pIT4uWcfy54', 1, 1, 8, 1),
+('PSG LGD vs ASTER - BEST DPC CHINA TEAM! - DPC 2023 CN SUMMER TOUR 3 Dota 2 Highlights', '2023-06-26' , 'DOTA 2 PSG LGD vs ASTER - BEST DPC CHINA TEAM! - DOTA 2 DPC 2023 CHINA SUMMER TOUR 3 DPC Dota 2 Highlights 2023 Tournament - Week 3 DPC CN Division 1', '', 'offline', './assets/videos/dota.png', 'https://www.youtube.com/watch?v=aG15JM07Dt4', 1, 0, 5, 1),
+('TSM vs Disguised Highlights | Challengers League: North America 2023', '2023-06-26' , 'Subscribe for More Professional Valorant Content , Road to 200k Subscribers.', '', 'offline', './assets/videos/valorant2.png', 'https://www.youtube.com/watch?v=PiOfqf6RFPk', 1, 1, 18, 1),
+('LOUD vs FURIA All Maps | Valorant Champions Tour 2023: Americas League', '2023-06-26' , 'Subscribe for More Professional Valorant Content , Road to 200k Subscribers.', '', 'offline', './assets/videos/valorant1.png', 'https://www.youtube.com/watch?v=acs0y78XG7s', 1, 0, 18, 1),
+('ASTER vs 9 PANDAS - SUMAIL vs RAMZSES666 - DREAMLEAGUE 2023 S20 Dota 2 Highlights', '2023-06-26' , 'DOTA 2 ASTER vs 9 PANDAS - SUMAIL vs RAMZSES666 - DREAMLEAGUE SEASON 20 2023 Dota 2 Highlights Tournament 2023 - Group Stage 1 Group B Bo2 #dota2', '', 'offline', './assets/videos/astervspandas.png', 'https://www.youtube.com/watch?v=NrQcIBzBSTk', 0, 1, 5, 1),
+('Dota2 - Gladiators vs Team Aster - Game 2 - DreamLeague Season 20 - Group B', '2023-06-26' , 'All about the DreamLeague Season 20', '', 'offline', './assets/videos/gladiatorsvsaster.png', 'https://www.youtube.com/watch?v=9qAs3EaZzQ0', 0, 0, 5, 1),
+('Master Moments Ep. 2 | FIFA 22 Ft. DUX Gravesen', '2023-06-26' , 'Watch Gravesen take a trip down memory lane to revisit some of his best FIFA 22 eSports moments.', '', 'offline', './assets/videos/fifa.png', 'https://www.youtube.com/watch?v=yjaBoDvWe_Y', 0, 1, 6, 1),
+('😨 IL DÉCOUVRE 2 NOUVELLES ROTAS COMPLÈTEMENT FOLLES ?!! 😱 | BEST OF FORTNITE #15', '2023-06-26' , '😨 IL DÉCOUVRE 2 NOUVELLES ROTAS COMPLÈTEMENT BROKEN ?!! 😱 | BEST OF FORTNITE #15', '', 'offline', './assets/videos/fortnite.png', 'https://www.youtube.com/watch?v=Gw3lMBveOHA', 0, 0, 7, 1),
+('Raptors Uprising GC vs Knicks Gaming - 5v5 Full Highlights | THE TIPOFF | May 30, 2023', '2023-06-26' , 'The 2023 Season is here live from D.C.!', '', 'offline', './assets/videos/nba.png', 'https://www.youtube.com/watch?v=prCd0aZeTmA', 0, 1, 11, 1),
+('14 Top Madden Plays of 2022! | MCS | Madden 23', '2023-06-26' , 'Here are the top plays from the past year. Which play do you think is the crème de la crème of 2022!? ', '', 'offline', './assets/videos/madden.png', 'https://www.youtube.com/watch?v=E3XrsWwuxxE', 0, 0, 10, 1),
+('Top 10 Plays | EU Spring Cup', '2023-06-26' , 'The RLCS European Spring Cup was on fire with tons of top-notch goals and incredible team plays, but which of them stood out among the crowd? Watch now and find out!', '', 'offline', './assets/videos/rocketleague.png', 'https://www.youtube.com/watch?v=_HXFCrf0xbg', 0, 1, 13, 1),
+('Manon (Damascus) vs Blanka (Tyrant) - Street Fighter 6 Gameplay', '2023-06-26' , 'We had some quick FT1s before our session was up, so enjoy these battles between Reversal team mates!', '', 'offline', './assets/videos/streetfighter.png', 'https://www.youtube.com/watch?v=MRxTHkJd0u8', 0, 0, 15, 1),
+('DRX Knee (Steve/Feng) vs GOBACK Chand NY (Leo) - 2023 TWT Masters - BAM 13 2023: Winners Semifinals', '2023-06-26' , 'Follow us!', '', 'offline', './assets/videos/tekken.png', 'https://www.youtube.com/watch?v=7mWWqyXvMiQ',0, 1, 17, 1),
+('Show Me Your Moose Losers Semis - DannyDVito (Young Link) Vs. Big Stew (Kazuya) Smash Ultimate - SSB', '2023-06-26' , 'Show Me Your Moose is a Super Smash Bros Ultimate Tournament in Wasilla, Arkansas.', '', 'offline', './assets/videos/smash.png', 'https://www.youtube.com/watch?v=fb7GtosBk9M', 0, 0, 16, 1),
+('Simp And Abezy Ace BACK TO BACK 💥 | Best of the Week - Major V Week 2', '2023-06-26' , 'Check out the best plays from Week 2 of the Major V Qualifiers, presented by Monster Energy. Which was your favorite? 👀', '', 'offline', './assets/videos/cod.png', 'https://www.youtube.com/watch?v=HCFPBZLt-pg', 0, 1, 2, 1),
+('NA Regional CHAMPIONS! ALGS Winners’ POV | DarkZero | Year 3 Split 2 | Apex Legends', '2023-06-26' , 'Drop into the POV of our NA Regional Champions DarkZero as they secured the win on Match Point during Game 8.', '', 'offline', './assets/videos/apex.png', 'https://www.youtube.com/watch?v=yfoJtqE5b-s', 0, 0, 1, 1);
+
+-- Create user_video
+INSERT INTO `user_video` (`user_id`, `video_id`, `is_favorite`) 
+VALUES
+(1, 2, 1),
+(1, 7, 1),
+(1, 8, 0),
+(1, 11, 1),
+(1, 15, 1),
+(2, 1, 0),
+(2, 5, 1),
+(2, 8, 1),
+(2, 10, 1),
+(2, 15, 1);
+
+-- Create video_category
+INSERT INTO `video_category` (`video_id`, `category_id`) 
+VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 1),
+(5, 1),
+(6, 3),
+(7, 3),
+(8, 6),
+(9, 1),
+(10, 6),
+(11, 6),
+(12, 4),
+(13, 2),
+(14, 2),
+(15, 2),
+(16, 1),
+(17, 1);

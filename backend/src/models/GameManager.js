@@ -5,7 +5,7 @@ class GameManager extends AbstractManager {
     super({ table: "game" });
   }
 
-  filterGamesByName(sql, sqlDependencies) {
+  findAllWithFilters(sql, sqlDependencies) {
     return this.database.query(sql, [sqlDependencies]);
   }
 }

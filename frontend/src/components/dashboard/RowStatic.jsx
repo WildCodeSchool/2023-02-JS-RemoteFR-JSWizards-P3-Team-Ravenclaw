@@ -2,29 +2,26 @@
 import PropTypes from "prop-types";
 
 // Helpers
+import capitalizeText from "../../helpers/capitalize";
 import checkRowStatus from "../../helpers/checkRowStatus";
 
 export default function RowStatic({ video }) {
-  const fields = Object.keys(video);
-  const values = Object.values(video);
-
-  let counter = 0;
   return (
     <tr className="border-b dark:border-neutral">
-      {values.map((value, index) => {
-        counter += 1;
-        return (
-          <td key={counter} className="px-4 py-3 text-sm">
-            {typeof value === "boolean" ? (
-              <input type="checkbox" checked={values[5]} readOnly />
-            ) : (
-              <span className={checkRowStatus(fields[index], value)}>
-                {value}
-              </span>
-            )}
-          </td>
-        );
-      })}
+      <td key={video.id} className="px-4 py-3 text-sm">
+        {video.id}
+      </td>
+      <td className="px-4 py-3 text-sm">{capitalizeText(video.title)}</td>
+      <td className="px-4 py-3 text-sm">{video.category.toUpperCase()}</td>
+      <td className="px-4 py-3 text-sm">{capitalizeText(video.language)}</td>
+      <td className="px-4 py-3 text-sm">
+        <span className={checkRowStatus(video.status)}>
+          {capitalizeText(video.status)}
+        </span>
+      </td>
+      <td className="px-4 py-3 text-sm">
+        <input type="checkbox" checked={video.visibility} readOnly />
+      </td>
     </tr>
   );
 }
@@ -32,9 +29,10 @@ export default function RowStatic({ video }) {
 RowStatic.propTypes = {
   video: PropTypes.shape({
     id: PropTypes.number,
-    name: PropTypes.string,
+    title: PropTypes.string,
     category: PropTypes.string,
     language: PropTypes.string,
+    visibility: PropTypes.number,
     status: PropTypes.string,
   }).isRequired,
 };

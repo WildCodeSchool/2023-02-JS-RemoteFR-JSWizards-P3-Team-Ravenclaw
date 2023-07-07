@@ -1,60 +1,78 @@
 // Package
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
+import {
+  FacebookShareButton,
+  FacebookMessengerShareButton,
+  TwitterShareButton,
+  WhatsappShareButton,
+  TwitterIcon,
+  FacebookIcon,
+  FacebookMessengerIcon,
+  WhatsappIcon,
+} from "react-share";
+import useAxios from "../hooks/useAxios";
 
 // Component
 import Player from "../components/video/Player";
 import Label from "../components/utilities/Label";
 import Button from "../components/utilities/Button";
 
-// Data
-import videos from "../data/video.json";
-
 export default function VideoPlayer() {
-  const [data, setData] = useState({});
+  const [isToggled, setIsToggled] = useState(false);
   const { id } = useParams();
 
-  useEffect(() => {
-    const filteredVideo = videos.filter((video) => {
-      return video.id === parseInt(id, 10);
-    });
-    setData(filteredVideo[0]);
-  }, []);
+  const shareUrl = import.meta.env.VITE_BACKEND_URL;
+
+  const { data: video } = useAxios(`${shareUrl}/videos/${id}`);
 
   return (
     <>
-      <Player video={data} />
-      <div className="head-infos flex justify-between md:justify-end md:gap-8">
-        <div className="fps-language ml-8 flex gap-2 md:gap-6">
-          <Label
-            htmlFor="FPS"
-            className="rounded-2xl bg-primaryLightest px-4 py-1 font-bold"
-            title="FPS"
-          />
-          <Label
-            htmlFor="ENGLISH"
-            className="rounded-2xl bg-primaryLightest px-4 py-1 font-bold"
-            title="ENGLISH"
-          />
+      <Player video={video} />
+      <section className="head-infos flex flex-col justify-between md:gap-8">
+        <div className="flex justify-between">
+          <div className="fps-language flex gap-4 md:gap-6">
+            <Label
+              htmlFor="FPS"
+              className="rounded-2xl bg-primaryLightest px-4 py-1 font-bold"
+              title="FPS"
+            />
+            <Label
+              htmlFor="ENGLISH"
+              className="rounded-2xl bg-primaryLightest px-4 py-1 font-bold"
+              title="ENGLISH"
+            />
+          </div>
+          <div className="flex items-center gap-4 md:gap-6">
+            <Button type="button">
+              <img src="../assets/icon/utility/like.svg" alt="like button" />
+            </Button>
+            <Button type="button" onClick={() => setIsToggled(!isToggled)}>
+              <img src="../assets/icon/utility/share.svg" alt="share button" />
+            </Button>
+            {isToggled && (
+              <div className="absolute z-10 mb-56 ml-8 rounded-lg bg-neutralLightest">
+                <div className="flex flex-col gap-2 px-2 py-2">
+                  <TwitterShareButton url={shareUrl}>
+                    <TwitterIcon size={35} round />
+                  </TwitterShareButton>
+                  <FacebookShareButton url={shareUrl}>
+                    <FacebookIcon size={35} round />
+                  </FacebookShareButton>
+                  <FacebookMessengerShareButton url={shareUrl}>
+                    <FacebookMessengerIcon size={35} round />
+                  </FacebookMessengerShareButton>
+                  <WhatsappShareButton url={shareUrl}>
+                    <WhatsappIcon size={35} round />
+                  </WhatsappShareButton>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
-        <div className="fav-share mr-8">
-          <Button customCSS="text-neutralDark mr-4">
-            <img src="../../public/assets/img/player/fav-btn.png" alt="" />
-          </Button>
-          <Button customCSS="text-neutralDark">
-            <img src="../../public/assets/img/player/share-btn.png" alt="" />
-          </Button>
-        </div>
-      </div>
-      <div className="video-description">
-        <h1 className="ml-8 mt-8">{data.title}</h1>
-        <p className="mx-8 text-justify">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta
-          voluptatem quos pariatur aperiam eveniet consequuntur explicabo
-          tenetur temporibus voluptate necessitatibus aspernatur reprehenderit
-          quas repellendus, sequi iusto molestiae iste doloremque asperiores!
-        </p>
-      </div>
+        <h1>{video.title}</h1>
+        <p className="text-justify">{video.description}</p>
+      </section>
     </>
   );
 }

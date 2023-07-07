@@ -1,6 +1,6 @@
 const express = require("express");
 
-const videoController = require("../controllers/videoController");
+const adminController = require("../controllers/adminController");
 
 const router = express.Router();
 
@@ -10,7 +10,7 @@ const router = express.Router();
  * TODO: DELETE handler...
  * TODO: add authentication wall...
  */
-router.get("/", videoController.getAllWiltFilters);
-router.get("/:id", videoController.getById);
+router.get("/stats", adminController.getAllStats);
+router.get("/videos", adminController.getAllVideos);
 
 module.exports = router;

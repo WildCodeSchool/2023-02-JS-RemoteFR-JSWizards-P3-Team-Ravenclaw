@@ -50,12 +50,12 @@ export default function Home() {
             </article>
             <article>
               <h1>Popular Videos</h1>
-              {/* <SliderVideo
+              <SliderVideo
                 customClassSlider={styles.slider__video}
                 customClassCard={styles.card__video}
                 customClassOverlayWrapper={styles.overlay__wrapper__grid}
                 videos={popularVideos}
-              /> */}
+              />
             </article>
           </section>
           <Partners />

@@ -1,17 +1,19 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function useAxios(url) {
+export default function useAxios(endpoint) {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     const controller = new AbortController();
     const { signal } = controller;
     setIsLoading(true);
     axios
-      .get(url, { signal })
+      .get(`${baseUrl}${endpoint}`, { signal })
       .then((res) => {
         setData(res.data);
       })
@@ -25,7 +27,7 @@ export default function useAxios(url) {
     return function cleanUp() {
       controller.abort();
     };
-  }, [url]);
+  }, [endpoint]);
 
   return { data, isLoading, error };
 }

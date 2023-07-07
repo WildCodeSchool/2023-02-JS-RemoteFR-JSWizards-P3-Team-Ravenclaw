@@ -9,75 +9,45 @@ import RowHead from "./dashboard/RowHead";
 import RowSearch from "./dashboard/RowSearch";
 import Card from "./utilities/Card";
 
-export default function Dashboard({ videos }) {
+// Data
+import adminStats from "../data/adminStats.json";
+
+export default function Dashboard({ videos, dbStats }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
+
   const offset = pageSize * currentPage - pageSize; // pages parcourues
   const nextPage = offset + pageSize;
+
+  const stats = adminStats.map((stat, index) => ({
+    ...stat,
+    ...dbStats[index],
+  }));
+
   return (
-    <div className="flex w-screen max-w-[calc(100vw-320px)] flex-col gap-8 px-[100px] py-8">
+    <article className="flex w-screen max-w-[calc(100vw-320px)] flex-col gap-8 px-[100px] py-8">
       <h1>Dashboard</h1>
+
       <div className="flex flex-wrap gap-4 lg:flex-nowrap">
-        <Card classCSS="w-full bg-primary py-2 px-6 rounded-lg">
-          <div className="flex flex-wrap justify-between gap-y-2">
-            <div className="flex flex-col gap-1">
-              <p>Videos</p>
-              <p>100</p>
+        {stats.map((stat) => (
+          <Card classCSS="w-full bg-primary py-2 px-6 rounded-lg" key={stat.id}>
+            <div className="flex flex-wrap justify-between gap-y-2">
+              <div className="flex flex-col gap-1">
+                <p>{stat.title}</p>
+                <p className="font-bold">{stat.total}</p>
+              </div>
+              <img src={stat.logo} alt={stat.alt} className="w-[30px]" />
             </div>
-            <img
-              src="../assets/icon/dashboard/video.svg"
-              alt="video icon"
-              className="w-[30px]"
-            />
-          </div>
-        </Card>
-        <Card classCSS="w-full bg-primary py-2 px-6 rounded-lg">
-          <div className="flex flex-wrap justify-between gap-y-2">
-            <div className="flex flex-col gap-1">
-              <p>Users</p>
-              <p>100</p>
-            </div>
-            <img
-              src="../assets/icon/dashboard/users.svg"
-              alt="video icon"
-              className="w-[30px]"
-            />
-          </div>
-        </Card>
-        <Card classCSS="w-full bg-primary py-2 px-6 rounded-lg">
-          <div className="flex flex-wrap justify-between gap-y-2">
-            <div className="flex flex-col gap-1">
-              <p>Categories</p>
-              <p>100</p>
-            </div>
-            <img
-              src="../assets/icon/dashboard/category.svg"
-              alt="video icon"
-              className="w-[30px]"
-            />
-          </div>
-        </Card>
-        <Card classCSS="w-full bg-primary py-2 px-6 rounded-lg">
-          <div className="flex flex-wrap justify-between gap-y-2">
-            <div className="flex flex-col gap-1">
-              <p>Games</p>
-              <p>100</p>
-            </div>
-            <img
-              src="../assets/icon/dashboard/joystick.svg"
-              alt="video icon"
-              className="w-[30px]"
-            />
-          </div>
-        </Card>
+          </Card>
+        ))}
       </div>
+
       <div className="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
         <RowSearch activeTab="dashboard" />
         <div className="overflow-x-auto">
           <table className="w-full text-left text-base text-neutralDarkest dark:text-neutralLightest">
             <RowHead activeTab="dashboard" />
             <tbody>
-              {/*eslint-disable*/}
               {videos.slice(offset, nextPage).map((video) => (
                 <RowStatic video={video} key={video.id} />
               ))}
@@ -111,7 +81,7 @@ export default function Dashboard({ videos }) {
           </ConfigProvider>
         </div>
       </div>
-    </div>
+    </article>
   );
 }
 
@@ -119,10 +89,19 @@ Dashboard.propTypes = {
   videos: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number,
-      name: PropTypes.string,
+      title: PropTypes.string,
       category: PropTypes.string,
       language: PropTypes.string,
+      visibility: PropTypes.number,
       status: PropTypes.string,
+    })
+  ).isRequired,
+  dbStats: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+      total: PropTypes.number,
+      logo: PropTypes.string,
+      alt: PropTypes.string,
     })
   ).isRequired,
 };

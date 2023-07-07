@@ -7,7 +7,6 @@ import { useState } from "react";
 import styles from "../../css/Navbar.module.css";
 
 // Components
-import Notification from "./Notification";
 import MenuOpen from "../navbar/MenuOpen";
 import MenuClose from "../navbar/MenuClose";
 import LogOut from "../navbar/LogOut";
@@ -70,7 +69,6 @@ export default function NavbarMobile({ navitems }) {
 
       {/* navbuttons */}
       <div className={`${styles.inline__list} ${styles.navbar__btn}`}>
-        <Notification onClick={() => null} />
         {!isOpen && <MenuOpen onClick={toggleNavMenu} />}
         {isOpen && <MenuClose onClick={toggleNavMenu} />}
       </div>
