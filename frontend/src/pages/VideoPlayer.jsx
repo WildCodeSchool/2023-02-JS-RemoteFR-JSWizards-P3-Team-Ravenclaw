@@ -71,12 +71,7 @@ export default function VideoPlayer() {
           </div>
         </div>
         <h1>{video.title}</h1>
-        <p className="text-justify">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta
-          voluptatem quos pariatur aperiam eveniet consequuntur explicabo
-          tenetur temporibus voluptate necessitatibus aspernatur reprehenderit
-          quas repellendus, sequi iusto molestiae iste doloremque asperiores!
-        </p>
+        <p className="text-justify">{video.description}</p>
       </section>
     </>
   );
