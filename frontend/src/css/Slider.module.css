@@ -59,7 +59,7 @@
 
 .card__game:hover {
   transform: scale(var(--card-scale));
-} 
+}
 
 /* ------------------------ HOME ------------------------ */
 .slider__game {
