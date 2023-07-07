@@ -9,7 +9,6 @@
 .slider {
   display: flex;
   overflow-x: scroll;
-  overflow-y: visible;
   gap: 24px;
 
   @media screen and (max-width: theme("screens.md")) {
