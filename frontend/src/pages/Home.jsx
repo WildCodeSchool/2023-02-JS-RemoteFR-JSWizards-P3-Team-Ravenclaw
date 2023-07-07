@@ -16,6 +16,7 @@ import * as Services from "../service/Account.service";
 export default function Home() {
   const [games, setGames] = useState([]);
   const [promotedVideos, setPromotedVideos] = useState([]);
+  const [popularVideos, setPopularVideos] = useState([]);
 
   useEffect(() => {
     Services.getAllGames().then((res) => {
@@ -25,11 +26,15 @@ export default function Home() {
     Services.getPromotedVideos().then((res) => {
       setPromotedVideos(res);
     });
+
+    Services.getPopularVideos().then((res) => {
+      setPopularVideos(res);
+    });
   }, []);
 
   return (
     <>
-      {games.length === 0 && promotedVideos.length === 0 ? (
+      {games.length === 0 && promotedVideos.length === 0 && popularVideos.length === 0 ? (
         <Loader />
       ) : (
         <>
@@ -50,12 +55,12 @@ export default function Home() {
             </article>
             <article>
               <h1>Popular Videos</h1>
-              {/* <SliderVideo
+              <SliderVideo
                 customClassSlider={styles.slider__video}
                 customClassCard={styles.card__video}
                 customClassOverlayWrapper={styles.overlay__wrapper__grid}
                 videos={popularVideos}
-              /> */}
+              />
             </article>
           </section>
           <Partners />
