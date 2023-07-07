@@ -33,6 +33,7 @@ const LanguageManager = require("./LanguageManager");
 const GameManager = require("./GameManager");
 const UserManager = require("./UserManager");
 const PlanManager = require("./PlanManager");
+const CategoryManager = require("./CategoryManager");
 
 models.video = new VideoManager();
 models.video.setDatabase(pool);
@@ -48,6 +49,9 @@ models.user.setDatabase(pool);
 
 models.plan = new PlanManager();
 models.plan.setDatabase(pool);
+
+models.category = new CategoryManager();
+models.category.setDatabase(pool);
 
 // bonus: use a proxy to personalize error message,
 // when asking for a non existing model

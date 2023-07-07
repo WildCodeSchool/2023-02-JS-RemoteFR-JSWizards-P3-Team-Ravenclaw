@@ -2,7 +2,7 @@ export default function Loader() {
   return (
     <div
       role="status"
-      className="flex min-h-[calc(100vh-160px)] items-center justify-center bg-neutralDarkest/50"
+      className="flex min-h-[calc(100vh-160px)] w-full items-center justify-center bg-neutralDarkest/50"
     >
       <svg
         aria-hidden="true"

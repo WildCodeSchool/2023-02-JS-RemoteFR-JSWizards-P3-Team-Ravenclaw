@@ -3,6 +3,10 @@ class AbstractManager {
     this.table = table;
   }
 
+  countAll() {
+    return this.database.query(`SELECT COUNT(*) AS total FROM ${this.table}`);
+  }
+
   find(id) {
     return this.database.query(`SELECT * FROM  ${this.table} WHERE id = ?`, [
       id,
