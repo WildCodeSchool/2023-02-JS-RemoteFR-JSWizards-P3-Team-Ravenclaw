@@ -1,9 +1,6 @@
 // Package
 import { useState, useEffect } from "react";
 
-// Hooks
-import useAxios from "../hooks/useAxios";
-
 // Style
 import styles from "../css/Slider.module.css";
 
@@ -14,27 +11,25 @@ import SliderVideo from "../components/utilities/SliderVideo";
 import Partners from "../components/home/Partners";
 import Footer from "../components/utilities/Footer";
 import Loader from "../components/utilities/Loader";
+import * as Services from "../service/Account.service";
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  const baseUrl = import.meta.env.VITE_BACKEND_URL;
-
-  // fetch data fron databse using custom hook
-  const { data: games, isLoading: isGameLoading } = useAxios(
-    `${baseUrl}/games`
-  );
-  const { data: promotedVideos, isLoading: isPromotedLoading } = useAxios(
-    `${baseUrl}/videos?isPromoted=1`
-  );
+  const [games, setGames] = useState([]);
+  const [promotedVideos, setPromotedVideos] = useState([]);
 
   useEffect(() => {
-    if (!isGameLoading && !isPromotedLoading) setIsLoading(false);
+    Services.getAllGames().then((res) => {
+      setGames(res);
+    });
+
+    Services.getPromotedVideos().then((res) => {
+      setPromotedVideos(res);
+    });
   }, []);
 
   return (
     <>
-      {isLoading ? (
+      {games.length === 0 && promotedVideos.length === 0 ? (
         <Loader />
       ) : (
         <>
