@@ -1,6 +1,6 @@
 // Packages
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import useAxios from "../hooks/useAxios";
 
 // Components
 import SwitchBilling from "../components/plans/SwitchBilling";
@@ -9,12 +9,10 @@ import Footer from "../components/utilities/Footer";
 
 export default function Pricing() {
   const [currentBilling, setCurrentBilling] = useState("Monthly");
-  const [plans, setPlans] = useState([]);
 
-  const planUrl = `http://localhost:5000/plans`;
-  useEffect(() => {
-    axios.get(planUrl).then((res) => setPlans(res.data));
-  }, []);
+  const planUrl = import.meta.env.VITE_BACKEND_URL;
+  const { data: plans } = useAxios(`${planUrl}/plans`);
+
   return (
     <>
       <section className="flex h-[calc(100vh-76px)] md:h-[calc(100vh-160px)]">

@@ -67,8 +67,8 @@ export default function Caroussel({ plans, billing }) {
                       {"$" +
                         `${
                           billing.toLowerCase() === "monthly"
-                            ? Math.round(plan.price_monthly)
-                            : Math.round(plan.price_yearly)
+                            ? parseFloat(plan.price_monthly)
+                            : parseFloat(plan.price_yearly)
                         }`}
                     </span>
                     <span className={styles.card__plan__billing}>
