@@ -1,16 +1,17 @@
 // Packages
 import { useState } from "react";
+import useAxios from "../hooks/useAxios";
 
 // Components
 import SwitchBilling from "../components/plans/SwitchBilling";
 import Caroussel from "../components/plans/Caroussel";
 import Footer from "../components/utilities/Footer";
 
-// Data
-import plans from "../data/plan.json";
-
 export default function Pricing() {
   const [currentBilling, setCurrentBilling] = useState("Monthly");
+
+  const planUrl = import.meta.env.VITE_BACKEND_URL;
+  const { data: plans } = useAxios(`${planUrl}/plans`);
 
   return (
     <>
