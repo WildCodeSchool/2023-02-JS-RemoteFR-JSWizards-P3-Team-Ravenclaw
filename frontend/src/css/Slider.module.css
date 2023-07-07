@@ -48,55 +48,24 @@
   border-radius: 8px;
 
   cursor: pointer;
-  overflow: hidden;
+  overflow-x: hidden;
   transform: scale(1);
   transition: all 0.3s ease;
 
   @media screen and (min-width: theme("screens.md")) {
-    width: 184px;
-    height: 280px;
+    width: 180px;
   }
 }
 
-.card:hover {
-  border: 3px solid theme("colors.primaryLightest");
+.card__game:hover {
   transform: scale(var(--card-scale));
-  @apply drop-shadow-[0px_10px_15px_rgba(0,0,0,0.3)];
-}
+} 
 
 /* ------------------------ HOME ------------------------ */
 .slider__game {
   @media screen and (min-width: theme("screens.md")) {
     padding-bottom: 12px;
   }
-}
-
-.card__game h2 {
-  position: absolute;
-  bottom: 0;
-  height: 100%;
-  width: 100%;
-  padding: 4px 16px;
-
-  @apply bg-neutralDarkest/50 backdrop-blur-sm;
-  color: theme("colors.neutralLightest");
-  font-family: theme("fontFamily.header");
-  font-size: theme("fontSize.sm");
-  font-weight: theme("fontWeight.extrabold");
-  text-align: center;
-  text-transform: capitalize;
-  white-space: nowrap;
-
-  transform: translateY(88%);
-  transition: all 0.3s ease;
-
-  @media screen and (min-width: theme("screens.md")) {
-    font-size: theme("fontSize.base");
-  }
-}
-
-.card__game:hover h2 {
-  transform: translate(0%);
 }
 
 .slider__video {

@@ -22,9 +22,7 @@ export default function SliderGame({ games }) {
                   styleCSS={{
                     backgroundImage: `url(${game.thumbnail})`,
                   }}
-                >
-                  <h2>{game.name}</h2>
-                </Card>
+                />
               </Link>
             </li>
           ))}
