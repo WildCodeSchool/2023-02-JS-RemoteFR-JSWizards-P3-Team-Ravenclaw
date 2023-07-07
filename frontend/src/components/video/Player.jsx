@@ -13,7 +13,7 @@ export default function Player({ video }) {
           paddingTop: "2rem",
         }}
       >
-        <ReactPlayer url={video.video} controls playing />
+        <ReactPlayer url={video.url_video} controls playing />
       </div>
     </div>
   );
@@ -31,6 +31,7 @@ Player.propTypes = {
     video: PropTypes.string,
     thumbnail_game: PropTypes.string,
     thumbnail_video: PropTypes.string,
+    url_video: PropTypes.string,
   }),
 };
 
@@ -46,5 +47,6 @@ Player.defaultProps = {
     video: null,
     thumbnail_game: null,
     thumbnail_video: null,
+    url_video: null,
   }),
 };
