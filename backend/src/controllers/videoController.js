@@ -2,9 +2,15 @@ const models = require("../models");
 const handleVideoQuery = require("../services/handleVideoQuery");
 
 const getAllWiltFilters = async (req, res) => {
+  // hard-coded treshold to consider videos as popular
+  const POUPLAR_VIDEO_TRESHOLD = 1;
   try {
     // handle query filters from client request (if any)
-    const [sql, sqlDependencies] = handleVideoQuery(req.query);
+    const [sql, sqlDependencies] = handleVideoQuery(
+      req.query,
+      POUPLAR_VIDEO_TRESHOLD
+    );
+
     const [videos] = await models.video.findAllWithFilters(
       sql,
       sqlDependencies

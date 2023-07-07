@@ -27,9 +27,13 @@ export default function Home() {
   const { data: promotedVideos, isLoading: isPromotedLoading } = useAxios(
     `${baseUrl}/videos?isPromoted=1`
   );
+  const { data: popularVideos, isLoading: isPopularLoading } = useAxios(
+    `${baseUrl}/videos?isPopular=1&treshold=1`
+  );
 
   useEffect(() => {
-    if (!isGameLoading && !isPromotedLoading) setIsLoading(false);
+    if (!isGameLoading && !isPromotedLoading && !isPopularLoading)
+      setIsLoading(false);
   }, []);
 
   return (
@@ -59,7 +63,7 @@ export default function Home() {
                 customClassSlider={styles.slider__video}
                 customClassCard={styles.card__video}
                 customClassOverlayWrapper={styles.overlay__wrapper__grid}
-                videos={promotedVideos}
+                videos={popularVideos}
               />
             </article>
           </section>
