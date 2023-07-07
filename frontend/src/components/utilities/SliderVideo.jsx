@@ -19,7 +19,7 @@ export default function SliderVideo({
   const navigate = useNavigate();
 
   const handleClick = (isLinkAvailable, linkURL) =>
-    isLinkAvailable ? navigate(`${linkURL}`) : navigate("connection");
+    isLinkAvailable ? navigate(`${linkURL}`) : navigate("account");
 
   const videosToDisplay = isPaginated ? videos.slice(0, displayCount) : videos;
 
