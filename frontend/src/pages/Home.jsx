@@ -34,7 +34,9 @@ export default function Home() {
 
   return (
     <>
-      {games.length === 0 && promotedVideos.length === 0 && popularVideos.length === 0 ? (
+      {games.length === 0 &&
+      promotedVideos.length === 0 &&
+      popularVideos.length === 0 ? (
         <Loader />
       ) : (
         <>
