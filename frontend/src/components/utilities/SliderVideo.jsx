@@ -30,7 +30,9 @@ export default function SliderVideo({
           <button
             type="button"
             className="w-full"
-            onClick={() => handleClick(video?.visible, `/videos/${video.id}`)}
+            onClick={() =>
+              handleClick(video?.visibility, `/videos/${video.id}`)
+            }
           >
             <Card
               classCSS={`${styles.card} ${customClassCard} bg-cover`}
@@ -38,7 +40,7 @@ export default function SliderVideo({
                 backgroundImage: `url(${video.thumbnail})`,
               }}
             >
-              {!video.visible && (
+              {!video.visibility && (
                 <div className={styles.card__overlay}>
                   <div
                     className={`${styles.overlay__wrapper} ${customClassOverlayWrapper}`}
