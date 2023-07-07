@@ -1,6 +1,5 @@
 // Package
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import {
   FacebookShareButton,
@@ -12,6 +11,7 @@ import {
   FacebookMessengerIcon,
   WhatsappIcon,
 } from "react-share";
+import useAxios from "../hooks/useAxios";
 
 // Component
 import Player from "../components/video/Player";
@@ -19,22 +19,16 @@ import Label from "../components/utilities/Label";
 import Button from "../components/utilities/Button";
 
 export default function VideoPlayer() {
-  const [data, setData] = useState({});
   const [isToggled, setIsToggled] = useState(false);
   const { id } = useParams();
 
-  const shareUrl = `http://localhost:5000/videos/${id}`;
+  const shareUrl = import.meta.env.VITE_BACKEND_URL;
 
-  useEffect(() => {
-    axios.get(shareUrl).then((res) => {
-      const fetchedData = res.data;
-      setData(fetchedData);
-    });
-  }, []);
+  const { data: video } = useAxios(`${shareUrl}/videos/${id}`);
 
   return (
     <>
-      <Player video={data} />
+      <Player video={video} />
       <section className="head-infos flex flex-col justify-between md:gap-8">
         <div className="flex justify-between">
           <div className="fps-language flex gap-4 md:gap-6">
@@ -76,7 +70,7 @@ export default function VideoPlayer() {
             )}
           </div>
         </div>
-        <h1>{data.title}</h1>
+        <h1>{video.title}</h1>
         <p className="text-justify">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta
           voluptatem quos pariatur aperiam eveniet consequuntur explicabo
