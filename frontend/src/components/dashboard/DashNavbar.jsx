@@ -13,11 +13,6 @@ export default function DashNavbar() {
     { title: "Manage Content", id: 2, path: "edit" },
     { title: "Favorites Videos", id: 3 },
     { title: "Users", id: 4 },
-    { title: "Support", id: 5 },
-    { title: "Contact Messages", id: 6 },
-    { title: "Messages", id: 7 },
-    { title: "Tickets", id: 8 },
-    { title: "Bug Report", id: 9 },
     { title: "Log Out", id: 10 },
   ];
   const { setLoggedIn } = useContext(LoginContext);
