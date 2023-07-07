@@ -26,7 +26,6 @@ export default function SliderGame({ games }) {
           </li>
         ))}
       </ul>
-
     </>
   );
 }
