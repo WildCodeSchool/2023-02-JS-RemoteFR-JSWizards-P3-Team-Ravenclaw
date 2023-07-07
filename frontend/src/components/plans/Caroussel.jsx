@@ -67,8 +67,8 @@ export default function Caroussel({ plans, billing }) {
                       {"$" +
                         `${
                           billing.toLowerCase() === "monthly"
-                            ? plan.price_monthly
-                            : plan.price_yearly
+                            ? Math.round(plan.price_monthly)
+                            : Math.round(plan.price_yearly)
                         }`}
                     </span>
                     <span className={styles.card__plan__billing}>
@@ -122,8 +122,8 @@ Caroussel.propTypes = {
   plans: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string,
-      price_monthly: PropTypes.number,
-      price_yearly: PropTypes.number,
+      price_monthly: PropTypes.string,
+      price_yearly: PropTypes.string,
       description: PropTypes.string,
       perk_1: PropTypes.string,
       perk_2: PropTypes.string,

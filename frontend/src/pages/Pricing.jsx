@@ -1,17 +1,20 @@
 // Packages
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 // Components
 import SwitchBilling from "../components/plans/SwitchBilling";
 import Caroussel from "../components/plans/Caroussel";
 import Footer from "../components/utilities/Footer";
 
-// Data
-import plans from "../data/plan.json";
-
 export default function Pricing() {
   const [currentBilling, setCurrentBilling] = useState("Monthly");
+  const [plans, setPlans] = useState([]);
 
+  const planUrl = `http://localhost:5000/plans`;
+  useEffect(() => {
+    axios.get(planUrl).then((res) => setPlans(res.data));
+  }, []);
   return (
     <>
       <section className="flex h-[calc(100vh-76px)] md:h-[calc(100vh-160px)]">
