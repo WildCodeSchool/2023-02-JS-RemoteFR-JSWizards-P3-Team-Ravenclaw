@@ -6,9 +6,9 @@ const Joi = require("joi");
 const userSchema = Joi.object({
   email: Joi.string().email().max(150).required(),
   password: Joi.string().max(255).required(),
-  pseudo: Joi.string().max(150).required(),
+  pseudo: [Joi.string().max(150), Joi.allow(null)],
   planID: [Joi.number().integer(), Joi.allow(null)],
-  userTypeId: Joi.number().integer(),
+  userTypeId: Joi.number().integer().required(),
 });
 
 const validateUserInfo = (req, res, next) => {

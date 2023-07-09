@@ -17,6 +17,6 @@ router.use("/languages", languageRouter);
 router.use("/plans", planRouter);
 router.use("/admin", adminRouter);
 
-router.use("/", authRouter);
+router.use("/auth", authRouter);
 
 module.exports = router;
