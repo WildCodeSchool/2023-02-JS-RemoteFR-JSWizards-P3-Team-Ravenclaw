@@ -6,21 +6,22 @@ export default function useAxios(endpoint) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const baseUrl = import.meta.env.VITE_BACKEND_URL;
+  const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     const controller = new AbortController();
     const { signal } = controller;
     setIsLoading(true);
+
     axios
-      .get(`${baseUrl}${endpoint}`, { signal })
+      .get(`${BASE_URL}${endpoint}`, { signal })
       .then((res) => {
         setData(res.data);
       })
       .catch((err) => {
         setError(err);
         if (axios.isCancel(err)) console.warn("Axios request aborted");
-        console.error("Error fetching video data:", err);
+        console.error("Error fetching data from API:", err);
       })
       .finally(() => setIsLoading(false));
 
