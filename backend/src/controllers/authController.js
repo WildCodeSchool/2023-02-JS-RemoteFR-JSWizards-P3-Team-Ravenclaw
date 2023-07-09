@@ -16,10 +16,7 @@ const login = async (req, res) => {
     if (!token) throw new Error("No authentication token returned");
 
     // send back authentication token to the client and save it as a cookie
-    res
-      .cookie("appjwt", token, { httpOnly: true })
-      .status(200)
-      .send(`Successfully logged in as ${req.user.pseudo}`);
+    res.cookie("appjwt", token, { httpOnly: true }).status(200).json(req.user);
   } catch (err) {
     console.error(err);
     res
@@ -28,4 +25,13 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { login };
+const logout = async (req, res) => {
+  try {
+    res.clearCookie("appjwt").status(200).json({ message: "user logged out" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("oops...an error occured when loggin out the user");
+  }
+};
+
+module.exports = { login, logout };
