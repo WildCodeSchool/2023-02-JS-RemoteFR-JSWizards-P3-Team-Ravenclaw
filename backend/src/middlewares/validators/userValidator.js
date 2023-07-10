@@ -8,7 +8,7 @@ const userSchema = Joi.object({
   password: Joi.string().max(255).required(),
   pseudo: [Joi.string().max(150), Joi.allow(null)],
   planID: [Joi.number().integer(), Joi.allow(null)],
-  userTypeId: Joi.number().integer().required(),
+  userTypeId: [Joi.number().integer().required(), Joi.allow(null)],
 });
 
 const validateUserInfo = (req, res, next) => {

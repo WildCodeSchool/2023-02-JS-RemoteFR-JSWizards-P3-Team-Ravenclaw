@@ -25,8 +25,8 @@ class UserManager extends AbstractManager {
       email,
       password,
       pseudo,
-      planID,
-      userTypeId,
+      planID || null,
+      userTypeId || 1,
     ]);
   }
 

@@ -68,9 +68,9 @@ CREATE TABLE `user` (
   `email` VARCHAR(150) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
   `pseudo` VARCHAR(150) NULL,
-  `plan_id` INT NULL,
+  `plan_id` INT DEFAULT NULL,
   CONSTRAINT fk_user_plan FOREIGN KEY (`plan_id`) REFERENCES `plan`(`id`),
-	`user_type_id` INT NOT NULL,
+	`user_type_id` INT DEFAULT 1,
   CONSTRAINT fk_user_user_type FOREIGN KEY (`user_type_id`) REFERENCES `user_type`(`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
