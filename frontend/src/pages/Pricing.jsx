@@ -10,8 +10,7 @@ import Footer from "../components/utilities/Footer";
 export default function Pricing() {
   const [currentBilling, setCurrentBilling] = useState("Monthly");
 
-  const planUrl = import.meta.env.VITE_BACKEND_URL;
-  const { data: plans } = useAxios(`${planUrl}/plans`);
+  const { data: plans } = useAxios(`/plans`);
 
   return (
     <>
