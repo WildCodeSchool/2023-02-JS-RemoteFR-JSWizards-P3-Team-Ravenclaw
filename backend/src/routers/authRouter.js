@@ -13,12 +13,5 @@ const router = express.Router();
  */
 router.post("/login", verifyEmail, verifyPassword, authController.login);
 router.get("/logout", authController.logout);
-router.get("/register");
-// router.get(
-//   "/register",
-//   validateUserInfo,
-//   checkForExistingAccount,
-//   authController.logout
-// );
 
 module.exports = router;

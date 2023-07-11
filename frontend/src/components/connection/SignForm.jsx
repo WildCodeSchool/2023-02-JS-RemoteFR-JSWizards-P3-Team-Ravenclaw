@@ -24,8 +24,6 @@ export default function SignForm({ isSignIn }) {
   const passwordType = passwordVisible ? "text" : "password";
   const passwordConfType = passwordConfVisible ? "text" : "password";
 
-  const DEFAULT_USER = { user_type_id: 1, plan_id: null, pseudo: null };
-
   const TOAST_DEFAULT_CONFIG = {
     position: "bottom-right",
     autoClose: 3000,
@@ -58,7 +56,6 @@ export default function SignForm({ isSignIn }) {
         } else {
           // register new user to database
           const res = await registerUser({
-            ...DEFAULT_USER,
             email,
             password,
           });
