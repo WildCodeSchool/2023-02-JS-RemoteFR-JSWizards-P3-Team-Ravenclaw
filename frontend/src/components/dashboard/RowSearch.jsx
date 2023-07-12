@@ -11,7 +11,12 @@ import ModalCategory from "./category/ModalCategory";
 import ModalLanguage from "./language/ModalLanguage";
 import ModalGame from "./game/ModalGame";
 
-export default function RowSearch({ activeTab, setFlagLanguages }) {
+export default function RowSearch({
+  activeTab,
+  filterText,
+  setFilterText,
+  setFlagLanguages,
+}) {
   const [isModalOpened, setIsModalOpened] = useState(false);
 
   const addButton = () => {
@@ -86,10 +91,15 @@ export default function RowSearch({ activeTab, setFlagLanguages }) {
     <div className="flex flex-col items-center justify-between space-y-3 p-4 md:flex-row md:space-x-4 md:space-y-0">
       <div className="w-full md:w-1/2">
         <div className="flex items-center gap-4">
-          <Searchbar className="relative w-full min-w-[200px]" />
+          <Searchbar
+            className="relative w-full min-w-[200px]"
+            filterText={filterText}
+            onFilterTextChange={setFilterText}
+          />
           {activeTab === "video" && <Dropdown title="Search filters" />}
         </div>
       </div>
+
       {activeTab !== "dashboard" && (
         <div className="flex w-full justify-center space-y-2 md:w-auto md:flex-row md:items-center md:space-x-3 md:space-y-0">
           <Button
@@ -121,5 +131,7 @@ export default function RowSearch({ activeTab, setFlagLanguages }) {
 
 RowSearch.propTypes = {
   activeTab: PropTypes.string.isRequired,
+  filterText: PropTypes.string.isRequired,
+  setFilterText: PropTypes.func.isRequired,
   setFlagLanguages: PropTypes.func.isRequired,
 };

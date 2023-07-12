@@ -12,6 +12,9 @@ import RowCategory from "./category/RowCategory";
 import RowLanguage from "./language/RowLanguage";
 import RowGame from "./game/RowGame";
 
+// Helpers
+import filterTable from "../../helpers/filterTable";
+
 // Services
 import { getGames } from "../../services/games";
 import { getCategories } from "../../services/categories";
@@ -19,24 +22,23 @@ import { getLanguages } from "../../services/languages";
 
 export default function DashTable({ videos }) {
   const [activeTab, setActiveTab] = useState("video");
-  const setActiveTabItem = (tab) => {
-    setActiveTab(tab);
-  };
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
   const [objectNumber, setObjectNumber] = useState(null);
-
   const [games, setGames] = useState([]);
   const [languages, setLanguages] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [filterText, setFilterText] = useState("");
 
   // const [flagGames, setFlagGames] = useState(false);
   // const [flagCategories, setFlagCategories] = useState(false);
   const [flagLanguages, setFlagLanguages] = useState(false);
 
-  // pages parcourues
+  // table pagination
   const offset = pageSize * currentPage - pageSize;
   const nextPage = offset + pageSize;
+
+  const setActiveTabItem = (tab) => setActiveTab(tab);
 
   // load games from database
   useEffect(() => {
@@ -80,9 +82,17 @@ export default function DashTable({ videos }) {
   return (
     <div className="flex w-screen max-w-[calc(100vw-320px)] flex-col gap-8 px-[100px] py-8">
       <h1>Manage Content</h1>
+
       <div className="relative min-w-[600px] overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
         <NavTab setActiveTabItem={setActiveTabItem} />
-        <RowSearch activeTab={activeTab} setFlagLanguages={setFlagLanguages} />
+
+        <RowSearch
+          activeTab={activeTab}
+          filterText={filterText}
+          setFilterText={setFilterText}
+          setFlagLanguages={setFlagLanguages}
+        />
+
         <table className="w-full overflow-x-auto text-left text-base text-neutralDarkest dark:text-neutralLightest">
           <RowHead activeTab={activeTab} />
           <tbody>
@@ -102,7 +112,7 @@ export default function DashTable({ videos }) {
                 ))
               : activeTab === "language"
               ? languages.length &&
-                languages
+                filterTable(languages, "name", filterText)
                   .slice(offset, nextPage)
                   .map((language) => (
                     <RowLanguage
@@ -124,6 +134,7 @@ export default function DashTable({ videos }) {
             {/* eslint-enable */}
           </tbody>
         </table>
+
         <ConfigProvider
           theme={{
             token: {
