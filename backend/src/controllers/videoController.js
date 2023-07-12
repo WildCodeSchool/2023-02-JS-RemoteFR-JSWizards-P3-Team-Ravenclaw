@@ -1,7 +1,7 @@
 const models = require("../models");
 const handleVideoQuery = require("../services/handleVideoQuery");
 
-const getAllWiltFilters = async (req, res) => {
+const getAllWithFilters = async (req, res) => {
   // hard-coded treshold to consider videos as popular
   const POUPLAR_VIDEO_TRESHOLD = 1;
   try {
@@ -43,4 +43,4 @@ const getById = async (req, res) => {
   }
 };
 
-module.exports = { getAllWiltFilters, getById };
+module.exports = { getAllWithFilters, getById };

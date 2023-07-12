@@ -16,6 +16,7 @@ export default function RowSearch({
   filterText,
   setFilterText,
   setFlagLanguages,
+  setFlagCategories,
 }) {
   const [isModalOpened, setIsModalOpened] = useState(false);
 
@@ -55,9 +56,8 @@ export default function RowSearch({
       return (
         <ModalCategory
           open={isModalOpened}
-          onOk={() => setIsModalOpened(false)}
-          onCancel={() => setIsModalOpened(false)}
-          onClick={() => setIsModalOpened(false)}
+          setIsModalOpened={setIsModalOpened}
+          setFlag={setFlagCategories}
         />
       );
     }
@@ -134,4 +134,5 @@ RowSearch.propTypes = {
   filterText: PropTypes.string.isRequired,
   setFilterText: PropTypes.func.isRequired,
   setFlagLanguages: PropTypes.func.isRequired,
+  setFlagCategories: PropTypes.func.isRequired,
 };

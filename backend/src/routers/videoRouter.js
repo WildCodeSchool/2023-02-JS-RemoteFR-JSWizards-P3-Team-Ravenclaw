@@ -10,7 +10,7 @@ const router = express.Router();
  * TODO: DELETE handler...
  * TODO: add authentication wall...
  */
-router.get("/", videoController.getAllWiltFilters);
+router.get("/", videoController.getAllWithFilters);
 router.get("/:id", videoController.getById);
 
 module.exports = router;
