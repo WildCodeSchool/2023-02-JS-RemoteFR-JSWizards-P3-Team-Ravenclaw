@@ -1,3 +1,4 @@
+-- SQLBook: Code
 -- _____________________________________________ CREATE TABLES _____________________________________________
 DROP TABLE IF EXISTS `language`;
 CREATE TABLE `language` (
@@ -145,7 +146,7 @@ VALUES
 -- Create plans
 INSERT INTO `plan` (`name`, `price_monthly`, `price_yearly`, `description`, `perk_1`, `perk_2`, `perk_3`, `perk_4`) 
 VALUES
-('starter', 9, 99, 'Unleash the power of on-demand video', 'Limited to 1 user', 'No ads interruption', 'High quality video', 'Cancel anytime'),
+('starter', 9, 99, 'Unleash the power of VOD', 'Limited to 1 user', 'No ads interruption', 'High quality video', 'Cancel anytime'),
 ('standard', 14, 159, 'Best deal for amateurs of e-sport', 'Up to 3 users', 'Multi-devices', 'High quality video', 'Cancel anytime'),
 ('premium', 19, 219, 'For the real fans of e-sport', 'Up to 5 users', 'Multi-devices', 'Premium quality video', 'Cancel anytime');
 
