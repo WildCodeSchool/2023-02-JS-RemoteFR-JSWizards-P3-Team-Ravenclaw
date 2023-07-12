@@ -14,4 +14,46 @@ const getAll = async (req, res) => {
   }
 };
 
-module.exports = { getAll };
+const editById = async (req, res) => {
+  try {
+    const [result] = await models.category.update(req.body, req.params.id);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).send(`Category not found`);
+    }
+    return res.sendStatus(204);
+  } catch (err) {
+    console.error(err);
+    return res
+      .status(500)
+      .send("oops...an error occured when updating category from database");
+  }
+};
+
+const post = async (req, res) => {
+  try {
+    await models.category.create(req.body);
+    res.sendStatus(204);
+  } catch (err) {
+    console.error(err);
+    res
+      .status(500)
+      .send("oops...an error occured when updating category from database");
+  }
+};
+
+const remove = async (req, res) => {
+  try {
+    const [result] = await models.category.delete(req.params.id);
+    if (result.affectedRows === 0)
+      return res.status(404).send(`Category not found`);
+    return res.sendStatus(204);
+  } catch (err) {
+    console.error(err);
+    return res
+      .status(500)
+      .send("oops...an error occured when removing category from database");
+  }
+};
+
+module.exports = { getAll, editById, post, remove };
