@@ -262,6 +262,13 @@
   width: 164px;
 }
 
+@media screen and (min-width: theme("screens.md")) {
+  .swiper-slide {
+    width: 18rem;
+    height: 20rem;
+  }
+}
+
 .swiper-pagination-bullet {
   width: 8px;
   height: 8px;

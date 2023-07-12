@@ -18,13 +18,14 @@ export default function Pricing() {
         <article>
           <h1>Plans & Pricing</h1>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-            malesuada, ipsum ut facilisis facilisis, justo justo volutpat purus,
-            convallis malesuada erat felis at leo ridendum pecat
+            Découvrez nos plans et tarifs pour bénéficier d'une offre adaptée à
+            vos besoins. Choisissez parmi nos trois abonnements : Starter,
+            Standard et Premium, pour trouver celui qui correspond parfaitement
+            à vos attentes.
           </p>
         </article>
 
-        <article className="flex flex-col gap-4">
+        <article className="flex flex-col items-center gap-6">
           <SwitchBilling
             currentBilling={currentBilling}
             onChangeBilling={(newBilling) => setCurrentBilling(newBilling)}
