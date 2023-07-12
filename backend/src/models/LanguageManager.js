@@ -6,9 +6,16 @@ class LanguageManager extends AbstractManager {
   }
 
   update(body, id) {
-    const { name } = body;
-    const SQL = `UPDATE ${this.table} SET name = ? WHERE id = ?`;
-    return this.database.query(SQL, [name, id]);
+    return this.database.query(
+      `UPDATE ${this.table} SET name = ? WHERE id = ?`,
+      [body.name, id]
+    );
+  }
+
+  create(body) {
+    return this.database.query(`INSERT INTO ${this.table} (name) VALUES (?)`, [
+      body.name,
+    ]);
   }
 }
 

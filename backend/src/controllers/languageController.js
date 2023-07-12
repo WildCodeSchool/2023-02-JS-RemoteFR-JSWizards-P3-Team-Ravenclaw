@@ -29,4 +29,16 @@ const editById = async (req, res) => {
   }
 };
 
-module.exports = { getAll, editById };
+const post = async (req, res) => {
+  try {
+    await models.language.create(req.body);
+    res.sendStatus(204);
+  } catch (err) {
+    console.error(err);
+    res
+      .status(500)
+      .send("oops...an error occured when updating language from database");
+  }
+};
+
+module.exports = { getAll, editById, post };
