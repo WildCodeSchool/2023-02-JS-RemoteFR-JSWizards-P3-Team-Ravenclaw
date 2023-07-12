@@ -18,10 +18,10 @@ export default function Pricing() {
         <article>
           <h1>Plans & Pricing</h1>
           <p>
-            Découvrez nos plans et tarifs pour bénéficier d'une offre adaptée à
-            vos besoins. Choisissez parmi nos trois abonnements : Starter,
-            Standard et Premium, pour trouver celui qui correspond parfaitement
-            à vos attentes.
+            Discover our plans and prices to benefit from an offer adapted to
+            your needs. Choose from our three subscriptions: Starter,
+            Standard and Premium, to find the perfect match
+            to your expectations.
           </p>
         </article>
 
