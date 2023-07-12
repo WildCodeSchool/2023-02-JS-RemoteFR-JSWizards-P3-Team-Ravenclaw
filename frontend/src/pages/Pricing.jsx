@@ -19,9 +19,8 @@ export default function Pricing() {
           <h1>Plans & Pricing</h1>
           <p>
             Discover our plans and prices to benefit from an offer adapted to
-            your needs. Choose from our three subscriptions: Starter,
-            Standard and Premium, to find the perfect match
-            to your expectations.
+            your needs. Choose from our three subscriptions: Starter, Standard
+            and Premium, to find the perfect match to your expectations.
           </p>
         </article>
 
