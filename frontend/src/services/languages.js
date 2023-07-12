@@ -7,8 +7,10 @@ export const getLanguages = (controller) => {
   return axios.get(`${BASE_URL}/languages`, { signal });
 };
 
-export const modifyLanguageById = (reqBody, languageId) =>
-  axios.put(`${BASE_URL}/languages/${languageId}`, reqBody);
+export const modifyLanguageById = (body, id) =>
+  axios.put(`${BASE_URL}/languages/${id}`, body);
 
-export const addLanguage = (reqBody) =>
-  axios.post(`${BASE_URL}/languages/`, reqBody);
+export const addLanguage = (body) => axios.post(`${BASE_URL}/languages/`, body);
+
+export const deleteLanguage = (id) =>
+  axios.delete(`${BASE_URL}/languages/${id}`);
