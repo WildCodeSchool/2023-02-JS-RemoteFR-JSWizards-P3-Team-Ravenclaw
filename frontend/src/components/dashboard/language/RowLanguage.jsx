@@ -6,6 +6,9 @@ import PropTypes from "prop-types";
 import LanguageDropdown from "./LanguageDropdown";
 import Button from "../../utilities/Button";
 
+// Helpers
+import capitalizeText from "../../../helpers/capitalize";
+
 export default function RowLanguage({ language }) {
   const [isToggled, setIsToggled] = useState(false);
 
@@ -13,7 +16,7 @@ export default function RowLanguage({ language }) {
     <>
       <tr className="w-full justify-between border-b dark:border-neutral">
         <td className="px-4 py-3 text-sm">{language.id}</td>
-        <td className="px-4 py-3 text-sm">{language.name}</td>
+        <td className="px-4 py-3 text-sm">{capitalizeText(language.name)}</td>
         <td className="px-4 py-3 text-sm">
           <span className="flex gap-4">
             <Button
