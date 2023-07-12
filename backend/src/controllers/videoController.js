@@ -32,7 +32,7 @@ const getAllWiltFilters = async (req, res) => {
 
 const getById = async (req, res) => {
   try {
-    const [[video]] = await models.video.find(req.params.id);
+    const [[video]] = await models.video.findById(req.params.id);
     if (!video) res.status(404).send("Video not found");
     res.json(video);
   } catch (err) {
