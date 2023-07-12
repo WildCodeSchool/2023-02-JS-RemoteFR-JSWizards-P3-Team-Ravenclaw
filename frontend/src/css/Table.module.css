@@ -12,7 +12,7 @@
 }
 
 .input__style::placeholder {
-  color: theme("colors.neutralLight");
+  color: theme("colors.neutral");
 }
 
 /* Start table btn style  */
