@@ -31,7 +31,7 @@ export default function DashTable({ videos }) {
   const [filterText, setFilterText] = useState("");
 
   // const [flagGames, setFlagGames] = useState(false);
-  // const [flagCategories, setFlagCategories] = useState(false);
+  const [flagCategories, setFlagCategories] = useState(false);
   const [flagLanguages, setFlagLanguages] = useState(false);
 
   // table pagination
@@ -55,8 +55,7 @@ export default function DashTable({ videos }) {
     getCategories(categoriesController)
       .then((res) => setCategories(res.data))
       .catch((err) => console.error(err));
-    // }, [flagCategories]);
-  }, []);
+  }, [flagCategories]);
 
   // load languages from database
   useEffect(() => {
@@ -91,6 +90,7 @@ export default function DashTable({ videos }) {
           filterText={filterText}
           setFilterText={setFilterText}
           setFlagLanguages={setFlagLanguages}
+          setFlagCategories={setFlagCategories}
         />
 
         <table className="w-full overflow-x-auto text-left text-base text-neutralDarkest dark:text-neutralLightest">
@@ -103,13 +103,15 @@ export default function DashTable({ videos }) {
                   .map((video) => <RowVideo key={video.id} video={video} />)
               : activeTab === "category"
               ? categories.length &&
-                categories.slice(offset, nextPage).map((category) => (
-                  <RowCategory
-                    key={category.id}
-                    category={category}
-                    // setFlagCategories={setFlagCategories}
-                  />
-                ))
+                filterTable(categories, "name", filterText)
+                  .slice(offset, nextPage)
+                  .map((category) => (
+                    <RowCategory
+                      key={category.id}
+                      category={category}
+                      setFlagCategories={setFlagCategories}
+                    />
+                  ))
               : activeTab === "language"
               ? languages.length &&
                 filterTable(languages, "name", filterText)
