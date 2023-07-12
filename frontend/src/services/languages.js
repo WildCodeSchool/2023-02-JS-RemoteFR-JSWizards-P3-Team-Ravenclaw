@@ -9,3 +9,6 @@ export const getLanguages = (controller) => {
 
 export const modifyLanguageById = (reqBody, languageId) =>
   axios.put(`${BASE_URL}/languages/${languageId}`, reqBody);
+
+export const addLanguage = (reqBody) =>
+  axios.post(`${BASE_URL}/languages/`, reqBody);

@@ -11,12 +11,8 @@ import ModalCategory from "./category/ModalCategory";
 import ModalLanguage from "./language/ModalLanguage";
 import ModalGame from "./game/ModalGame";
 
-export default function RowSearch({ activeTab }) {
-  const [open, setOpen] = useState(false);
-
-  const showModal = () => {
-    setOpen(true);
-  };
+export default function RowSearch({ activeTab, setFlagLanguages }) {
+  const [isModalOpened, setIsModalOpened] = useState(false);
 
   const addButton = () => {
     if (activeTab === "video") {
@@ -40,41 +36,43 @@ export default function RowSearch({ activeTab }) {
   const addModal = () => {
     if (activeTab === "video") {
       return (
+        // EN COURS...
         <ModalVideo
-          open={open}
-          onOk={() => setOpen(false)}
-          onCancel={() => setOpen(false)}
-          onClick={() => setOpen(false)}
+          open={isModalOpened}
+          onOk={() => setIsModalOpened(false)}
+          onCancel={() => setIsModalOpened(false)}
+          onClick={() => setIsModalOpened(false)}
         />
       );
     }
+    // EN COURS...
     if (activeTab === "category") {
       return (
         <ModalCategory
-          open={open}
-          onOk={() => setOpen(false)}
-          onCancel={() => setOpen(false)}
-          onClick={() => setOpen(false)}
+          open={isModalOpened}
+          onOk={() => setIsModalOpened(false)}
+          onCancel={() => setIsModalOpened(false)}
+          onClick={() => setIsModalOpened(false)}
         />
       );
     }
     if (activeTab === "language") {
       return (
         <ModalLanguage
-          open={open}
-          onOk={() => setOpen(false)}
-          onCancel={() => setOpen(false)}
-          onClick={() => setOpen(false)}
+          open={isModalOpened}
+          setIsModalOpened={setIsModalOpened}
+          setFlag={setFlagLanguages}
         />
       );
     }
+    // EN COURS...
     if (activeTab === "game") {
       return (
         <ModalGame
-          open={open}
-          onOk={() => setOpen(false)}
-          onCancel={() => setOpen(false)}
-          onClick={() => setOpen(false)}
+          open={isModalOpened}
+          onOk={() => setIsModalOpened(false)}
+          onCancel={() => setIsModalOpened(false)}
+          onClick={() => setIsModalOpened(false)}
         />
       );
     }
@@ -97,7 +95,7 @@ export default function RowSearch({ activeTab }) {
           <Button
             type="button"
             customCSS="flex items-center justify-between rounded-lg bg-primary px-4 py-3 text-center text-sm text-white hover:bg-primaryLight focus:outline-none gap-2"
-            onClick={() => showModal(true)}
+            onClick={() => setIsModalOpened(true)}
           >
             <svg
               className="flex h-4 w-4 justify-end"
@@ -123,4 +121,5 @@ export default function RowSearch({ activeTab }) {
 
 RowSearch.propTypes = {
   activeTab: PropTypes.string.isRequired,
+  setFlagLanguages: PropTypes.func.isRequired,
 };

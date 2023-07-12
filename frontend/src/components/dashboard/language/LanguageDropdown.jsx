@@ -57,6 +57,7 @@ export default function LanguageDropdown({
             type="text"
             className={`${styles.input__style} h-full`}
             placeholder="Type language name"
+            required
             ref={inputRef}
           />
           <span className="flex w-full items-end justify-end">

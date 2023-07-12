@@ -82,7 +82,7 @@ export default function DashTable({ videos }) {
       <h1>Manage Content</h1>
       <div className="relative min-w-[600px] overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
         <NavTab setActiveTabItem={setActiveTabItem} />
-        <RowSearch activeTab={activeTab} />
+        <RowSearch activeTab={activeTab} setFlagLanguages={setFlagLanguages} />
         <table className="w-full overflow-x-auto text-left text-base text-neutralDarkest dark:text-neutralLightest">
           <RowHead activeTab={activeTab} />
           <tbody>

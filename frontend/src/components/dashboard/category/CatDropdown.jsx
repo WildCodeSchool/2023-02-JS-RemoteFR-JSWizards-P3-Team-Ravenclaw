@@ -1,3 +1,6 @@
+// Packages
+// import PropTypes from "prop-types";
+
 // Style
 import styles from "../../../css/Table.module.css";
 
