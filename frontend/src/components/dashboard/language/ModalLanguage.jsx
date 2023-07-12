@@ -63,6 +63,9 @@ export default function ModalLanguage({ open, setIsModalOpened, setFlag }) {
       onCancel={handleClose}
       onOk={handleSubmit}
       footer={null}
+      afterOpenChange={() => {
+        inputRef.current.focus();
+      }}
     >
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <Input
