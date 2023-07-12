@@ -22,7 +22,6 @@ export default function FavVideos({ videos }) {
   );
 }
 
-
 FavVideos.propTypes = {
   videos: PropTypes.arrayOf(
     PropTypes.shape({
