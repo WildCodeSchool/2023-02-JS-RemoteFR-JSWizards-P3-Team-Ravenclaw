@@ -113,24 +113,24 @@ VALUES
 -- Create games
 INSERT INTO `game` (`name`, `thumbnail`) 
 VALUES 
-('apex', './assets/games/Apex.jpg'),
-('call of duty', './assets/games/CallOfDuty.jpg'),
-('chess', './assets/games/Chess.jpg'),
-('counter strike', './assets/games/CounterStrike.jpg'),
-('dota', './assets/games/Dota2.jpg'),
-('fifa 23', './assets/games/Fifa23.jpg'),
-('fortnite', './assets/games/Fortnite.jpg'),
-('hearth stone', './assets/games/HearthStone.jpg'),
-('league of legend', './assets/games/LeagueOfLegends.jpg'),
-('madden 23', './assets/games/Madden23.jpg'),
-('nba 23', './assets/games/NBA2K23.jpg'),
-('overwatch 2', './assets/games/Overwatch2.jpg'),
-('rocket league', './assets/games/RocketLeague.jpg'),
-('starcraft 2', './assets/games/StarCraft2.jpg'),
-('street fighter', './assets/games/StreetFighter.jpg'),
-('super smash bros', './assets/games/SuperSmashBros.jpg'),
-('tekken', './assets/games/Tekken.jpg'),
-('valorant', './assets/games/Valorant.jpg');
+('apex', '../assets/games/Apex.jpg'),
+('call of duty', '../assets/games/CallOfDuty.jpg'),
+('chess', '../assets/games/Chess.jpg'),
+('counter strike', '../assets/games/CounterStrike.jpg'),
+('dota', '../assets/games/Dota2.jpg'),
+('fifa 23', '../assets/games/Fifa23.jpg'),
+('fortnite', '../assets/games/Fortnite.jpg'),
+('hearth stone', '../assets/games/HearthStone.jpg'),
+('league of legend', '../assets/games/LeagueOfLegends.jpg'),
+('madden 23', '../assets/games/Madden23.jpg'),
+('nba 23', '../assets/games/NBA2K23.jpg'),
+('overwatch 2', '../assets/games/Overwatch2.jpg'),
+('rocket league', '../assets/games/RocketLeague.jpg'),
+('starcraft 2', '../assets/games/StarCraft2.jpg'),
+('street fighter', '../assets/games/StreetFighter.jpg'),
+('super smash bros', '../assets/games/SuperSmashBros.jpg'),
+('tekken', '../assets/games/Tekken.jpg'),
+('valorant', '../assets/games/Valorant.jpg');
 
 -- Create languages
 INSERT INTO `language` (`name`) 

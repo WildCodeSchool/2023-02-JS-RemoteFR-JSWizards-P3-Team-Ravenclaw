@@ -1,10 +1,11 @@
 // Packages
 import PropTypes from "prop-types";
-import { useState } from "react";
 
-export default function Searchbar({ className }) {
-  const [videoSearch, setVideoSearch] = useState("");
-
+export default function Searchbar({
+  className,
+  filterText,
+  onFilterTextChange,
+}) {
   return (
     <form className={className}>
       <div className="absolute inset-y-0 left-0 flex items-center pl-3">
@@ -26,17 +27,19 @@ export default function Searchbar({ className }) {
         type="search"
         className="block w-full rounded-lg border border-neutralLight bg-neutralLightest p-3 pl-10 text-sm text-neutralDarkest focus:border-primaryLight focus:outline-none dark:border-neutralDark/50 dark:bg-gray-600 dark:text-neutralLightest dark:placeholder-neutralLight"
         placeholder="Search..."
-        value={videoSearch}
-        onChange={(e) => setVideoSearch(e.target.value)}
+        value={filterText}
+        onChange={(e) => onFilterTextChange(e.target.value)}
       />
     </form>
   );
 }
 
-Searchbar.defaultProps = {
-  className: null,
-};
-
 Searchbar.propTypes = {
   className: PropTypes.string,
+  filterText: PropTypes.string.isRequired,
+  onFilterTextChange: PropTypes.func.isRequired,
+};
+
+Searchbar.defaultProps = {
+  className: null,
 };

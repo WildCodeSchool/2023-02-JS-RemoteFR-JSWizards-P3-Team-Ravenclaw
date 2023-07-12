@@ -13,7 +13,7 @@ export default function RowCategory({ category }) {
     <>
       <tr className="w-full justify-between border-b dark:border-neutral">
         <td className="px-4 py-3 text-sm">{category.id}</td>
-        <td className="px-4 py-3 text-sm">{category.name}</td>
+        <td className="px-4 py-3 text-sm">{category.name.toUpperCase()}</td>
         <td className="px-4 py-3 text-sm">
           <span className="flex gap-4">
             <Button

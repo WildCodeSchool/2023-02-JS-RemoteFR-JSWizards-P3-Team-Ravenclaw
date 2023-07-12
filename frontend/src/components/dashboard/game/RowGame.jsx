@@ -6,6 +6,9 @@ import PropTypes from "prop-types";
 import GameDropdown from "./GameDropdown";
 import Button from "../../utilities/Button";
 
+// Helpers
+import capitalizeText from "../../../helpers/capitalize";
+
 export default function RowGame({ game }) {
   const [isToggled, setIsToggled] = useState(false);
 
@@ -19,7 +22,7 @@ export default function RowGame({ game }) {
             alt={game.name}
             className="h-10 w-14 rounded object-cover object-top"
           />
-          {game.name}
+          {capitalizeText(game.name)}
         </td>
         <td className="px-4 py-3 text-sm">
           <span className="flex gap-4">

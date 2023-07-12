@@ -1,7 +1,7 @@
 // Packages
+import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { Pagination, ConfigProvider } from "antd";
-import PropTypes from "prop-types";
 
 // Components
 import RowSearch from "./RowSearch";
@@ -12,22 +12,59 @@ import RowCategory from "./category/RowCategory";
 import RowLanguage from "./language/RowLanguage";
 import RowGame from "./game/RowGame";
 
-// Data
-import games from "../../data/game.json";
-import languages from "../../data/language.json";
-import categories from "../../data/category.json";
+// Helpers
+import filterTable from "../../helpers/filterTable";
+
+// Services
+import { getGames } from "../../services/games";
+import { getCategories } from "../../services/categories";
+import { getLanguages } from "../../services/languages";
 
 export default function DashTable({ videos }) {
   const [activeTab, setActiveTab] = useState("video");
-  const setActiveTabItem = (tab) => {
-    setActiveTab(tab);
-  };
-
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
   const [objectNumber, setObjectNumber] = useState(null);
-  const offset = pageSize * currentPage - pageSize; // pages parcourues
+  const [games, setGames] = useState([]);
+  const [languages, setLanguages] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [filterText, setFilterText] = useState("");
+
+  // const [flagGames, setFlagGames] = useState(false);
+  // const [flagCategories, setFlagCategories] = useState(false);
+  const [flagLanguages, setFlagLanguages] = useState(false);
+
+  // table pagination
+  const offset = pageSize * currentPage - pageSize;
   const nextPage = offset + pageSize;
+
+  const setActiveTabItem = (tab) => setActiveTab(tab);
+
+  // load games from database
+  useEffect(() => {
+    const gamesController = new AbortController();
+    getGames(gamesController)
+      .then((res) => setGames(res.data))
+      .catch((err) => console.error(err));
+    // }, [flagGames]);
+  }, []);
+
+  // load categories from database
+  useEffect(() => {
+    const categoriesController = new AbortController();
+    getCategories(categoriesController)
+      .then((res) => setCategories(res.data))
+      .catch((err) => console.error(err));
+    // }, [flagCategories]);
+  }, []);
+
+  // load languages from database
+  useEffect(() => {
+    const languagesController = new AbortController();
+    getLanguages(languagesController)
+      .then((res) => setLanguages(res.data))
+      .catch((err) => console.error(err));
+  }, [flagLanguages]);
 
   useEffect(() => {
     setCurrentPage(1);
@@ -35,6 +72,8 @@ export default function DashTable({ videos }) {
       setObjectNumber(categories.length);
     } else if (activeTab === "language") {
       setObjectNumber(languages.length);
+    } else if (activeTab === "games") {
+      setObjectNumber(games.length);
     } else {
       setObjectNumber(videos.length);
     }
@@ -43,9 +82,17 @@ export default function DashTable({ videos }) {
   return (
     <div className="flex w-screen max-w-[calc(100vw-320px)] flex-col gap-8 px-[100px] py-8">
       <h1>Manage Content</h1>
+
       <div className="relative min-w-[600px] overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
         <NavTab setActiveTabItem={setActiveTabItem} />
-        <RowSearch activeTab={activeTab} />
+
+        <RowSearch
+          activeTab={activeTab}
+          filterText={filterText}
+          setFilterText={setFilterText}
+          setFlagLanguages={setFlagLanguages}
+        />
+
         <table className="w-full overflow-x-auto text-left text-base text-neutralDarkest dark:text-neutralLightest">
           <RowHead activeTab={activeTab} />
           <tbody>
@@ -55,25 +102,39 @@ export default function DashTable({ videos }) {
                   .slice(offset, nextPage)
                   .map((video) => <RowVideo key={video.id} video={video} />)
               : activeTab === "category"
-              ? categories
-                  .slice(offset, nextPage)
-                  .map((category) => (
-                    <RowCategory key={category.id} category={category} />
-                  ))
+              ? categories.length &&
+                categories.slice(offset, nextPage).map((category) => (
+                  <RowCategory
+                    key={category.id}
+                    category={category}
+                    // setFlagCategories={setFlagCategories}
+                  />
+                ))
               : activeTab === "language"
-              ? languages
+              ? languages.length &&
+                filterTable(languages, "name", filterText)
                   .slice(offset, nextPage)
                   .map((language) => (
-                    <RowLanguage key={language.id} language={language} />
+                    <RowLanguage
+                      key={language.id}
+                      language={language}
+                      setFlagLanguages={setFlagLanguages}
+                    />
                   ))
               : activeTab === "game"
-              ? games
-                  .slice(offset, nextPage)
-                  .map((game) => <RowGame key={game.id} game={game} />)
+              ? games.length &&
+                games.slice(offset, nextPage).map((game) => (
+                  <RowGame
+                    key={game.id}
+                    game={game}
+                    // setFlagGames={setFlagGames}
+                  />
+                ))
               : null}
             {/* eslint-enable */}
           </tbody>
         </table>
+
         <ConfigProvider
           theme={{
             token: {
