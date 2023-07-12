@@ -9,15 +9,7 @@ import styles from "../../css/Table.module.css";
 import Label from "./Label";
 
 const Input = forwardRef(function forwardRefToChild(
-  {
-    htmlFor,
-    title,
-    type,
-    className,
-    placeholder,
-    accept,
-    required = "required",
-  },
+  { htmlFor, title, type, className, placeholder, accept, required = true },
   ref
 ) {
   return (
@@ -46,7 +38,7 @@ Input.propTypes = {
   className: PropTypes.string,
   placeholder: PropTypes.string,
   accept: PropTypes.string,
-  required: PropTypes.string,
+  required: PropTypes.bool,
 };
 
 Input.defaultProps = {
@@ -56,7 +48,7 @@ Input.defaultProps = {
   className: null,
   placeholder: null,
   accept: null,
-  required: "required",
+  required: true,
 };
 
 export default Input;
