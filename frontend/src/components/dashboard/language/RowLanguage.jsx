@@ -9,8 +9,10 @@ import Button from "../../utilities/Button";
 // Helpers
 import capitalizeText from "../../../helpers/capitalize";
 
-export default function RowLanguage({ language }) {
+export default function RowLanguage({ language, setFlagLanguages }) {
   const [isToggled, setIsToggled] = useState(false);
+
+  const toggleDropdown = () => setIsToggled(!isToggled);
 
   return (
     <>
@@ -24,15 +26,21 @@ export default function RowLanguage({ language }) {
               onClick={() => setIsToggled(!isToggled)}
               customCSS="flex items-center"
             >
-              <img src="../assets/icon/dashboard/edit.svg" alt="" />
+              <img src="../assets/icon/dashboard/edit.svg" alt="edit" />
             </Button>
             <Button type="button" customCSS="flex items-center">
-              <img src="../assets/icon/dashboard/delete.svg" alt="" />
+              <img src="../assets/icon/dashboard/delete.svg" alt="delete" />
             </Button>
           </span>
         </td>
       </tr>
-      {isToggled && <LanguageDropdown />}
+      {isToggled && (
+        <LanguageDropdown
+          id={language.id}
+          toggleDropdown={toggleDropdown}
+          setFlagLanguages={setFlagLanguages}
+        />
+      )}
     </>
   );
 }
@@ -42,4 +50,5 @@ RowLanguage.propTypes = {
     id: PropTypes.number,
     name: PropTypes.string,
   }).isRequired,
+  setFlagLanguages: PropTypes.func.isRequired,
 };
