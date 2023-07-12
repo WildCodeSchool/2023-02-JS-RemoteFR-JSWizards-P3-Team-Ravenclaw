@@ -11,7 +11,7 @@ export default function DashNavbar() {
   const Menus = [
     { title: "Dashboard", id: 1, path: "" },
     { title: "Manage Content", id: 2, path: "edit" },
-    { title: "Favorites Videos", id: 3 },
+    { title: "Favorites Videos", id: 3, path: "favories" },
     { title: "Users", id: 4 },
     { title: "Support", id: 5 },
     { title: "Contact Messages", id: 6 },

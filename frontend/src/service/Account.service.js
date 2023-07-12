@@ -30,3 +30,13 @@ export const getPromotedVideos = async () => {
     return { data: [] };
   }
 };
+export const getPremiumVideos = async (gameName) => {
+  try {
+    const url = `${baseUrl}/videos?name=${gameName}`;
+    const { data } = await axios(url);
+    console.log(data);
+    return data;
+  } catch (error) {
+    return { data: [] };
+  }
+};

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import RowSearch from "./RowSearch";
 import RowHead from "./RowHead";
 import RowVideo from "./video/RowVideo";

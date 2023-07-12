@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 // Components
 import ManageContent from "../components/dashboard/ManageContent";
 import Dashboard from "../components/Dashboard";
+import FavVideos from "../components/dashboard/FavVideos";
 
 const videos = [
   {
@@ -104,15 +105,18 @@ const videos = [
   },
 ];
 
-export default function Admin({ edit }) {
+export default function Admin({ edit, dashboard, favories }) {
   return (
     <div>
       {edit && <ManageContent videos={videos} />}
-      {!edit && <Dashboard videos={videos} />}
+      {dashboard && <Dashboard videos={videos} />}
+      {favories && <FavVideos videos={videos} />}
     </div>
   );
 }
 
 Admin.propTypes = {
   edit: PropTypes.bool.isRequired,
+  dashboard: PropTypes.bool.isRequired,
+  favories: PropTypes.bool.isRequired,
 };

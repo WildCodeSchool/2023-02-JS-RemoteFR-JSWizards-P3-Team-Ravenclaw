@@ -11,7 +11,7 @@ const displayedLinks = [
   {
     id: 1,
     img: "./assets/img/picturesForHome/cs.jpg",
-    link: "/videos/18",
+    link: "/videos/2",
     alt: "cs",
   },
   {

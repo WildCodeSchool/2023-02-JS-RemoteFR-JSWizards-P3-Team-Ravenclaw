@@ -37,8 +37,9 @@ export default function App() {
             <Route path="*" element={<NotFound />} />
             {loggedIn ? (
               <Route path="account" element={<DashLayout />}>
-                <Route path="" element={<Admin />} />
+                <Route path="" element={<Admin dashboard />} />
                 <Route path="edit" element={<Admin edit />} />
+                <Route path="favories" element={<Admin favories />} />
                 <Route path="user" element={<User />} />
               </Route>
             ) : (
