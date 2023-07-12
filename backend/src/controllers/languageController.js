@@ -41,4 +41,18 @@ const post = async (req, res) => {
   }
 };
 
-module.exports = { getAll, editById, post };
+const remove = async (req, res) => {
+  try {
+    const [result] = await models.language.delete(req.params.id);
+    if (result.affectedRows === 0)
+      return res.status(404).send(`Language not found`);
+    return res.sendStatus(204);
+  } catch (err) {
+    console.error(err);
+    return res
+      .status(500)
+      .send("oops...an error occured when removing language from database");
+  }
+};
+
+module.exports = { getAll, editById, post, remove };

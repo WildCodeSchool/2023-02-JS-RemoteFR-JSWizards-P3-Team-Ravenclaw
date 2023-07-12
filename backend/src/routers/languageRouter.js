@@ -7,18 +7,17 @@ const checkForExistingLanguage = require("../middlewares/langMiddleware");
 const router = express.Router();
 
 /**
- * TODO: POST handler with validateLanguage middleware..
- * TODO: DELETE handler...
  * TODO: add authentication wall...
  */
 router.get("/", languageController.getAll);
 
+router.put("/:id", validateLanguageInfo, languageController.editById);
+router.delete("/:id", languageController.remove);
 router.post(
   "/",
   validateLanguageInfo,
   checkForExistingLanguage,
   languageController.post
 );
-router.put("/:id", validateLanguageInfo, languageController.editById);
 
 module.exports = router;
