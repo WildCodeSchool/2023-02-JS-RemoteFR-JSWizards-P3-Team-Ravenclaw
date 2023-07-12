@@ -1,5 +1,6 @@
 // Packages
 import PropTypes from "prop-types";
+import { forwardRef } from "react";
 
 // Style
 import styles from "../../css/Table.module.css";
@@ -7,14 +8,10 @@ import styles from "../../css/Table.module.css";
 // Components
 import Label from "./Label";
 
-export default function Input({
-  htmlFor,
-  title,
-  type,
-  className,
-  placeholder,
-  accept,
-}) {
+const Input = forwardRef(function forwardRefToChild(
+  { htmlFor, title, type, className, placeholder, accept },
+  ref
+) {
   return (
     <div className="flex flex-col gap-1.5">
       <Label
@@ -27,10 +24,11 @@ export default function Input({
         className={className}
         placeholder={placeholder}
         accept={accept}
+        ref={ref}
       />
     </div>
   );
-}
+});
 
 Input.propTypes = {
   htmlFor: PropTypes.string,
@@ -49,3 +47,5 @@ Input.defaultProps = {
   placeholder: null,
   accept: null,
 };
+
+export default Input;
