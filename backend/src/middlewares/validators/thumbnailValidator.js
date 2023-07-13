@@ -5,7 +5,7 @@ const Joi = require("joi");
 
 const thumbnailSchema = Joi.object({
   originalname: Joi.string()
-    .regex(/([A-z0-9-_./]+)?.(png|jpg|jpeg|webp)$/i)
+    .regex(/([A-z0-9:-_./]+)?.(png|jpg|jpeg|webp)$/i)
     .max(255)
     .required(),
 });
