@@ -1,35 +1,21 @@
 // Packages
 import PropTypes from "prop-types";
-import { useState, useEffect } from "react";
-
-// Hooks
-import useAxios from "../hooks/useAxios";
+import { useState } from "react";
 
 // Components
 import ManageContent from "../components/dashboard/ManageContent";
 import Dashboard from "../components/Dashboard";
-import Loader from "../components/utilities/Loader";
 
 export default function Admin({ edit }) {
-  const [isLoading, setIsLoading] = useState(true);
-  const { data: dbStats, isLoading: isStatsLoading } = useAxios("/admin/stats");
-  const { data: videos, isLoading: isVideosLoading } =
-    useAxios("/admin/videos");
-
-  useEffect(() => {
-    if (!isStatsLoading && !isVideosLoading) setIsLoading(false);
-  }, []);
+  const [filterText, setFilterText] = useState("");
 
   return (
-    // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <div>
-          {edit && <ManageContent videos={videos} />}
-          {!edit && <Dashboard videos={videos} dbStats={dbStats} />}
-        </div>
+      {edit && (
+        <ManageContent filterText={filterText} setFilterText={setFilterText} />
+      )}
+      {!edit && (
+        <Dashboard filterText={filterText} setFilterText={setFilterText} />
       )}
     </>
   );
