@@ -1,7 +1,7 @@
 // Packages
-import { Pagination, ConfigProvider } from "antd";
-import { useState } from "react";
 import PropTypes from "prop-types";
+import { Pagination, ConfigProvider } from "antd";
+import { useState, useEffect } from "react";
 
 // Components
 import RowStatic from "./dashboard/RowStatic";
@@ -9,12 +9,20 @@ import RowHead from "./dashboard/RowHead";
 import RowSearch from "./dashboard/RowSearch";
 import Card from "./utilities/Card";
 
+// Helpers
+import filterTable from "../helpers/filterTable";
+
+// Services
+import { getVideos, getStats } from "../services/admin";
+
 // Data
 import adminStats from "../data/adminStats.json";
 
-export default function Dashboard({ videos, dbStats }) {
+export default function Dashboard({ filterText, setFilterText }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
+  const [videos, setVideos] = useState([]);
+  const [dbStats, setDbStats] = useState([]);
 
   const offset = pageSize * currentPage - pageSize; // pages parcourues
   const nextPage = offset + pageSize;
@@ -24,33 +32,58 @@ export default function Dashboard({ videos, dbStats }) {
     ...dbStats[index],
   }));
 
+  // load videos from database
+  useEffect(() => {
+    const videosController = new AbortController();
+    getVideos(videosController)
+      .then((res) => setVideos(res.data))
+      .catch((err) => console.error(err));
+  }, []);
+
+  // load admin stats from database
+  useEffect(() => {
+    const statsController = new AbortController();
+    getStats(statsController)
+      .then((res) => setDbStats(res.data))
+      .catch((err) => console.error(err));
+  }, []);
+
   return (
     <article className="flex w-screen max-w-[calc(100vw-320px)] flex-col gap-8 px-[100px] py-8">
       <h1>Dashboard</h1>
 
       <div className="flex flex-wrap gap-4 lg:flex-nowrap">
-        {stats.map((stat) => (
-          <Card classCSS="w-full bg-primary py-2 px-6 rounded-lg" key={stat.id}>
-            <div className="flex flex-wrap justify-between gap-y-2">
-              <div className="flex flex-col gap-1">
-                <p>{stat.title}</p>
-                <p className="font-bold">{stat.total}</p>
+        {dbStats.length &&
+          stats.map((stat) => (
+            <Card
+              classCSS="w-full bg-primary py-2 px-6 rounded-lg"
+              key={stat.id}
+            >
+              <div className="flex flex-wrap justify-between gap-y-2">
+                <div className="flex flex-col gap-1">
+                  <p>{stat.title}</p>
+                  <p className="font-bold">{stat.total}</p>
+                </div>
+                <img src={stat.logo} alt={stat.alt} className="w-[30px]" />
               </div>
-              <img src={stat.logo} alt={stat.alt} className="w-[30px]" />
-            </div>
-          </Card>
-        ))}
+            </Card>
+          ))}
       </div>
 
       <div className="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
-        <RowSearch activeTab="dashboard" />
+        <RowSearch
+          activeTab="dashboard"
+          filterText={filterText}
+          setFilterText={setFilterText}
+        />
         <div className="overflow-x-auto">
           <table className="w-full text-left text-base text-neutralDarkest dark:text-neutralLightest">
             <RowHead activeTab="dashboard" />
             <tbody>
-              {videos.slice(offset, nextPage).map((video) => (
-                <RowStatic video={video} key={video.id} />
-              ))}
+              {videos.length &&
+                filterTable(videos, "title", filterText)
+                  .slice(offset, nextPage)
+                  .map((video) => <RowStatic video={video} key={video.id} />)}
             </tbody>
           </table>
           <ConfigProvider
@@ -86,22 +119,6 @@ export default function Dashboard({ videos, dbStats }) {
 }
 
 Dashboard.propTypes = {
-  videos: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      title: PropTypes.string,
-      category: PropTypes.string,
-      language: PropTypes.string,
-      visibility: PropTypes.number,
-      status: PropTypes.string,
-    })
-  ).isRequired,
-  dbStats: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string,
-      total: PropTypes.number,
-      logo: PropTypes.string,
-      alt: PropTypes.string,
-    })
-  ).isRequired,
+  filterText: PropTypes.string.isRequired,
+  setFilterText: PropTypes.func.isRequired,
 };
