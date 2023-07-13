@@ -113,14 +113,14 @@ export default function ModalVideo({ open, onOk, onCancel, onClick }) {
             <Input
               title="Video Upload"
               type="file"
-              accept="video/*"
+              accept=".mp4, .avi, .mov, .wmv, .webm"
               className="file:hover:primaryLightest file:cursor-pointer file:rounded-md file:border-none file:bg-primary file:p-3 file:text-neutralLightest"
               required
             />
             <Input
               title="Image Upload"
               type="file"
-              accept="image/*"
+              accept=".jpg, .jpeg, .png, .webp"
               className="file:hover:primaryLightest file:cursor-pointer file:rounded-md file:border-none file:bg-primary file:p-3 file:text-neutralLightest"
             />
           </div>

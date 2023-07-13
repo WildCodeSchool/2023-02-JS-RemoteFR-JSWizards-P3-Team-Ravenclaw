@@ -80,7 +80,6 @@ export default function ModalLanguage({ open, setIsModalOpened, setFlag }) {
 
         <div className="flex justify-end gap-2">
           <Button
-            key="cancel"
             type="button"
             onClick={handleClose}
             customCSS={`${styles.btn_modal__style} ring-1 ring-inset ring-neutral text-neutralDark`}
@@ -89,7 +88,6 @@ export default function ModalLanguage({ open, setIsModalOpened, setFlag }) {
           </Button>
 
           <Button
-            key="submit"
             type="submit"
             customCSS={`${styles.btn_modal__style} ml-2 bg-primaryLight text-neutralLightest`}
           >
