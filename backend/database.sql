@@ -26,8 +26,8 @@ CREATE TABLE `video` (
   `is_promoted` TINYINT UNSIGNED DEFAULT 0,
 	-- 'visibility' controls which user (not connected, connected with plan...) can access the videos
   -- 0: all users
-  -- 1: connected w/o plan
-  -- 2: connected with plan
+  -- 1: connected w OR w/o plan (freemium)
+  -- 2: connected with plan (premium)
   `visibility` TINYINT UNSIGNED DEFAULT 0,
 	`game_id` INT NOT NULL,
   CONSTRAINT fk_video_game FOREIGN KEY (`game_id`) REFERENCES `game`(`id`),
