@@ -32,7 +32,7 @@ export default function LanguageDropdown({
   };
 
   const handleSubmit = (e) => {
-    const name = inputRef.current.value;
+    const name = inputRef.current.value.trim().toLowerCase();
     e.preventDefault();
     toggleDropdown();
     modifyLanguageById({ name }, id)

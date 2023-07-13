@@ -34,7 +34,7 @@ export default function ModalCategory({ open, setIsModalOpened, setFlag }) {
   };
 
   const handleSubmit = (e) => {
-    const name = inputRef.current.value.trim();
+    const name = inputRef.current.value.trim().toLowerCase();
     e.preventDefault();
     addCategory({ name })
       .then((res) => {

@@ -34,7 +34,7 @@ export default function ModalLanguage({ open, setIsModalOpened, setFlag }) {
   };
 
   const handleSubmit = (e) => {
-    const name = inputRef.current.value.trim();
+    const name = inputRef.current.value.trim().toLowerCase();
     e.preventDefault();
     addLanguage({ name })
       .then((res) => {
