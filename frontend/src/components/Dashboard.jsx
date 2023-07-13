@@ -83,7 +83,11 @@ export default function Dashboard({ filterText, setFilterText }) {
               {videos.length &&
                 filterTable(videos, "title", filterText)
                   .slice(offset, nextPage)
-                  .map((video) => <RowStatic video={video} key={video.id} />)}
+                  .map((video) => (
+                    <tr className="border-b dark:border-neutral" key={video.id}>
+                      <RowStatic video={video} />
+                    </tr>
+                  ))}
             </tbody>
           </table>
           <ConfigProvider
