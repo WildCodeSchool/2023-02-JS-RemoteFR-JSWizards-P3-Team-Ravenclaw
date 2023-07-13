@@ -114,13 +114,13 @@ export default function VideoDropdown() {
             <Input
               title="Video Upload"
               type="file"
-              accept="video/*"
+              accept=".mp4, .avi, .mov, .wmv, .webm"
               className="file:hover:primaryLightest file:cursor-pointer file:rounded-md file:border-none file:bg-primary file:p-3 file:text-neutralLightest"
             />
             <Input
               title="Image Upload"
               type="file"
-              accept="image/*"
+              accept=".jpg, .jpeg, .png, .webp"
               className="file:hover:primaryLightest file:cursor-pointer file:rounded-md file:border-none file:bg-primary file:p-3 file:text-neutralLightest"
             />
             <span className="flex items-end">
