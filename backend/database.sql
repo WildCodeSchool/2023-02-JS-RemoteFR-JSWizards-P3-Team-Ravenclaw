@@ -1,97 +1,108 @@
--- SQLBook: Code
 -- _____________________________________________ CREATE TABLES _____________________________________________
 DROP TABLE IF EXISTS `language`;
 CREATE TABLE `language` (
-  `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(50) NOT NULL
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+    `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(50) NOT NULL
+)  ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
 
 DROP TABLE IF EXISTS `game`;
 CREATE TABLE `game` (
-  `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(50) NOT NULL,
-  `thumbnail` VARCHAR(255) NOT NULL
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+    `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(50) NOT NULL,
+    `thumbnail` VARCHAR(255) NOT NULL
+)  ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
 
 DROP TABLE IF EXISTS `video`;
 CREATE TABLE `video` (
-  `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `title` VARCHAR(255) NOT NULL,
-  `upload_date` DATE NOT NULL,
-  `description` VARCHAR(255) NULL,
-  `slug` VARCHAR(255) NULL,
-  `status` VARCHAR(255) NOT NULL,
-  `thumbnail` VARCHAR(255) NOT NULL,
-  `url_video` VARCHAR(255) NOT NULL,
-  `is_promoted` TINYINT UNSIGNED DEFAULT 0,
-	-- 'visibility' controls which user (not connected, connected with plan...) can access the videos
-  -- 0: all users
-  -- 1: connected w OR w/o plan (freemium)
-  -- 2: connected with plan (premium)
-  `visibility` TINYINT UNSIGNED DEFAULT 0,
-	`game_id` INT NOT NULL,
-  CONSTRAINT fk_video_game FOREIGN KEY (`game_id`) REFERENCES `game`(`id`),
-	`language_id` INT NOT NULL,
-  CONSTRAINT fk_video_language FOREIGN KEY (`language_id`) REFERENCES `language`(`id`)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+    `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    `title` VARCHAR(255) NOT NULL,
+    `upload_date` DATE NOT NULL,
+    `description` VARCHAR(255) NULL,
+    `slug` VARCHAR(255) NULL,
+    `status` VARCHAR(255) NOT NULL,
+    `thumbnail` VARCHAR(255) NOT NULL,
+    `url_video` VARCHAR(255) NOT NULL,
+    `is_promoted` TINYINT UNSIGNED DEFAULT 0,
+    -- 'visibility' controls which user (not connected, connected with plan...) can access the videos
+    -- 0: all users
+    -- 1: connected w OR w/o plan (freemium)
+    -- 2: connected with plan (premium)
+    `visibility` TINYINT UNSIGNED DEFAULT 0,
+    `game_id` INT NOT NULL,
+    CONSTRAINT fk_video_game FOREIGN KEY (`game_id`)
+        REFERENCES `game` (`id`),
+    `language_id` INT NOT NULL,
+    CONSTRAINT fk_video_language FOREIGN KEY (`language_id`)
+        REFERENCES `language` (`id`)
+)  ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
 
 DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
-  `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(50) NOT NULL
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+    `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(50) NOT NULL
+)  ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
 
 DROP TABLE IF EXISTS `user_type`;
 CREATE TABLE `user_type` (
-  `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	-- 'role' controls user privileges
-  -- 0: common user
-  -- 1: admin
-  `is_admin` TINYINT NOT NULL DEFAULT 0
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+    `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    -- 'role' controls user privileges
+    -- 0: common user
+    -- 1: admin
+    `is_admin` TINYINT NOT NULL DEFAULT 0
+)  ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
 
 DROP TABLE IF EXISTS `plan`;
 CREATE TABLE `plan` (
-  `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(50) NOT NULL,
-  `price_monthly` DECIMAL(10,2) NOT NULL,
-  `price_yearly` DECIMAL(10,2) NOT NULL,
-  `description` VARCHAR(255) NOT NULL,
-  `perk_1` VARCHAR(255) NOT NULL,
-  `perk_2` VARCHAR(255) NOT NULL,
-  `perk_3` VARCHAR(255) NOT NULL,
-  `perk_4` VARCHAR(255) NOT NULL
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+    `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(50) NOT NULL,
+    `price_monthly` DECIMAL(10 , 2 ) NOT NULL,
+    `price_yearly` DECIMAL(10 , 2 ) NOT NULL,
+    `description` VARCHAR(255) NOT NULL,
+    `perk_1` VARCHAR(255) NOT NULL,
+    `perk_2` VARCHAR(255) NOT NULL,
+    `perk_3` VARCHAR(255) NOT NULL,
+    `perk_4` VARCHAR(255) NOT NULL
+)  ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-  `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `email` VARCHAR(150) NOT NULL,
-  `password` VARCHAR(255) NOT NULL,
-  `pseudo` VARCHAR(150) NULL,
-  `plan_id` INT DEFAULT NULL,
-  CONSTRAINT fk_user_plan FOREIGN KEY (`plan_id`) REFERENCES `plan`(`id`),
-	`user_type_id` INT DEFAULT 1,
-  CONSTRAINT fk_user_user_type FOREIGN KEY (`user_type_id`) REFERENCES `user_type`(`id`)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+    `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    `email` VARCHAR(150) NOT NULL,
+    `password` VARCHAR(255) NOT NULL,
+    `pseudo` VARCHAR(150) NULL,
+    `plan_id` INT DEFAULT NULL,
+    CONSTRAINT fk_user_plan FOREIGN KEY (`plan_id`)
+        REFERENCES `plan` (`id`),
+    `user_type_id` INT DEFAULT 1,
+    CONSTRAINT fk_user_user_type FOREIGN KEY (`user_type_id`)
+        REFERENCES `user_type` (`id`)
+)  ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
 
 DROP TABLE IF EXISTS `user_video`;
 CREATE TABLE `user_video` (
-  `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `user_id` INT NULL,
-  CONSTRAINT fk_user_video FOREIGN KEY (`user_id`) REFERENCES `user`(`id`),
-	`video_id` INT NULL,
-  CONSTRAINT fk_video_user FOREIGN KEY (`video_id`) REFERENCES `video`(`id`),
-  `is_favorite` TINYINT UNSIGNED DEFAULT 0
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+    `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    `user_id` INT DEFAULT NULL,
+    CONSTRAINT fk_user_video FOREIGN KEY (`user_id`)
+        REFERENCES `user` (`id`)
+        ON DELETE SET NULL,
+    `video_id` INT DEFAULT NULL,
+    CONSTRAINT fk_video_user FOREIGN KEY (`video_id`)
+        REFERENCES `video` (`id`)
+        ON DELETE SET NULL,
+    `is_favorite` TINYINT UNSIGNED DEFAULT 0
+)  ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
 
 DROP TABLE IF EXISTS `video_category`;
 CREATE TABLE `video_category` (
-  `video_id` INT NOT NULL,
-  CONSTRAINT fk_video_category FOREIGN KEY (`video_id`) REFERENCES `video`(`id`),
-	`category_id` INT NOT NULL,
-  CONSTRAINT fk_category_video FOREIGN KEY (`category_id`) REFERENCES `category`(`id`)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+    `video_id` INT DEFAULT NULL,
+    CONSTRAINT fk_video_category FOREIGN KEY (`video_id`)
+        REFERENCES `video` (`id`)
+        ON DELETE SET NULL,
+    `category_id` INT DEFAULT NULL,
+    CONSTRAINT fk_category_video FOREIGN KEY (`category_id`)
+        REFERENCES `category` (`id`)
+         ON DELETE SET NULL
+)  ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
 
 -- _____________________________________________ POPULATE TABLES _____________________________________________
 -- Create user types
