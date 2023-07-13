@@ -15,8 +15,9 @@ export default function RowSearch({
   activeTab,
   filterText,
   setFilterText,
-  setFlagLanguages,
   setFlagCategories,
+  setFlagLanguages,
+  setFlagGames,
 }) {
   const [isModalOpened, setIsModalOpened] = useState(false);
 
@@ -51,7 +52,6 @@ export default function RowSearch({
         />
       );
     }
-    // EN COURS...
     if (activeTab === "category") {
       return (
         <ModalCategory
@@ -70,14 +70,12 @@ export default function RowSearch({
         />
       );
     }
-    // EN COURS...
     if (activeTab === "game") {
       return (
         <ModalGame
           open={isModalOpened}
-          onOk={() => setIsModalOpened(false)}
-          onCancel={() => setIsModalOpened(false)}
-          onClick={() => setIsModalOpened(false)}
+          setIsModalOpened={setIsModalOpened}
+          setFlag={setFlagGames}
         />
       );
     }
@@ -131,8 +129,17 @@ export default function RowSearch({
 
 RowSearch.propTypes = {
   activeTab: PropTypes.string.isRequired,
-  filterText: PropTypes.string.isRequired,
-  setFilterText: PropTypes.func.isRequired,
-  setFlagLanguages: PropTypes.func.isRequired,
-  setFlagCategories: PropTypes.func.isRequired,
+  filterText: PropTypes.string,
+  setFilterText: PropTypes.func,
+  setFlagCategories: PropTypes.func,
+  setFlagLanguages: PropTypes.func,
+  setFlagGames: PropTypes.func,
+};
+
+RowSearch.defaultProps = {
+  filterText: null,
+  setFilterText: null,
+  setFlagCategories: null,
+  setFlagLanguages: null,
+  setFlagGames: null,
 };

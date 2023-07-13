@@ -8,6 +8,7 @@ const languageRouter = require("./languageRouter");
 const planRouter = require("./planRouter");
 const userRouter = require("./userRouter");
 const videoRouter = require("./videoRouter");
+const uploadRouter = require("./uploadRouter");
 
 const router = express.Router();
 
@@ -19,5 +20,6 @@ router.use("/languages", languageRouter);
 router.use("/plans", planRouter);
 router.use("/users", userRouter);
 router.use("/videos", videoRouter);
+router.use("/upload", uploadRouter);
 
 module.exports = router;

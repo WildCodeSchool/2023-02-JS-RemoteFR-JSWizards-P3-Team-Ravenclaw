@@ -36,10 +36,12 @@ export default function Searchbar({
 
 Searchbar.propTypes = {
   className: PropTypes.string,
-  filterText: PropTypes.string.isRequired,
-  onFilterTextChange: PropTypes.func.isRequired,
+  filterText: PropTypes.string,
+  onFilterTextChange: PropTypes.func,
 };
 
 Searchbar.defaultProps = {
   className: null,
+  filterText: null,
+  onFilterTextChange: null,
 };
