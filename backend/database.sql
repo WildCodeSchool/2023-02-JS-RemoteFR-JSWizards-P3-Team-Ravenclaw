@@ -16,10 +16,10 @@ DROP TABLE IF EXISTS `video`;
 CREATE TABLE `video` (
     `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     `title` VARCHAR(255) NOT NULL,
-    `upload_date` DATE NOT NULL,
+    `upload_date` DATE NOT NULL DEFAULT (DATE_FORMAT(CURRENT_TIMESTAMP, "%Y-%m-%d")),
     `description` VARCHAR(255) NOT NULL,
     `slug` VARCHAR(255) NULL,
-    `status` VARCHAR(255) NOT NULL DEFAULT 'online',
+    `status` VARCHAR(255) DEFAULT "online",
     `thumbnail` VARCHAR(255) NOT NULL,
     `url_video` VARCHAR(255) NOT NULL,
     `is_promoted` TINYINT UNSIGNED DEFAULT 0,
@@ -188,7 +188,7 @@ VALUES
 ('Show Me Your Moose Losers Semis - DannyDVito (Young Link) Vs. Big Stew (Kazuya) Smash Ultimate - SSB', '2023-06-26' , 'Show Me Your Moose is a Super Smash Bros Ultimate Tournament in Wasilla, Arkansas.', '', 'offline', './assets/videos/smash.png', 'https://www.youtube.com/watch?v=fb7GtosBk9M', 0, 0, 16, 1),
 ('Simp And Abezy Ace BACK TO BACK 💥 | Best of the Week - Major V Week 2', '2023-06-26' , 'Check out the best plays from Week 2 of the Major V Qualifiers, presented by Monster Energy. Which was your favorite? 👀', '', 'offline', './assets/videos/cod.png', 'https://www.youtube.com/watch?v=HCFPBZLt-pg', 0, 1, 2, 1),
 ('NA Regional CHAMPIONS! ALGS Winners’ POV | DarkZero | Year 3 Split 2 | Apex Legends', '2023-06-26' , 'Drop into the POV of our NA Regional Champions DarkZero as they secured the win on Match Point during Game 8.', '', 'offline', './assets/videos/apex.png', 'https://www.youtube.com/watch?v=yfoJtqE5b-s', 0, 0, 1, 1),
-('OG vs NIP - MAP 1 P2 - 1/4 de finale - ESL Pro League S14', '2023/07/12', 'Broadcasted live on Twitch -- Watch live at https://www.twitch.tv/esl_csgo_fr', '', 'offline', './assets/videos/CS.png', 'https://www.youtube.com/watch?v=Q_sOW9H6tGU', 0, 1, 4, 2 ),
+('OG vs NIP - MAP 1 P2 - 1/4 de finale - ESL Pro League S14', '2023-07-12', 'Broadcasted live on Twitch -- Watch live at https://www.twitch.tv/esl_csgo_fr', '', 'offline', './assets/videos/CS.png', 'https://www.youtube.com/watch?v=Q_sOW9H6tGU', 0, 1, 4, 2 ),
 ('LoL - Saminos - Quadruplé Varus', '2023-07-12', '', '', 'offline', './assets/videos/lol.jpg', 'https://www.youtube.com/watch?v=RppjAidXdXY', 0, 1, 9, 2);
 
 -- Create user_video
