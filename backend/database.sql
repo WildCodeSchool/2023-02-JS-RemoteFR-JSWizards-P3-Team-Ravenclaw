@@ -16,7 +16,7 @@ DROP TABLE IF EXISTS `video`;
 CREATE TABLE `video` (
     `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     `title` VARCHAR(255) NOT NULL,
-    `upload_date` DATE NOT NULL DEFAULT (DATE_FORMAT(CURRENT_TIMESTAMP, "%Y-%m-%d")),
+    `upload_date` DATE DEFAULT (DATE_FORMAT(CURRENT_TIMESTAMP, "%Y-%m-%d")),
     `description` VARCHAR(255) NOT NULL,
     `slug` VARCHAR(255) NULL,
     `status` VARCHAR(255) DEFAULT "online",
