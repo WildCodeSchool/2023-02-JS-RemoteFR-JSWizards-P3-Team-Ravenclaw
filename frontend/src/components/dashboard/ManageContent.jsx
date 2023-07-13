@@ -30,7 +30,7 @@ export default function DashTable({ videos }) {
   const [categories, setCategories] = useState([]);
   const [filterText, setFilterText] = useState("");
 
-  // const [flagGames, setFlagGames] = useState(false);
+  const [flagGames, setFlagGames] = useState(false);
   const [flagCategories, setFlagCategories] = useState(false);
   const [flagLanguages, setFlagLanguages] = useState(false);
 
@@ -46,8 +46,7 @@ export default function DashTable({ videos }) {
     getGames(gamesController)
       .then((res) => setGames(res.data))
       .catch((err) => console.error(err));
-    // }, [flagGames]);
-  }, []);
+  }, [flagGames]);
 
   // load categories from database
   useEffect(() => {
@@ -89,8 +88,9 @@ export default function DashTable({ videos }) {
           activeTab={activeTab}
           filterText={filterText}
           setFilterText={setFilterText}
-          setFlagLanguages={setFlagLanguages}
           setFlagCategories={setFlagCategories}
+          setFlagLanguages={setFlagLanguages}
+          setFlagGames={setFlagGames}
         />
 
         <table className="w-full overflow-x-auto text-left text-base text-neutralDarkest dark:text-neutralLightest">
@@ -125,13 +125,15 @@ export default function DashTable({ videos }) {
                   ))
               : activeTab === "game"
               ? games.length &&
-                games.slice(offset, nextPage).map((game) => (
-                  <RowGame
-                    key={game.id}
-                    game={game}
-                    // setFlagGames={setFlagGames}
-                  />
-                ))
+                filterTable(games, "name", filterText)
+                  .slice(offset, nextPage)
+                  .map((game) => (
+                    <RowGame
+                      key={game.id}
+                      game={game}
+                      setFlagGames={setFlagGames}
+                    />
+                  ))
               : null}
             {/* eslint-enable */}
           </tbody>
