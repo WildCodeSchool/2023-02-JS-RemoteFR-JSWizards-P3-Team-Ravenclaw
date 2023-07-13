@@ -43,4 +43,46 @@ const getById = async (req, res) => {
   }
 };
 
-module.exports = { getAllWithFilters, getById };
+const editById = async (req, res) => {
+  try {
+    const [result] = await models.video.update(req.body, req.params.id);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).send(`Video not found`);
+    }
+    return res.sendStatus(204);
+  } catch (err) {
+    console.error(err);
+    return res
+      .status(500)
+      .send("oops...an error occured when updating video from database");
+  }
+};
+
+const post = async (req, res) => {
+  try {
+    await models.video.create(req.body);
+    res.sendStatus(204);
+  } catch (err) {
+    console.error(err);
+    res
+      .status(500)
+      .send("oops...an error occured when updating video from database");
+  }
+};
+
+const remove = async (req, res) => {
+  try {
+    const [result] = await models.video.delete(req.params.id);
+    if (result.affectedRows === 0)
+      return res.status(404).send(`Video not found`);
+    return res.sendStatus(204);
+  } catch (err) {
+    console.error(err);
+    return res
+      .status(500)
+      .send("oops...an error occured when removing video from database");
+  }
+};
+
+module.exports = { getAllWithFilters, getById, editById, post, remove };
