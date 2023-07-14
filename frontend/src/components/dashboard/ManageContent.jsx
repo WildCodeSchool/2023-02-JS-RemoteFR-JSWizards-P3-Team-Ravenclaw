@@ -23,7 +23,7 @@ export default function ManageContent({ filterText, setFilterText }) {
     <div className="flex w-screen max-w-[calc(100vw-320px)] flex-col gap-8 px-[100px] py-8">
       <h1>Manage Content</h1>
 
-      <div className="relative min-w-[600px] overflow-hidden bg-gray-800 bg-white shadow-md sm:rounded-lg">
+      <div className="relative min-w-[600px] overflow-hidden bg-gray-800 shadow-md sm:rounded-lg">
         <NavTab setActiveTabItem={setActiveTabItem} />
 
         <RowSearch
