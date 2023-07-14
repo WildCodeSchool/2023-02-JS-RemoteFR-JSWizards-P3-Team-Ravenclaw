@@ -28,12 +28,14 @@ CREATE TABLE `video` (
     -- 1: connected w OR w/o plan (freemium)
     -- 2: connected with plan (premium)
     `visibility` TINYINT UNSIGNED DEFAULT 0,
-    `game_id` INT NOT NULL,
+    `game_id` INT DEFAULT NULL,
     CONSTRAINT fk_video_game FOREIGN KEY (`game_id`)
-        REFERENCES `game` (`id`),
-    `language_id` INT NOT NULL,
+        REFERENCES `game` (`id`)
+         ON DELETE SET NULL,
+    `language_id` INT DEFAULT NULL,
     CONSTRAINT fk_video_language FOREIGN KEY (`language_id`)
         REFERENCES `language` (`id`)
+         ON DELETE SET NULL
 )  ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
 
 DROP TABLE IF EXISTS `category`;
