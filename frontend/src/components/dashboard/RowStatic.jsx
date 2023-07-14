@@ -7,13 +7,15 @@ import checkRowStatus from "../../helpers/checkRowStatus";
 
 export default function RowStatic({ video }) {
   return (
-    <>
-      <td key={video.id} className="px-4 py-3 text-sm">
-        {video.id}
-      </td>
+    <tr className="border-b dark:border-neutral">
+      <td className="px-4 py-3 text-sm">{video.id}</td>
       <td className="px-4 py-3 text-sm">{capitalizeText(video.title)}</td>
-      <td className="px-4 py-3 text-sm">{video.category.toUpperCase()}</td>
-      <td className="px-4 py-3 text-sm">{capitalizeText(video.language)}</td>
+      <td className="px-4 py-3 text-sm">
+        {video.category?.toUpperCase() || "-"}
+      </td>
+      <td className="px-4 py-3 text-sm">
+        {capitalizeText(video.language) || "-"}
+      </td>
       <td className="px-4 py-3 text-sm">
         <span className={checkRowStatus(video.status)}>
           {capitalizeText(video.status)}
@@ -22,7 +24,7 @@ export default function RowStatic({ video }) {
       <td className="px-4 py-3 text-sm">
         <input type="checkbox" checked={video.visibility} readOnly />
       </td>
-    </>
+    </tr>
   );
 }
 

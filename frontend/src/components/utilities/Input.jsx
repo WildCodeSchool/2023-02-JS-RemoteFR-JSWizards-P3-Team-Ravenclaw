@@ -2,17 +2,15 @@
 import PropTypes from "prop-types";
 import { forwardRef } from "react";
 
-// Style
+// Styles
 import styles from "../../css/Table.module.css";
-
-// Components
-import Label from "./Label";
 
 const Input = forwardRef(function forwardRefToChild(
   {
     htmlFor,
     title,
     tooltip,
+    name = "",
     type,
     className,
     placeholder,
@@ -22,13 +20,13 @@ const Input = forwardRef(function forwardRefToChild(
   ref
 ) {
   return (
-    <div className="flex flex-col gap-1.5">
-      <Label
-        htmlFor={htmlFor}
-        className={`${styles.label__style}`}
-        title={title}
-      />
+    <label
+      htmlFor={htmlFor}
+      className={`flex flex-col gap-1.5 ${styles.label__style}`}
+    >
+      {title}
       <input
+        name={name}
         title={tooltip}
         type={type}
         className={className}
@@ -37,7 +35,7 @@ const Input = forwardRef(function forwardRefToChild(
         required={required}
         ref={ref}
       />
-    </div>
+    </label>
   );
 });
 
@@ -45,6 +43,7 @@ Input.propTypes = {
   htmlFor: PropTypes.string,
   title: PropTypes.string,
   tooltip: PropTypes.string,
+  name: PropTypes.string,
   type: PropTypes.string,
   className: PropTypes.string,
   placeholder: PropTypes.string,
@@ -56,6 +55,7 @@ Input.defaultProps = {
   htmlFor: null,
   title: null,
   tooltip: null,
+  name: null,
   type: null,
   className: null,
   placeholder: null,

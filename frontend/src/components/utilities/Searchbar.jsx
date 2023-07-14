@@ -8,7 +8,7 @@ export default function Searchbar({
 }) {
   return (
     <form className={className}>
-      <div className="absolute inset-y-0 left-0 flex items-center pl-3">
+      <div className="absolute inset-y-0 flex items-center pl-3">
         <svg
           aria-hidden="true"
           className="h-5 w-5 text-neutral"
@@ -23,9 +23,10 @@ export default function Searchbar({
           />
         </svg>
       </div>
+
       <input
         type="search"
-        className="block w-full rounded-lg border border-neutralLight bg-neutralLightest p-3 pl-10 text-sm text-neutralDarkest focus:border-primaryLight focus:outline-none dark:border-neutralDark/50 dark:bg-gray-600 dark:text-neutralLightest dark:placeholder-neutralLight"
+        className="block w-full rounded-lg border border-neutralDark/50 bg-gray-600 p-3 pl-10 text-sm text-neutralLightest placeholder-neutralLight focus:border-primaryLight focus:outline-none"
         placeholder="Search..."
         value={filterText}
         onChange={(e) => onFilterTextChange(e.target.value)}

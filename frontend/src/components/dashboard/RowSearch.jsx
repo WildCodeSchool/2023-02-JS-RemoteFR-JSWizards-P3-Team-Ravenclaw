@@ -18,8 +18,10 @@ export default function RowSearch({
   setFlagCategories,
   setFlagLanguages,
   setFlagGames,
+  setFlagVideos,
 }) {
   const [isModalOpened, setIsModalOpened] = useState(false);
+  const [isDropdownOpened, setIsDropdownOpened] = useState(false);
 
   const addButton = () => {
     if (activeTab === "video") {
@@ -43,12 +45,10 @@ export default function RowSearch({
   const addModal = () => {
     if (activeTab === "video") {
       return (
-        // EN COURS...
         <ModalVideo
           open={isModalOpened}
-          onOk={() => setIsModalOpened(false)}
-          onCancel={() => setIsModalOpened(false)}
-          onClick={() => setIsModalOpened(false)}
+          setIsModalOpened={setIsModalOpened}
+          setFlag={setFlagVideos}
         />
       );
     }
@@ -94,7 +94,13 @@ export default function RowSearch({
             filterText={filterText}
             onFilterTextChange={setFilterText}
           />
-          {activeTab === "video" && <Dropdown title="Search filters" />}
+          {activeTab === "video" && (
+            <Dropdown
+              title="Search filters"
+              isOpen={isDropdownOpened}
+              setIsOpen={setIsDropdownOpened}
+            />
+          )}
         </div>
       </div>
 
@@ -134,6 +140,7 @@ RowSearch.propTypes = {
   setFlagCategories: PropTypes.func,
   setFlagLanguages: PropTypes.func,
   setFlagGames: PropTypes.func,
+  setFlagVideos: PropTypes.func,
 };
 
 RowSearch.defaultProps = {
@@ -142,4 +149,5 @@ RowSearch.defaultProps = {
   setFlagCategories: null,
   setFlagLanguages: null,
   setFlagGames: null,
+  setFlagVideos: null,
 };
