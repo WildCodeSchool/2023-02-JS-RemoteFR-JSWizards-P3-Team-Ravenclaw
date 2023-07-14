@@ -1,6 +1,6 @@
 [
   { "title": "Dashboard", "id": 1, "path": "" },
   { "title": "Manage Content", "id": 2, "path": "edit" },
-  { "title": "Favorites Videos", "id": 3 },
+  { "title": "Favorites Videos", "id": 3, "path": "favorites" },
   { "title": "Users", "id": 4 }
 ]

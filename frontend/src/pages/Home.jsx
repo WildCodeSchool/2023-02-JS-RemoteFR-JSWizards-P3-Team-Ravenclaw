@@ -22,7 +22,6 @@ export default function Home() {
     Services.getAllGames().then((res) => {
       setGames(res);
     });
-
     Services.getPromotedVideos().then((res) => {
       setPromotedVideos(res);
     });

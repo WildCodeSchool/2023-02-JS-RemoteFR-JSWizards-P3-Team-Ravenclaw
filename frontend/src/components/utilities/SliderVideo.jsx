@@ -1,12 +1,14 @@
 // Packages
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-
+import { useEffect, useState } from "react";
 // Style
+
 import styles from "../../css/Slider.module.css";
 
 // Components
 import Card from "./Card";
+import useAuth from "../../hooks/useAuth";
 
 export default function SliderVideo({
   videos,
@@ -16,12 +18,31 @@ export default function SliderVideo({
   displayCount,
   isPaginated,
 }) {
-  const navigate = useNavigate();
+  const { account } = useAuth();
+  const [unlockedVideo, setUnlockedVideo] = useState({
+    id_plan: undefined,
+  });
+  const [isAuthorized, setIsAuthorized] = useState(undefined);
 
+  const navigate = useNavigate();
   const handleClick = (isLinkAvailable, linkURL) =>
     isLinkAvailable ? navigate(`${linkURL}`) : navigate("account");
 
   const videosToDisplay = isPaginated ? videos.slice(0, displayCount) : videos;
+
+  useEffect(() => {
+    setUnlockedVideo(account);
+  }, []);
+
+  useEffect(() => {
+    if (unlockedVideo.id_plan === undefined) {
+      setIsAuthorized(0);
+    } else if (unlockedVideo.id_plan === 1) {
+      setIsAuthorized(1);
+    } else if (unlockedVideo.id_plan === null || unlockedVideo.id_plan === 3) {
+      setIsAuthorized(2);
+    }
+  }, [unlockedVideo]);
 
   return (
     <ul className={`${styles.slider} ${customClassSlider}`}>
@@ -40,7 +61,7 @@ export default function SliderVideo({
                 backgroundImage: `url(${video.thumbnail})`,
               }}
             >
-              {!video.visibility && (
+              {video.visibility > isAuthorized && (
                 <div className={styles.card__overlay}>
                   <div
                     className={`${styles.overlay__wrapper} ${customClassOverlayWrapper}`}
