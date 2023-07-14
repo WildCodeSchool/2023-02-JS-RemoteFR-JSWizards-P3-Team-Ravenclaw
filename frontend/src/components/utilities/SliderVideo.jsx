@@ -25,9 +25,6 @@ export default function SliderVideo({
   const [isAuthorized, setIsAuthorized] = useState(undefined);
 
   const navigate = useNavigate();
-  const handleClick = (isLinkAvailable, linkURL) =>
-    isLinkAvailable ? navigate(`${linkURL}`) : navigate("account");
-
   const videosToDisplay = isPaginated ? videos.slice(0, displayCount) : videos;
 
   useEffect(() => {
@@ -48,13 +45,19 @@ export default function SliderVideo({
     <ul className={`${styles.slider} ${customClassSlider}`}>
       {videosToDisplay.map((video) => (
         <li key={video.id}>
+          {/* eslint-disable */}
           <button
             type="button"
             className="w-full"
             onClick={() =>
-              handleClick(video?.visibility, `/videos/${video.id}`)
+              video.visibility > isAuthorized && isAuthorized === 0
+                ? navigate("account")
+                : video.visibility > isAuthorized && isAuthorized === 1
+                ? navigate("plans")
+                : navigate(`/videos/${video.id}`)
             }
           >
+            {/* eslint-enable */}
             <Card
               classCSS={`${styles.card} ${customClassCard} bg-cover`}
               styleCSS={{
@@ -71,9 +74,16 @@ export default function SliderVideo({
                       alt={video.title}
                       className={styles.overlay__wrapper__lock}
                     />
-                    <p className={styles.overlay__wrapper__description}>
-                      Login to watch
-                    </p>
+                    {isAuthorized === 0 && (
+                      <p className={styles.overlay__wrapper__description}>
+                        Login to watch
+                      </p>
+                    )}
+                    {isAuthorized === 1 && (
+                      <p className={styles.overlay__wrapper__description}>
+                        Become premium to watch
+                      </p>
+                    )}
                   </div>
                 </div>
               )}
