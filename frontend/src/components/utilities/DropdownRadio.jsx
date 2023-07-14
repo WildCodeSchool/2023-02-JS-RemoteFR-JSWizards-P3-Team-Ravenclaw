@@ -1,22 +1,24 @@
 // Packages
 import PropTypes from "prop-types";
+import { useState } from "react";
 
 // Components
 import Button from "./Button";
 import Searchbar from "./Searchbar";
-// import DropdownLi from "./DropdownLi";
-import DropdownList from "./DropdownList";
+import DropdownRadioList from "./DropdownRadioList";
 
-export default function Dropdown({
+export default function DropdownRadio({
   name = "",
   title,
   items,
   isOpen,
   setIsOpen,
 }) {
-  // const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+  const [filterOptions, setFilterOptions] = useState("");
+
   return (
-    <div>
+    <>
       <Button
         customCSS="flex items-center justify-between rounded-lg bg-primary p-3 text-center text-sm text-neutralLight focus:outline-none hover:bg-primaryLight min-w-[200px]"
         type="button"
@@ -24,7 +26,7 @@ export default function Dropdown({
       >
         {title}
         <svg
-          className="flex h-4 w-4 justify-end"
+          className={`flex h-4 w-4 justify-end ${isOpen ? "rotate-180" : ""}`}
           aria-hidden="true"
           fill="none"
           stroke="currentColor"
@@ -39,38 +41,28 @@ export default function Dropdown({
           />
         </svg>
       </Button>
+
       {isOpen && (
-        <div className="w-50 absolute z-10 mt-2 rounded-lg bg-gray-700 shadow">
-          {/* <div className="p-3"> */}
-          {/* <Searchbar className="relative w-full" /> */}
-          <Searchbar className="relative w-full p-3" />
-          {/* </div> */}
-          <DropdownList name={name} items={items} />
-          {/* <ul
+        <div className="w-50 absolute top-full z-10 mt-2 rounded-lg bg-gray-700 shadow">
+          <Searchbar
+            className="relative w-full p-3"
+            filterText={filterOptions}
+            onFilterTextChange={setFilterOptions}
+          />
+          <DropdownRadioList
             name={name}
-            className="h-48 overflow-y-auto px-3 pb-3 text-sm text-neutralDarkest dark:text-neutralLightest"
-            aria-labelledby="dropdownSearchButton"
-          >
-            {Array.isArray(items) && items.length > 0 ? (
-              items.map((item) => (
-                <DropdownLi
-                  key={item.id}
-                  item={item}
-                  isChecked={isChecked}
-                  setIsChecked={setIsChecked}
-                />
-              ))
-            ) : (
-              <li>No items found</li>
-            )}
-          </ul> */}
+            items={items}
+            filterOptions={filterOptions}
+            isChecked={isChecked}
+            setIsChecked={setIsChecked}
+          />
         </div>
       )}
-    </div>
+    </>
   );
 }
 
-Dropdown.propTypes = {
+DropdownRadio.propTypes = {
   name: PropTypes.string,
   title: PropTypes.string.isRequired,
   items: PropTypes.arrayOf(
@@ -83,7 +75,7 @@ Dropdown.propTypes = {
   setIsOpen: PropTypes.func.isRequired,
 };
 
-Dropdown.defaultProps = {
+DropdownRadio.defaultProps = {
   name: null,
   items: null,
 };

@@ -77,19 +77,19 @@ export default function Dashboard({ filterText, setFilterText }) {
           setFilterText={setFilterText}
         />
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-base text-neutralDarkest dark:text-neutralLightest">
-            <RowHead activeTab="dashboard" />
-            <tbody>
-              {videos.length &&
-                filterTable(videos, "title", filterText)
+          {videos.length && (
+            <table className="w-full text-left text-base text-neutralDarkest dark:text-neutralLightest">
+              <RowHead activeTab="dashboard" />
+              <tbody>
+                {filterTable(videos, "title", filterText)
                   .slice(offset, nextPage)
                   .map((video) => (
-                    <tr className="border-b dark:border-neutral" key={video.id}>
-                      <RowStatic video={video} />
-                    </tr>
+                    <RowStatic video={video} key={video.id} />
                   ))}
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+          )}
+
           <ConfigProvider
             theme={{
               token: {
