@@ -73,7 +73,7 @@ export default function ModalLanguage({ open, setIsModalOpened, setFlag }) {
           title="Name"
           type="text"
           className={`${styles.input__style}`}
-          placeholder="Type language name"
+          placeholder="Type language name..."
           required
           ref={inputRef}
         />
