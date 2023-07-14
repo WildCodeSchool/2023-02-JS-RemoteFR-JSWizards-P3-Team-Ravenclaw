@@ -32,6 +32,14 @@
   @apply border-primaryLight bg-neutralLightest bg-none text-primaryLight;
 }
 
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  height: 16px;
+  width: 16px;
+  background-image: url("../public/assets/icon/utility/cancel.svg");
+  cursor: pointer;
+}
+
 /* ______________________________________________________________________ *\
    Base
 \* ______________________________________________________________________ */
