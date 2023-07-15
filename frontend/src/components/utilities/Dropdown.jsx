@@ -1,30 +1,57 @@
 // Packages
 import PropTypes from "prop-types";
+import { useState } from "react";
 
 // Components
 import Button from "./Button";
 import Searchbar from "./Searchbar";
-// import DropdownLi from "./DropdownLi";
 import DropdownList from "./DropdownList";
+
+// Helpers
+import getSelectionName from "../../helpers/getSelectionName";
 
 export default function Dropdown({
   name = "",
   title,
   items,
-  isOpen,
-  setIsOpen,
+  isDropdownOpen,
+  handleDropdown,
+  handleChange,
 }) {
-  // const [isChecked, setIsChecked] = useState(false);
+  const initState = (data) => {
+    const state = [];
+    data.forEach((el) =>
+      state.push({ id: el.id, name: el.name, isSelected: false })
+    );
+    return state;
+  };
+
+  // store the dropdown searchbar filtered text
+  const [filterOptions, setFilterOptions] = useState("");
+  // store the dropdown radio button selection
+  const [selectedItems, setSelectedItems] = useState(initState(items));
+
+  const updateSelectedItems = (selectionId) => {
+    const clonedSelection = [...selectedItems];
+    const updatedSelection = clonedSelection.map((item) => ({
+      ...item,
+      isSelected: item.id === selectionId ? !item.isSelected : item.isSelected,
+    }));
+    setSelectedItems(updatedSelection);
+  };
+
   return (
-    <div>
+    <>
       <Button
         customCSS="flex items-center justify-between rounded-lg bg-primary p-3 text-center text-sm text-neutralLight focus:outline-none hover:bg-primaryLight min-w-[200px]"
         type="button"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => handleDropdown(!isDropdownOpen)}
       >
-        {title}
+        {getSelectionName(selectedItems) || title}
         <svg
-          className="flex h-4 w-4 justify-end"
+          className={`flex h-4 w-4 justify-end ${
+            isDropdownOpen ? "rotate-180" : ""
+          }`}
           aria-hidden="true"
           fill="none"
           stroke="currentColor"
@@ -39,34 +66,25 @@ export default function Dropdown({
           />
         </svg>
       </Button>
-      {isOpen && (
-        <div className="w-50 absolute z-10 mt-2 rounded-lg bg-gray-700 shadow">
-          {/* <div className="p-3"> */}
-          {/* <Searchbar className="relative w-full" /> */}
-          <Searchbar className="relative w-full p-3" />
-          {/* </div> */}
-          <DropdownList name={name} items={items} />
-          {/* <ul
+
+      {isDropdownOpen && (
+        <div className="w-50 absolute top-full z-10 mt-2 rounded-lg bg-gray-700 shadow">
+          <Searchbar
+            className="relative w-full p-3"
+            filterText={filterOptions}
+            onFilterTextChange={setFilterOptions}
+          />
+          <DropdownList
             name={name}
-            className="h-48 overflow-y-auto px-3 pb-3 text-sm text-neutralDarkest dark:text-neutralLightest"
-            aria-labelledby="dropdownSearchButton"
-          >
-            {Array.isArray(items) && items.length > 0 ? (
-              items.map((item) => (
-                <DropdownLi
-                  key={item.id}
-                  item={item}
-                  isChecked={isChecked}
-                  setIsChecked={setIsChecked}
-                />
-              ))
-            ) : (
-              <li>No items found</li>
-            )}
-          </ul> */}
+            items={items}
+            filterOptions={filterOptions}
+            selection={selectedItems}
+            onSelectionChange={updateSelectedItems}
+            handleChange={handleChange}
+          />
         </div>
       )}
-    </div>
+    </>
   );
 }
 
@@ -79,8 +97,9 @@ Dropdown.propTypes = {
       name: PropTypes.string,
     })
   ),
-  isOpen: PropTypes.bool.isRequired,
-  setIsOpen: PropTypes.func.isRequired,
+  isDropdownOpen: PropTypes.bool.isRequired,
+  handleDropdown: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
 };
 
 Dropdown.defaultProps = {
