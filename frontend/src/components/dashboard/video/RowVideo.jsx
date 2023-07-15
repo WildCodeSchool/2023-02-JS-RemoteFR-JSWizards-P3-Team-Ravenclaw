@@ -60,7 +60,7 @@ export default function RowVideo({ video, setFlagVideos }) {
         </td>
         <td className="px-4 py-3 text-sm">
           <span className={checkRowStatus(video.status)}>
-            {capitalizeText(video.status)}
+            {capitalizeText(video.status) || "-"}
           </span>
         </td>
         <td className="px-4 py-3 text-sm">
