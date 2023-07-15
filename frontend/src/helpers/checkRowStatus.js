@@ -1,6 +1,8 @@
-export default function checkRowStatus(inputValue = "") {
+export default function checkRowStatus(status) {
   let className = "";
-  const input = inputValue.toString().toLowerCase();
+  if (!status) return className;
+
+  const input = status.toLowerCase();
 
   className = `${className} rounded-lg px-4 py-1`;
   switch (input) {
