@@ -9,7 +9,6 @@ import Button from "../../utilities/Button";
 import Input from "../../utilities/Input";
 import Label from "../../utilities/Label";
 import Dropdown from "../../utilities/Dropdown";
-import DropdownRadio from "../../utilities/DropdownRadio";
 
 // Hooks
 import useAxios from "../../../hooks/useAxios";
@@ -213,10 +212,11 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
                 className={`${styles.label__style}`}
                 title="Game"
               />
-              <DropdownRadio
+              <Dropdown
                 name="game"
                 title="Select game"
                 items={games}
+                allowMultipleSelections={false}
                 required
                 isDropdownOpen={isGameDropOpened}
                 handleDropdown={setIsGameDropOpened}
@@ -250,10 +250,11 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
                 className={`${styles.label__style}`}
                 title="Language"
               />
-              <DropdownRadio
+              <Dropdown
                 name="language"
                 title="Select language"
                 items={languages}
+                allowMultipleSelections={false}
                 required
                 isDropdownOpen={isLangDropOpened}
                 handleDropdown={setIsLangDropOpened}
@@ -270,6 +271,7 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
                 name="category"
                 title="Select game category"
                 items={categories}
+                allowMultipleSelections
                 required
                 isDropdownOpen={isCatDropOpened}
                 handleDropdown={setIsCatDropOpened}

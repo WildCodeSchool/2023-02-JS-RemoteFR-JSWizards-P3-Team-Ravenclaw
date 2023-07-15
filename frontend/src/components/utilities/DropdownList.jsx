@@ -6,8 +6,9 @@ import capitalizeText from "../../helpers/capitalize";
 import filterTable from "../../helpers/filterTable";
 
 export default function DropdownList({
-  name,
   items,
+  inputName,
+  inputType = "radio",
   filterOptions,
   selection,
   onSelectionChange,
@@ -19,9 +20,9 @@ export default function DropdownList({
     // send current selection info to grand-parent modal form
     handleChange(e);
   };
+
   return (
     <ul
-      name={name}
       className="h-40 overflow-y-auto px-3 pb-3 text-sm text-neutralLightest"
       aria-labelledby="dropdownSearchButton"
     >
@@ -33,9 +34,8 @@ export default function DropdownList({
           >
             <input
               id={item.id}
-              type="checkbox"
-              // name={item.name}
-              name={name}
+              type={inputType}
+              name={inputName}
               value={item.name}
               checked={selection.find((el) => el.id === item.id).isSelected}
               onChange={(event) => handleOnValueChange(event, item.id)}
@@ -57,7 +57,8 @@ export default function DropdownList({
 }
 
 DropdownList.propTypes = {
-  name: PropTypes.string.isRequired,
+  inputName: PropTypes.string.isRequired,
+  inputType: PropTypes.string.isRequired,
   items: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number,

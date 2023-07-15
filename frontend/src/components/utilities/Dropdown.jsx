@@ -14,6 +14,7 @@ export default function Dropdown({
   name = "",
   title,
   items,
+  allowMultipleSelections = false,
   isDropdownOpen,
   handleDropdown,
   handleChange,
@@ -33,11 +34,22 @@ export default function Dropdown({
 
   const updateSelectedItems = (selectionId) => {
     const clonedSelection = [...selectedItems];
-    const updatedSelection = clonedSelection.map((item) => ({
-      ...item,
-      isSelected: item.id === selectionId ? !item.isSelected : item.isSelected,
-    }));
+    const updatedSelection = clonedSelection.map((item) => {
+      if (allowMultipleSelections) {
+        return {
+          ...item,
+          isSelected:
+            item.id === selectionId ? !item.isSelected : item.isSelected,
+        };
+      }
+      return {
+        ...item,
+        isSelected: item.id === selectionId ? !item.isSelected : false,
+      };
+    });
     setSelectedItems(updatedSelection);
+    // close dropdown
+    if (!allowMultipleSelections) handleDropdown(!isDropdownOpen);
   };
 
   return (
@@ -75,8 +87,9 @@ export default function Dropdown({
             onFilterTextChange={setFilterOptions}
           />
           <DropdownList
-            name={name}
             items={items}
+            inputName={name}
+            inputType={allowMultipleSelections ? "checkbox" : "radio"}
             filterOptions={filterOptions}
             selection={selectedItems}
             onSelectionChange={updateSelectedItems}
@@ -97,6 +110,7 @@ Dropdown.propTypes = {
       name: PropTypes.string,
     })
   ),
+  allowMultipleSelections: PropTypes.bool.isRequired,
   isDropdownOpen: PropTypes.bool.isRequired,
   handleDropdown: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
