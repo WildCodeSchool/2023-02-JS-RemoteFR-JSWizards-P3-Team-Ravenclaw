@@ -18,10 +18,10 @@ export default function DropdownRadio({
   setIsOpen,
   handleChange,
 }) {
-  const initState = (games) => {
+  const initState = (data) => {
     const state = [];
-    games.forEach((game) =>
-      state.push({ id: game.id, name: game.name, isSelected: false })
+    data.forEach((el) =>
+      state.push({ id: el.id, name: el.name, isSelected: false })
     );
     return state;
   };
@@ -29,15 +29,15 @@ export default function DropdownRadio({
   // store the dropdown searchbar filtered text
   const [filterOptions, setFilterOptions] = useState("");
   // store the dropdown radio button selection
-  const [gameSelection, setGameSelection] = useState(initState(items));
+  const [dataSelection, setDataSelection] = useState(initState(items));
 
   const handleSelection = (position) => {
-    const clonedSelection = [...gameSelection];
+    const clonedSelection = [...dataSelection];
     const updatedSelection = clonedSelection.map((game, index) => ({
       ...game,
       isSelected: index === position ? !game.isSelected : false,
     }));
-    setGameSelection(updatedSelection);
+    setDataSelection(updatedSelection);
   };
 
   return (
@@ -47,7 +47,7 @@ export default function DropdownRadio({
         type="button"
         onClick={() => setIsOpen(!isOpen)}
       >
-        {getSelectionName(gameSelection) || title}
+        {getSelectionName(dataSelection) || title}
         <svg
           className={`flex h-4 w-4 justify-end ${isOpen ? "rotate-180" : ""}`}
           aria-hidden="true"
@@ -76,7 +76,7 @@ export default function DropdownRadio({
             name={name}
             items={items}
             filterOptions={filterOptions}
-            selection={gameSelection}
+            selection={dataSelection}
             onSelectionChange={handleSelection}
             handleChange={handleChange}
           />
