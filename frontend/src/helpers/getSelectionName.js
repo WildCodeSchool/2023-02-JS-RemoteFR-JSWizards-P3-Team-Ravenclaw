@@ -1,12 +1,18 @@
 import capitalizeText from "./capitalize";
 
 function findSelectionIndex(arr) {
-  return arr.findIndex((el) => el.isSelected);
+  const indexes = [];
+  arr.forEach((el, index) => {
+    if (el.isSelected) indexes.push(index);
+  });
+  return indexes;
 }
 
 export default function getSelectionName(arr) {
-  const selectionIndex = findSelectionIndex(arr);
-  const isAnySelection = selectionIndex >= 0;
-  if (!isAnySelection) return "";
-  return capitalizeText(arr[selectionIndex].name);
+  const selectionIndexes = findSelectionIndex(arr);
+  const isMultipleSelection = selectionIndexes.length > 1;
+  if (!selectionIndexes.length) return "";
+  const selectionName =
+    arr[selectionIndexes[0]].name + (isMultipleSelection ? "..." : "");
+  return capitalizeText(selectionName);
 }
