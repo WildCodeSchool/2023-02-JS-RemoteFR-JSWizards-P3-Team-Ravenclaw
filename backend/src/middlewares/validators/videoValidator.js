@@ -13,8 +13,8 @@ const videoSchema = Joi.object({
   urlVideo: Joi.string().max(255).required(),
   isPromoted: [Joi.number().integer().positive(), Joi.allow(null)],
   visibility: [Joi.number().integer().positive(), Joi.allow(null)],
-  gameID: Joi.number().integer().positive().required(),
-  languageID: Joi.number().integer().positive().required(),
+  gameID: [Joi.number().integer().positive(), Joi.allow(null)],
+  languageID: [Joi.number().integer().positive(), Joi.allow(null)],
 });
 
 const validateVideoInfo = (req, res, next) => {
