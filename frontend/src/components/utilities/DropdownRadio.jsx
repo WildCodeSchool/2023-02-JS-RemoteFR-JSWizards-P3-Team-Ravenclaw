@@ -7,6 +7,9 @@ import Button from "./Button";
 import Searchbar from "./Searchbar";
 import DropdownRadioList from "./DropdownRadioList";
 
+// Helpers
+import getSelectionName from "../../helpers/getSelectionName";
+
 export default function DropdownRadio({
   name = "",
   title,
@@ -44,7 +47,7 @@ export default function DropdownRadio({
         type="button"
         onClick={() => setIsOpen(!isOpen)}
       >
-        {title}
+        {getSelectionName(gameSelection) || title}
         <svg
           className={`flex h-4 w-4 justify-end ${isOpen ? "rotate-180" : ""}`}
           aria-hidden="true"
