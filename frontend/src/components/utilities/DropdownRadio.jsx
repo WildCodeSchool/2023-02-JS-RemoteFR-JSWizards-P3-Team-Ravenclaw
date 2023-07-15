@@ -33,9 +33,9 @@ export default function DropdownRadio({
 
   const updateSelectedItems = (selectionId) => {
     const clonedSelection = [...selectedItems];
-    const updatedSelection = clonedSelection.map((game) => ({
-      ...game,
-      isSelected: game.id === selectionId ? !game.isSelected : false,
+    const updatedSelection = clonedSelection.map((item) => ({
+      ...item,
+      isSelected: item.id === selectionId ? !item.isSelected : false,
     }));
     setSelectedItems(updatedSelection);
     // close dropdown
