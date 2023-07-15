@@ -26,6 +26,7 @@ const Input = forwardRef(function forwardRefToChild(
     >
       {title}
       <input
+        id={htmlFor}
         name={name}
         title={tooltip}
         type={type}
