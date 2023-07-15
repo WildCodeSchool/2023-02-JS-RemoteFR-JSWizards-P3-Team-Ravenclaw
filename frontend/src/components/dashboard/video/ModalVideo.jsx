@@ -2,7 +2,7 @@
 import PropTypes from "prop-types";
 import { Modal } from "antd";
 import { useRef, useState } from "react";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 // Components
 import Button from "../../utilities/Button";
@@ -22,11 +22,10 @@ import {
 } from "../../../helpers/updateFormData";
 
 // Services
-// import {
-//   // addVideo,
-//   // addVideoThumbnail,
-//   // addVideoMedia,
-// } from "../../../services/videos";
+import // addVideo,
+// addVideoThumbnail,
+// addVideoMedia,
+"../../../services/videos";
 
 // Styles
 import styles from "../../../css/Table.module.css";
@@ -35,7 +34,6 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
   const inputRef = useRef();
   const imageRef = useRef();
   const videoRef = useRef();
-  // const formRef = useRef();
 
   const [isGameDropOpened, setIsGameDropOpened] = useState(false);
   const [isLangDropOpened, setIsLangDropOpened] = useState(false);
@@ -53,33 +51,16 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
     video: {},
   });
 
-  // Request body fields
-  // {
-  //   title: "",
-  //   description: "",
-  //   thumbnail: "",
-  //   url_video: "",
-  //   // optional
-  //   upload_date: "",
-  //   slug: "",
-  //   status: "",
-  //   is_promoted: "",
-  //   visibility: "",
-  //   game_id: "",
-  //   language_id: "",
-  //   category_id: "",
-  // }
-
-  // const TOAST_DEFAULT_CONFIG = {
-  //   position: "bottom-right",
-  //   autoClose: 3000,
-  //   hideProgressBar: true,
-  //   closeOnClick: true,
-  //   pauseOnHover: true,
-  //   draggable: false,
-  //   progress: undefined,
-  //   theme: "dark",
-  // };
+  const TOAST_DEFAULT_CONFIG = {
+    position: "bottom-right",
+    autoClose: 3000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: false,
+    progress: undefined,
+    theme: "dark",
+  };
 
   // fetch data from database to populate dropdown items
   const { data: games } = useAxios("/games");
@@ -112,8 +93,6 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
     setFormVideoInfo(updatedFormData);
   };
 
-  // console.log(formVideoInfo);
-
   const handleCloseModal = () => {
     // close dropdowns
     setIsGameDropOpened(false);
@@ -127,52 +106,73 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // const videoName = inputRef.current.value.trim().toLowerCase();
-    // const { title, isPremium, isPromoted, description, video, thumbnail } =
-    //   e.target;
-
-    // const body = { ...videoInfo, title, description, video, thumbnail };
-    // console.log(e.target.title.value);
-
-    // upload file to backend public folder
     // use the FormData constructor to create a new FormData object (instance) to convert the image file into a bunch of data and send it through the network
-    // const formData = new FormData();
-    // formData.append("video_thumbnail", imageRef.current.files[0]);
+    const thumbnailFormData = new FormData();
+    const videoFormData = new FormData();
+    videoFormData.append("video", videoRef.current.files[0]);
+    thumbnailFormData.append("video_thumbnail", imageRef.current.files[0]);
 
-    // missing videoRef
+    try {
+      // upload video thumbnail to backend public folder
+      // const {
+      //   data: { thumbnail: videoThumbUrl },
+      // } = await addVideoThumbnail(thumbnailFormData);
 
-    // try {
-    //   const {
-    //     data: { url_thumbnail: videoThumbUrl },
-    //   } = await addVideoThumbnail(formData);
+      // upload video to backend public folder
+      // const {
+      //   data: { url_video: videoUrl },
+      // } = await addVideoMedia(videoFormData);
 
-    //   // const {
-    //   //   data: { url_thumbnail: videoThumbUrl },
-    //   // } = await addVideoMedia(formData);
+      // add video entry to database
+      // const bodyVideo = {};
+      // Request body fields
+      // {
+      //   title: "",
+      //   description: "",
+      //   thumbnail: "",
+      //   url_video: "",
+      //   // optional
+      //   upload_date: "",
+      //   slug: "",
+      //   status: "",
+      //   is_promoted: "",
+      //   visibility: "",
+      //   game_id: "",
+      //   language_id: "",
+      //   category_id: "",
+      // }
+      // const responseVideo = await addVideo(body);
 
-    //   const response = await addVideo({
-    //     name: videoName,
-    //     thumbnail: videoThumbUrl,
-    //   });
-    //   if (response?.status === 204)
-    //     toast.success("Video successfully added!", TOAST_DEFAULT_CONFIG);
-    //   // reset inputs
-    //   inputRef.current.value = "";
-    //   imageRef.current.value = "";
-    //   videoRef.current.value = "";
-    //   // close modal
-    //   setIsModalOpened(false);
-    //   // raise flag to refetch data from DB and update table view
-    setFlag((prev) => !prev);
-    // } catch (err) {
-    //   console.error(err);
-    //   if (err.response?.status === 409) {
-    //     toast.error(`${err.response.data}`, TOAST_DEFAULT_CONFIG);
-    //   } else {
-    //     toast.error(`${err.response.statusText}!`, TOAST_DEFAULT_CONFIG);
-    //   }
-    // }
+      // add relation entry (video_category) to database (only if a category has been added)
+      // let responseRelation = {};
+      // if (formVideoInfo.category) {
+      //   responseRelation = await addVideo({});
+      // } else {
+      //   responseRelation = { data: null, status: 204 };
+      // }
+      // check status
+      // if (responseVideo?.status === 204 && responseRelation?.status === 204)
+      //   toast.success("Video successfully added!", TOAST_DEFAULT_CONFIG);
+
+      // reset form inputs
+      // ...
+
+      // close modal
+      setIsModalOpened(false);
+
+      // raise flag to refetch data from DB and update table view
+      setFlag((prev) => !prev);
+    } catch (err) {
+      console.error(err);
+      if (err.response?.status === 409) {
+        toast.error(`${err.response.data}`, TOAST_DEFAULT_CONFIG);
+      } else {
+        toast.error(`${err.response.statusText}!`, TOAST_DEFAULT_CONFIG);
+      }
+    }
   };
+
+  // console.log(formVideoInfo);
 
   return (
     <Modal
@@ -190,7 +190,6 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
         onSubmit={handleSubmit}
         encType="multipart/form-data"
         className="flex flex-col gap-4"
-        // ref={formRef}
       >
         <div className="flex flex-col gap-4">
           <Input
