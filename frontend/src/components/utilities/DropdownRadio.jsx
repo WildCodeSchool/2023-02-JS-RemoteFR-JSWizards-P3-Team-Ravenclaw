@@ -13,9 +13,29 @@ export default function DropdownRadio({
   items,
   isOpen,
   setIsOpen,
+  handleChange,
 }) {
-  const [isChecked, setIsChecked] = useState(false);
+  const initState = (games) => {
+    const state = [];
+    games.forEach((game) =>
+      state.push({ id: game.id, name: game.name, isSelected: false })
+    );
+    return state;
+  };
+
+  // store the dropdown searchbar filtered text
   const [filterOptions, setFilterOptions] = useState("");
+  // store the dropdown radio button selection
+  const [gameSelection, setGameSelection] = useState(initState(items));
+
+  const handleSelection = (position) => {
+    const clonedSelection = [...gameSelection];
+    const updatedSelection = clonedSelection.map((game, index) => ({
+      ...game,
+      isSelected: index === position ? !game.isSelected : false,
+    }));
+    setGameSelection(updatedSelection);
+  };
 
   return (
     <>
@@ -53,8 +73,9 @@ export default function DropdownRadio({
             name={name}
             items={items}
             filterOptions={filterOptions}
-            isChecked={isChecked}
-            setIsChecked={setIsChecked}
+            selection={gameSelection}
+            onSelectionChange={handleSelection}
+            handleChange={handleChange}
           />
         </div>
       )}
@@ -73,6 +94,7 @@ DropdownRadio.propTypes = {
   ),
   isOpen: PropTypes.bool.isRequired,
   setIsOpen: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
 };
 
 DropdownRadio.defaultProps = {

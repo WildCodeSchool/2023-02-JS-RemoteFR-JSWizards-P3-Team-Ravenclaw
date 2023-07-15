@@ -9,9 +9,17 @@ export default function DropdownRadioList({
   name,
   items,
   filterOptions,
-  isChecked,
-  setIsChecked,
+  selection,
+  onSelectionChange,
+  handleChange,
 }) {
+  const handleOnValueChange = (e, pos) => {
+    // store current choice into parent dropdown state (allow dropwdown to be opened/closed without loosing selection)
+    onSelectionChange(pos);
+    // send current selection info to grand-parent modal form
+    handleChange(e);
+  };
+
   return (
     <ul
       name={name}
@@ -19,21 +27,23 @@ export default function DropdownRadioList({
       aria-labelledby="dropdownSearchButton"
     >
       {Array.isArray(items) && items.length > 0 ? (
-        filterTable(items, "name", filterOptions).map((item) => (
+        filterTable(items, "name", filterOptions).map((item, index) => (
           <li
             key={item.id}
             className="flex items-center rounded pl-2 hover:bg-gray-600"
           >
             <input
-              id={`checkbox-item-${item.id}`}
+              id={item.id}
               type="radio"
+              // all radio button must be grouped under the same name to allow unique selection
               name={name}
-              value={isChecked}
-              onChange={() => setIsChecked(!isChecked)}
+              value={item.name}
+              checked={selection[index].isSelected}
+              onChange={(event) => handleOnValueChange(event, index)}
               className="h-4 w-4 rounded border-neutral bg-gray-100 focus:outline-none"
             />
             <label
-              htmlFor={`checkbox-item-${item.id}`}
+              htmlFor={item.id}
               className="ml-2 w-full rounded py-2 text-sm font-medium"
             >
               {capitalizeText(item.name)}
@@ -56,6 +66,13 @@ DropdownRadioList.propTypes = {
     })
   ).isRequired,
   filterOptions: PropTypes.string.isRequired,
-  isChecked: PropTypes.bool.isRequired,
-  setIsChecked: PropTypes.func.isRequired,
+  selection: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+      isSelected: PropTypes.bool,
+    })
+  ).isRequired,
+  onSelectionChange: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
 };
