@@ -13,21 +13,20 @@ export default function DropdownRadioList({
   onSelectionChange,
   handleChange,
 }) {
-  const handleOnValueChange = (e, pos) => {
+  const handleOnValueChange = (e, id) => {
     // store current choice into parent dropdown state (allow dropwdown to be opened/closed without loosing selection)
-    onSelectionChange(pos);
+    onSelectionChange(id);
     // send current selection info to grand-parent modal form
     handleChange(e);
   };
 
   return (
     <ul
-      name={name}
       className="h-40 overflow-y-auto px-3 pb-3 text-sm text-neutralLightest"
       aria-labelledby="dropdownSearchButton"
     >
       {Array.isArray(items) && items.length > 0 ? (
-        filterTable(items, "name", filterOptions).map((item, index) => (
+        filterTable(items, "name", filterOptions).map((item) => (
           <li
             key={item.id}
             className="flex items-center rounded pl-2 hover:bg-gray-600"
@@ -38,8 +37,8 @@ export default function DropdownRadioList({
               // all radio button must be grouped under the same name to allow unique selection
               name={name}
               value={item.name}
-              checked={selection[index].isSelected}
-              onChange={(event) => handleOnValueChange(event, index)}
+              checked={selection.find((el) => el.id === item.id).isSelected}
+              onChange={(event) => handleOnValueChange(event, item.id)}
               className="h-4 w-4 rounded border-neutral bg-gray-100 focus:outline-none"
             />
             <label

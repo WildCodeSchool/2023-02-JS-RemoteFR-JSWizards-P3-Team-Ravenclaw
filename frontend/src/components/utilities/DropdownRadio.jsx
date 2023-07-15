@@ -14,8 +14,8 @@ export default function DropdownRadio({
   name = "",
   title,
   items,
-  isOpen,
-  setIsOpen,
+  isDropdownOpen,
+  handleDropdown,
   handleChange,
 }) {
   const initState = (data) => {
@@ -29,15 +29,17 @@ export default function DropdownRadio({
   // store the dropdown searchbar filtered text
   const [filterOptions, setFilterOptions] = useState("");
   // store the dropdown radio button selection
-  const [dataSelection, setDataSelection] = useState(initState(items));
+  const [selectedItems, setSelectedItems] = useState(initState(items));
 
-  const handleSelection = (position) => {
-    const clonedSelection = [...dataSelection];
-    const updatedSelection = clonedSelection.map((game, index) => ({
+  const updateSelectedItems = (selectionId) => {
+    const clonedSelection = [...selectedItems];
+    const updatedSelection = clonedSelection.map((game) => ({
       ...game,
-      isSelected: index === position ? !game.isSelected : false,
+      isSelected: game.id === selectionId ? !game.isSelected : false,
     }));
-    setDataSelection(updatedSelection);
+    setSelectedItems(updatedSelection);
+    // close dropdown
+    handleDropdown(!isDropdownOpen);
   };
 
   return (
@@ -45,11 +47,13 @@ export default function DropdownRadio({
       <Button
         customCSS="flex items-center justify-between rounded-lg bg-primary p-3 text-center text-sm text-neutralLight focus:outline-none hover:bg-primaryLight min-w-[200px]"
         type="button"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => handleDropdown(!isDropdownOpen)}
       >
-        {getSelectionName(dataSelection) || title}
+        {getSelectionName(selectedItems) || title}
         <svg
-          className={`flex h-4 w-4 justify-end ${isOpen ? "rotate-180" : ""}`}
+          className={`flex h-4 w-4 justify-end ${
+            isDropdownOpen ? "rotate-180" : ""
+          }`}
           aria-hidden="true"
           fill="none"
           stroke="currentColor"
@@ -65,7 +69,7 @@ export default function DropdownRadio({
         </svg>
       </Button>
 
-      {isOpen && (
+      {isDropdownOpen && (
         <div className="w-50 absolute top-full z-10 mt-2 rounded-lg bg-gray-700 shadow">
           <Searchbar
             className="relative w-full p-3"
@@ -76,8 +80,8 @@ export default function DropdownRadio({
             name={name}
             items={items}
             filterOptions={filterOptions}
-            selection={dataSelection}
-            onSelectionChange={handleSelection}
+            selection={selectedItems}
+            onSelectionChange={updateSelectedItems}
             handleChange={handleChange}
           />
         </div>
@@ -95,8 +99,8 @@ DropdownRadio.propTypes = {
       name: PropTypes.string,
     })
   ),
-  isOpen: PropTypes.bool.isRequired,
-  setIsOpen: PropTypes.func.isRequired,
+  isDropdownOpen: PropTypes.bool.isRequired,
+  handleDropdown: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
 };
 
