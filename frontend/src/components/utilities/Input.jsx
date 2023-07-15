@@ -16,6 +16,7 @@ const Input = forwardRef(function forwardRefToChild(
     placeholder,
     accept,
     required = true,
+    handleChange,
   },
   ref
 ) {
@@ -35,6 +36,7 @@ const Input = forwardRef(function forwardRefToChild(
         accept={accept}
         required={required}
         ref={ref}
+        onChange={handleChange}
       />
     </label>
   );
@@ -50,6 +52,7 @@ Input.propTypes = {
   placeholder: PropTypes.string,
   accept: PropTypes.string,
   required: PropTypes.bool,
+  handleChange: PropTypes.func,
 };
 
 Input.defaultProps = {
@@ -62,6 +65,7 @@ Input.defaultProps = {
   placeholder: null,
   accept: null,
   required: true,
+  handleChange: null,
 };
 
 export default Input;
