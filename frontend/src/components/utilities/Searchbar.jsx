@@ -7,7 +7,7 @@ export default function Searchbar({
   onFilterTextChange,
 }) {
   return (
-    <form className={className}>
+    <div className={className}>
       <div className="absolute inset-y-0 flex items-center pl-3">
         <svg
           aria-hidden="true"
@@ -31,7 +31,7 @@ export default function Searchbar({
         value={filterText}
         onChange={(e) => onFilterTextChange(e.target.value)}
       />
-    </form>
+    </div>
   );
 }
 
