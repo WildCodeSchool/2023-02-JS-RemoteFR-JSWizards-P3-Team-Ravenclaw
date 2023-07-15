@@ -14,6 +14,14 @@ import DropdownRadio from "../../utilities/DropdownRadio";
 // Hooks
 import useAxios from "../../../hooks/useAxios";
 
+// Helpers
+import {
+  updateFromInput,
+  updateFromFileInput,
+  updateFromDropdownRadio,
+  updateFromDropdownCheckbox,
+} from "../../../helpers/updateFormData";
+
 // Services
 // import {
 //   // addVideo,
@@ -26,14 +34,42 @@ import styles from "../../../css/Table.module.css";
 
 export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
   const inputRef = useRef();
-  // const imageRef = useRef();
-  // const videoRef = useRef();
-  const formRef = useRef();
+  const imageRef = useRef();
+  const videoRef = useRef();
+  // const formRef = useRef();
 
-  // const [videoInfo, setVideoInfo] = useState({});
   const [isGameDropOpened, setIsGameDropOpened] = useState(false);
   const [isLangDropOpened, setIsLangDropOpened] = useState(false);
   const [isCatDropOpened, setIsCatDropOpened] = useState(false);
+  // video info based on form inputs
+  const [formVideoInfo, setFormVideoInfo] = useState({
+    title: "",
+    game: {},
+    isPremium: false,
+    isPromoted: false,
+    language: {},
+    category: [],
+    description: "",
+    thumbnail: {},
+    video: {},
+  });
+
+  // Request body fields
+  // {
+  //   title: "",
+  //   description: "",
+  //   thumbnail: "",
+  //   url_video: "",
+  //   // optional
+  //   upload_date: "",
+  //   slug: "",
+  //   status: "",
+  //   is_promoted: "",
+  //   visibility: "",
+  //   game_id: "",
+  //   language_id: "",
+  //   category_id: "",
+  // }
 
   // const TOAST_DEFAULT_CONFIG = {
   //   position: "bottom-right",
@@ -51,11 +87,36 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
   const { data: categories } = useAxios("/categories");
   const { data: languages } = useAxios("/languages");
 
-  const handleClose = () => {
-    // reset form data
-    // formRef.current.value = "";
-    // inputRef.current.value = "";
-    // close all dropdown
+  // handle change in form inputs
+  const handleInputChange = (e) => {
+    let updatedFormData = { ...formVideoInfo };
+    switch (e.target.name) {
+      case "game":
+      case "language":
+        updatedFormData = updateFromDropdownRadio(e, formVideoInfo);
+        break;
+      case "category":
+        updatedFormData = updateFromDropdownCheckbox(e, formVideoInfo);
+        break;
+      case "thumbnail":
+      case "video":
+        updatedFormData = updateFromFileInput(
+          e,
+          imageRef,
+          videoRef,
+          formVideoInfo
+        );
+        break;
+      default:
+        updatedFormData = updateFromInput(e, formVideoInfo);
+    }
+    setFormVideoInfo(updatedFormData);
+  };
+
+  // console.log(formVideoInfo);
+
+  const handleCloseModal = () => {
+    // close dropdowns
     setIsGameDropOpened(false);
     setIsLangDropOpened(false);
     setIsCatDropOpened(false);
@@ -63,6 +124,7 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
     setIsModalOpened(false);
   };
 
+  // IN PROGRESS...
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -118,7 +180,7 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
       centered
       open={open}
       title="Add a new video"
-      onCancel={handleClose}
+      onCancel={handleCloseModal}
       onOk={handleSubmit}
       footer={null}
       afterOpenChange={() => {
@@ -129,7 +191,7 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
         onSubmit={handleSubmit}
         encType="multipart/form-data"
         className="flex flex-col gap-4"
-        ref={formRef}
+        // ref={formRef}
       >
         <div className="flex flex-col gap-4">
           <Input
@@ -141,12 +203,13 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
             placeholder="Type video title..."
             required
             ref={inputRef}
+            handleChange={handleInputChange}
           />
 
           <div className="flex flex-wrap justify-between gap-y-4 md:flex-nowrap">
             <div className="relative flex flex-col gap-1.5">
               <Label
-                htmlFor="Game"
+                htmlFor="game"
                 className={`${styles.label__style}`}
                 title="Game"
               />
@@ -155,8 +218,9 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
                 title="Select game"
                 items={games}
                 required
-                isOpen={isGameDropOpened}
-                setIsOpen={setIsGameDropOpened}
+                isDropdownOpen={isGameDropOpened}
+                handleDropdown={setIsGameDropOpened}
+                handleChange={handleInputChange}
               />
             </div>
             <Input
@@ -166,6 +230,7 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
               title="Premium"
               type="checkbox"
               required={false}
+              handleChange={handleInputChange}
             />
             <Input
               name="isPromoted"
@@ -174,26 +239,28 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
               title="Promoted"
               type="checkbox"
               required={false}
+              handleChange={handleInputChange}
             />
           </div>
 
           <div className="flex flex-wrap justify-between gap-4 md:flex-nowrap">
-            <div className="flex flex-col gap-1.5">
+            <div className="relative flex flex-col gap-1.5">
               <Label
                 htmlFor="language"
                 className={`${styles.label__style}`}
                 title="Language"
               />
-              <Dropdown
+              <DropdownRadio
                 name="language"
                 title="Select language"
                 items={languages}
                 required
-                isOpen={isLangDropOpened}
-                setIsOpen={setIsLangDropOpened}
+                isDropdownOpen={isLangDropOpened}
+                handleDropdown={setIsLangDropOpened}
+                handleChange={handleInputChange}
               />
             </div>
-            <div className="flex flex-col gap-1.5">
+            <div className="relative flex flex-col gap-1.5">
               <Label
                 htmlFor="category"
                 className={`${styles.label__style}`}
@@ -204,8 +271,9 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
                 title="Select game category"
                 items={categories}
                 required
-                isOpen={isCatDropOpened}
-                setIsOpen={setIsCatDropOpened}
+                isDropdownOpen={isCatDropOpened}
+                handleDropdown={setIsCatDropOpened}
+                handleChange={handleInputChange}
               />
             </div>
           </div>
@@ -222,6 +290,7 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
               className={`${styles.input__style} h-full w-full`}
               placeholder="Type video description..."
               required
+              onChange={handleInputChange}
             />
           </div>
 
@@ -232,8 +301,9 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
               type="file"
               accept=".mp4, .avi, .mov, .wmv, .webm"
               className="file:hover:primaryLightest file:cursor-pointer file:rounded-md file:border-none file:bg-primary file:p-3 file:text-neutralLight"
-              // ref={videoRef}
               required={false}
+              ref={videoRef}
+              handleChange={handleInputChange}
             />
             <Input
               name="thumbnail"
@@ -241,8 +311,9 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
               type="file"
               accept=".jpg, .jpeg, .png, .webp"
               className="file:hover:primaryLightest file:cursor-pointer file:rounded-md file:border-none file:bg-primary file:p-3 file:text-neutralLight"
-              // ref={imageRef}
               required={false}
+              ref={imageRef}
+              handleChange={handleInputChange}
             />
           </div>
         </div>
@@ -250,7 +321,7 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
         <div className="flex justify-end gap-2">
           <Button
             type="button"
-            onClick={handleClose}
+            onClick={handleCloseModal}
             customCSS={`${styles.btn_modal__style} ring-1 ring-inset ring-neutral text-neutralDark`}
           >
             Cancel
