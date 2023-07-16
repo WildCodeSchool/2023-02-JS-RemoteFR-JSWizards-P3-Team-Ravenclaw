@@ -3,22 +3,26 @@ const { v4: uuidv4 } = require("uuid");
 require("dotenv").config();
 
 const FRONT_DEST = `http://localhost:${process.env.APP_PORT}/`;
-const GAME_THUMB_DEST = "/uploads/games/";
 
 const post = (req, res) => {
+  // extract file destination (backend location)
+  const { destination } = req.file;
+  const fileDestination = destination.slice(destination.search("/uploads"));
+
+  // give file unique name by pre-pending uuid (avoid file to be overwritten)
   const { filename, originalname } = req.file;
   const oldfileName = filename;
-  // use uuid package to give a unique filename and avoid file to be replaced
   const newfileName = `${uuidv4()}-${originalname}`;
 
+  // rename file
   // fs.rename(oldPath, newPath, callback);
   fs.rename(
-    `./public/${GAME_THUMB_DEST}${oldfileName}`,
-    `./public/${GAME_THUMB_DEST}${newfileName}`,
+    `./public/${fileDestination}/${oldfileName}`,
+    `./public/${fileDestination}/${newfileName}`,
     (err) => {
       if (err) throw err;
       res.json({
-        url_thumbnail: `${FRONT_DEST}${GAME_THUMB_DEST}${newfileName}`,
+        url_file: `${FRONT_DEST}${fileDestination}${newfileName}`,
       });
     }
   );
