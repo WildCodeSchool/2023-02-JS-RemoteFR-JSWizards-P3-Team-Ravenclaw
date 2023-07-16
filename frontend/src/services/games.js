@@ -11,7 +11,7 @@ export const modifyGameById = (body, id) =>
   axios.put(`${BASE_URL}/games/${id}`, body);
 
 export const addGameThumbnail = (form) =>
-  axios.post(`${BASE_URL}/upload/games/thumbnails`, form);
+  axios.post(`${BASE_URL}/upload/thumbnails/games`, form);
 
 export const addGame = (body) => axios.post(`${BASE_URL}/games/`, body);
 
