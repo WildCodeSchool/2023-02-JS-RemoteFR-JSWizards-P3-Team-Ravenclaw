@@ -38,6 +38,23 @@ export default function UserTable({ users }) {
     setCurrentPage(1);
   }, []);
 
+  // export to CSV
+  const convertToCSV = (data) => {
+    const header = Object.keys(data[0]).join(",");
+    const rows = data.map((item) => Object.values(item).join(","));
+    return [header, ...rows].join("\n");
+  };
+
+  const exportToCSV = (data) => {
+    const csvContent = `data:text/csv;charset=utf-8,${convertToCSV(data)}`;
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "userdata.csv");
+    document.body.appendChild(link);
+    link.click();
+  };
+
   return (
     <article className="flex w-screen max-w-[calc(100vw-320px)] flex-col gap-8 px-[100px] py-8">
       <h1>Users</h1>
@@ -47,6 +64,7 @@ export default function UserTable({ users }) {
           activeTab="userList"
           setFilterText={setFilterText}
           setFlagUsers={setFlagUsers}
+          exportData={() => exportToCSV(userList)}
         />
         <div className="overflow-x-auto">
           <table className="w-full text-left text-base text-neutralDarkest dark:text-neutralLightest">
