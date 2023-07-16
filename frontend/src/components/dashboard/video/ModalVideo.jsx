@@ -20,12 +20,16 @@ import {
   updateFromDropdownRadio,
   updateFromDropdownCheckbox,
 } from "../../../helpers/updateFormData";
+import formatVideoBodyRequest from "../../../helpers/formatVideoBodyRequest";
+import checkVideoFormCompleted from "../../../helpers/checkVideoFormCompleted";
 
 // Services
-import // addVideo,
-// addVideoThumbnail,
-// addVideoMedia,
-"../../../services/videos";
+import {
+  addVideoThumbnail,
+  addVideoMedia,
+  addVideo,
+  addVideoCategory,
+} from "../../../services/videos";
 
 // Styles
 import styles from "../../../css/Table.module.css";
@@ -38,6 +42,7 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
   const [isGameDropOpened, setIsGameDropOpened] = useState(false);
   const [isLangDropOpened, setIsLangDropOpened] = useState(false);
   const [isCatDropOpened, setIsCatDropOpened] = useState(false);
+
   // video info based on form inputs
   const [formVideoInfo, setFormVideoInfo] = useState({
     title: "",
@@ -102,9 +107,16 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
     setIsModalOpened(false);
   };
 
-  // IN PROGRESS...
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // make sure all required dropdown are filled (if any)
+    const { areMandatoryInputsFilled: isFormCompleted, errorMessage } =
+      checkVideoFormCompleted(formVideoInfo);
+    if (!isFormCompleted) {
+      toast.error(`${errorMessage}!`, TOAST_DEFAULT_CONFIG);
+      return;
+    }
 
     // use the FormData constructor to create a new FormData object (instance) to convert the image file into a bunch of data and send it through the network
     const thumbnailFormData = new FormData();
@@ -114,48 +126,53 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
 
     try {
       // upload video thumbnail to backend public folder
-      // const {
-      //   data: { thumbnail: videoThumbUrl },
-      // } = await addVideoThumbnail(thumbnailFormData);
+      const {
+        data: { url_file: videoThumbUrl },
+      } = await addVideoThumbnail(thumbnailFormData);
 
       // upload video to backend public folder
-      // const {
-      //   data: { url_video: videoUrl },
-      // } = await addVideoMedia(videoFormData);
+      const {
+        data: { url_file: videoUrl },
+      } = await addVideoMedia(videoFormData);
 
       // add video entry to database
-      // const bodyVideo = {};
-      // Request body fields
-      // {
-      //   title: "",
-      //   description: "",
-      //   thumbnail: "",
-      //   url_video: "",
-      //   // optional
-      //   upload_date: "",
-      //   slug: "",
-      //   status: "",
-      //   is_promoted: "",
-      //   visibility: "",
-      //   game_id: "",
-      //   language_id: "",
-      //   category_id: "",
-      // }
-      // const responseVideo = await addVideo(body);
+      const responseVideo = await addVideo(
+        formatVideoBodyRequest(formVideoInfo, videoUrl, videoThumbUrl)
+      );
 
-      // add relation entry (video_category) to database (only if a category has been added)
-      // let responseRelation = {};
-      // if (formVideoInfo.category) {
-      //   responseRelation = await addVideo({});
-      // } else {
-      //   responseRelation = { data: null, status: 204 };
-      // }
-      // check status
-      // if (responseVideo?.status === 204 && responseRelation?.status === 204)
-      //   toast.success("Video successfully added!", TOAST_DEFAULT_CONFIG);
+      // add relation entry for each added category (video_category) to database
+      const relationReponses = [];
+
+      formVideoInfo.category.forEach(async (category) => {
+        try {
+          const response = await addVideoCategory({
+            video_id: responseVideo.data.insertId,
+            // category_id: formVideoInfo.category[index].id,
+            category_id: category.id,
+          });
+          relationReponses.push(response);
+        } catch (err) {
+          console.error(err);
+          toast.error(`${err.response.statusText}!`, TOAST_DEFAULT_CONFIG);
+        }
+      });
+
+      // notify status
+      toast.success(`Video successfully added!`, TOAST_DEFAULT_CONFIG);
 
       // reset form inputs
-      // ...
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
+
+      /**
+       * !TO DO: do not refresh the page to reset form inputs
+       * use instead dedicated methods
+       * requires the dropdown states to be placed within ModalVideo...
+       */
+      // reset form inputs & state
+      // e.target.reset();
+      // setFormVideoInfo({});
 
       // close modal
       setIsModalOpened(false);
@@ -171,8 +188,6 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
       }
     }
   };
-
-  // console.log(formVideoInfo);
 
   return (
     <Modal
@@ -216,7 +231,6 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
                 title="Select game"
                 items={games}
                 allowMultipleSelections={false}
-                required
                 isDropdownOpen={isGameDropOpened}
                 handleDropdown={setIsGameDropOpened}
                 handleChange={handleInputChange}
@@ -254,7 +268,6 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
                 title="Select language"
                 items={languages}
                 allowMultipleSelections={false}
-                required
                 isDropdownOpen={isLangDropOpened}
                 handleDropdown={setIsLangDropOpened}
                 handleChange={handleInputChange}
@@ -271,7 +284,6 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
                 title="Select game category"
                 items={categories}
                 allowMultipleSelections
-                required
                 isDropdownOpen={isCatDropOpened}
                 handleDropdown={setIsCatDropOpened}
                 handleChange={handleInputChange}
@@ -302,7 +314,7 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
               type="file"
               accept=".mp4, .avi, .mov, .wmv, .webm"
               className="file:hover:primaryLightest file:cursor-pointer file:rounded-md file:border-none file:bg-primary file:p-3 file:text-neutralLight"
-              required={false}
+              required
               ref={videoRef}
               handleChange={handleInputChange}
             />
@@ -312,7 +324,7 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
               type="file"
               accept=".jpg, .jpeg, .png, .webp"
               className="file:hover:primaryLightest file:cursor-pointer file:rounded-md file:border-none file:bg-primary file:p-3 file:text-neutralLight"
-              required={false}
+              required
               ref={imageRef}
               handleChange={handleInputChange}
             />
