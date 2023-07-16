@@ -13,6 +13,7 @@
 
 .input__style::placeholder {
   color: theme("colors.neutralLight");
+  font-size: theme("fontSize.sm");
 }
 
 /* Start table btn style  */

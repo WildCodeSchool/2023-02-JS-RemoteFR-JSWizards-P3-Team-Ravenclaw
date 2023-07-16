@@ -28,7 +28,7 @@ export default function RowVideo({ video, setFlagVideos }) {
     theme: "dark",
   };
 
-  const toggleDropdown = () => setIsToggled(!isToggled);
+  // const toggleDropdown = () => setIsToggled(!isToggled);
 
   const handleDeleteVideo = (id) => {
     deleteVideo(id)
@@ -108,13 +108,7 @@ export default function RowVideo({ video, setFlagVideos }) {
           </span>
         </td>
       </tr>
-      {isToggled && (
-        <VideoDropdown
-          id={video.id}
-          toggleDropdown={toggleDropdown}
-          setFlagVideos={setFlagVideos}
-        />
-      )}
+      {isToggled && <VideoDropdown setFlagVideos={setFlagVideos} />}
     </>
   );
 }

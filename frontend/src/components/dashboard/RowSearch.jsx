@@ -21,7 +21,6 @@ export default function RowSearch({
   setFlagVideos,
 }) {
   const [isModalOpened, setIsModalOpened] = useState(false);
-  // const [isDropdownOpened, setIsDropdownOpened] = useState(false);
 
   const addButton = () => {
     if (activeTab === "video") {
@@ -94,13 +93,6 @@ export default function RowSearch({
             filterText={filterText}
             onFilterTextChange={setFilterText}
           />
-          {/* {activeTab === "video" && (
-            <Dropdown
-              title="Search filters"
-              isOpen={isDropdownOpened}
-              setIsOpen={setIsDropdownOpened}
-            />
-          )} */}
         </div>
       </div>
 
