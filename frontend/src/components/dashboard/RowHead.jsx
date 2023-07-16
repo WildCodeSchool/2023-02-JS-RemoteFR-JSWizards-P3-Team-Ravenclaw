@@ -31,19 +31,43 @@ export default function RowHead({ activeTab }) {
       id: 7,
       name: "Actions",
     },
+    {
+      id: 8,
+      name: "Email",
+    },
+    {
+      id: 9,
+      name: "Plan",
+    },
   ];
 
   const filteredTitles = titles.filter((title) => {
-    if (activeTab === "video" && title.name === "Premium") {
+    if (
+      activeTab === "video" &&
+      (title.name === "Premium" ||
+        title.name === "Pseudo" ||
+        title.name === "Email" ||
+        title.name === "Plan")
+    ) {
       return false; // Exclude "Premium" for video tab
     }
-    if (activeTab === "dashboard" && title.name === "Actions") {
+    if (
+      activeTab === "dashboard" &&
+      (title.name === "Actions" ||
+        title.name === "Pseudo" ||
+        title.name === "Email" ||
+        title.name === "Plan")
+    ) {
+      return false; // Exclude "Actions" for video tab
+    }
+    if (activeTab === "userList" && title.name === "Actions") {
       return false; // Exclude "Actions" for video tab
     }
     if (
       (activeTab === "category" ||
         activeTab === "language" ||
-        activeTab === "game") &&
+        activeTab === "game" ||
+        activeTab === "userList") &&
       (title.name === "Category" ||
         title.name === "Language" ||
         title.name === "Status" ||
