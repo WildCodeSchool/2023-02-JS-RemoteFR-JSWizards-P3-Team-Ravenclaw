@@ -11,11 +11,11 @@ export const modifyVideoById = (body, id) =>
   axios.put(`${BASE_URL}/videos/${id}`, body);
 
 export const addVideoThumbnail = (form) =>
-  axios.post(`${BASE_URL}/upload/videos/thumbnails`, form);
+  axios.post(`${BASE_URL}/upload/thumbnails/videos`, form);
 
 // To update
 export const addVideoMedia = (form) =>
-  axios.post(`${BASE_URL}/upload/videos/???`, form);
+  axios.post(`${BASE_URL}/upload/videos`, form);
 
 export const addVideo = (body) => axios.post(`${BASE_URL}/videos/`, body);
 

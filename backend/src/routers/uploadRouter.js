@@ -9,7 +9,7 @@ const router = express.Router();
 
 // public folder destination for games thumbnails upload
 const THUMB_DEST = "./public/uploads/thumbnails";
-const VIDEO_DEST = "./public/uploads/videos";
+const VIDEO_DEST = "./public/uploads/videos/";
 const uploadGameThumbnail = multer({ dest: `${THUMB_DEST}/games/` });
 const uploadVideoThumbnail = multer({ dest: `${THUMB_DEST}/videos/` });
 const uploadVideo = multer({ dest: VIDEO_DEST });

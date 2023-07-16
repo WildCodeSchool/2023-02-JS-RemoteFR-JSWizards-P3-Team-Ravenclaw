@@ -7,7 +7,7 @@ const FRONT_DEST = `http://localhost:${process.env.APP_PORT}/`;
 const post = (req, res) => {
   // extract file destination (backend location)
   const { destination } = req.file;
-  const fileDestination = destination.slice(destination.search("/uploads"));
+  const fileDestination = destination.slice(destination.search("uploads"));
 
   // give file unique name by pre-pending uuid (avoid file to be overwritten)
   const { filename, originalname } = req.file;
@@ -17,11 +17,14 @@ const post = (req, res) => {
   // rename file
   // fs.rename(oldPath, newPath, callback);
   fs.rename(
-    `./public/${fileDestination}/${oldfileName}`,
-    `./public/${fileDestination}/${newfileName}`,
+    // `./public/${fileDestination}/${oldfileName}`,
+    // `./public/${fileDestination}/${newfileName}`,
+    `./public/${fileDestination}${oldfileName}`,
+    `./public/${fileDestination}${newfileName}`,
     (err) => {
       if (err) throw err;
       res.json({
+        // url_file: `${FRONT_DEST}${fileDestination}/${newfileName}`,
         url_file: `${FRONT_DEST}${fileDestination}${newfileName}`,
       });
     }
