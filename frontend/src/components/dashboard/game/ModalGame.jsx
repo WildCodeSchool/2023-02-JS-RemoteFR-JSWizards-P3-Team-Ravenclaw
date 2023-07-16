@@ -43,7 +43,7 @@ export default function ModalGame({ open, setIsModalOpened, setFlag }) {
     formData.append("game_thumbnail", fileRef.current.files[0]);
     try {
       const {
-        data: { url_thumbnail: gameThumbUrl },
+        data: { url_file: gameThumbUrl },
       } = await addGameThumbnail(formData);
 
       const response = await addGame({
