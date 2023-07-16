@@ -5,7 +5,6 @@ import { useState } from "react";
 // Components
 import Searchbar from "../utilities/Searchbar";
 import Button from "../utilities/Button";
-import Dropdown from "../utilities/Dropdown";
 import ModalVideo from "./video/ModalVideo";
 import ModalCategory from "./category/ModalCategory";
 import ModalLanguage from "./language/ModalLanguage";
@@ -18,6 +17,7 @@ export default function RowSearch({
   setFlagCategories,
   setFlagLanguages,
   setFlagGames,
+  setFlagVideos,
   exportData,
 }) {
   const [isModalOpened, setIsModalOpened] = useState(false);
@@ -47,12 +47,10 @@ export default function RowSearch({
   const addModal = () => {
     if (activeTab === "video") {
       return (
-        // EN COURS...
         <ModalVideo
           open={isModalOpened}
-          onOk={() => setIsModalOpened(false)}
-          onCancel={() => setIsModalOpened(false)}
-          onClick={() => setIsModalOpened(false)}
+          setIsModalOpened={setIsModalOpened}
+          setFlag={setFlagVideos}
         />
       );
     }
@@ -98,7 +96,6 @@ export default function RowSearch({
             filterText={filterText}
             onFilterTextChange={setFilterText}
           />
-          {activeTab === "video" && <Dropdown title="Search filters" />}
         </div>
       </div>
 
@@ -161,6 +158,7 @@ RowSearch.propTypes = {
   setFlagCategories: PropTypes.func,
   setFlagLanguages: PropTypes.func,
   setFlagGames: PropTypes.func,
+  setFlagVideos: PropTypes.func,
   exportData: PropTypes.func,
 };
 
@@ -170,5 +168,6 @@ RowSearch.defaultProps = {
   setFlagCategories: null,
   setFlagLanguages: null,
   setFlagGames: null,
+  setFlagVideos: null,
   exportData: null,
 };
