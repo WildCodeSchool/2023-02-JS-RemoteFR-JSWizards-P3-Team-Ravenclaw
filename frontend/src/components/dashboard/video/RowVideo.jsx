@@ -53,7 +53,9 @@ export default function RowVideo({ video, setFlagVideos }) {
         <td className="px-4 py-3 text-sm">{video.id}</td>
         <td className="px-4 py-3 text-sm">{capitalizeText(video.title)}</td>
         <td className="px-4 py-3 text-sm">
-          {video.category?.toUpperCase() || "-"}
+          {Array.isArray(video.category)
+            ? video.category?.join(" | ").toUpperCase() || "-"
+            : video.category?.toUpperCase() || "-"}
         </td>
         <td className="px-4 py-3 text-sm">
           {capitalizeText(video.language) || "-"}
@@ -120,10 +122,13 @@ export default function RowVideo({ video, setFlagVideos }) {
 RowVideo.propTypes = {
   video: PropTypes.shape({
     id: PropTypes.number,
-    visibility: PropTypes.number,
     title: PropTypes.string,
-    category: PropTypes.string,
+    category: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.arrayOf(PropTypes.string),
+    ]),
     language: PropTypes.string,
+    visibility: PropTypes.number,
     status: PropTypes.string,
   }).isRequired,
   setFlagVideos: PropTypes.func.isRequired,

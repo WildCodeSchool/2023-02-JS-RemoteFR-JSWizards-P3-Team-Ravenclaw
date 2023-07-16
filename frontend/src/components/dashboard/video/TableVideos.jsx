@@ -9,6 +9,7 @@ import RowVideo from "./RowVideo";
 
 // Helpers
 import filterTable from "../../../helpers/filterTable";
+import groupVideoCategory from "../../../helpers/groupVideoCategory";
 
 // Services
 import { getVideos } from "../../../services/admin";
@@ -17,7 +18,6 @@ export default function TableVideos({ filterText, flagVideos, setFlagVideos }) {
   const [videos, setVideos] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
-  const [objectNumber, setObjectNumber] = useState(null);
 
   // table pagination
   const offset = pageSize * currentPage - pageSize;
@@ -27,8 +27,7 @@ export default function TableVideos({ filterText, flagVideos, setFlagVideos }) {
     const controller = new AbortController();
     getVideos(controller)
       .then((res) => {
-        setVideos(res.data);
-        setObjectNumber(res.data.length);
+        setVideos(groupVideoCategory(res.data));
       })
       .catch((err) => console.error(err));
   }, [flagVideos]);
@@ -70,7 +69,7 @@ export default function TableVideos({ filterText, flagVideos, setFlagVideos }) {
           className="py-2 text-center"
           pageSize={pageSize}
           current={currentPage}
-          total={objectNumber}
+          total={videos.length}
           onChange={(pageClicked, onPageSize) => {
             setCurrentPage(pageClicked);
             setPageSize(onPageSize);

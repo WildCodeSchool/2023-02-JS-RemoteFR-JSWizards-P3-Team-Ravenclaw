@@ -11,6 +11,7 @@ import Card from "./utilities/Card";
 
 // Helpers
 import filterTable from "../helpers/filterTable";
+import groupVideoCategory from "../helpers/groupVideoCategory";
 
 // Services
 import { getVideos, getStats } from "../services/admin";
@@ -24,7 +25,8 @@ export default function Dashboard({ filterText, setFilterText }) {
   const [videos, setVideos] = useState([]);
   const [dbStats, setDbStats] = useState([]);
 
-  const offset = pageSize * currentPage - pageSize; // pages parcourues
+  // table pagination
+  const offset = pageSize * currentPage - pageSize;
   const nextPage = offset + pageSize;
 
   const stats = adminStats.map((stat, index) => ({
@@ -36,7 +38,7 @@ export default function Dashboard({ filterText, setFilterText }) {
   useEffect(() => {
     const videosController = new AbortController();
     getVideos(videosController)
-      .then((res) => setVideos(res.data))
+      .then((res) => setVideos(groupVideoCategory(res.data)))
       .catch((err) => console.error(err));
   }, []);
 
