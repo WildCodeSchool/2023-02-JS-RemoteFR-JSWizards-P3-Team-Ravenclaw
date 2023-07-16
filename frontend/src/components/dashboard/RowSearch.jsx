@@ -37,6 +37,9 @@ export default function RowSearch({
     if (activeTab === "page") {
       return "Add component";
     }
+    if (activeTab === "userList") {
+      return "Export user list";
+    }
     return null;
   };
 
