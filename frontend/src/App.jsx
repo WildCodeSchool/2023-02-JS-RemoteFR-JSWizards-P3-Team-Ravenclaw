@@ -45,6 +45,7 @@ export default function App() {
                 <>
                   <Route path="" element={<Admin />} />
                   <Route path="edit" element={<Admin edit />} />
+                  <Route path="userList" element={<Admin userList />} />
                 </>
               ) : (
                 <Route path="user" element={<User />} />

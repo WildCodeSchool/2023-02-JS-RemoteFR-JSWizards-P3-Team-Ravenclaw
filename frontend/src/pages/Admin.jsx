@@ -8,16 +8,19 @@ import useAxios from "../hooks/useAxios";
 // Components
 import ManageContent from "../components/dashboard/ManageContent";
 import Dashboard from "../components/Dashboard";
+import UserTable from "../components/dashboard/user/UserTable";
 import Loader from "../components/utilities/Loader";
 
-export default function Admin({ edit }) {
+export default function Admin({ edit, userList }) {
   const [isLoading, setIsLoading] = useState(true);
   const { data: dbStats, isLoading: isStatsLoading } = useAxios("/admin/stats");
   const { data: videos, isLoading: isVideosLoading } =
     useAxios("/admin/videos");
+  const { data: users, isLoading: isUsersLoading } = useAxios("/users");
 
   useEffect(() => {
-    if (!isStatsLoading && !isVideosLoading) setIsLoading(false);
+    if (!isStatsLoading && !isVideosLoading && !isUsersLoading)
+      setIsLoading(false);
   }, []);
 
   return (
@@ -28,7 +31,10 @@ export default function Admin({ edit }) {
       ) : (
         <div>
           {edit && <ManageContent videos={videos} />}
-          {!edit && <Dashboard videos={videos} dbStats={dbStats} />}
+          {!edit && !userList && (
+            <Dashboard videos={videos} dbStats={dbStats} />
+          )}
+          {userList && <UserTable users={users} />}
         </div>
       )}
     </>
@@ -37,8 +43,10 @@ export default function Admin({ edit }) {
 
 Admin.defaultProps = {
   edit: null,
+  userList: null,
 };
 
 Admin.propTypes = {
   edit: PropTypes.bool,
+  userList: PropTypes.bool,
 };
