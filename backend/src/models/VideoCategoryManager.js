@@ -13,6 +13,12 @@ class VideoCategoryManager extends AbstractManager {
       [videoID, categoryID]
     );
   }
+
+  deleteFromVideoId(videoId) {
+    return this.database.query(`DELETE FROM ${this.table} WHERE video_id = ?`, [
+      videoId,
+    ]);
+  }
 }
 
 module.exports = VideoCategoryManager;

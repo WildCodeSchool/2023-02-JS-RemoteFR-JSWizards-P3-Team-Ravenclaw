@@ -34,4 +34,22 @@ const post = async (req, res) => {
   }
 };
 
-module.exports = { getAll, post };
+const remove = async (req, res) => {
+  try {
+    const [result] = await models.videoCategory.deleteFromVideoId(
+      req.params.id
+    );
+    if (result.affectedRows === 0)
+      return res.status(404).send(`Video-category not found`);
+    return res.sendStatus(204);
+  } catch (err) {
+    console.error(err);
+    return res
+      .status(500)
+      .send(
+        "oops...an error occured when removing video-category from database"
+      );
+  }
+};
+
+module.exports = { getAll, post, remove };
