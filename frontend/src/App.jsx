@@ -43,8 +43,9 @@ export default function App() {
             <Route path="account" element={<DashLayout />}>
               {isAdmin ? (
                 <>
-                  <Route path="" element={<Admin />} />
+                  <Route path="" element={<Admin dashboard />} />
                   <Route path="edit" element={<Admin edit />} />
+                  <Route path="favorites" element={<Admin favorites />} />
                 </>
               ) : (
                 <Route path="user" element={<User />} />

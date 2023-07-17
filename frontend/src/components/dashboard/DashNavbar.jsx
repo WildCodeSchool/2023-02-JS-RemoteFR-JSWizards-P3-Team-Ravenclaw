@@ -20,7 +20,9 @@ export default function DashNavbar() {
     // request logout
     await logoutUser();
     // update context
-    setAccount(undefined);
+    setAccount({
+      id_plan: undefined,
+    });
     // clear local storage
     clearUserFromLocalStorage();
     // re-direction to HomePage

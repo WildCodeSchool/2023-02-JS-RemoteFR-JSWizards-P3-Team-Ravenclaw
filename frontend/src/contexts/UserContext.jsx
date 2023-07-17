@@ -4,7 +4,9 @@ import { createContext, useState } from "react";
 export const UserContext = createContext();
 
 export function UserProvider({ children }) {
-  const [account, setAccount] = useState(undefined);
+  const [account, setAccount] = useState({
+    id_plan: undefined,
+  });
 
   return (
     // eslint-disable-next-line react/jsx-no-constructed-context-values
