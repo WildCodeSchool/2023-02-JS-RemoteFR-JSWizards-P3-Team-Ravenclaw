@@ -16,6 +16,7 @@ export default function formatVideoBodyRequest(
     description: videoInfo.description,
     slug: videoInfo.slug ?? "",
     status: videoInfo.status ?? "online",
+    seo: videoInfo.seo ?? "",
     thumbnail: thumbnailUrl,
     url_video: videoUrl,
     is_promoted: videoInfo.isPromoted,
