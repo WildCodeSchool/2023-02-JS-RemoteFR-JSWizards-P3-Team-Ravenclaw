@@ -1,41 +1,32 @@
 // Packages
 import PropTypes from "prop-types";
-import { useState, useEffect } from "react";
-
-// Hooks
-import useAxios from "../hooks/useAxios";
+import { useState } from "react";
 
 // Components
 import ManageContent from "../components/dashboard/ManageContent";
 import Dashboard from "../components/Dashboard";
 import UserTable from "../components/dashboard/user/UserTable";
-import Loader from "../components/utilities/Loader";
+import FavVideos from "../components/dashboard/FavVideos";
 
-export default function Admin({ edit, userList }) {
-  const [isLoading, setIsLoading] = useState(true);
-  const { data: dbStats, isLoading: isStatsLoading } = useAxios("/admin/stats");
-  const { data: videos, isLoading: isVideosLoading } =
-    useAxios("/admin/videos");
-  const { data: users, isLoading: isUsersLoading } = useAxios("/users");
-
-  useEffect(() => {
-    if (!isStatsLoading && !isVideosLoading && !isUsersLoading)
-      setIsLoading(false);
-  }, []);
-
+export default function Admin({ edit, dashboard, favorites }) {
+  const [filterText, setFilterText] = useState("");
   return (
-    // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <div>
-          {edit && <ManageContent videos={videos} />}
-          {!edit && !userList && (
-            <Dashboard videos={videos} dbStats={dbStats} />
-          )}
-          {userList && <UserTable users={users} />}
-        </div>
+      {edit && (
+        <ManageContent filterText={filterText} setFilterText={setFilterText} />
+      )}
+      {dashboard && (
+        <Dashboard filterText={filterText} setFilterText={setFilterText} />
+      )}
+      {favorites && (
+        <FavVideos filterText={filterText} setFilterText={setFilterText} />
+      )}
+      {favorites && (
+        <UserTable
+          ideos
+          filterText={filterText}
+          setFilterText={setFilterText}
+        />
       )}
     </>
   );
@@ -43,10 +34,11 @@ export default function Admin({ edit, userList }) {
 
 Admin.defaultProps = {
   edit: null,
-  userList: null,
+  dashboard: null,
+  favorites: null,
 };
-
 Admin.propTypes = {
   edit: PropTypes.bool,
-  userList: PropTypes.bool,
+  dashboard: PropTypes.bool,
+  favorites: PropTypes.bool,
 };

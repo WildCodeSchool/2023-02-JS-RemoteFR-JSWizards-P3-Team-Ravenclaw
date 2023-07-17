@@ -8,15 +8,22 @@ export default function useAuth() {
   const LOCAL_STORAGE_KEY = "account";
 
   let status;
-  switch (account) {
+
+  switch (account.id_plan) {
     case null:
-      status = "guest";
+      status = "authenticated";
+      break;
+    case 1:
+      status = "authenticated";
+      break;
+    case 3:
+      status = "authenticated";
       break;
     case undefined:
       status = "unknown";
       break;
     default:
-      status = "authenticated";
+      status = "guest";
   }
 
   const checkAuthentication = (userStatus) => userStatus === "authenticated";
@@ -64,5 +71,6 @@ export default function useAuth() {
     registerUser,
     isLoggedIn,
     isAdmin,
+    account,
   };
 }

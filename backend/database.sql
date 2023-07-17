@@ -160,7 +160,7 @@ VALUES
 -- Create video
 INSERT INTO `video` (`title`, `upload_date`, `description`, `slug`, `status`, `thumbnail`, `url_video`, `is_promoted`, `visibility`, `game_id`, `language_id`) 
 VALUES 
-('LIP WITH A SPICY SYMMETRA 💥 | OWL TOP 5', '2023-06-26' , 'Welcome to Top 5 Plays, where were highlighting the five craziest plays each week of the #OWL2023 season! Which one holds your #1 spot? Let us know in the comments!', '', 'offline', './assets/videos/overwatch.png', 'https://www.youtube.com/watch?v=tF2ss2mU-Yc', 1, 0, 12, 1),
+('LIP WITH A SPICY SYMMETRA 💥 | OWL TOP 5', '2023-06-26' , 'Welcome to Top 5 Plays, where were highlighting the five craziest plays each week of the #OWL2023 season! Which one holds your #1 spot? Let us know in the comments!', '', 'offline', './assets/videos/overwatch.png', 'https://www.youtube.com/watch?v=tF2ss2mU-Yc', 1, 2, 12, 1),
 ('Mull it Over - Ping Mage - Masters Tour: Maw and Disorder', '2023-06-26', 'Subscribe!' , '', 'offline', './assets/videos/hearthstone1.png', 'https://www.youtube.com/watch?v=pIT4uWcfy54', 1, 1, 8, 1),
 ('PSG LGD vs ASTER - BEST DPC CHINA TEAM! - DPC 2023 CN SUMMER TOUR 3 Dota 2 Highlights', '2023-06-26' , 'DOTA 2 PSG LGD vs ASTER - BEST DPC CHINA TEAM! - DOTA 2 DPC 2023 CHINA SUMMER TOUR 3 DPC Dota 2 Highlights 2023 Tournament - Week 3 DPC CN Division 1', '', 'offline', './assets/videos/dota.png', 'https://www.youtube.com/watch?v=aG15JM07Dt4', 1, 0, 5, 1),
 ('TSM vs Disguised Highlights | Challengers League: North America 2023', '2023-06-26' , 'Subscribe for More Professional Valorant Content , Road to 200k Subscribers.', '', 'offline', './assets/videos/valorant2.png', 'https://www.youtube.com/watch?v=PiOfqf6RFPk', 1, 1, 18, 1),

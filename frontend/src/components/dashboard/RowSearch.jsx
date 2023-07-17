@@ -99,7 +99,7 @@ export default function RowSearch({
         </div>
       </div>
 
-      {activeTab !== "dashboard" && (
+      {activeTab !== "dashboard" && activeTab !== "fav" && (
         <div className="flex w-full justify-center space-y-2 md:w-auto md:flex-row md:items-center md:space-x-3 md:space-y-0">
           {activeTab === "userList" ? (
             <Button
