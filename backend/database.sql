@@ -20,6 +20,7 @@ CREATE TABLE `video` (
     `description` VARCHAR(255) NOT NULL,
     `slug` VARCHAR(255) NULL,
     `status` VARCHAR(255) DEFAULT "online",
+    `seo` VARCHAR(255) DEFAULT "",
     `thumbnail` VARCHAR(255) NOT NULL,
     `url_video` VARCHAR(255) NOT NULL,
     `is_promoted` TINYINT UNSIGNED DEFAULT 0,
