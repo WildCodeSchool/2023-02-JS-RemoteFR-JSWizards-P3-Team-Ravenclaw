@@ -8,7 +8,6 @@ import Dashboard from "../components/Dashboard";
 import FavVideos from "../components/dashboard/FavVideos";
 
 export default function Admin({ edit, dashboard, favorites }) {
-  const [isLoading, setIsLoading] = useState(true);
   const [filterText, setFilterText] = useState("");
 
   return (
