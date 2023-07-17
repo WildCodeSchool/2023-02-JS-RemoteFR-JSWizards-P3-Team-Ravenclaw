@@ -99,7 +99,7 @@ export default function SignForm({ isSignIn }) {
         id="email-login"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}$"
+        pattern="[A-z0-9._%+\-]+@[A-z0-9.\-]+\.[A-z]{2,4}$"
         required
         title="example@test.com"
         autoComplete="on"

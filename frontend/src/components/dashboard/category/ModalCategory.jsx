@@ -73,7 +73,7 @@ export default function ModalCategory({ open, setIsModalOpened, setFlag }) {
           title="Name"
           type="text"
           className={`${styles.input__style}`}
-          placeholder="Type category name"
+          placeholder="Type category name..."
           required
           ref={inputRef}
         />

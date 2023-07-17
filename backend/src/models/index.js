@@ -34,6 +34,7 @@ const GameManager = require("./GameManager");
 const UserManager = require("./UserManager");
 const PlanManager = require("./PlanManager");
 const CategoryManager = require("./CategoryManager");
+const VideoCategoryManager = require("./VideoCategoryManager");
 
 models.video = new VideoManager();
 models.video.setDatabase(pool);
@@ -52,6 +53,9 @@ models.plan.setDatabase(pool);
 
 models.category = new CategoryManager();
 models.category.setDatabase(pool);
+
+models.videoCategory = new VideoCategoryManager();
+models.videoCategory.setDatabase(pool);
 
 // bonus: use a proxy to personalize error message,
 // when asking for a non existing model
