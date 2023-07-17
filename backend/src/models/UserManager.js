@@ -48,6 +48,12 @@ class UserManager extends AbstractManager {
       id,
     ]);
   }
+
+  findAllWithPlans() {
+    return this.database
+      .query(`SELECT u.id AS id_user, u.email, u.pseudo, p.id AS id_plan, p.name AS plan FROM ${this.table} AS u
+    LEFT JOIN plan AS p ON u.plan_id = p.id`);
+  }
 }
 
 module.exports = UserManager;
