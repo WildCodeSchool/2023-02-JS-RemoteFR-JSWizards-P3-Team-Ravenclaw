@@ -4,14 +4,14 @@ import PropTypes from "prop-types";
 import { useRef } from "react";
 import { toast } from "react-toastify";
 
-// Component
+// Components
 import Button from "../../utilities/Button";
 import Input from "../../utilities/Input";
 
 // Services
 import { addGame, addGameThumbnail } from "../../../services/games";
 
-// Style
+// Styles
 import styles from "../../../css/Table.module.css";
 
 export default function ModalGame({ open, setIsModalOpened, setFlag }) {
@@ -43,7 +43,7 @@ export default function ModalGame({ open, setIsModalOpened, setFlag }) {
     formData.append("game_thumbnail", fileRef.current.files[0]);
     try {
       const {
-        data: { url_thumbnail: gameThumbUrl },
+        data: { url_file: gameThumbUrl },
       } = await addGameThumbnail(formData);
 
       const response = await addGame({
@@ -91,7 +91,7 @@ export default function ModalGame({ open, setIsModalOpened, setFlag }) {
           title="Game Name"
           type="text"
           className={`${styles.input__style}`}
-          placeholder="Type game name"
+          placeholder="Type game name..."
           required
           ref={inputRef}
         />
@@ -100,7 +100,7 @@ export default function ModalGame({ open, setIsModalOpened, setFlag }) {
           tooltip="Valid file extensions are: .jpg, .jpeg, .png, .webp"
           type="file"
           accept=".jpg, .jpeg, .png, .webp"
-          className="file:hover:primaryLightest file:cursor-pointer file:rounded-md file:border-none file:bg-primary file:p-3 file:text-neutralLightest"
+          className="file:hover:primaryLightest file:cursor-pointer file:rounded-md file:border-none file:bg-primary file:p-3 file:text-neutralLight"
           required
           ref={fileRef}
         />

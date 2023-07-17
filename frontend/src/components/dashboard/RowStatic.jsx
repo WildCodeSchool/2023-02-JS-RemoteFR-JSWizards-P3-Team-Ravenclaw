@@ -8,15 +8,19 @@ import checkRowStatus from "../../helpers/checkRowStatus";
 export default function RowStatic({ video }) {
   return (
     <tr className="border-b dark:border-neutral">
-      <td key={video.id} className="px-4 py-3 text-sm">
-        {video.id}
-      </td>
+      <td className="px-4 py-3 text-sm">{video.id}</td>
       <td className="px-4 py-3 text-sm">{capitalizeText(video.title)}</td>
-      <td className="px-4 py-3 text-sm">{video.category.toUpperCase()}</td>
-      <td className="px-4 py-3 text-sm">{capitalizeText(video.language)}</td>
+      <td className="px-4 py-3 text-sm">
+        {Array.isArray(video.category)
+          ? video.category?.join(" | ").toUpperCase() || "-"
+          : video.category?.toUpperCase() || "-"}
+      </td>
+      <td className="px-4 py-3 text-sm">
+        {capitalizeText(video.language) || "-"}
+      </td>
       <td className="px-4 py-3 text-sm">
         <span className={checkRowStatus(video.status)}>
-          {capitalizeText(video.status)}
+          {capitalizeText(video.status) || "-"}
         </span>
       </td>
       <td className="px-4 py-3 text-sm">
@@ -30,7 +34,10 @@ RowStatic.propTypes = {
   video: PropTypes.shape({
     id: PropTypes.number,
     title: PropTypes.string,
-    category: PropTypes.string,
+    category: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.arrayOf(PropTypes.string),
+    ]),
     language: PropTypes.string,
     visibility: PropTypes.number,
     status: PropTypes.string,

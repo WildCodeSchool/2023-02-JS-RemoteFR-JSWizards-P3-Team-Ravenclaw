@@ -1,6 +1,9 @@
 // Packages
 import PropTypes from "prop-types";
 
+// Helpers
+import capitalizeText from "../../helpers/capitalize";
+
 export default function DropdownLi({ item }) {
   return (
     <li>
@@ -15,7 +18,7 @@ export default function DropdownLi({ item }) {
           htmlFor={`checkbox-item-${item.id}`}
           className="ml-2 w-full rounded py-2 text-sm font-medium text-gray-900 dark:text-gray-300"
         >
-          {item.name}
+          {capitalizeText(item.name)}
         </label>
       </div>
     </li>
