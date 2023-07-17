@@ -11,7 +11,8 @@ export function updateFromInput(event, formData) {
 
 export function updateFromDropdownRadio(event, formData) {
   const clonedFormData = { ...formData };
-  const { id, value: name } = event.target;
+  const { value: name } = event.target;
+  const id = event.target.getAttribute("data-key");
   return {
     ...clonedFormData,
     [event.target.name]: { id, name },
@@ -20,13 +21,14 @@ export function updateFromDropdownRadio(event, formData) {
 
 export function updateFromDropdownCheckbox(event, formData) {
   const clonedFormData = { ...formData };
-  const { name: key, id, value: name } = event.target;
-  const newObj = { id, name };
+  const { value: name } = event.target;
+  const key = event.target.getAttribute("data-attribute");
+  const id = event.target.getAttribute("data-key");
   const index = clonedFormData[key].findIndex((el) => el.id === id);
   if (index === -1) {
-    clonedFormData[key].push(newObj);
+    clonedFormData[key].push({ id, name });
   } else {
-    clonedFormData[key][index] = newObj;
+    clonedFormData[key][index] = { id, name };
   }
   return clonedFormData;
 }

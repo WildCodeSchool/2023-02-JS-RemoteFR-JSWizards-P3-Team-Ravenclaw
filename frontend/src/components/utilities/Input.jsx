@@ -15,6 +15,7 @@ const Input = forwardRef(function forwardRefToChild(
     className,
     placeholder,
     accept,
+    pattern,
     required = true,
     handleChange,
   },
@@ -27,14 +28,16 @@ const Input = forwardRef(function forwardRefToChild(
     >
       {title}
       <input
+        type={type}
         id={htmlFor}
         name={name}
+        data-attribute={name}
         title={tooltip}
-        type={type}
         className={className}
         placeholder={placeholder}
         accept={accept}
         required={required}
+        pattern={pattern}
         ref={ref}
         onChange={handleChange}
       />
@@ -51,6 +54,7 @@ Input.propTypes = {
   className: PropTypes.string,
   placeholder: PropTypes.string,
   accept: PropTypes.string,
+  pattern: PropTypes.string,
   required: PropTypes.bool,
   handleChange: PropTypes.func,
 };
@@ -64,6 +68,7 @@ Input.defaultProps = {
   className: null,
   placeholder: null,
   accept: null,
+  pattern: null,
   required: true,
   handleChange: null,
 };

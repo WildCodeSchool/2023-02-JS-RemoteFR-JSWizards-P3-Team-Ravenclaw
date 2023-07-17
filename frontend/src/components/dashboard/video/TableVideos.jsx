@@ -41,7 +41,11 @@ export default function TableVideos({ filterText, flagVideos, setFlagVideos }) {
             {filterTable(videos, "title", filterText)
               .slice(offset, nextPage)
               .map((video) => (
-                <RowVideo key={video.id} setFlagVideos={setFlagVideos} />
+                <RowVideo
+                  key={video.id}
+                  video={video}
+                  setFlagVideos={setFlagVideos}
+                />
               ))}
           </tbody>
         </table>

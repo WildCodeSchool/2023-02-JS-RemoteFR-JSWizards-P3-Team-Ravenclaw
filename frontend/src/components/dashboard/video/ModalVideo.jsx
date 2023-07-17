@@ -75,16 +75,27 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
   // handle change in form inputs
   const handleInputChange = (e) => {
     let updatedFormData = { ...formVideoInfo };
-    switch (e.target.name) {
-      case "game":
-      case "language":
-        updatedFormData = updateFromDropdownRadio(e, formVideoInfo);
+    switch (e.target.type) {
+      case "radio":
+        switch (e.target.getAttribute("data-attribute")) {
+          case "game":
+          case "language":
+            updatedFormData = updateFromDropdownRadio(e, formVideoInfo);
+            break;
+          default:
+            updatedFormData = updateFromInput(e, formVideoInfo);
+        }
         break;
-      case "category":
-        updatedFormData = updateFromDropdownCheckbox(e, formVideoInfo);
+      case "checkbox":
+        switch (e.target.getAttribute("data-attribute")) {
+          case "category":
+            updatedFormData = updateFromDropdownCheckbox(e, formVideoInfo);
+            break;
+          default:
+            updatedFormData = updateFromInput(e, formVideoInfo);
+        }
         break;
-      case "thumbnail":
-      case "video":
+      case "file":
         updatedFormData = updateFromFileInput(
           e,
           imageRef,
@@ -114,7 +125,7 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
     const { areMandatoryInputsFilled: isFormCompleted, errorMessage } =
       checkVideoFormCompleted(formVideoInfo);
     if (!isFormCompleted) {
-      toast.error(`${errorMessage}!`, TOAST_DEFAULT_CONFIG);
+      toast.error(`${errorMessage}`, TOAST_DEFAULT_CONFIG);
       return;
     }
 
@@ -147,7 +158,6 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
         try {
           const response = await addVideoCategory({
             video_id: responseVideo.data.insertId,
-            // category_id: formVideoInfo.category[index].id,
             category_id: category.id,
           });
           relationReponses.push(response);
@@ -209,9 +219,9 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
         <div className="flex flex-col gap-4">
           <Input
             htmlFor="title"
+            type="text"
             name="title"
             title="Title"
-            type="text"
             className={`${styles.input__style}`}
             placeholder="Type video title..."
             required
@@ -227,30 +237,30 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
                 title="Game"
               />
               <Dropdown
+                type="radio"
                 name="game"
                 title="Select game"
                 items={games}
-                allowMultipleSelections={false}
                 isDropdownOpen={isGameDropOpened}
                 handleDropdown={setIsGameDropOpened}
                 handleChange={handleInputChange}
               />
             </div>
             <Input
-              name="isPremium"
               htmlFor="Premium"
+              type="checkbox"
+              name="isPremium"
               className="m-3.5"
               title="Premium"
-              type="checkbox"
               required={false}
               handleChange={handleInputChange}
             />
             <Input
-              name="isPromoted"
               htmlFor="Promoted"
+              type="checkbox"
+              name="isPromoted"
               className="m-3.5"
               title="Promoted"
-              type="checkbox"
               required={false}
               handleChange={handleInputChange}
             />
@@ -264,10 +274,10 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
                 title="Language"
               />
               <Dropdown
+                type="radio"
                 name="language"
                 title="Select language"
                 items={languages}
-                allowMultipleSelections={false}
                 isDropdownOpen={isLangDropOpened}
                 handleDropdown={setIsLangDropOpened}
                 handleChange={handleInputChange}
@@ -280,10 +290,10 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
                 title="Category"
               />
               <Dropdown
+                type="checkbox"
                 name="category"
                 title="Select game category"
                 items={categories}
-                allowMultipleSelections
                 isDropdownOpen={isCatDropOpened}
                 handleDropdown={setIsCatDropOpened}
                 handleChange={handleInputChange}
@@ -293,13 +303,14 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
 
           <div className="flex w-full flex-col gap-1.5">
             <Label
-              htmlFor="Video description"
+              htmlFor="description"
               className={`${styles.label__style}`}
               title="Video description"
             />
             <textarea
-              name="description"
               type="text"
+              name="description"
+              id="description"
               className={`${styles.input__style} h-full w-full`}
               placeholder="Type video description..."
               required
@@ -309,9 +320,9 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
 
           <div className="flex flex-col gap-4">
             <Input
+              type="file"
               name="video"
               title="Video Upload"
-              type="file"
               accept=".mp4, .avi, .mov, .wmv, .webm"
               className="file:hover:primaryLightest file:cursor-pointer file:rounded-md file:border-none file:bg-primary file:p-3 file:text-neutralLight"
               required
@@ -319,9 +330,9 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
               handleChange={handleInputChange}
             />
             <Input
+              type="file"
               name="thumbnail"
               title="Image Upload"
-              type="file"
               accept=".jpg, .jpeg, .png, .webp"
               className="file:hover:primaryLightest file:cursor-pointer file:rounded-md file:border-none file:bg-primary file:p-3 file:text-neutralLight"
               required

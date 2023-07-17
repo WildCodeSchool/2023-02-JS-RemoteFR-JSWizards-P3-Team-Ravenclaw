@@ -12,9 +12,9 @@ import getSelectionName from "../../helpers/getSelectionName";
 
 export default function Dropdown({
   name = "",
+  type,
   title,
   items,
-  allowMultipleSelections = false,
   isDropdownOpen,
   handleDropdown,
   handleChange,
@@ -35,7 +35,7 @@ export default function Dropdown({
   const updateSelectedItems = (selectionId) => {
     const clonedSelection = [...selectedItems];
     const updatedSelection = clonedSelection.map((item) => {
-      if (allowMultipleSelections) {
+      if (type === "checkbox") {
         return {
           ...item,
           isSelected:
@@ -49,7 +49,7 @@ export default function Dropdown({
     });
     setSelectedItems(updatedSelection);
     // close dropdown
-    if (!allowMultipleSelections) handleDropdown(!isDropdownOpen);
+    if (type !== "checkbox") handleDropdown(!isDropdownOpen);
   };
 
   return (
@@ -89,7 +89,7 @@ export default function Dropdown({
           <DropdownList
             items={items}
             inputName={name}
-            inputType={allowMultipleSelections ? "checkbox" : "radio"}
+            inputType={type}
             filterOptions={filterOptions}
             selection={selectedItems}
             onSelectionChange={updateSelectedItems}
@@ -103,6 +103,7 @@ export default function Dropdown({
 
 Dropdown.propTypes = {
   name: PropTypes.string,
+  type: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   items: PropTypes.arrayOf(
     PropTypes.shape({
@@ -110,7 +111,6 @@ Dropdown.propTypes = {
       name: PropTypes.string,
     })
   ),
-  allowMultipleSelections: PropTypes.bool.isRequired,
   isDropdownOpen: PropTypes.bool.isRequired,
   handleDropdown: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,

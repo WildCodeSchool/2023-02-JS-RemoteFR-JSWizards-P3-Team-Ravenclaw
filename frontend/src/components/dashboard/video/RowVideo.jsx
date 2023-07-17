@@ -7,6 +7,9 @@ import { toast } from "react-toastify";
 import VideoDropdown from "./VideoDropdown";
 import Button from "../../utilities/Button";
 
+// Hooks
+import useAxios from "../../../hooks/useAxios";
+
 // Services
 import { deleteVideo } from "../../../services/videos";
 
@@ -16,6 +19,11 @@ import checkRowStatus from "../../../helpers/checkRowStatus";
 
 export default function RowVideo({ video, setFlagVideos }) {
   const [isToggled, setIsToggled] = useState(false);
+
+  // fetch data from database to populate dropdown items
+  const { data: games } = useAxios("/games");
+  const { data: categories } = useAxios("/categories");
+  const { data: languages } = useAxios("/languages");
 
   const TOAST_DEFAULT_CONFIG = {
     position: "bottom-right",
@@ -27,8 +35,6 @@ export default function RowVideo({ video, setFlagVideos }) {
     progress: undefined,
     theme: "dark",
   };
-
-  // const toggleDropdown = () => setIsToggled(!isToggled);
 
   const handleDeleteVideo = (id) => {
     deleteVideo(id)
@@ -108,7 +114,16 @@ export default function RowVideo({ video, setFlagVideos }) {
           </span>
         </td>
       </tr>
-      {isToggled && <VideoDropdown setFlagVideos={setFlagVideos} />}
+      {isToggled && (
+        <VideoDropdown
+          videoId={video.id}
+          games={games}
+          categories={categories}
+          languages={languages}
+          toggleRow={setIsToggled}
+          setFlagVideos={setFlagVideos}
+        />
+      )}
     </>
   );
 }

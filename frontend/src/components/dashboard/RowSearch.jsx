@@ -5,7 +5,6 @@ import { useState } from "react";
 // Components
 import Searchbar from "../utilities/Searchbar";
 import Button from "../utilities/Button";
-// import Dropdown from "../utilities/Dropdown";
 import ModalVideo from "./video/ModalVideo";
 import ModalCategory from "./category/ModalCategory";
 import ModalLanguage from "./language/ModalLanguage";
