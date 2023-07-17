@@ -8,7 +8,7 @@ import Dashboard from "../components/Dashboard";
 import UserTable from "../components/dashboard/user/UserTable";
 import FavVideos from "../components/dashboard/FavVideos";
 
-export default function Admin({ edit, dashboard, favorites }) {
+export default function Admin({ edit, dashboard, favorites, userList }) {
   const [filterText, setFilterText] = useState("");
   return (
     <>
@@ -21,12 +21,8 @@ export default function Admin({ edit, dashboard, favorites }) {
       {favorites && (
         <FavVideos filterText={filterText} setFilterText={setFilterText} />
       )}
-      {favorites && (
-        <UserTable
-          ideos
-          filterText={filterText}
-          setFilterText={setFilterText}
-        />
+      {userList && (
+        <UserTable filterText={filterText} setFilterText={setFilterText} />
       )}
     </>
   );
@@ -36,9 +32,11 @@ Admin.defaultProps = {
   edit: null,
   dashboard: null,
   favorites: null,
+  userList: null,
 };
 Admin.propTypes = {
   edit: PropTypes.bool,
   dashboard: PropTypes.bool,
   favorites: PropTypes.bool,
+  userList: PropTypes.bool,
 };
