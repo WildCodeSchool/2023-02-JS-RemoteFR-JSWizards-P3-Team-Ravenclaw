@@ -26,6 +26,7 @@ class VideoManager extends AbstractManager {
       description,
       slug,
       status,
+      seo,
       thumbnail,
       url_video: urlVideo,
       is_promoted: isPromoted,
@@ -35,13 +36,14 @@ class VideoManager extends AbstractManager {
     } = body;
 
     return this.database.query(
-      `UPDATE ${this.table} SET title = ?, upload_date = ?, description = ?, slug = ?, status = ?, thumbnail = ?, url_video = ?, is_promoted = ?, visibility = ?, game_id = ?, language_id = ? WHERE id = ?`,
+      `UPDATE ${this.table} SET title = ?, upload_date = ?, description = ?, slug = ?, status = ?, seo = ?, thumbnail = ?, url_video = ?, is_promoted = ?, visibility = ?, game_id = ?, language_id = ? WHERE id = ?`,
       [
         title,
         uploadDate,
         description,
         slug,
         status,
+        seo,
         thumbnail,
         urlVideo,
         isPromoted,
@@ -60,6 +62,7 @@ class VideoManager extends AbstractManager {
       description,
       slug,
       status,
+      seo,
       thumbnail,
       url_video: urlVideo,
       is_promoted: isPromoted,
@@ -69,13 +72,14 @@ class VideoManager extends AbstractManager {
     } = body;
 
     return this.database.query(
-      `INSERT INTO ${this.table} (title, upload_date, description, slug, status, thumbnail, url_video, is_promoted, visibility, game_id, language_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      `INSERT INTO ${this.table} (title, upload_date, description, slug, status, seo, thumbnail, url_video, is_promoted, visibility, game_id, language_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         title,
         uploadDate,
         description,
         slug,
         status,
+        seo,
         thumbnail,
         urlVideo,
         isPromoted,

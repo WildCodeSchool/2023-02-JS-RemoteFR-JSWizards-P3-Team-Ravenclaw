@@ -50,7 +50,7 @@ const editById = async (req, res) => {
     if (result.affectedRows === 0) {
       return res.status(404).send(`Video not found`);
     }
-    return res.sendStatus(204);
+    return res.status(200).json({ insertId: result.insertId });
   } catch (err) {
     console.error(err);
     return res
