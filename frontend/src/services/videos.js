@@ -22,3 +22,6 @@ export const deleteVideo = (id) => axios.delete(`${BASE_URL}/videos/${id}`);
 
 export const addVideoCategory = (body) =>
   axios.post(`${BASE_URL}/video-category/`, body);
+
+export const deleteVideoCategory = (id) =>
+  axios.delete(`${BASE_URL}/video-category/${id}`);
