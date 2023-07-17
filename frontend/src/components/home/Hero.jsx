@@ -16,7 +16,6 @@ const displayedLinks = [
   },
   {
     id: 2,
-    // img: "./public/assets/img/picturesForHome/ow.jpg",
     img: "./assets/img/picturesForHome/ow.jpg",
     link: "/videos/1",
     alt: "ow",
