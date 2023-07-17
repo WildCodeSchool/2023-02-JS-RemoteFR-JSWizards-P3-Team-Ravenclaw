@@ -60,20 +60,39 @@ export default function RowHead({ activeTab }) {
     ) {
       return false; // Exclude "Actions" for video tab
     }
-    if (activeTab === "userList" && title.name === "Actions") {
+    if (
+      activeTab === "userList" &&
+      (title.name === "Category" ||
+        title.name === "Language" ||
+        title.name === "Status" ||
+        title.name === "Premium" ||
+        title.name === "Actions")
+    ) {
       return false; // Exclude "Actions" for video tab
     }
     if (
       (activeTab === "category" ||
         activeTab === "language" ||
-        activeTab === "game" ||
-        activeTab === "userList") &&
+        activeTab === "game") &&
       (title.name === "Category" ||
         title.name === "Language" ||
         title.name === "Status" ||
-        title.name === "Premium")
+        title.name === "Premium" ||
+        title.name === "Email" ||
+        title.name === "Plan")
     ) {
       return false; // Exclude headers for category, language and game tabs
+    }
+    if (
+      activeTab === "fav" &&
+      (title.name === "ID" ||
+        title.name === "Status" ||
+        title.name === "Premium" ||
+        title.name === "Pseudo" ||
+        title.name === "Email" ||
+        title.name === "Plan")
+    ) {
+      return false; // Exclude "Favorite" for video tab
     }
     return true; // Include other titles
   });
