@@ -1,8 +1,22 @@
 const models = require("../models");
 
+// To remove if not used
+// const getAll = async (req, res) => {
+//   try {
+//     const [users] = await models.user.findAll();
+//     if (!users.length) return res.status(404).send("No existing users");
+//     return res.json(users);
+//   } catch (err) {
+//     console.error(err);
+//     return res
+//       .status(500)
+//       .send("oops...an error occured when retrieving users from database");
+//   }
+// };
+
 const getAll = async (req, res) => {
   try {
-    const [users] = await models.user.findAll();
+    const [users] = await models.user.findAllWithPlans();
     if (!users.length) return res.status(404).send("No existing users");
     return res.json(users);
   } catch (err) {
