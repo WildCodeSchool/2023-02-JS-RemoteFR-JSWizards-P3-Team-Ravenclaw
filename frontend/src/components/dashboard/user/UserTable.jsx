@@ -1,7 +1,7 @@
 // Packages
-import { Pagination, ConfigProvider } from "antd";
 import { useState, useEffect } from "react";
-import PropTypes from "prop-types";
+import { Pagination, ConfigProvider } from "antd";
+import { toast } from "react-toastify";
 
 // Components
 import RowUser from "./RowUser";
@@ -11,10 +11,13 @@ import RowSearch from "../RowSearch";
 // Helpers
 import filterTable from "../../../helpers/filterTable";
 
+// Hook
+import useAxios from "../../../hooks/useAxios";
+
 // Services
 import { getUsers } from "../../../services/users";
 
-export default function UserTable({ users }) {
+export default function UserTable() {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
 
@@ -22,21 +25,22 @@ export default function UserTable({ users }) {
   const [filterText, setFilterText] = useState("");
   const [flagUsers, setFlagUsers] = useState(false);
 
+  const { data: users } = useAxios("/users");
+
   // Pagination logic
   const offset = pageSize * currentPage - pageSize;
   const nextPage = offset + pageSize;
 
-  // load users from database
-  useEffect(() => {
-    const userController = new AbortController();
-    getUsers(userController)
-      .then((res) => setUserList(res.data))
-      .catch((err) => console.error(err));
-  }, [flagUsers]);
-
-  useEffect(() => {
-    setCurrentPage(1);
-  }, []);
+  const TOAST_DEFAULT_CONFIG = {
+    position: "bottom-right",
+    autoClose: 3000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: false,
+    progress: undefined,
+    theme: "dark",
+  };
 
   // export to CSV
   const convertToCSV = (data) => {
@@ -55,6 +59,23 @@ export default function UserTable({ users }) {
     link.click();
   };
 
+  const handleExport = () => {
+    exportToCSV(users);
+    toast.success("User list successfully exported!", TOAST_DEFAULT_CONFIG);
+  };
+
+  // load users from database
+  useEffect(() => {
+    const userController = new AbortController();
+    getUsers(userController)
+      .then((res) => setUserList(res.data))
+      .catch((err) => console.error(err));
+  }, [flagUsers]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, []);
+
   return (
     <article className="flex w-screen max-w-[calc(100vw-320px)] flex-col gap-8 px-[100px] py-8">
       <h1>Users</h1>
@@ -64,7 +85,7 @@ export default function UserTable({ users }) {
           activeTab="userList"
           setFilterText={setFilterText}
           setFlagUsers={setFlagUsers}
-          exportData={() => exportToCSV(userList)}
+          exportData={handleExport}
         />
         <div className="overflow-x-auto">
           <table className="w-full text-left text-base text-neutralDarkest dark:text-neutralLightest">
@@ -113,16 +134,3 @@ export default function UserTable({ users }) {
     </article>
   );
 }
-
-UserTable.propTypes = {
-  users: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      title: PropTypes.string,
-      category: PropTypes.string,
-      language: PropTypes.string,
-      visibility: PropTypes.number,
-      status: PropTypes.string,
-    })
-  ).isRequired,
-};
