@@ -6,7 +6,7 @@ import { useState } from "react";
 import ManageContent from "../components/dashboard/ManageContent";
 import Dashboard from "../components/Dashboard";
 import UserTable from "../components/dashboard/user/UserTable";
-import FavVideos from "../components/dashboard/FavVideos";
+import TableFavorite from "../components/dashboard/favorite/TableFavorite";
 
 export default function Admin({ edit, dashboard, favorites, userList }) {
   const [filterText, setFilterText] = useState("");
@@ -19,7 +19,7 @@ export default function Admin({ edit, dashboard, favorites, userList }) {
         <Dashboard filterText={filterText} setFilterText={setFilterText} />
       )}
       {favorites && (
-        <FavVideos filterText={filterText} setFilterText={setFilterText} />
+        <TableFavorite filterText={filterText} setFilterText={setFilterText} />
       )}
       {userList && (
         <UserTable filterText={filterText} setFilterText={setFilterText} />
