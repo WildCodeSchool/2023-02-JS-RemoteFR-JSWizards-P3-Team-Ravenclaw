@@ -9,8 +9,9 @@ import useAxios from "../hooks/useAxios";
 import ManageContent from "../components/dashboard/ManageContent";
 import Dashboard from "../components/Dashboard";
 import Loader from "../components/utilities/Loader";
+import FavVideos from "../components/dashboard/FavVideos";
 
-export default function Admin({ edit }) {
+export default function Admin({ edit, dashboard, favorites }) {
   const [isLoading, setIsLoading] = useState(true);
   const { data: dbStats, isLoading: isStatsLoading } = useAxios("/admin/stats");
   const { data: videos, isLoading: isVideosLoading } =
@@ -28,7 +29,8 @@ export default function Admin({ edit }) {
       ) : (
         <div>
           {edit && <ManageContent videos={videos} />}
-          {!edit && <Dashboard videos={videos} dbStats={dbStats} />}
+          {dashboard && <Dashboard videos={videos} dbStats={dbStats} />}
+          {favorites && <FavVideos videos={videos} />}
         </div>
       )}
     </>
@@ -37,8 +39,12 @@ export default function Admin({ edit }) {
 
 Admin.defaultProps = {
   edit: null,
+  dashboard: null,
+  favorites: null,
 };
 
 Admin.propTypes = {
   edit: PropTypes.bool,
+  dashboard: PropTypes.bool,
+  favorites: PropTypes.bool,
 };

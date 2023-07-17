@@ -1,12 +1,14 @@
 // Packages
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-
+import { useEffect, useState } from "react";
 // Style
+
 import styles from "../../css/Slider.module.css";
 
 // Components
 import Card from "./Card";
+import useAuth from "../../hooks/useAuth";
 
 export default function SliderVideo({
   videos,
@@ -16,31 +18,53 @@ export default function SliderVideo({
   displayCount,
   isPaginated,
 }) {
+  const { account } = useAuth();
+  const [unlockedVideo, setUnlockedVideo] = useState({
+    id_plan: undefined,
+  });
+  const [isAuthorized, setIsAuthorized] = useState(undefined);
+
   const navigate = useNavigate();
-
-  const handleClick = (isLinkAvailable, linkURL) =>
-    isLinkAvailable ? navigate(`${linkURL}`) : navigate("account");
-
   const videosToDisplay = isPaginated ? videos.slice(0, displayCount) : videos;
+
+  useEffect(() => {
+    setUnlockedVideo(account);
+  }, []);
+
+  useEffect(() => {
+    if (unlockedVideo.id_plan === undefined) {
+      setIsAuthorized(0);
+    } else if (unlockedVideo.id_plan === 1) {
+      setIsAuthorized(1);
+    } else if (unlockedVideo.id_plan === null || unlockedVideo.id_plan === 3) {
+      setIsAuthorized(2);
+    }
+  }, [unlockedVideo]);
 
   return (
     <ul className={`${styles.slider} ${customClassSlider}`}>
       {videosToDisplay.map((video) => (
         <li key={video.id}>
+          {/* eslint-disable */}
           <button
             type="button"
             className="w-full"
             onClick={() =>
-              handleClick(video?.visibility, `/videos/${video.id}`)
+              video.visibility > isAuthorized && isAuthorized === 0
+                ? navigate("account")
+                : video.visibility > isAuthorized && isAuthorized === 1
+                ? navigate("plans")
+                : navigate(`/videos/${video.id}`)
             }
           >
+            {/* eslint-enable */}
             <Card
               classCSS={`${styles.card} ${customClassCard} bg-cover`}
               styleCSS={{
                 backgroundImage: `url(${video.thumbnail})`,
               }}
             >
-              {!video.visibility && (
+              {video.visibility > isAuthorized && (
                 <div className={styles.card__overlay}>
                   <div
                     className={`${styles.overlay__wrapper} ${customClassOverlayWrapper}`}
@@ -50,9 +74,16 @@ export default function SliderVideo({
                       alt={video.title}
                       className={styles.overlay__wrapper__lock}
                     />
-                    <p className={styles.overlay__wrapper__description}>
-                      Login to watch
-                    </p>
+                    {isAuthorized === 0 && (
+                      <p className={styles.overlay__wrapper__description}>
+                        Login to watch
+                      </p>
+                    )}
+                    {isAuthorized === 1 && (
+                      <p className={styles.overlay__wrapper__description}>
+                        Become premium to watch
+                      </p>
+                    )}
                   </div>
                 </div>
               )}
