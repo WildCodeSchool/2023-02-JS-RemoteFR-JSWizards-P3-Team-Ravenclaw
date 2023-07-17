@@ -12,9 +12,15 @@ export default function Admin({ edit, dashboard, favorites }) {
 
   return (
     <>
-      {edit && <ManageContent filterText={filterText} setFilterText={setFilterText} />}
-      {dashboard && <Dashboard filterText={filterText} setFilterText={setFilterText} />}
-      {favorites && <FavVideos filterText={filterText} setFilterText={setFilterText} />}
+      {edit && (
+        <ManageContent filterText={filterText} setFilterText={setFilterText} />
+      )}
+      {dashboard && (
+        <Dashboard filterText={filterText} setFilterText={setFilterText} />
+      )}
+      {favorites && (
+        <FavVideos filterText={filterText} setFilterText={setFilterText} />
+      )}
     </>
   );
 }
