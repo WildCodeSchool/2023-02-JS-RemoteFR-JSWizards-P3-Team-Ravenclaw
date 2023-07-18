@@ -14,7 +14,7 @@ import styles from "../../css/DashNavbar.module.css";
 export default function DashNavbar() {
   const navigate = useNavigate();
   const { setAccount } = useUserContext();
-  const { clearUserFromLocalStorage, logoutUser } = useAuth();
+  const { clearUserFromLocalStorage, isAdmin, logoutUser } = useAuth();
 
   const handleClick = async () => {
     // request logout
@@ -34,19 +34,35 @@ export default function DashNavbar() {
       <nav className="relative h-full min-h-[calc(100vh-80px)] w-11/12 bg-neutralDarkest p-5 pt-8 text-xl font-medium duration-300 md:w-72">
         <ul className="pt-6">
           {menus.map((menu) => {
-            return (
-              <li key={menu.id} className={`${styles.dashList}`}>
-                <NavLink
-                  to={menu?.path}
-                  className="flex w-full cursor-pointer rounded-lg pl-4 text-lg decoration-primaryLightest hover:bg-neutralLight hover:text-primaryLight"
-                >
-                  {menu.title}
-                </NavLink>
-              </li>
-            );
+            // Check if the user is an admin to show specific menu items
+            if (isAdmin && ["", "edit", "userList"].includes(menu.path)) {
+              return (
+                <li key={menu.id} className={`${styles.dashList}`}>
+                  <NavLink
+                    to={menu.path}
+                    className="flex w-full cursor-pointer rounded-lg pl-4 text-lg decoration-primaryLightest hover:bg-neutralLight hover:text-primaryLight"
+                  >
+                    {menu.title}
+                  </NavLink>
+                </li>
+              );
+            }
+            if (!isAdmin && ["dashboard", "favorites"].includes(menu.path)) {
+              // Users can only see the "Favorites Videos"
+              return (
+                <li key={menu.id} className={`${styles.dashList}`}>
+                  <NavLink
+                    to={menu.path}
+                    className="flex w-full cursor-pointer rounded-lg pl-4 text-lg decoration-primaryLightest hover:bg-neutralLight hover:text-primaryLight"
+                  >
+                    {menu.title}
+                  </NavLink>
+                </li>
+              );
+            }
+            return null;
           })}
         </ul>
-        {/* <div className="group flex cursor-pointer items-center gap-4 pl-4 hover:border hover:border-primaryLightest md:rounded-lg"> */}
         <div className="group flex cursor-pointer items-center gap-4 pl-4 hover:bg-primary md:rounded-lg">
           <svg
             viewBox="0 0 64 64"
