@@ -4,6 +4,9 @@ import { useState, useEffect } from "react";
 // Components
 import Card from "./utilities/Card";
 
+// Helper
+import capitalizeText from "../helpers/capitalize";
+
 // Services
 import { getStats } from "../services/users";
 
@@ -40,7 +43,7 @@ export default function DashboardUser() {
               <div className="flex flex-wrap items-center justify-between gap-y-2">
                 <div className="flex flex-col gap-1">
                   <p>{stat.title}</p>
-                  <p className="font-bold">{stat.total}</p>
+                  <p className="font-bold">{capitalizeText(stat.total)}</p>
                 </div>
                 <img src={stat.logo} alt={stat.alt} className="h-[30px]" />
               </div>
