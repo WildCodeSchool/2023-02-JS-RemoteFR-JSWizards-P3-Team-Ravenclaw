@@ -1,6 +1,6 @@
 // Packages
 import { useState, useEffect } from "react";
-// import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 // Hooks
 import useAxios from "../hooks/useAxios";
@@ -31,10 +31,6 @@ export default function Videos() {
     account: { id_user: userId },
   } = useAuth();
 
-  // retrieve query parameters from URL
-  // const [searchParams] = useSearchParams();
-  // const gameName = searchParams.get("game");
-
   // states to handle 'add more' gallery
   const [videoNumber, setVideoNumber] = useState(8);
 
@@ -57,21 +53,8 @@ export default function Videos() {
   const { data: categories } = useAxios("/categories");
   const { data: games } = useAxios("/games");
 
-  // TO BE REMOVED
-  // fetch data from database to populate video sliders
-  // const { data: videos, isLoading: isVideosLoading } = useAxios(`/videos`);
-  // const { data: favoriteVideos, isLoading: isFavoriteLoading } = useAxios(
-  // `/user-video/${userId}`
-  // );
-
-  // TO BE REMOVED
-  // const { data: freemiumVideos, isFreemiumLoading } = useAxios(
-  //   `${baseUrl}/videos?name=${url}`
-  // );
-  // const { data: favoriteVideo, isLoading } = useAxios(`/favorite-video`);
-  // const { data: favoriteVideos, isFavoriteLoading } = useAxios(
-  //   `${baseUrl}/videos?name=${url}`
-  // );
+  // retrieve query parameters from URL
+  const [searchParams] = useSearchParams();
 
   const isAuthenticated = userId !== undefined;
 
@@ -102,6 +85,7 @@ export default function Videos() {
   useEffect(() => {
     setIsLoading(true);
     setAreVideosLoading(true);
+
     getVideos()
       .then((res) => {
         setFreemiumVideos(
@@ -132,6 +116,14 @@ export default function Videos() {
   useEffect(() => {
     if (!areVideosLoading && !areFavVideosLoading) setIsLoading(false);
   }, [areVideosLoading, areFavVideosLoading]);
+
+  useEffect(() => {
+    const gameName = searchParams.get("game");
+    const requestedGame = games.find((game) => game.name === gameName);
+    if (requestedGame) {
+      setFilterGame({ id: requestedGame.id, name: requestedGame.name });
+    }
+  }, [games]);
 
   return (
     <>
