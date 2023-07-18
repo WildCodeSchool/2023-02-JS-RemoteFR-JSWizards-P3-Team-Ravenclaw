@@ -85,4 +85,23 @@ const remove = async (req, res) => {
   }
 };
 
-module.exports = { getAll, getById, create, editById, remove };
+const getAllStats = async (req, res) => {
+  try {
+    const stats = [];
+
+    const [[isFavorite]] = await models.user.countAllFavorites();
+    stats.push(isFavorite);
+
+    const [[plan]] = await models.user.findPlansName();
+    stats.push(plan);
+
+    res.json(stats);
+  } catch (err) {
+    console.error(err);
+    res
+      .status(500)
+      .send("oops...an error occured when retrieving all stats from database");
+  }
+};
+
+module.exports = { getAll, getById, create, editById, remove, getAllStats };
