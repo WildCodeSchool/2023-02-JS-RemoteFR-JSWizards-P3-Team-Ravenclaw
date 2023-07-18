@@ -93,6 +93,10 @@ export default function RowFavorite({ video, setFlagVideos }) {
   );
 }
 
+RowFavorite.defaultProps = {
+  setFlagVideos: null,
+};
+
 RowFavorite.propTypes = {
   video: PropTypes.shape({
     id: PropTypes.number,
@@ -103,5 +107,5 @@ RowFavorite.propTypes = {
     ]),
     language: PropTypes.string,
   }).isRequired,
-  setFlagVideos: PropTypes.func.isRequired,
+  setFlagVideos: PropTypes.func,
 };
