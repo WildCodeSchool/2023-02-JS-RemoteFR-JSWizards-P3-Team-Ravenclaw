@@ -8,7 +8,7 @@ import RowHead from "../RowHead";
 import RowCategory from "./RowCategory";
 
 // Helpers
-import filterTable from "../../../helpers/filterTable";
+import { filterByText } from "../../../helpers/filterTable";
 
 // Services
 import { getCategories } from "../../../services/categories";
@@ -43,7 +43,7 @@ export default function TableCategories({
         <table className="w-full overflow-x-auto text-left text-base text-neutralLightest">
           <RowHead activeTab="category" />
           <tbody>
-            {filterTable(categories, "name", filterText)
+            {filterByText(categories, "name", filterText)
               .slice(offset, nextPage)
               .map((category) => (
                 <RowCategory

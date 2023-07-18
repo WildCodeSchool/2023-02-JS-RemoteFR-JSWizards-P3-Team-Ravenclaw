@@ -8,7 +8,7 @@ import RowHead from "../RowHead";
 import RowGame from "./RowGame";
 
 // Helpers
-import filterTable from "../../../helpers/filterTable";
+import { filterByText } from "../../../helpers/filterTable";
 
 // Services
 import { getGames } from "../../../services/games";
@@ -39,7 +39,7 @@ export default function TableGames({ filterText, flagGames, setFlagGames }) {
         <table className="w-full overflow-x-auto text-left text-base text-neutralLightest">
           <RowHead activeTab="game" />
           <tbody>
-            {filterTable(games, "name", filterText)
+            {filterByText(games, "name", filterText)
               .slice(offset, nextPage)
               .map((game) => (
                 <RowGame

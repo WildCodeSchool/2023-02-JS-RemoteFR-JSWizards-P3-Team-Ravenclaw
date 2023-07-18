@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 // Helpers
 import capitalizeText from "../../helpers/capitalize";
-import filterTable from "../../helpers/filterTable";
+import { filterByText } from "../../helpers/filterTable";
 
 export default function DropdownList({
   items,
@@ -27,7 +27,7 @@ export default function DropdownList({
       aria-labelledby="dropdownSearchButton"
     >
       {Array.isArray(items) && items.length > 0 ? (
-        filterTable(items, "name", filterOptions).map((item) => (
+        filterByText(items, "name", filterOptions).map((item) => (
           <li key={item.id} className="rounded pl-2 hover:bg-gray-600">
             <label
               htmlFor={item.name}

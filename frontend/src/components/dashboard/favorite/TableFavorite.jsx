@@ -9,7 +9,7 @@ import RowHead from "../RowHead";
 import RowFavorite from "./RowFavorite";
 
 // Helpers
-import filterTable from "../../../helpers/filterTable";
+import { filterByText } from "../../../helpers/filterTable";
 
 // Hook
 import useAxios from "../../../hooks/useAxios";
@@ -35,7 +35,7 @@ export default function TableFavorite({ filterText, setFilterText }) {
         <table className="w-full overflow-x-auto text-left text-base text-neutralDarkest dark:text-neutralLightest">
           <RowHead activeTab="fav" />
           <tbody>
-            {filterTable(videos, "title", filterText)
+            {filterByText(videos, "title", filterText)
               .slice(offset, nextPage)
               .map((video) => (
                 <RowFavorite key={video.id} video={video} />
