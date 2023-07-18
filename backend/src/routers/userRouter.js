@@ -14,6 +14,7 @@ const router = express.Router();
  * TODO: add authentication wall...
  */
 router.get("/", userController.getAll);
+router.get("/stats", userController.getAllStats);
 router.get("/:id", userController.getById);
 router.post(
   "/",
