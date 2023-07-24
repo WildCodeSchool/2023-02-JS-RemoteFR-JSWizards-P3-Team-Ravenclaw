@@ -13,12 +13,22 @@ import { filterByText } from "../../../helpers/filterTable";
 
 // Hook
 import useAxios from "../../../hooks/useAxios";
+import useUserContext from "../../../hooks/useUserContext";
 
-export default function TableFavorite({ filterText, setFilterText }) {
+export default function TableFavorite({
+  filterText,
+  setFilterText,
+  flagVideos,
+  setFlagVideos,
+}) {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
 
-  const { data: videos } = useAxios("/videos");
+  const { account } = useUserContext();
+  const { data: favoriteVideos } = useAxios(
+    `/user-video/${account.id_user}`,
+    flagVideos
+  );
 
   const offset = pageSize * currentPage - pageSize;
   const nextPage = offset + pageSize;
@@ -35,10 +45,15 @@ export default function TableFavorite({ filterText, setFilterText }) {
         <table className="w-full overflow-x-auto text-left text-base text-neutralDarkest dark:text-neutralLightest">
           <RowHead activeTab="fav" />
           <tbody>
-            {filterByText(videos, "title", filterText)
+            {filterByText(favoriteVideos, "title", filterText)
               .slice(offset, nextPage)
               .map((video) => (
-                <RowFavorite key={video.id} video={video} />
+                <RowFavorite
+                  key={video.id}
+                  video={video}
+                  userId={account.id_user}
+                  setFlagVideos={setFlagVideos}
+                />
               ))}
           </tbody>
         </table>
@@ -60,7 +75,7 @@ export default function TableFavorite({ filterText, setFilterText }) {
             className="py-2 text-center"
             pageSize={pageSize}
             current={currentPage}
-            total={videos.length}
+            total={favoriteVideos.length}
             onChange={(pageClicked, onPageSize) => {
               setCurrentPage(pageClicked);
               setPageSize(onPageSize);
@@ -76,4 +91,10 @@ export default function TableFavorite({ filterText, setFilterText }) {
 TableFavorite.propTypes = {
   filterText: PropTypes.string.isRequired,
   setFilterText: PropTypes.func.isRequired,
+  setFlagVideos: PropTypes.func.isRequired,
+  flagVideos: PropTypes.func,
+};
+
+TableFavorite.defaultProps = {
+  flagVideos: null,
 };
