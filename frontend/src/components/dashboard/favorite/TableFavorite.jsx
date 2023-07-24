@@ -24,9 +24,9 @@ export default function TableFavorite({ filterText, setFilterText }) {
   const nextPage = offset + pageSize;
 
   return (
-    <div className="flex w-screen max-w-[calc(100vw-320px)] flex-col gap-8 px-[100px] py-8">
-      <h1>Favorites Videos</h1>
-      <div className="relative overflow-hidden bg-gray-800 shadow-md sm:rounded-lg">
+    <div className="flex max-w-full flex-col gap-2">
+      <h2 className="text-lg font-bold">Favorites Videos</h2>
+      <div className="overflow-hidden bg-gray-800 shadow-md sm:rounded-lg">
         <RowSearch
           activeTab="fav"
           filterText={filterText}
