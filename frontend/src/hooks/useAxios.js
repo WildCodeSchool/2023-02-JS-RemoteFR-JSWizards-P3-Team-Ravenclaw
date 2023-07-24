@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function useAxios(endpoint) {
+export default function useAxios(endpoint, refetchFlag) {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -9,26 +9,30 @@ export default function useAxios(endpoint) {
   const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
-    const controller = new AbortController();
-    const { signal } = controller;
+    const { CancelToken } = axios;
+    const source = CancelToken.source();
     setIsLoading(true);
 
-    axios
-      .get(`${BASE_URL}${endpoint}`, { signal })
-      .then((res) => {
+    const getData = async (url) => {
+      try {
+        const res = await axios.get(`${BASE_URL}${url}`, {
+          cancelToken: source.token,
+        });
         setData(res.data);
-      })
-      .catch((err) => {
-        setError(err);
-        if (axios.isCancel(err)) console.warn("Axios request aborted");
-        console.error("Error fetching data from API:", err);
-      })
-      .finally(() => setIsLoading(false));
-
-    return function cleanUp() {
-      controller.abort();
+      } catch (err) {
+        if (!axios.isCancel(err)) {
+          console.error("Error fetching data from API:", err);
+          setError(err);
+        }
+      } finally {
+        setIsLoading(false);
+      }
     };
-  }, [endpoint]);
+
+    getData(endpoint);
+
+    return () => source.cancel(); // cleanup function
+  }, [endpoint, refetchFlag]);
 
   return { data, isLoading, error };
 }
