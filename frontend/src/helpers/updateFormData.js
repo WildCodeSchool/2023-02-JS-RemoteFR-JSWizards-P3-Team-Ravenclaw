@@ -21,16 +21,22 @@ export function updateFromDropdownRadio(event, formData) {
 
 export function updateFromDropdownCheckbox(event, formData) {
   const clonedFormData = { ...formData };
+
   const { value: name } = event.target;
   const key = event.target.getAttribute("data-attribute");
   const id = event.target.getAttribute("data-key");
   const index = clonedFormData[key].findIndex((el) => el.id === id);
+
+  const clonedCategeories = [...clonedFormData[key]];
+
   if (index === -1) {
-    clonedFormData[key].push({ id, name });
-  } else {
-    clonedFormData[key][index] = { id, name };
+    clonedCategeories.push({ id, name });
+    return { ...clonedFormData, [key]: clonedCategeories };
   }
-  return clonedFormData;
+  return {
+    ...formData,
+    [key]: clonedCategeories.filter((category) => category.id !== id),
+  };
 }
 
 export function updateFromFileInput(event, imageRef, videoRef, formData) {
