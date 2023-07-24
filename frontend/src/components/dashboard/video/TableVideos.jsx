@@ -8,7 +8,7 @@ import RowHead from "../RowHead";
 import RowVideo from "./RowVideo";
 
 // Helpers
-import filterTable from "../../../helpers/filterTable";
+import { filterByText } from "../../../helpers/filterTable";
 import groupVideoCategory from "../../../helpers/groupVideoCategory";
 
 // Services
@@ -38,7 +38,7 @@ export default function TableVideos({ filterText, flagVideos, setFlagVideos }) {
         <table className="w-full overflow-x-auto text-left text-base text-neutralLightest">
           <RowHead activeTab="video" />
           <tbody>
-            {filterTable(videos, "title", filterText)
+            {filterByText(videos, "title", filterText)
               .slice(offset, nextPage)
               .map((video) => (
                 <RowVideo

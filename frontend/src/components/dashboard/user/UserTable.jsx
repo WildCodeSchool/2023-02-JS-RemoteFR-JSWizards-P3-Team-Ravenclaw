@@ -9,7 +9,7 @@ import RowHead from "../RowHead";
 import RowSearch from "../RowSearch";
 
 // Helpers
-import filterTable from "../../../helpers/filterTable";
+import { filterByText } from "../../../helpers/filterTable";
 
 // Hook
 import useAxios from "../../../hooks/useAxios";
@@ -92,7 +92,7 @@ export default function UserTable() {
             <RowHead activeTab="userList" />
             <tbody>
               {userList.length &&
-                filterTable(userList, "pseudo", filterText)
+                filterByText(userList, "pseudo", filterText)
                   .slice(offset, nextPage)
                   .map((user) => (
                     <RowUser

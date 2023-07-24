@@ -10,6 +10,7 @@ const userRouter = require("./userRouter");
 const videoRouter = require("./videoRouter");
 const videoCategoryRouter = require("./videoCategoryRouter");
 const uploadRouter = require("./uploadRouter");
+const userVideoRouter = require("./userVideoRouter");
 
 const router = express.Router();
 
@@ -23,5 +24,6 @@ router.use("/users", userRouter);
 router.use("/videos", videoRouter);
 router.use("/video-category", videoCategoryRouter);
 router.use("/upload", uploadRouter);
+router.use("/user-video", userVideoRouter);
 
 module.exports = router;

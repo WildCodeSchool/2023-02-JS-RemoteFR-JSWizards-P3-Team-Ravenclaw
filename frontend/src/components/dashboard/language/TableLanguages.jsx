@@ -8,7 +8,7 @@ import RowHead from "../RowHead";
 import RowLanguage from "./RowLanguage";
 
 // Helpers
-import filterTable from "../../../helpers/filterTable";
+import { filterByText } from "../../../helpers/filterTable";
 
 // Services
 import { getLanguages } from "../../../services/languages";
@@ -43,7 +43,7 @@ export default function TableLanguages({
         <table className="w-full overflow-x-auto text-left text-base text-neutralLightest">
           <RowHead activeTab="language" />
           <tbody>
-            {filterTable(languages, "name", filterText)
+            {filterByText(languages, "name", filterText)
               .slice(offset, nextPage)
               .map((language) => (
                 <RowLanguage

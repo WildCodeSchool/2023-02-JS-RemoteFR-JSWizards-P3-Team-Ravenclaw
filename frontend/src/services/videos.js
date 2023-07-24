@@ -2,9 +2,16 @@ import axios from "axios";
 
 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
-export const getVideos = (controller) => {
+export const getVideos = () => {
+  const controller = new AbortController();
   const { signal } = controller;
   return axios.get(`${BASE_URL}/videos`, { signal });
+};
+
+export const getFavoriteVideos = (userId) => {
+  const controller = new AbortController();
+  const { signal } = controller;
+  return axios.get(`${BASE_URL}/user-video/${userId}`, { signal });
 };
 
 export const modifyVideoById = (body, id) =>
