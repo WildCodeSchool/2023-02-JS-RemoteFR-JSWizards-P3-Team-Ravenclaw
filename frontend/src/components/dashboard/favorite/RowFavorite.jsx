@@ -87,6 +87,10 @@ export default function RowFavorite({ video, setFlagVideos, userId }) {
               />
             </svg>
           </Button>
+        </span>
+      </td>
+      <td className="px-4 py-3 text-sm">
+        <span className="flex h-full w-full gap-4 ">
           <Button
             type="button"
             customCSS="group"

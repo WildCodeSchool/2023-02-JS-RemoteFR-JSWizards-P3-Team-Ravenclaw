@@ -45,7 +45,7 @@ export default function RowHead({ activeTab }) {
     },
     {
       id: 11,
-      name: "Unlike",
+      name: "Unfavorite",
     },
   ];
 
@@ -57,7 +57,7 @@ export default function RowHead({ activeTab }) {
         title.name === "Email" ||
         title.name === "Plan" ||
         title.name === "Watch" ||
-        title.name === "Unlike")
+        title.name === "Unfavorite")
     ) {
       return false; // Exclude "Premium" for video tab
     }
@@ -68,7 +68,7 @@ export default function RowHead({ activeTab }) {
         title.name === "Email" ||
         title.name === "Plan" ||
         title.name === "Watch" ||
-        title.name === "Unlike")
+        title.name === "Unfavorite")
     ) {
       return false; // Exclude "Actions" for video tab
     }
@@ -80,7 +80,7 @@ export default function RowHead({ activeTab }) {
         title.name === "Premium" ||
         title.name === "Actions" ||
         title.name === "Watch" ||
-        title.name === "Unlike")
+        title.name === "Unfavorite")
     ) {
       return false; // Exclude "Actions" for video tab
     }
@@ -95,7 +95,7 @@ export default function RowHead({ activeTab }) {
         title.name === "Email" ||
         title.name === "Plan" ||
         title.name === "Watch" ||
-        title.name === "Unlike")
+        title.name === "Unfavorite")
     ) {
       return false; // Exclude headers for category, language and game tabs
     }
