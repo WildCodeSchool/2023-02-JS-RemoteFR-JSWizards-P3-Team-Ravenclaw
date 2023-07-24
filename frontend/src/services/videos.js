@@ -17,6 +17,14 @@ export const getFavoriteVideos = (userId) => {
 export const modifyVideoById = (body, id) =>
   axios.put(`${BASE_URL}/videos/${id}`, body);
 
+export const unfavoriteVideo = (videoId, userId) => {
+  return axios.put(`${BASE_URL}/user-video/`, {
+    user_id: userId,
+    video_id: videoId,
+    is_favorite: 0,
+  });
+};
+
 export const addVideoThumbnail = (form) =>
   axios.post(`${BASE_URL}/upload/thumbnails/videos`, form);
 
