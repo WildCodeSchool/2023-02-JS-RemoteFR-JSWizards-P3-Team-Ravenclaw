@@ -1,17 +1,18 @@
 // Packages
 import PropTypes from "prop-types";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 // Components
 import Button from "../../utilities/Button";
 
 // Services
-import { deleteVideo } from "../../../services/videos";
+import { unfavoriteVideo } from "../../../services/videos";
 
 // Helpers
 import capitalizeText from "../../../helpers/capitalize";
 
-export default function RowFavorite({ video, setFlagVideos }) {
+export default function RowFavorite({ video, setFlagVideos, userId }) {
   const TOAST_DEFAULT_CONFIG = {
     position: "bottom-right",
     autoClose: 3000,
@@ -23,22 +24,34 @@ export default function RowFavorite({ video, setFlagVideos }) {
     theme: "dark",
   };
 
-  const handleDeleteVideo = (id) => {
-    deleteVideo(id)
+  const navigate = useNavigate();
+
+  const handleViewVideo = () => {
+    return navigate(`/videos/${video.id}`);
+  };
+
+  const handleFavoriteVideo = (videoId) => {
+    unfavoriteVideo(videoId, userId)
       .then((res) => {
-        if (res?.status === 204)
+        if (res?.status === 200) {
           toast.success(
             "Video successfully unfavorited!",
             TOAST_DEFAULT_CONFIG
           );
-        setFlagVideos((prev) => !prev);
+          setFlagVideos((prev) => !prev);
+        } else {
+          toast.error("Unfavoriting video failed!", TOAST_DEFAULT_CONFIG);
+        }
       })
       .catch((err) => {
         console.error(err);
         if (err.response.status === 404) {
           toast.error(`${err.response.data}`, TOAST_DEFAULT_CONFIG);
         } else {
-          toast.error(`${err.response.statusText}!`, TOAST_DEFAULT_CONFIG);
+          toast.error(
+            "An error occurred while unfavoriting the video!",
+            TOAST_DEFAULT_CONFIG
+          );
         }
       });
   };
@@ -47,19 +60,19 @@ export default function RowFavorite({ video, setFlagVideos }) {
     <tr className="border-b dark:border-neutral">
       <td className="px-4 py-3 text-sm">{capitalizeText(video.title)}</td>
       <td className="px-4 py-3 text-sm">
-        {Array.isArray(video.category)
-          ? video.category?.join(" | ").toUpperCase() || "-"
-          : video.category?.toUpperCase() || "-"}
+        {Array.isArray(video.category_name)
+          ? video.category_name?.join(" | ").toUpperCase() || "-"
+          : video.category_name?.toUpperCase() || "-"}
       </td>
       <td className="px-4 py-3 text-sm">
-        {capitalizeText(video.language) || "-"}
+        {capitalizeText(video.language_name) || "-"}
       </td>
       <td className="px-4 py-3 text-sm">
         <span className="flex h-full w-full gap-4 ">
           <Button
             type="button"
             customCSS="group"
-            // onClick={() => ()}
+            onClick={() => handleViewVideo(video.id)}
           >
             <svg width="20" height="14" viewBox="0 0 25 18" fill="none">
               <path
@@ -77,7 +90,7 @@ export default function RowFavorite({ video, setFlagVideos }) {
           <Button
             type="button"
             customCSS="group"
-            onClick={() => handleDeleteVideo(video.id)}
+            onClick={() => handleFavoriteVideo(video.id)}
           >
             <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
               <path
@@ -95,17 +108,19 @@ export default function RowFavorite({ video, setFlagVideos }) {
 
 RowFavorite.defaultProps = {
   setFlagVideos: null,
+  userId: null,
 };
 
 RowFavorite.propTypes = {
   video: PropTypes.shape({
     id: PropTypes.number,
     title: PropTypes.string,
-    category: PropTypes.oneOfType([
+    category_name: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.arrayOf(PropTypes.string),
     ]),
-    language: PropTypes.string,
+    language_name: PropTypes.string,
   }).isRequired,
   setFlagVideos: PropTypes.func,
+  userId: PropTypes.number,
 };
