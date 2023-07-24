@@ -2,14 +2,12 @@
   {
     "id": 1,
     "title": "Favorites",
-    "total": null,
     "logo": "../assets/icon/dashboard/favorites.svg",
     "alt": "favorites icon"
   },
   {
     "id": 2,
     "title": "Subscription",
-    "total": null,
     "logo": "../assets/icon/dashboard/plan.svg",
     "alt": "plan icon"
   }
