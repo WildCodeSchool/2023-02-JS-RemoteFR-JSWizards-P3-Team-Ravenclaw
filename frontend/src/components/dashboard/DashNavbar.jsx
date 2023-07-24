@@ -47,8 +47,7 @@ export default function DashNavbar() {
                 </li>
               );
             }
-            if (!isAdmin && ["dashboard", "favorites"].includes(menu.path)) {
-              // Users can only see the "Favorites Videos"
+            if (!isAdmin && ["Your Dashboard"].includes(menu.title)) {
               return (
                 <li key={menu.id} className={`${styles.dashList}`}>
                   <NavLink
