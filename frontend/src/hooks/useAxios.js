@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function useAxios(endpoint) {
+export default function useAxios(endpoint, refetchFlag) {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -28,7 +28,7 @@ export default function useAxios(endpoint) {
     return function cleanUp() {
       controller.abort();
     };
-  }, [endpoint]);
+  }, [endpoint, refetchFlag]);
 
   return { data, isLoading, error };
 }
