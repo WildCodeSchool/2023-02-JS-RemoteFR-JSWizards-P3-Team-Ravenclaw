@@ -17,6 +17,7 @@ import userStats from "../data/userStats.json";
 export default function DashboardUser() {
   const [dbStats, setDbStats] = useState([]);
   const [filterText, setFilterText] = useState("");
+  const [flagVideos, setFlagVideos] = useState(false);
 
   const stats = userStats.map((stat, index) => ({
     ...stat,
@@ -29,7 +30,7 @@ export default function DashboardUser() {
     getStats(statsController)
       .then((res) => setDbStats(res.data))
       .catch((err) => console.error(err));
-  }, []);
+  }, [flagVideos]);
 
   return (
     <article className="flex w-screen max-w-[calc(100vw-320px)] flex-col gap-8 px-[100px] py-8">
@@ -58,7 +59,12 @@ export default function DashboardUser() {
             </Card>
           ))}
       </div>
-      <TableFavorite filterText={filterText} setFilterText={setFilterText} />
+      <TableFavorite
+        filterText={filterText}
+        setFilterText={setFilterText}
+        flagVideos={flagVideos}
+        setFlagVideos={setFlagVideos}
+      />
     </article>
   );
 }
