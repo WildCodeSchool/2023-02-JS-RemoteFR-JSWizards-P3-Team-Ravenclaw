@@ -14,7 +14,7 @@ export default function RowSearch({
   activeTab,
   filterText,
   setFilterText,
-  setFlagCategories,
+  setRefetchCategories,
   setFlagLanguages,
   setFlagGames,
   setFlagVideos,
@@ -59,7 +59,7 @@ export default function RowSearch({
         <ModalCategory
           open={isModalOpened}
           setIsModalOpened={setIsModalOpened}
-          setFlag={setFlagCategories}
+          setRefetchCategories={setRefetchCategories}
         />
       );
     }
@@ -155,7 +155,7 @@ RowSearch.propTypes = {
   activeTab: PropTypes.string.isRequired,
   filterText: PropTypes.string,
   setFilterText: PropTypes.func,
-  setFlagCategories: PropTypes.func,
+  setRefetchCategories: PropTypes.func,
   setFlagLanguages: PropTypes.func,
   setFlagGames: PropTypes.func,
   setFlagVideos: PropTypes.func,
@@ -165,7 +165,7 @@ RowSearch.propTypes = {
 RowSearch.defaultProps = {
   filterText: null,
   setFilterText: null,
-  setFlagCategories: null,
+  setRefetchCategories: null,
   setFlagLanguages: null,
   setFlagGames: null,
   setFlagVideos: null,

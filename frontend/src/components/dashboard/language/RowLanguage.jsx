@@ -7,25 +7,17 @@ import { toast } from "react-toastify";
 import LanguageDropdown from "./LanguageDropdown";
 import Button from "../../utilities/Button";
 
-// Services
-import { deleteLanguage } from "../../../services/languages";
-
 // Helpers
 import capitalizeText from "../../../helpers/capitalize";
 
-export default function RowLanguage({ language, setFlagLanguages }) {
-  const [isToggled, setIsToggled] = useState(false);
+// Services
+import { deleteLanguage } from "../../../services/languages";
 
-  const TOAST_DEFAULT_CONFIG = {
-    position: "bottom-right",
-    autoClose: 3000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: false,
-    progress: undefined,
-    theme: "dark",
-  };
+// Settings
+import TOAST_DEFAULT_CONFIG from "../../../settings/toastify.json";
+
+export default function RowLanguage({ language, refetchData }) {
+  const [isToggled, setIsToggled] = useState(false);
 
   const toggleDropdown = () => setIsToggled(!isToggled);
 
@@ -34,7 +26,7 @@ export default function RowLanguage({ language, setFlagLanguages }) {
       .then((res) => {
         if (res?.status === 204)
           toast.success("Language successfully deleted!", TOAST_DEFAULT_CONFIG);
-        setFlagLanguages((prev) => !prev);
+        refetchData((prev) => !prev);
       })
       .catch((err) => {
         console.error(err);
@@ -96,9 +88,9 @@ export default function RowLanguage({ language, setFlagLanguages }) {
       </tr>
       {isToggled && (
         <LanguageDropdown
-          id={language.id}
+          language={language}
           toggleDropdown={toggleDropdown}
-          setFlagLanguages={setFlagLanguages}
+          refetchData={refetchData}
         />
       )}
     </>
@@ -110,5 +102,5 @@ RowLanguage.propTypes = {
     id: PropTypes.number,
     name: PropTypes.string,
   }).isRequired,
-  setFlagLanguages: PropTypes.func.isRequired,
+  refetchData: PropTypes.func.isRequired,
 };

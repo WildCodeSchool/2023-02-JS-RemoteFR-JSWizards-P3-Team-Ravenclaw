@@ -1,6 +1,6 @@
 // Packages
 import PropTypes from "prop-types";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { toast } from "react-toastify";
 
 // Components
@@ -10,38 +10,35 @@ import Input from "../../utilities/Input";
 // Services
 import { modifyCategoryById } from "../../../services/categories";
 
+// Settings
+import TOAST_DEFAULT_CONFIG from "../../../settings/toastify.json";
+
 // Style
 import styles from "../../../css/Table.module.css";
 
-export default function CatDropdown({ id, toggleDropdown, setFlagCategories }) {
+export default function CatDropdown({ category, toggleDropdown, refetchData }) {
   const inputRef = useRef();
 
-  const TOAST_DEFAULT_CONFIG = {
-    position: "bottom-right",
-    autoClose: 3000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: false,
-    progress: undefined,
-    theme: "dark",
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const name = inputRef.current.value.trim().toLowerCase();
+    try {
+      const res = await modifyCategoryById({ name }, category.id);
+      if (res?.status === 204) {
+        toast.success("Category successfully updated!", TOAST_DEFAULT_CONFIG);
+        refetchData((prev) => !prev);
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error(`${err.response.statusText}!`, TOAST_DEFAULT_CONFIG);
+    } finally {
+      toggleDropdown();
+    }
   };
 
-  const handleSubmit = (e) => {
-    const name = inputRef.current.value.trim().toLowerCase();
-    e.preventDefault();
-    toggleDropdown();
-    modifyCategoryById({ name }, id)
-      .then((res) => {
-        if (res?.status === 204)
-          toast.success("Category successfully updated!", TOAST_DEFAULT_CONFIG);
-        setFlagCategories((prev) => !prev);
-      })
-      .catch((err) => {
-        console.error(err);
-        toast.error(`${err.response.statusText}!`, TOAST_DEFAULT_CONFIG);
-      });
-  };
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
 
   return (
     <tr className="border-b dark:border-neutral">
@@ -49,12 +46,13 @@ export default function CatDropdown({ id, toggleDropdown, setFlagCategories }) {
         <form className="flex gap-4" onSubmit={handleSubmit}>
           <Input
             htmlFor="title"
-            title="Cateogry Name"
+            title="Category"
             type="text"
             className={`${styles.input__style} h-full`}
-            placeholder="Type category name"
+            placeholder="Enter a category name..."
             isRequired
             ref={inputRef}
+            value={category.name}
           />
           <span className="flex w-full items-end justify-end">
             <Button
@@ -71,7 +69,10 @@ export default function CatDropdown({ id, toggleDropdown, setFlagCategories }) {
 }
 
 CatDropdown.propTypes = {
-  id: PropTypes.number.isRequired,
+  category: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+  }).isRequired,
   toggleDropdown: PropTypes.func.isRequired,
-  setFlagCategories: PropTypes.func.isRequired,
+  refetchData: PropTypes.func.isRequired,
 };

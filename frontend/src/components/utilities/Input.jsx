@@ -1,6 +1,6 @@
 // Packages
 import PropTypes from "prop-types";
-import { forwardRef } from "react";
+import { useState, forwardRef } from "react";
 
 // Styles
 import styles from "../../css/Table.module.css";
@@ -17,10 +17,18 @@ const Input = forwardRef(function forwardRefToChild(
     accept,
     pattern,
     required = true,
-    handleChange,
+    value = "",
+    // handleChange,
   },
   ref
 ) {
+  const [inputValue, setInputValue] = useState(value);
+
+  const onChange = (e) => {
+    setInputValue(e.target.value);
+    // handleChange();
+  };
+
   return (
     <label
       htmlFor={htmlFor}
@@ -28,8 +36,8 @@ const Input = forwardRef(function forwardRefToChild(
     >
       {title}
       <input
-        type={type}
         id={htmlFor}
+        type={type}
         name={name}
         data-attribute={name}
         title={tooltip}
@@ -39,7 +47,8 @@ const Input = forwardRef(function forwardRefToChild(
         required={required}
         pattern={pattern}
         ref={ref}
-        onChange={handleChange}
+        value={inputValue}
+        onChange={onChange}
       />
     </label>
   );
@@ -56,7 +65,8 @@ Input.propTypes = {
   accept: PropTypes.string,
   pattern: PropTypes.string,
   required: PropTypes.bool,
-  handleChange: PropTypes.func,
+  value: PropTypes.string,
+  // handleChange: PropTypes.func,
 };
 
 Input.defaultProps = {
@@ -70,7 +80,8 @@ Input.defaultProps = {
   accept: null,
   pattern: null,
   required: true,
-  handleChange: null,
+  value: "",
+  // handleChange: null,
 };
 
 export default Input;

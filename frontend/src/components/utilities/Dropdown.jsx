@@ -32,6 +32,8 @@ export default function Dropdown({
   // store the dropdown radio button selection
   const [selectedItems, setSelectedItems] = useState(initState(items));
 
+  // const resetSelection = () => setSelectedItems(initState(items));
+
   const updateSelectedItems = (selectionId) => {
     const clonedSelection = [...selectedItems];
     const updatedSelection = clonedSelection.map((item) => {
@@ -94,6 +96,7 @@ export default function Dropdown({
             selection={selectedItems}
             onSelectionChange={updateSelectedItems}
             handleChange={handleChange}
+            // onReset={resetSelection}
           />
         </div>
       )}

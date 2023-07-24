@@ -14,7 +14,11 @@ import { addCategory } from "../../../services/categories";
 // Style
 import styles from "../../../css/Table.module.css";
 
-export default function ModalCategory({ open, setIsModalOpened, setFlag }) {
+export default function ModalCategory({
+  open,
+  setIsModalOpened,
+  setRefetchCategories,
+}) {
   const inputRef = useRef();
 
   const TOAST_DEFAULT_CONFIG = {
@@ -40,7 +44,7 @@ export default function ModalCategory({ open, setIsModalOpened, setFlag }) {
       .then((res) => {
         if (res?.status === 204)
           toast.success("Category successfully added!", TOAST_DEFAULT_CONFIG);
-        setFlag((prev) => !prev);
+        setRefetchCategories((prev) => !prev);
         // reset input
         inputRef.current.value = "";
         setIsModalOpened(false);
@@ -102,11 +106,11 @@ export default function ModalCategory({ open, setIsModalOpened, setFlag }) {
 ModalCategory.propTypes = {
   open: PropTypes.bool,
   setIsModalOpened: PropTypes.func,
-  setFlag: PropTypes.func,
+  setRefetchCategories: PropTypes.func,
 };
 
 ModalCategory.defaultProps = {
   open: null,
   setIsModalOpened: null,
-  setFlag: null,
+  setRefetchCategories: null,
 };
