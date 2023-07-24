@@ -10,7 +10,7 @@ import RowSearch from "./dashboard/RowSearch";
 import Card from "./utilities/Card";
 
 // Helpers
-import filterTable from "../helpers/filterTable";
+import { filterByText } from "../helpers/filterTable";
 import groupVideoCategory from "../helpers/groupVideoCategory";
 
 // Services
@@ -83,7 +83,7 @@ export default function Dashboard({ filterText, setFilterText }) {
             <table className="w-full text-left text-base text-neutralDarkest dark:text-neutralLightest">
               <RowHead activeTab="dashboard" />
               <tbody>
-                {filterTable(videos, "title", filterText)
+                {filterByText(videos, "title", filterText)
                   .slice(offset, nextPage)
                   .map((video) => (
                     <RowStatic video={video} key={video.id} />
