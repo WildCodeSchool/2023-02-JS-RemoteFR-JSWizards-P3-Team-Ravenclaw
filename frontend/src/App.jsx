@@ -48,10 +48,7 @@ export default function App() {
                   <Route path="userList" element={<Admin userList />} />
                 </>
               ) : (
-                <>
-                  <Route path="dashboard" element={<User dashboard />} />
-                  <Route path="favorites" element={<User favorites />} />
-                </>
+                <Route path="" element={<User dashboard />} />
               )}
             </Route>
           ) : (
