@@ -11,7 +11,7 @@ import SliderVideo from "../components/utilities/SliderVideo";
 import Partners from "../components/home/Partners";
 import Footer from "../components/utilities/Footer";
 import Loader from "../components/utilities/Loader";
-import * as Services from "../service/Account.service";
+import * as Services from "../services/Account.service";
 
 export default function Home() {
   const [games, setGames] = useState([]);

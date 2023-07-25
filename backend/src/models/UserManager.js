@@ -48,6 +48,18 @@ class UserManager extends AbstractManager {
       id,
     ]);
   }
+
+  findPlansName() {
+    return this.database.query(
+      `SELECT p.name AS plan FROM ${this.table} AS u INNER JOIN plan AS p ON u.plan_id = p.id`
+    );
+  }
+
+  countAllFavorites() {
+    return this.database.query(
+      `SELECT COUNT(uv.id) AS favorite_count FROM ${this.table} AS u INNER JOIN user_video AS uv ON u.id = uv.user_id WHERE uv.is_favorite = 1 GROUP BY u.id;`
+    );
+  }
 }
 
 module.exports = UserManager;

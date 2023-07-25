@@ -28,7 +28,7 @@ const getAllStats = async (req, res) => {
 const getAllVideos = async (req, res) => {
   try {
     const sql =
-      "SELECT v.id, v.title, v.status, v.visibility, l.name AS language, c.name AS category FROM video AS v INNER JOIN language AS l ON l.id = v.language_id INNER JOIN video_category AS vc ON vc.video_id = v.id INNER JOIN category AS c ON vc.category_id = c.id";
+      "SELECT v.id, v.title, v.status, v.visibility, l.name AS language, c.name AS category FROM video AS v LEFT JOIN language AS l ON l.id = v.language_id LEFT JOIN video_category AS vc ON vc.video_id = v.id LEFT JOIN category AS c ON vc.category_id = c.id";
     const [videos] = await models.video.findAllWithRelatedContent(sql, []);
     if (!videos.length) return res.status(404).send("No video found");
     return res.json(videos);

@@ -99,7 +99,7 @@ export default function Caroussel({ plans, billing }) {
                 </div>
                 <button
                   type="button"
-                  className={`btn-default ${styles.card__plan__btn}`}
+                  className={`btn-default ${styles.card__plan__btn} md:text-base md:font-bold`}
                   onClick={() => handleClick(capitalize(plan.name))}
                 >
                   Choose Plan

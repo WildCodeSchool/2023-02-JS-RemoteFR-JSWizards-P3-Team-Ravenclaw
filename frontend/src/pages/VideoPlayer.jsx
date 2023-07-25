@@ -87,16 +87,20 @@ export default function VideoPlayer() {
           <section className="head-infos flex flex-col justify-between md:gap-8">
             <div className="flex justify-between">
               <div className="fps-language flex gap-4 md:gap-6">
-                <Label
-                  htmlFor="FPS"
-                  className="rounded-2xl bg-primaryLightest px-4 py-1 font-bold"
-                  title="FPS"
-                />
-                <Label
-                  htmlFor="ENGLISH"
-                  className="rounded-2xl bg-primaryLightest px-4 py-1 font-bold"
-                  title="ENGLISH"
-                />
+                {video && (
+                  <>
+                    <Label
+                      htmlFor={video.category_name}
+                      className="rounded-2xl bg-primaryLightest px-4 py-1 font-bold"
+                      title={video.category_name}
+                    />
+                    <Label
+                      htmlFor={video.language_name}
+                      className="rounded-2xl bg-primaryLightest px-4 py-1 font-bold"
+                      title={video.language_name}
+                    />
+                  </>
+                )}
               </div>
               <div className="flex items-center gap-4 md:gap-6">
                 {account.id_user !== undefined && (

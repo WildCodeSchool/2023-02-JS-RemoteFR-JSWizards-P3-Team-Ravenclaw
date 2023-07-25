@@ -14,16 +14,20 @@ const postFavs = async (req, res) => {
 const insertFavs = async (req, res) => {
   try {
     await models.user_video.setFavorite(req.body);
-
     return res.sendStatus(200);
   } catch (err) {
     console.error(err);
-    return res.status(500).send("ba bravo");
+    return res
+      .status(500)
+      .send(
+        "oops...an error occured when updating favorite video from database"
+      );
   }
 };
 
 const getOne = async (req, res) => {
   try {
+
     const [[favs]] = await models.user_video.getFavorites(req.query);
     if (!favs) return res.status(404).send("No existing favs");
     return res.json(favs);
@@ -31,7 +35,7 @@ const getOne = async (req, res) => {
     console.error(err);
     return res
       .status(500)
-      .send("oops...an error occured when retrieving favs from database");
+      .send("oops...an error occured when retrieving user's favorite video from database");
   }
 };
 
@@ -48,4 +52,20 @@ const deleteFav = async (req, res) => {
   }
 };
 
-module.exports = { insertFavs, getOne, postFavs, deleteFav };
+const getAllUserFavorites = async (req, res) => {
+  try {
+    const [favorites] = await models.userVideo.findAllFavorites(req.params.id);
+    if (!favorites.length)
+      return res.status(404).send("No existing favorite videos");
+    return res.json(favorites);
+  } catch (err) {
+    console.error(err);
+    return res
+      .status(500)
+      .send(
+        "oops...an error occured when retrieving user's favorite videos from database"
+      );
+  }
+};
+
+module.exports = { insertFavs, getOne, getAllUserFavorites, postFavs, deleteFav };

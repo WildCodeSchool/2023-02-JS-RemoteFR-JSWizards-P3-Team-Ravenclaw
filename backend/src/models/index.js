@@ -35,6 +35,7 @@ const UserManager = require("./UserManager");
 const PlanManager = require("./PlanManager");
 const CategoryManager = require("./CategoryManager");
 const UserVideoManager = require("./UserVideoManager");
+const VideoCategoryManager = require("./VideoCategoryManager");
 
 models.user_video = new UserVideoManager();
 models.user_video.setDatabase(pool);
@@ -56,6 +57,9 @@ models.plan.setDatabase(pool);
 
 models.category = new CategoryManager();
 models.category.setDatabase(pool);
+
+models.videoCategory = new VideoCategoryManager();
+models.videoCategory.setDatabase(pool);
 
 // bonus: use a proxy to personalize error message,
 // when asking for a non existing model

@@ -31,13 +31,57 @@ export default function RowHead({ activeTab }) {
       id: 7,
       name: "Actions",
     },
+    {
+      id: 8,
+      name: "Email",
+    },
+    {
+      id: 9,
+      name: "Plan",
+    },
+    {
+      id: 10,
+      name: "Watch",
+    },
+    {
+      id: 11,
+      name: "Unfavorite",
+    },
   ];
 
   const filteredTitles = titles.filter((title) => {
-    if (activeTab === "video" && title.name === "Premium") {
+    if (
+      activeTab === "video" &&
+      (title.name === "Premium" ||
+        title.name === "Pseudo" ||
+        title.name === "Email" ||
+        title.name === "Plan" ||
+        title.name === "Watch" ||
+        title.name === "Unfavorite")
+    ) {
       return false; // Exclude "Premium" for video tab
     }
-    if (activeTab === "dashboard" && title.name === "Actions") {
+    if (
+      activeTab === "dashboard" &&
+      (title.name === "Actions" ||
+        title.name === "Pseudo" ||
+        title.name === "Email" ||
+        title.name === "Plan" ||
+        title.name === "Watch" ||
+        title.name === "Unfavorite")
+    ) {
+      return false; // Exclude "Actions" for video tab
+    }
+    if (
+      activeTab === "userList" &&
+      (title.name === "Category" ||
+        title.name === "Language" ||
+        title.name === "Status" ||
+        title.name === "Premium" ||
+        title.name === "Actions" ||
+        title.name === "Watch" ||
+        title.name === "Unfavorite")
+    ) {
       return false; // Exclude "Actions" for video tab
     }
     if (
@@ -47,18 +91,25 @@ export default function RowHead({ activeTab }) {
       (title.name === "Category" ||
         title.name === "Language" ||
         title.name === "Status" ||
-        title.name === "Premium")
+        title.name === "Premium" ||
+        title.name === "Email" ||
+        title.name === "Plan" ||
+        title.name === "Watch" ||
+        title.name === "Unfavorite")
     ) {
       return false; // Exclude headers for category, language and game tabs
     }
-
     if (
       activeTab === "fav" &&
       (title.name === "ID" ||
+        title.name === "Status" ||
         title.name === "Premium" ||
-        title.name === "Status")
+        title.name === "Pseudo" ||
+        title.name === "Email" ||
+        title.name === "Plan" ||
+        title.name === "Actions")
     ) {
-      return false;
+      return false; // Exclude "Favorite" for video tab
     }
     return true; // Include other titles
   });
