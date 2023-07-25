@@ -1,6 +1,6 @@
 // Packages
 import PropTypes from "prop-types";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
 // Components
@@ -26,18 +26,23 @@ import {
   modifyVideoById,
   deleteVideoCategory,
   addVideoCategory,
+  deleteVideoThumbnail,
+  deleteVideoFile,
 } from "../../../services/videos";
+
+// Settings
+import TOAST_DEFAULT_CONFIG from "../../../settings/toastify.json";
 
 // Style
 import styles from "../../../css/Table.module.css";
 
 export default function VideoDropdown({
-  videoId,
+  video,
   games,
   categories,
   languages,
   toggleRow,
-  setFlagVideos,
+  refetchData,
 }) {
   const inputRef = useRef();
   const imageRef = useRef();
@@ -47,31 +52,45 @@ export default function VideoDropdown({
   const [isLangDropOpened, setIsLangDropOpened] = useState(false);
   const [isCatDropOpened, setIsCatDropOpened] = useState(false);
 
-  // video info based on form inputs
-  const [formVideoInfo, setFormVideoInfo] = useState({
-    title: "",
-    game: {},
-    isPremium: false,
-    isPromoted: false,
-    language: {},
-    category: [],
-    description: "",
-    thumbnail: {},
-    video: {},
-    seo: "",
-    status: "",
-  });
-
-  const TOAST_DEFAULT_CONFIG = {
-    position: "bottom-right",
-    autoClose: 3000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: false,
-    progress: undefined,
-    theme: "dark",
+  const initState = (videoInfo) => {
+    if (Array.isArray(videoInfo.category_id))
+      return videoInfo.category_id.map((cat, index) => ({
+        id: cat,
+        name: videoInfo.category_name[index],
+      }));
+    return [{ id: videoInfo.category_id, name: videoInfo.category_name }];
   };
+
+  // video info based on form inputs
+  // const [formVideoInfo, setFormVideoInfo] = useState({
+  //   title: "",
+  //   game: {},
+  //   isPremium: false,
+  //   isPromoted: false,
+  //   language: {},
+  //   category: [],
+  //   description: "",
+  //   thumbnail: {},
+  //   video: {},
+  //   seo: "",
+  //   status: "",
+  // });
+
+  const [formVideoInfo, setFormVideoInfo] = useState({
+    title: video.title,
+    game: { id: video.game_id, name: video.game_name },
+    isPremium: video.visibility === 2,
+    isPromoted: Boolean(video.is_promoted),
+    language: { id: video.language_id, name: video.language_name },
+    category: initState(video),
+    description: video.description,
+    slug: video.slug,
+    thumbnail: video.thumbnail,
+    uploadDate: video.upload_date,
+    video: video.url_video,
+    seo: video.seo,
+    status: video.status,
+  });
 
   // handle change in form inputs
   const handleInputChange = (e) => {
@@ -121,38 +140,55 @@ export default function VideoDropdown({
       toast.error(`${errorMessage}`, TOAST_DEFAULT_CONFIG);
     }
 
-    // use the FormData constructor to create a new FormData object (instance) to convert the image file into a bunch of data and send it through the network
-    const thumbnailFormData = new FormData();
-    const videoFormData = new FormData();
-    videoFormData.append("video", videoRef.current.files[0]);
-    thumbnailFormData.append("video_thumbnail", imageRef.current.files[0]);
-
     try {
-      // upload video thumbnail to backend public folder
-      const {
-        data: { url_file: videoThumbUrl },
-      } = await addVideoThumbnail(thumbnailFormData);
+      let videoThumbUrl;
+      let videoUrl;
 
-      // upload video to backend public folder
-      const {
-        data: { url_file: videoUrl },
-      } = await addVideoMedia(videoFormData);
+      // a new thumnbail image has been picked
+      if (imageRef.current.value) {
+        // first delete old file (only if in backend/uploads folder)
+        await deleteVideoThumbnail({
+          data: { thumbnail: video.thumbnail },
+        });
+        // ...then upload new thumbnail file to backend public folder
+        const thumbnailFormData = new FormData();
+        thumbnailFormData.append("video_thumbnail", imageRef.current.files[0]);
+        const res = await addVideoThumbnail(thumbnailFormData);
+        videoThumbUrl = res.data.url_file;
+      }
+
+      // a new video file has been picked
+      if (videoRef.current.value) {
+        // first delete old video file (only if in backend/uploads folder)...
+        await deleteVideoFile({
+          data: { url_video: video.url_video },
+        });
+        // ...then upload new video file to backend public folder
+        const videoFormData = new FormData();
+        videoFormData.append("video", videoRef.current.files[0]);
+        const res = await addVideoMedia(videoFormData);
+        videoUrl = res.data.url_file;
+      }
 
       // update video entry to database
+      // console.log(
+      //   "req body:",
+      //   formatVideoBodyRequest(formVideoInfo, videoUrl, videoThumbUrl)
+      // );
       await modifyVideoById(
         formatVideoBodyRequest(formVideoInfo, videoUrl, videoThumbUrl),
-        videoId
+        video.id
       );
 
       // delete previous video-category entries from database
-      await deleteVideoCategory(videoId);
+      await deleteVideoCategory(video.id);
 
-      // add relation entry for each added category (video_category) to databaseb
+      // add relation entry for each added category (video_category) to database
       const relationReponses = [];
       formVideoInfo.category.forEach(async (category) => {
         try {
           const response = await addVideoCategory({
-            video_id: videoId,
+            video_id: video.id,
             category_id: category.id,
           });
           relationReponses.push(response);
@@ -165,25 +201,18 @@ export default function VideoDropdown({
       // notify status
       toast.success(`Video successfully updated!`, TOAST_DEFAULT_CONFIG);
 
-      // reset form inputs
-      setTimeout(() => {
-        window.location.reload();
-      }, 3000);
-
-      /**
-       * !TO DO: do not refresh the page to reset form inputs
-       * use instead dedicated methods
-       * requires the dropdown states to be placed within ModalVideo...
-       */
       // reset form inputs & state
-      e.target.reset();
+      // setTimeout(() => {
+      //   window.location.reload();
+      // }, 3000);
+      // e.target.reset();
       setFormVideoInfo({});
+
+      // raise flag to refetch data from DB and update table view
+      refetchData((prev) => !prev);
 
       // close modal
       toggleRow(false);
-
-      // raise flag to refetch data from DB and update table view
-      setFlagVideos((prev) => !prev);
     } catch (err) {
       console.error(err);
       if (err.response?.status === 409) {
@@ -193,6 +222,12 @@ export default function VideoDropdown({
       }
     }
   };
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
+
+  // console.log(formVideoInfo);
 
   return (
     <tr className="border-neutral">
@@ -210,6 +245,7 @@ export default function VideoDropdown({
                   placeholder="Type video title..."
                   required
                   ref={inputRef}
+                  value={video.title}
                   handleChange={handleInputChange}
                 />
                 <div className="relative flex flex-col gap-1.5">
@@ -223,6 +259,7 @@ export default function VideoDropdown({
                     name="language"
                     title="Select language"
                     items={languages}
+                    initialValue={video.language_name}
                     isDropdownOpen={isLangDropOpened}
                     handleDropdown={setIsLangDropOpened}
                     handleChange={handleInputChange}
@@ -239,6 +276,7 @@ export default function VideoDropdown({
                     name="category"
                     title="Select game category"
                     items={categories}
+                    initialValue={video.category_name}
                     isDropdownOpen={isCatDropOpened}
                     handleDropdown={setIsCatDropOpened}
                     handleChange={handleInputChange}
@@ -255,6 +293,7 @@ export default function VideoDropdown({
                     name="game"
                     title="Select game"
                     items={games}
+                    initialValue={video.game_name}
                     isDropdownOpen={isGameDropOpened}
                     handleDropdown={setIsGameDropOpened}
                     handleChange={handleInputChange}
@@ -267,6 +306,7 @@ export default function VideoDropdown({
                   className="m-3.5 flex items-center justify-center"
                   title="Premium"
                   required={false}
+                  isDefaultChecked={video.visibility === 2}
                   handleChange={handleInputChange}
                 />
                 <Input
@@ -276,6 +316,7 @@ export default function VideoDropdown({
                   className="m-3.5 flex items-center justify-center"
                   title="Promoted"
                   required={false}
+                  isDefaultChecked={Boolean(video.is_promoted)}
                   handleChange={handleInputChange}
                 />
               </div>
@@ -286,11 +327,12 @@ export default function VideoDropdown({
               name="seo"
               title="SEO"
               className={`${styles.input__style}`}
-              placeholder="Type seo tags..."
+              placeholder="Enter seo tags..."
               required={false}
               pattern="[A-z0-9,_\-\s]+"
               tooltip="use comma-separed keywords: esport, origins-digital, ..."
               autoComplete="on"
+              value={video.seo}
               handleChange={handleInputChange}
             />
             <div className="flex flex-col gap-1.5">
@@ -306,6 +348,7 @@ export default function VideoDropdown({
                 className={`${styles.input__style} h-full w-full`}
                 placeholder="Type video description..."
                 required
+                defaultValue={video.description}
                 onChange={handleInputChange}
               />
             </div>
@@ -329,6 +372,7 @@ export default function VideoDropdown({
                     name="status"
                     value="online"
                     required
+                    defaultChecked={video.status === "online"}
                     onChange={handleInputChange}
                     className="absolute opacity-0"
                   />
@@ -345,6 +389,7 @@ export default function VideoDropdown({
                     name="status"
                     value="offline"
                     required
+                    defaultChecked={video.status === "offline"}
                     onChange={handleInputChange}
                     className="absolute opacity-0"
                   />
@@ -361,6 +406,7 @@ export default function VideoDropdown({
                     name="status"
                     value="archived"
                     required
+                    defaultChecked={video.status === "archived"}
                     onChange={handleInputChange}
                     className="absolute opacity-0"
                   />
@@ -369,22 +415,22 @@ export default function VideoDropdown({
               </div>
             </div>
             <Input
+              title="Video Upload"
               type="file"
               name="video"
-              title="Video Upload"
               accept=".mp4, .avi, .mov, .wmv, .webm"
               className="file:hover:primaryLightest file:cursor-pointer file:rounded-md file:border-none file:bg-primary file:p-3 file:text-neutralLight"
-              required
+              required={false}
               ref={videoRef}
               handleChange={handleInputChange}
             />
             <Input
+              title="Image Upload"
               type="file"
               name="thumbnail"
-              title="Image Upload"
               accept=".jpg, .jpeg, .png, .webp"
               className="file:hover:primaryLightest file:cursor-pointer file:rounded-md file:border-none file:bg-primary file:p-3 file:text-neutralLight"
-              required
+              required={false}
               ref={imageRef}
               handleChange={handleInputChange}
             />
@@ -404,7 +450,31 @@ export default function VideoDropdown({
 }
 
 VideoDropdown.propTypes = {
-  videoId: PropTypes.number.isRequired,
+  video: PropTypes.shape({
+    id: PropTypes.number,
+    category_id: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.arrayOf(PropTypes.number),
+    ]),
+    category_name: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.arrayOf(PropTypes.string),
+    ]),
+    description: PropTypes.string,
+    game_id: PropTypes.number,
+    game_name: PropTypes.string,
+    is_promoted: PropTypes.number,
+    language_id: PropTypes.number,
+    language_name: PropTypes.string,
+    seo: PropTypes.string,
+    status: PropTypes.string,
+    slug: PropTypes.string,
+    thumbnail: PropTypes.string,
+    title: PropTypes.string,
+    upload_date: PropTypes.string,
+    url_video: PropTypes.string,
+    visibility: PropTypes.number,
+  }).isRequired,
   games: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number,
@@ -425,5 +495,5 @@ VideoDropdown.propTypes = {
     })
   ).isRequired,
   toggleRow: PropTypes.func.isRequired,
-  setFlagVideos: PropTypes.func.isRequired,
+  refetchData: PropTypes.func.isRequired,
 };

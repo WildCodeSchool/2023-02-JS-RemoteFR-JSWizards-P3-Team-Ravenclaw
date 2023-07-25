@@ -17,7 +17,10 @@ import { deleteVideo } from "../../../services/videos";
 import capitalizeText from "../../../helpers/capitalize";
 import checkRowStatus from "../../../helpers/checkRowStatus";
 
-export default function RowVideo({ video, setFlagVideos }) {
+// Settings
+import TOAST_DEFAULT_CONFIG from "../../../settings/toastify.json";
+
+export default function RowVideo({ video, refetchData }) {
   const [isToggled, setIsToggled] = useState(false);
 
   // fetch data from database to populate dropdown items
@@ -25,23 +28,12 @@ export default function RowVideo({ video, setFlagVideos }) {
   const { data: categories } = useAxios("/categories");
   const { data: languages } = useAxios("/languages");
 
-  const TOAST_DEFAULT_CONFIG = {
-    position: "bottom-right",
-    autoClose: 3000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: false,
-    progress: undefined,
-    theme: "dark",
-  };
-
   const handleDeleteVideo = (id) => {
     deleteVideo(id)
       .then((res) => {
         if (res?.status === 204)
           toast.success("Video successfully deleted!", TOAST_DEFAULT_CONFIG);
-        setFlagVideos((prev) => !prev);
+        refetchData((prev) => !prev);
       })
       .catch((err) => {
         console.error(err);
@@ -61,10 +53,10 @@ export default function RowVideo({ video, setFlagVideos }) {
         <td className="px-4 py-3 text-sm">
           {Array.isArray(video.category)
             ? video.category?.join(" | ").toUpperCase() || "-"
-            : video.category?.toUpperCase() || "-"}
+            : video.category_name.toUpperCase() || "-"}
         </td>
         <td className="px-4 py-3 text-sm">
-          {capitalizeText(video.language) || "-"}
+          {capitalizeText(video.language_name) || "-"}
         </td>
         <td className="px-4 py-3 text-sm">
           <span className={checkRowStatus(video.status)}>
@@ -116,12 +108,12 @@ export default function RowVideo({ video, setFlagVideos }) {
       </tr>
       {isToggled && (
         <VideoDropdown
-          videoId={video.id}
+          video={video}
           games={games}
           categories={categories}
           languages={languages}
           toggleRow={setIsToggled}
-          setFlagVideos={setFlagVideos}
+          refetchData={refetchData}
         />
       )}
     </>
@@ -136,9 +128,10 @@ RowVideo.propTypes = {
       PropTypes.string,
       PropTypes.arrayOf(PropTypes.string),
     ]),
-    language: PropTypes.string,
+    category_name: PropTypes.string,
+    language_name: PropTypes.string,
     visibility: PropTypes.number,
     status: PropTypes.string,
   }).isRequired,
-  setFlagVideos: PropTypes.func.isRequired,
+  refetchData: PropTypes.func.isRequired,
 };

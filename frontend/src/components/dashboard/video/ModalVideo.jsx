@@ -31,6 +31,9 @@ import {
   addVideoCategory,
 } from "../../../services/videos";
 
+// Settings
+import TOAST_DEFAULT_CONFIG from "../../../settings/toastify.json";
+
 // Styles
 import styles from "../../../css/Table.module.css";
 
@@ -55,17 +58,6 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
     thumbnail: {},
     video: {},
   });
-
-  const TOAST_DEFAULT_CONFIG = {
-    position: "bottom-right",
-    autoClose: 3000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: false,
-    progress: undefined,
-    theme: "dark",
-  };
 
   // fetch data from database to populate dropdown items
   const { data: games } = useAxios("/games");

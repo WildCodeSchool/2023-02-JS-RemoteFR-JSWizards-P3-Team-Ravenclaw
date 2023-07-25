@@ -8,7 +8,11 @@ import Button from "../../utilities/Button";
 import Input from "../../utilities/Input";
 
 // Services
-import { addGameThumbnail, modifyGameById } from "../../../services/games";
+import {
+  addGameThumbnail,
+  modifyGameById,
+  deleteGameThumbnail,
+} from "../../../services/games";
 
 // Settings
 import TOAST_DEFAULT_CONFIG from "../../../settings/toastify.json";
@@ -25,8 +29,13 @@ export default function GameDropdown({ game, toggleDropdown, refetchData }) {
     const name = inputRef.current.value.trim().toLowerCase();
     let thumbnail;
     try {
-      // upload new thumbnail (if any)
+      // a new thumnbail image has been picked
       if (fileRef.current.value) {
+        // first delete old file (only if in backend/uploads folder)...
+        await deleteGameThumbnail({
+          data: { thumbnail: game.thumbnail },
+        });
+        // ...then upload new thumbnail file to backend public folder
         const formData = new FormData();
         formData.append("game_thumbnail", fileRef.current.files[0]);
         const res = await addGameThumbnail(formData);

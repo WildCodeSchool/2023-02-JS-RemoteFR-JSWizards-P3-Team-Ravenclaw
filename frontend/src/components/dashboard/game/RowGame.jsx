@@ -11,7 +11,7 @@ import Button from "../../utilities/Button";
 import capitalizeText from "../../../helpers/capitalize";
 
 // Services
-import { deleteGame } from "../../../services/games";
+import { deleteGame, deleteGameThumbnail } from "../../../services/games";
 
 // Settings
 import TOAST_DEFAULT_CONFIG from "../../../settings/toastify.json";
@@ -21,21 +21,25 @@ export default function RowGame({ game, refetchData }) {
 
   const toggleDropdown = () => setIsToggled(!isToggled);
 
-  const handleDeleteGame = (id) => {
-    deleteGame(id)
-      .then((res) => {
-        if (res?.status === 204)
-          toast.success("Game successfully deleted!", TOAST_DEFAULT_CONFIG);
-        refetchData((prev) => !prev);
-      })
-      .catch((err) => {
-        console.error(err);
-        if (err.response.status === 404) {
-          toast.error(`${err.response.data}`, TOAST_DEFAULT_CONFIG);
-        } else {
-          toast.error(`${err.response.statusText}!`, TOAST_DEFAULT_CONFIG);
-        }
+  const handleDeleteGame = async (id) => {
+    try {
+      // first delete game thumbnail from public folder...
+      await deleteGameThumbnail({
+        data: { thumbnail: game.thumbnail },
       });
+      // ... then delete entry from database
+      const res = deleteGame(id);
+      if (res?.status === 204)
+        toast.success("Game successfully deleted!", TOAST_DEFAULT_CONFIG);
+      refetchData((prev) => !prev);
+    } catch (err) {
+      console.error(err);
+      if (err.response.status === 404) {
+        toast.error(`${err.response.data}`, TOAST_DEFAULT_CONFIG);
+      } else {
+        toast.error(`${err.response.statusText}!`, TOAST_DEFAULT_CONFIG);
+      }
+    }
   };
 
   return (

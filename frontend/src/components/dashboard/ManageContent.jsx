@@ -5,7 +5,7 @@ import { useState } from "react";
 // Components
 import RowSearch from "./RowSearch";
 import NavTab from "./NavTab";
-// import TableVideos from "./video/TableVideos";
+import TableVideos from "./video/TableVideos";
 import TableCategories from "./category/TableCategories";
 import TableLanguages from "./language/TableLanguages";
 import TableGames from "./game/TableGames";
@@ -13,9 +13,9 @@ import TableGames from "./game/TableGames";
 export default function ManageContent({ filterText, setFilterText }) {
   const [activeTab, setActiveTab] = useState("video");
   const [refetchGames, setRefetchGames] = useState(false);
-  const [refetchCategories, setRefetchCategories] = useState(false);
+  const [refetchVideos, setRefetchVideos] = useState(false);
   const [refetchLanguages, setRefetchLanguages] = useState(false);
-  // const [flagVideos, setFlagVideos] = useState(false);
+  const [refetchCategories, setRefetchCategories] = useState(false);
 
   const setActiveTabItem = (tab) => setActiveTab(tab);
 
@@ -30,19 +30,19 @@ export default function ManageContent({ filterText, setFilterText }) {
           activeTab={activeTab}
           filterText={filterText}
           setFilterText={setFilterText}
+          setRefetchGames={setRefetchGames}
+          setRefetchVideos={setRefetchVideos}
+          setRefetchLanguages={setRefetchLanguages}
           setRefetchCategories={setRefetchCategories}
-          setFlagLanguages={setRefetchLanguages}
-          // setFlagGames={setFlagGames}
-          // setFlagVideos={setFlagVideos}
         />
 
-        {/* {activeTab === "video" && (
+        {activeTab === "video" && (
           <TableVideos
             filterText={filterText}
-            flagVideos={flagVideos}
-            setFlagVideos={setFlagVideos}
+            refetchFlag={refetchVideos}
+            setRefetchFlag={setRefetchVideos}
           />
-        )} */}
+        )}
 
         {activeTab === "category" && (
           <TableCategories

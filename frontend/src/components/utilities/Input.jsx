@@ -18,15 +18,21 @@ const Input = forwardRef(function forwardRefToChild(
     pattern,
     required = true,
     value = "",
-    // handleChange,
+    isDefaultChecked = null,
+    handleChange = null,
   },
   ref
 ) {
   const [inputValue, setInputValue] = useState(value);
+  const [isChecked, setIsChecked] = useState(isDefaultChecked);
 
   const onChange = (e) => {
-    setInputValue(e.target.value);
-    // handleChange();
+    if (e.target.type === "checkbox" || e.target.type === "radio") {
+      setIsChecked((prevChecked) => !prevChecked);
+    } else {
+      setInputValue(e.target.value);
+    }
+    if (handleChange !== null) handleChange(e);
   };
 
   return (
@@ -48,6 +54,7 @@ const Input = forwardRef(function forwardRefToChild(
         pattern={pattern}
         ref={ref}
         value={inputValue}
+        checked={isChecked}
         onChange={onChange}
       />
     </label>
@@ -66,7 +73,8 @@ Input.propTypes = {
   pattern: PropTypes.string,
   required: PropTypes.bool,
   value: PropTypes.string,
-  // handleChange: PropTypes.func,
+  isDefaultChecked: PropTypes.bool,
+  handleChange: PropTypes.func,
 };
 
 Input.defaultProps = {
@@ -81,7 +89,8 @@ Input.defaultProps = {
   pattern: null,
   required: true,
   value: "",
-  // handleChange: null,
+  isDefaultChecked: null,
+  handleChange: null,
 };
 
 export default Input;

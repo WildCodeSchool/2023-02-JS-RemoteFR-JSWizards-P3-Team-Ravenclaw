@@ -12,13 +12,15 @@ export default function formatVideoBodyRequest(
 ) {
   return {
     title: videoInfo.title,
-    upload_date: formatedTimestamp(),
+    upload_date:
+      new Date(videoInfo.uploadDate).toISOString().substring(0, 10) ??
+      formatedTimestamp(),
     description: videoInfo.description,
     slug: videoInfo.slug ?? "",
     status: videoInfo.status ?? "online",
     seo: videoInfo.seo ?? "",
-    thumbnail: thumbnailUrl,
-    url_video: videoUrl,
+    thumbnail: thumbnailUrl || videoInfo.thumbnail,
+    url_video: videoUrl || videoInfo.video,
     is_promoted: videoInfo.isPromoted,
     // eslint-disable-next-line no-nested-ternary
     visibility: videoInfo.isPremium ? 2 : videoInfo.IsFreemium ? 1 : 0,

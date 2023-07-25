@@ -11,22 +11,14 @@ import Input from "../../utilities/Input";
 // Services
 import { addLanguage } from "../../../services/languages";
 
+// Settings
+import TOAST_DEFAULT_CONFIG from "../../../settings/toastify.json";
+
 // Style
 import styles from "../../../css/Table.module.css";
 
 export default function ModalLanguage({ open, setIsModalOpened, setFlag }) {
   const inputRef = useRef();
-
-  const TOAST_DEFAULT_CONFIG = {
-    position: "bottom-right",
-    autoClose: 3000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: false,
-    progress: undefined,
-    theme: "dark",
-  };
 
   const handleClose = () => {
     inputRef.current.value = "";

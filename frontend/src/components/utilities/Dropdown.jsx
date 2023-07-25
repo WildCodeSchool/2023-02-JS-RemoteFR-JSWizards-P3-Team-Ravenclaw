@@ -1,6 +1,6 @@
 // Packages
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // Components
 import Button from "./Button";
@@ -15,14 +15,19 @@ export default function Dropdown({
   type,
   title,
   items,
+  initialValue = "",
   isDropdownOpen,
   handleDropdown,
   handleChange,
 }) {
-  const initState = (data) => {
+  const initState = (data, initialState) => {
     const state = [];
-    data.forEach((el) =>
-      state.push({ id: el.id, name: el.name, isSelected: false })
+    items.forEach((item) =>
+      state.push({
+        id: item.id,
+        name: item.name,
+        isSelected: item.name === initialState,
+      })
     );
     return state;
   };
@@ -30,9 +35,8 @@ export default function Dropdown({
   // store the dropdown searchbar filtered text
   const [filterOptions, setFilterOptions] = useState("");
   // store the dropdown radio button selection
-  const [selectedItems, setSelectedItems] = useState(initState(items));
-
-  // const resetSelection = () => setSelectedItems(initState(items));
+  const [selectedItems, setSelectedItems] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const updateSelectedItems = (selectionId) => {
     const clonedSelection = [...selectedItems];
@@ -50,55 +54,68 @@ export default function Dropdown({
       };
     });
     setSelectedItems(updatedSelection);
-    // close dropdown
-    if (type !== "checkbox") handleDropdown(!isDropdownOpen);
+    if (type !== "checkbox") handleDropdown(!isDropdownOpen); // close dropdown
   };
 
-  return (
-    <>
-      <Button
-        customCSS="flex items-center justify-between rounded-lg bg-primary p-3 text-center text-sm text-neutralLight focus:outline-none hover:bg-primaryLight min-w-[200px]"
-        type="button"
-        onClick={() => handleDropdown(!isDropdownOpen)}
-      >
-        {getSelectionName(selectedItems) || title}
-        <svg
-          className={`flex h-4 w-4 justify-end ${
-            isDropdownOpen ? "rotate-180" : ""
-          }`}
-          aria-hidden="true"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M19 9l-7 7-7-7"
-          />
-        </svg>
-      </Button>
+  useEffect(() => {
+    if (initialValue || initialValue === "") {
+      setSelectedItems(initState(items, initialValue));
+      setIsLoading(false);
+    }
+  }, [initialValue]);
 
-      {isDropdownOpen && (
-        <div className="w-50 absolute top-full z-10 mt-2 rounded-lg bg-gray-700 shadow">
-          <Searchbar
-            className="relative w-full p-3"
-            filterText={filterOptions}
-            onFilterTextChange={setFilterOptions}
-          />
-          <DropdownList
-            items={items}
-            inputName={name}
-            inputType={type}
-            filterOptions={filterOptions}
-            selection={selectedItems}
-            onSelectionChange={updateSelectedItems}
-            handleChange={handleChange}
-            // onReset={resetSelection}
-          />
-        </div>
+  return (
+    // eslint-disable-next-line react/jsx-no-useless-fragment
+    <>
+      {isLoading ? (
+        <p>Loading data...</p>
+      ) : (
+        <>
+          <Button
+            customCSS="flex items-center justify-between rounded-lg bg-primary p-3 text-center text-sm text-neutralLight focus:outline-none hover:bg-primaryLight min-w-[200px]"
+            type="button"
+            onClick={() => handleDropdown(!isDropdownOpen)}
+          >
+            {getSelectionName(selectedItems) || title}
+            <svg
+              className={`flex h-4 w-4 justify-end ${
+                isDropdownOpen ? "rotate-180" : ""
+              }`}
+              aria-hidden="true"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </Button>
+
+          {isDropdownOpen && (
+            <div className="w-50 absolute top-full z-10 mt-2 rounded-lg bg-gray-700 shadow">
+              <Searchbar
+                className="relative w-full p-3"
+                filterText={filterOptions}
+                onFilterTextChange={setFilterOptions}
+              />
+              <DropdownList
+                items={items}
+                inputName={name}
+                inputType={type}
+                filterOptions={filterOptions}
+                selection={selectedItems}
+                onSelectionChange={updateSelectedItems}
+                handleChange={handleChange}
+                // onReset={resetSelection}
+              />
+            </div>
+          )}
+        </>
       )}
     </>
   );
@@ -114,6 +131,7 @@ Dropdown.propTypes = {
       name: PropTypes.string,
     })
   ),
+  initialValue: PropTypes.string,
   isDropdownOpen: PropTypes.bool.isRequired,
   handleDropdown: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
@@ -122,4 +140,5 @@ Dropdown.propTypes = {
 Dropdown.defaultProps = {
   name: null,
   items: null,
+  initialValue: "",
 };
