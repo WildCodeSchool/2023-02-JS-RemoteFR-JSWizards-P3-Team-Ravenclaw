@@ -17,7 +17,6 @@ import { deleteVideo } from "../../../services/videos";
 import capitalizeText from "../../../helpers/capitalize";
 import checkRowStatus from "../../../helpers/checkRowStatus";
 
-
 export default function RowVideo({ video, setFlagVideos }) {
   const [isToggled, setIsToggled] = useState(false);
 
