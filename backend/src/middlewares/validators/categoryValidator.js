@@ -3,14 +3,14 @@
  */
 const Joi = require("joi");
 
-const ctageorySchema = Joi.object({
+const categorySchema = Joi.object({
   name: Joi.string().max(50).required(),
 });
 
 const validateCategoryInfo = (req, res, next) => {
   const { name } = req.body;
 
-  const { error } = ctageorySchema.validate({ name }, { abortEarly: false });
+  const { error } = categorySchema.validate({ name }, { abortEarly: false });
 
   if (error) return res.status(422).json({ validationErrors: error.details });
 
