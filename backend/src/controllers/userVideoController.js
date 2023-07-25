@@ -27,7 +27,6 @@ const insertFavs = async (req, res) => {
 
 const getOne = async (req, res) => {
   try {
-
     const [[favs]] = await models.user_video.getFavorites(req.query);
     if (!favs) return res.status(404).send("No existing favs");
     return res.json(favs);
@@ -35,7 +34,9 @@ const getOne = async (req, res) => {
     console.error(err);
     return res
       .status(500)
-      .send("oops...an error occured when retrieving user's favorite video from database");
+      .send(
+        "oops...an error occured when retrieving user's favorite video from database"
+      );
   }
 };
 
@@ -68,4 +69,10 @@ const getAllUserFavorites = async (req, res) => {
   }
 };
 
-module.exports = { insertFavs, getOne, getAllUserFavorites, postFavs, deleteFav };
+module.exports = {
+  insertFavs,
+  getOne,
+  getAllUserFavorites,
+  postFavs,
+  deleteFav,
+};
