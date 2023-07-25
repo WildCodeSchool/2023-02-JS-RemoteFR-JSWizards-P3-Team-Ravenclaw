@@ -25,7 +25,7 @@ export default function ManageContent({ filterText, setFilterText }) {
 
       <div className="relative min-w-[600px] overflow-hidden bg-gray-800 shadow-md sm:rounded-lg">
         <NavTab setActiveTabItem={setActiveTabItem} />
-  
+
         <RowSearch
           activeTab={activeTab}
           filterText={filterText}
