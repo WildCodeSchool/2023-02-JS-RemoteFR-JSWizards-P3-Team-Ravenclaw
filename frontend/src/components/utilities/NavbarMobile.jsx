@@ -1,23 +1,38 @@
 // Packages
 import PropTypes from "prop-types";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-// Style
-import styles from "../../css/Navbar.module.css";
+// Custom Hooks
+import useUserContext from "../../hooks/useUserContext";
+import useAuth from "../../hooks/useAuth";
 
 // Components
-import Notification from "./Notification";
 import MenuOpen from "../navbar/MenuOpen";
 import MenuClose from "../navbar/MenuClose";
 import LogOut from "../navbar/LogOut";
 
+// Style
+import styles from "../../css/Navbar.module.css";
+
 export default function NavbarMobile({ navitems }) {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+  const { setAccount } = useUserContext();
+  const { clearUserFromLocalStorage, logoutUser } = useAuth();
 
   const toggleNavMenu = () => setIsOpen(!isOpen);
-  const logOutSession = () => {
+  const handleLogOut = async () => {
+    // close burger menu
     toggleNavMenu();
+    // request logout
+    await logoutUser();
+    // update context
+    setAccount(undefined);
+    // clear local storage
+    clearUserFromLocalStorage();
+    // re-direction to HomePage
+    navigate("/");
   };
 
   return (
@@ -60,7 +75,7 @@ export default function NavbarMobile({ navitems }) {
               <NavLink to="/">
                 <LogOut
                   customCSS={`${styles.navbarMobile__navitem} ${styles.navitem__logout}`}
-                  onClick={logOutSession}
+                  onClick={handleLogOut}
                 />
               </NavLink>
             </li>
@@ -70,7 +85,6 @@ export default function NavbarMobile({ navitems }) {
 
       {/* navbuttons */}
       <div className={`${styles.inline__list} ${styles.navbar__btn}`}>
-        <Notification onClick={() => null} />
         {!isOpen && <MenuOpen onClick={toggleNavMenu} />}
         {isOpen && <MenuClose onClick={toggleNavMenu} />}
       </div>

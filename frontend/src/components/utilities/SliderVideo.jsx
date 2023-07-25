@@ -2,26 +2,57 @@
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 
-// Style
-import styles from "../../css/Slider.module.css";
-
 // Components
 import Card from "./Card";
+import useAuth from "../../hooks/useAuth";
+
+// Styles
+import styles from "../../css/Slider.module.css";
 
 export default function SliderVideo({
   videos,
   customClassSlider,
   customClassCard,
   customClassOverlayWrapper,
-  displayCount,
+  videoNumber,
   isPaginated,
 }) {
+  const {
+    account: { id_user: userId, id_plan: planId },
+  } = useAuth();
+
   const navigate = useNavigate();
 
-  const handleClick = (isLinkAvailable, linkURL) =>
-    isLinkAvailable ? navigate(`${linkURL}`) : navigate("connection");
+  const videosToDisplay = isPaginated ? videos.slice(0, videoNumber) : videos;
 
-  const videosToDisplay = isPaginated ? videos.slice(0, displayCount) : videos;
+  const isAuthenticated = userId !== undefined;
+
+  const hasUserAcess = (video) => {
+    let hasAccess = false;
+    switch (planId) {
+      case 1:
+      case 3:
+        hasAccess = planId >= video.visibility;
+        break;
+      case 2:
+        hasAccess = planId > video.visibility;
+        break;
+      // admin
+      case null:
+        hasAccess = true;
+        break;
+      default:
+        hasAccess = video.visibility === 0;
+        break;
+    }
+    return hasAccess;
+  };
+
+  const handleVisibility = (video) => {
+    if (!isAuthenticated && !hasUserAcess(video)) return navigate("/account");
+    if (isAuthenticated && !hasUserAcess(video)) return navigate("/plans");
+    return navigate(`/videos/${video.id}`);
+  };
 
   return (
     <ul className={`${styles.slider} ${customClassSlider}`}>
@@ -30,7 +61,7 @@ export default function SliderVideo({
           <button
             type="button"
             className="w-full"
-            onClick={() => handleClick(video?.visible, `/videos/${video.id}`)}
+            onClick={() => handleVisibility(video)}
           >
             <Card
               classCSS={`${styles.card} ${customClassCard} bg-cover`}
@@ -38,7 +69,7 @@ export default function SliderVideo({
                 backgroundImage: `url(${video.thumbnail})`,
               }}
             >
-              {!video.visible && (
+              {!hasUserAcess(video) ? (
                 <div className={styles.card__overlay}>
                   <div
                     className={`${styles.overlay__wrapper} ${customClassOverlayWrapper}`}
@@ -48,14 +79,20 @@ export default function SliderVideo({
                       alt={video.title}
                       className={styles.overlay__wrapper__lock}
                     />
-                    <p className={styles.overlay__wrapper__description}>
-                      Login to watch
-                    </p>
+                    {!isAuthenticated ? (
+                      <p className={styles.overlay__wrapper__description}>
+                        Login to watch
+                      </p>
+                    ) : null}
+                    {isAuthenticated && !hasUserAcess(video) ? (
+                      <p className={styles.overlay__wrapper__description}>
+                        Become premium to watch
+                      </p>
+                    ) : null}
                   </div>
                 </div>
-              )}
+              ) : null}
             </Card>
-
             <p className={styles.slider__video__title}>{video.title}</p>
           </button>
         </li>
@@ -82,7 +119,7 @@ SliderVideo.propTypes = {
   customClassSlider: PropTypes.string,
   customClassCard: PropTypes.string,
   customClassOverlayWrapper: PropTypes.string,
-  displayCount: PropTypes.number,
+  videoNumber: PropTypes.number,
   isPaginated: PropTypes.bool,
 };
 
@@ -91,6 +128,6 @@ SliderVideo.defaultProps = {
   customClassSlider: "",
   customClassCard: "",
   customClassOverlayWrapper: "",
-  displayCount: null,
+  videoNumber: null,
   isPaginated: false,
 };

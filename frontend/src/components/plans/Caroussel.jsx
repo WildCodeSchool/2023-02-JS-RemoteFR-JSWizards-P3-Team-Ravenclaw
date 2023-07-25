@@ -67,8 +67,8 @@ export default function Caroussel({ plans, billing }) {
                       {"$" +
                         `${
                           billing.toLowerCase() === "monthly"
-                            ? plan.price_monthly
-                            : plan.price_yearly
+                            ? parseFloat(plan.price_monthly)
+                            : parseFloat(plan.price_yearly)
                         }`}
                     </span>
                     <span className={styles.card__plan__billing}>
@@ -99,7 +99,7 @@ export default function Caroussel({ plans, billing }) {
                 </div>
                 <button
                   type="button"
-                  className={`btn-default ${styles.card__plan__btn}`}
+                  className={`btn-default ${styles.card__plan__btn} md:text-base md:font-bold`}
                   onClick={() => handleClick(capitalize(plan.name))}
                 >
                   Choose Plan
@@ -122,8 +122,8 @@ Caroussel.propTypes = {
   plans: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string,
-      price_monthly: PropTypes.number,
-      price_yearly: PropTypes.number,
+      price_monthly: PropTypes.string,
+      price_yearly: PropTypes.string,
       description: PropTypes.string,
       perk_1: PropTypes.string,
       perk_2: PropTypes.string,

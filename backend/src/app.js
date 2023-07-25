@@ -2,6 +2,8 @@ const fs = require("node:fs");
 const path = require("node:path");
 const cors = require("cors");
 const express = require("express");
+const cookieParser = require("cookie-parser");
+
 const mainRouter = require("./routers/mainRouter");
 
 // create express app
@@ -9,11 +11,13 @@ const app = express();
 
 // use some application-level middlewares
 app.use(express.json());
+app.use(cookieParser());
 
 app.use(
   cors({
     origin: process.env.FRONTEND_URL ?? "http://localhost:3000",
     optionsSuccessStatus: 200,
+    credentials: true,
   })
 );
 

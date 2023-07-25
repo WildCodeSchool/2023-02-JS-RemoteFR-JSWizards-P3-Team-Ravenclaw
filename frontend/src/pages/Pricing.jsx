@@ -1,16 +1,16 @@
 // Packages
 import { useState } from "react";
+import useAxios from "../hooks/useAxios";
 
 // Components
 import SwitchBilling from "../components/plans/SwitchBilling";
 import Caroussel from "../components/plans/Caroussel";
 import Footer from "../components/utilities/Footer";
 
-// Data
-import plans from "../data/plan.json";
-
 export default function Pricing() {
   const [currentBilling, setCurrentBilling] = useState("Monthly");
+
+  const { data: plans } = useAxios(`/plans`);
 
   return (
     <>
@@ -18,13 +18,13 @@ export default function Pricing() {
         <article>
           <h1>Plans & Pricing</h1>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-            malesuada, ipsum ut facilisis facilisis, justo justo volutpat purus,
-            convallis malesuada erat felis at leo ridendum pecat
+            Discover our plans and prices to benefit from an offer adapted to
+            your needs. Choose from our three subscriptions: Starter, Standard
+            and Premium, to find the perfect match to your expectations.
           </p>
         </article>
 
-        <article className="flex flex-col gap-4">
+        <article className="flex flex-col items-center gap-6">
           <SwitchBilling
             currentBilling={currentBilling}
             onChangeBilling={(newBilling) => setCurrentBilling(newBilling)}

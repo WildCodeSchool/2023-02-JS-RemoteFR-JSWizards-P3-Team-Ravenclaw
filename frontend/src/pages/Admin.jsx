@@ -1,118 +1,36 @@
 // Packages
 import PropTypes from "prop-types";
+import { useState } from "react";
 
 // Components
 import ManageContent from "../components/dashboard/ManageContent";
 import Dashboard from "../components/Dashboard";
+import UserTable from "../components/dashboard/user/UserTable";
 
-const videos = [
-  {
-    id: 1000,
-    name: "Title of the video",
-    category: "MOBA",
-    language: "English",
-    status: "Online",
-    visible: true,
-  },
-  {
-    id: 1001,
-    name: "Title of the video",
-    category: "FPS",
-    language: "French",
-    status: "Offline",
-    visible: false,
-  },
-  {
-    id: 1002,
-    name: "Title of the video",
-    category: "Racing",
-    language: "Korean",
-    status: "Archived",
-    visible: true,
-  },
-  {
-    id: 1003,
-    name: "Title of the video",
-    category: "MOBA",
-    language: "English",
-    status: "Online",
-    visible: true,
-  },
-  {
-    id: 1004,
-    name: "Title of the video",
-    category: "FPS",
-    language: "French",
-    status: "Offline",
-    visible: false,
-  },
-  {
-    id: 1005,
-    name: "Title of the video",
-    category: "Racing",
-    language: "Korean",
-    status: "Archived",
-    visible: true,
-  },
-  {
-    id: 1006,
-    name: "Title of the video",
-    category: "MOBA",
-    language: "English",
-    status: "Online",
-    visible: true,
-  },
-  {
-    id: 1007,
-    name: "Title of the video",
-    category: "FPS",
-    language: "French",
-    status: "Offline",
-    visible: false,
-  },
-  {
-    id: 1008,
-    name: "Title of the video",
-    category: "Racing",
-    language: "Korean",
-    status: "Archived",
-    visible: true,
-  },
-  {
-    id: 1009,
-    name: "Title of the video",
-    category: "MOBA",
-    language: "English",
-    status: "Online",
-    visible: true,
-  },
-  {
-    id: 1010,
-    name: "Title of the video",
-    category: "FPS",
-    language: "French",
-    status: "Offline",
-    visible: false,
-  },
-  {
-    id: 1011,
-    name: "Title of the video",
-    category: "Racing",
-    language: "Korean",
-    status: "Archived",
-    visible: true,
-  },
-];
-
-export default function Admin({ edit }) {
+export default function Admin({ edit, dashboard, userList }) {
+  const [filterText, setFilterText] = useState("");
   return (
-    <div>
-      {edit && <ManageContent videos={videos} />}
-      {!edit && <Dashboard videos={videos} />}
-    </div>
+    <>
+      {edit && (
+        <ManageContent filterText={filterText} setFilterText={setFilterText} />
+      )}
+      {dashboard && (
+        <Dashboard filterText={filterText} setFilterText={setFilterText} />
+      )}
+      {userList && (
+        <UserTable filterText={filterText} setFilterText={setFilterText} />
+      )}
+    </>
   );
 }
 
+Admin.defaultProps = {
+  edit: null,
+  dashboard: null,
+  userList: null,
+};
 Admin.propTypes = {
-  edit: PropTypes.bool.isRequired,
+  edit: PropTypes.bool,
+  dashboard: PropTypes.bool,
+  userList: PropTypes.bool,
 };

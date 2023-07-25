@@ -5,23 +5,9 @@ import { useState } from "react";
 import SignForm from "./SignForm";
 
 export default function Connect() {
-  const [signIn, toggle] = useState(true);
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordVisible, setPasswordVisible] = useState(false);
-  const [passwordConfVisible, setPasswordConfVisible] = useState(false);
-
-  const handlePassVisibility = () => {
-    setPasswordVisible(!passwordVisible);
-  };
-
-  const handlePassConfVisibility = () => {
-    setPasswordConfVisible(!passwordConfVisible);
-  };
-
+  const [signIn, toggleSignIn] = useState(true);
   return (
-    <div className="relative flex min-h-[700px] w-[678px] max-w-full flex-col overflow-hidden bg-neutralLightest shadow-lg dark:bg-primaryDark md:min-h-[400px] md:rounded-lg">
+    <div className="relative flex min-h-[700px] w-[678px] max-w-full flex-col overflow-hidden bg-neutralLightest shadow-md shadow-primaryLight dark:bg-primaryDark md:min-h-[400px] md:rounded-lg">
       <div
         className={`signin-container ${
           signIn !== true
@@ -29,17 +15,7 @@ export default function Connect() {
             : null
         }`}
       >
-        <SignForm
-          isSignIn={signIn}
-          email={email}
-          setEmail={setEmail}
-          password={password}
-          setPassword={setPassword}
-          passwordVisible={passwordVisible}
-          passwordConfVisible={passwordConfVisible}
-          handlePassVisibility={handlePassVisibility}
-          handlePassConfVisibility={handlePassConfVisibility}
-        />
+        <SignForm isSignIn={signIn} />
       </div>
 
       <div
@@ -72,7 +48,7 @@ export default function Connect() {
             <button
               type="button"
               className="connect-button connect-ghostButton"
-              onClick={() => toggle(true)}
+              onClick={() => toggleSignIn(true)}
             >
               Sign In
             </button>
@@ -95,7 +71,7 @@ export default function Connect() {
             <button
               type="button"
               className="connect-button connect-ghostButton"
-              onClick={() => toggle(false)}
+              onClick={() => toggleSignIn(false)}
             >
               Create Account
             </button>

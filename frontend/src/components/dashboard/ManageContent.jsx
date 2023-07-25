@@ -1,118 +1,78 @@
 // Packages
-import { useEffect, useState } from "react";
-import { Pagination, ConfigProvider } from "antd";
 import PropTypes from "prop-types";
+import { useState } from "react";
 
 // Components
 import RowSearch from "./RowSearch";
 import NavTab from "./NavTab";
-import RowHead from "./RowHead";
-import RowVideo from "./video/RowVideo";
-import RowCategory from "./category/RowCategory";
-import RowLanguage from "./language/RowLanguage";
-import RowGame from "./game/RowGame";
+import TableVideos from "./video/TableVideos";
+import TableCategories from "./category/TableCategories";
+import TableLanguages from "./language/TableLanguages";
+import TableGames from "./game/TableGames";
 
-// Data
-import games from "../../data/game.json";
-import languages from "../../data/language.json";
-import categories from "../../data/category.json";
-
-export default function DashTable({ videos }) {
+export default function ManageContent({ filterText, setFilterText }) {
   const [activeTab, setActiveTab] = useState("video");
-  const setActiveTabItem = (tab) => {
-    setActiveTab(tab);
-  };
+  const [flagGames, setFlagGames] = useState(false);
+  const [flagCategories, setFlagCategories] = useState(false);
+  const [flagLanguages, setFlagLanguages] = useState(false);
+  const [flagVideos, setFlagVideos] = useState(false);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(5);
-  const [objectNumber, setObjectNumber] = useState(null);
-  const offset = pageSize * currentPage - pageSize; // pages parcourues
-  const nextPage = offset + pageSize;
-
-  useEffect(() => {
-    setCurrentPage(1);
-    if (activeTab === "category") {
-      setObjectNumber(categories.length);
-    } else if (activeTab === "language") {
-      setObjectNumber(languages.length);
-    } else {
-      setObjectNumber(videos.length);
-    }
-  }, [activeTab]);
+  const setActiveTabItem = (tab) => setActiveTab(tab);
 
   return (
     <div className="flex w-screen max-w-[calc(100vw-320px)] flex-col gap-8 px-[100px] py-8">
       <h1>Manage Content</h1>
-      <div className="relative min-w-[600px] overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
+
+      <div className="relative min-w-[600px] overflow-hidden bg-gray-800 shadow-md sm:rounded-lg">
         <NavTab setActiveTabItem={setActiveTabItem} />
-        <RowSearch activeTab={activeTab} />
-        <table className="w-full overflow-x-auto text-left text-base text-neutralDarkest dark:text-neutralLightest">
-          <RowHead activeTab={activeTab} />
-          <tbody>
-            {/* eslint-disable */}
-            {activeTab === "video"
-              ? videos
-                  .slice(offset, nextPage)
-                  .map((video) => <RowVideo key={video.id} video={video} />)
-              : activeTab === "category"
-              ? categories
-                  .slice(offset, nextPage)
-                  .map((category) => (
-                    <RowCategory key={category.id} category={category} />
-                  ))
-              : activeTab === "language"
-              ? languages
-                  .slice(offset, nextPage)
-                  .map((language) => (
-                    <RowLanguage key={language.id} language={language} />
-                  ))
-              : activeTab === "game"
-              ? games
-                  .slice(offset, nextPage)
-                  .map((game) => <RowGame key={game.id} game={game} />)
-              : null}
-            {/* eslint-enable */}
-          </tbody>
-        </table>
-        <ConfigProvider
-          theme={{
-            token: {
-              colorPrimary: "#9596FB",
-              colorText: "#9596FB",
-              colorBgContainer: "#1f2937",
-              colorBgTextHover: "#374151",
-              colorTextPlaceholder: "#9596FB",
-              colorBorder: "#9596FB",
-              controlOutlineWidth: "0",
-            },
-          }}
-        >
-          <Pagination
-            pageSizeOptions={[5, 10, 20, 50, 100]}
-            className="py-2 text-center"
-            pageSize={pageSize}
-            current={currentPage}
-            total={objectNumber}
-            onChange={(pageClicked, onPageSize) => {
-              setCurrentPage(pageClicked);
-              setPageSize(onPageSize);
-            }}
-            showSizeChanger
+
+        <RowSearch
+          activeTab={activeTab}
+          filterText={filterText}
+          setFilterText={setFilterText}
+          setFlagCategories={setFlagCategories}
+          setFlagLanguages={setFlagLanguages}
+          setFlagGames={setFlagGames}
+          setFlagVideos={setFlagVideos}
+        />
+
+        {activeTab === "video" && (
+          <TableVideos
+            filterText={filterText}
+            flagVideos={flagVideos}
+            setFlagVideos={setFlagVideos}
           />
-        </ConfigProvider>
+        )}
+
+        {activeTab === "category" && (
+          <TableCategories
+            filterText={filterText}
+            flagCategories={flagCategories}
+            setFlagCategories={setFlagCategories}
+          />
+        )}
+
+        {activeTab === "language" && (
+          <TableLanguages
+            filterText={filterText}
+            flagLanguages={flagLanguages}
+            setFlagLanguages={setFlagLanguages}
+          />
+        )}
+
+        {activeTab === "game" && (
+          <TableGames
+            filterText={filterText}
+            flagGames={flagGames}
+            setFlagGames={setFlagGames}
+          />
+        )}
       </div>
     </div>
   );
 }
 
-DashTable.propTypes = {
-  videos: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string,
-      category: PropTypes.string,
-      language: PropTypes.string,
-      status: PropTypes.string,
-    })
-  ).isRequired,
+ManageContent.propTypes = {
+  filterText: PropTypes.string.isRequired,
+  setFilterText: PropTypes.func.isRequired,
 };
