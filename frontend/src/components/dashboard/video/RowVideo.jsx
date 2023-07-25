@@ -59,4 +59,5 @@ RowVideo.propTypes = {
     language: PropTypes.string,
     status: PropTypes.string,
   }).isRequired,
+  admin: PropTypes.bool.isRequired,
 };
