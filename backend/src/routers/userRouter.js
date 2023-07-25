@@ -29,6 +29,7 @@ router.put(
   hashPassword,
   userController.editById
 );
+
 router.delete("/:id", userController.remove);
 
 module.exports = router;

@@ -51,6 +51,15 @@ export default function RowHead({ activeTab }) {
     ) {
       return false; // Exclude headers for category, language and game tabs
     }
+
+    if (
+      activeTab === "fav" &&
+      (title.name === "ID" ||
+        title.name === "Premium" ||
+        title.name === "Status")
+    ) {
+      return false;
+    }
     return true; // Include other titles
   });
 

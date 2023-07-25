@@ -53,7 +53,7 @@ export default function DashTable({ videos }) {
             {activeTab === "video"
               ? videos
                   .slice(offset, nextPage)
-                  .map((video) => <RowVideo key={video.id} video={video} />)
+                  .map((video) => <RowVideo key={video.id} video={video} admin/>)
               : activeTab === "category"
               ? categories
                   .slice(offset, nextPage)

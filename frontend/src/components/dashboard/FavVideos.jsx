@@ -1,10 +1,27 @@
 import PropTypes from "prop-types";
+import { useState, useEffect } from "react";
+import * as Services from "../../service/Favs.service";
 
 import RowSearch from "./RowSearch";
 import RowHead from "./RowHead";
 import RowVideo from "./video/RowVideo";
 
 export default function FavVideos({ videos }) {
+  const [favs, setFavs] = useState([
+    {
+      name: "ouloulou",
+      category: "fps",
+      language: "french",
+      edit: true,
+    },
+    { name: "oulala", category: "moba", language: "english", edit: true },
+  ]);
+  /* useEffect(() => {
+    Services.getfavs().then((res) => {
+      setFavs(res);
+    });
+  }, []); */
+
   return (
     <div className="w-screen max-w-[calc(100vw-320px)] px-[100px]">
       <h1>Favorites Videos</h1>
@@ -14,7 +31,7 @@ export default function FavVideos({ videos }) {
           <RowHead activeTab="fav" />
           <tbody>
             {/* eslint-disable */}
-            {videos.map((video) => (
+            {favs.map((video) => (
               <RowVideo key={video.id} video={video} />
             ))}
           </tbody>

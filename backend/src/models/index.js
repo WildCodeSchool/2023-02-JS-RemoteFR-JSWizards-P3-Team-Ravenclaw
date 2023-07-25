@@ -34,6 +34,10 @@ const GameManager = require("./GameManager");
 const UserManager = require("./UserManager");
 const PlanManager = require("./PlanManager");
 const CategoryManager = require("./CategoryManager");
+const UserVideoManager = require("./UserVideoManager");
+
+models.user_video = new UserVideoManager();
+models.user_video.setDatabase(pool);
 
 models.video = new VideoManager();
 models.video.setDatabase(pool);

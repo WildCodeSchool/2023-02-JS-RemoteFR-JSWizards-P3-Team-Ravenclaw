@@ -9,7 +9,7 @@ import Button from "../../utilities/Button";
 // Helpers
 import checkRowStatus from "../../../helpers/checkRowStatus";
 
-export default function RowVideo({ video }) {
+export default function RowVideo({ video, admin }) {
   const [isToggled, setIsToggled] = useState(false);
 
   const fields = Object.keys(video);
@@ -24,13 +24,15 @@ export default function RowVideo({ video }) {
             <td key={counter} className="px-4 py-3 text-sm">
               {typeof value === "boolean" ? (
                 <span className="flex gap-4">
-                  <Button
-                    type="button"
-                    onClick={() => setIsToggled(!isToggled)}
-                    customCSS="flex items-center"
-                  >
-                    <img src="../assets/icon/dashboard/edit.svg" alt="" />
-                  </Button>
+                  {admin && (
+                    <Button
+                      type="button"
+                      onClick={() => setIsToggled(!isToggled)}
+                      customCSS="flex items-center"
+                    >
+                      <img src="../assets/icon/dashboard/edit.svg" alt="" />
+                    </Button>
+                  )}
                   <Button type="button" customCSS="flex items-center">
                     <img src="../assets/icon/dashboard/delete.svg" alt="" />
                   </Button>
