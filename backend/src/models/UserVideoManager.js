@@ -16,7 +16,7 @@ class UserVideoManager extends AbstractManager {
       [userId, videoId, isFavorite]
     );
   }
-  
+
   setFavorite(body) {
     const {
       user_id: userId,
@@ -36,14 +36,14 @@ class UserVideoManager extends AbstractManager {
       [userId, videoId]
     );
   }
-  
+
   deleteFavorites(body) {
     const { user_id: userId, video_id: videoId } = body;
     return this.database.query(
       `delete from ${this.table} where user_id = ? and video_id = ?`,
       [userId, videoId]
     );
-  }      
+  }
 
   findAllFavorites([userId]) {
     return this.database.query(
