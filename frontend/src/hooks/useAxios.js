@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function useAxios(endpoint, refetchFlag) {
+import groupVideoCategory from "../helpers/groupVideoCategory";
+
+export default function useAxios(endpoint, refetchFlag = null) {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -18,7 +20,9 @@ export default function useAxios(endpoint, refetchFlag) {
         const res = await axios.get(`${BASE_URL}${url}`, {
           cancelToken: source.token,
         });
-        setData(res.data);
+        // if fetching videos, remove potential duplicates (multiple categories)
+        if (url.includes("videos")) setData(groupVideoCategory(res.data));
+        else setData(res.data);
       } catch (err) {
         if (!axios.isCancel(err)) {
           console.error("Error fetching data from API:", err);
