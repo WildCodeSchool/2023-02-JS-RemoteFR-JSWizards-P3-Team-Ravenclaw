@@ -189,7 +189,8 @@ export default function ModalVideo({ open, setIsModalOpened, refetchData }) {
       game: {},
       language: {},
       category: [],
-  }));
+    }));
+  };
 
   return (
     <Modal
