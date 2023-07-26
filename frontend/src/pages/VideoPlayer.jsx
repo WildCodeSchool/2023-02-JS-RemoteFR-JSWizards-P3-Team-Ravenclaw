@@ -13,7 +13,7 @@ import {
   WhatsappIcon,
 } from "react-share";
 import useAxios from "../hooks/useAxios";
-import * as Services from "../service/Favs.service";
+import * as Services from "../services/Favs.service";
 import useAuth from "../hooks/useAuth";
 // Component
 import Player from "../components/video/Player";
