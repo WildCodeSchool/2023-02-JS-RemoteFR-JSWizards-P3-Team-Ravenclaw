@@ -11,7 +11,11 @@ import Button from "../../utilities/Button";
 import useAxios from "../../../hooks/useAxios";
 
 // Services
-import { deleteVideo } from "../../../services/videos";
+import {
+  deleteVideo,
+  deleteVideoThumbnail,
+  deleteVideoFile,
+} from "../../../services/videos";
 
 // Helpers
 import capitalizeText from "../../../helpers/capitalize";
@@ -28,21 +32,28 @@ export default function RowVideo({ video, refetchData }) {
   const { data: categories } = useAxios("/categories");
   const { data: languages } = useAxios("/languages");
 
-  const handleDeleteVideo = (id) => {
-    deleteVideo(id)
-      .then((res) => {
-        if (res?.status === 204)
-          toast.success("Video successfully deleted!", TOAST_DEFAULT_CONFIG);
-        refetchData((prev) => !prev);
-      })
-      .catch((err) => {
-        console.error(err);
-        if (err.response.status === 404) {
-          toast.error(`${err.response.data}`, TOAST_DEFAULT_CONFIG);
-        } else {
-          toast.error(`${err.response.statusText}!`, TOAST_DEFAULT_CONFIG);
-        }
+  const handleDeleteVideo = async (id) => {
+    try {
+      // first delete video files from public folder...
+      await deleteVideoThumbnail({
+        data: { thumbnail: video.thumbnail },
       });
+      await deleteVideoFile({
+        data: { url_video: video.url_video },
+      });
+      // ... then delete entry from database
+      const res = await deleteVideo(id);
+      if (res?.status === 204)
+        toast.success("Video successfully deleted!", TOAST_DEFAULT_CONFIG);
+      refetchData((prev) => !prev);
+    } catch (err) {
+      console.error(err);
+      if (err.response.status === 404) {
+        toast.error(`${err.response.data}`, TOAST_DEFAULT_CONFIG);
+      } else {
+        toast.error(`${err.response.statusText}!`, TOAST_DEFAULT_CONFIG);
+      }
+    }
   };
 
   return (
