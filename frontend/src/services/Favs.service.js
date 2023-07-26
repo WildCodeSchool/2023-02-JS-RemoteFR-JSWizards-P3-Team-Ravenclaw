@@ -4,7 +4,7 @@ const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
 export const updateFavs = async (body) => {
   try {
-    const url = `${baseUrl}/userVideo`;
+    const url = `${baseUrl}/user-video`;
     const { data } = await axios.put(url, body);
     return data;
   } catch (error) {
@@ -39,12 +39,4 @@ export const deleteFav = async (data) => {
   } catch (error) {
     return { data: [] };
   }
-};
-
-export const unfavoriteVideo = (videoId, userId) => {
-  return axios.put(`${baseUrl}/user-video/`, {
-    user_id: userId,
-    video_id: videoId,
-    is_favorite: 0,
-  });
 };

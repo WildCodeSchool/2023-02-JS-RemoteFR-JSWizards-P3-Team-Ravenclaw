@@ -19,6 +19,9 @@ export default function Dropdown({
   isDropdownOpen,
   handleDropdown,
   handleChange,
+  resetCatFilters,
+  resetGameFilters,
+  resetLangFilters,
 }) {
   const [isLoading, setIsLoading] = useState(true);
   const [filterOptions, setFilterOptions] = useState("");
@@ -53,6 +56,13 @@ export default function Dropdown({
       })
     );
     return state;
+  };
+
+  const resetDropdown = () => {
+    setSelectedItems(initState(items, initialValue));
+    if (name === "category") resetCatFilters();
+    if (name === "game") resetGameFilters();
+    if (name === "language") resetLangFilters();
   };
 
   useEffect(() => {
@@ -110,6 +120,12 @@ export default function Dropdown({
                 onSelectionChange={updateSelectedItems}
                 handleChange={handleChange}
               />
+              <Button
+                customCSS="bg-primaryLight text-neutralLightest hover:bg-primaryLightest rounded py-1 px-3 m-3"
+                onClick={resetDropdown}
+              >
+                Reset
+              </Button>
             </div>
           )}
         </>
@@ -135,10 +151,16 @@ Dropdown.propTypes = {
   isDropdownOpen: PropTypes.bool.isRequired,
   handleDropdown: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
+  resetCatFilters: PropTypes.func,
+  resetGameFilters: PropTypes.func,
+  resetLangFilters: PropTypes.func,
 };
 
 Dropdown.defaultProps = {
   name: null,
   items: null,
   initialValue: "",
+  resetCatFilters: null,
+  resetGameFilters: null,
+  resetLangFilters: null,
 };
