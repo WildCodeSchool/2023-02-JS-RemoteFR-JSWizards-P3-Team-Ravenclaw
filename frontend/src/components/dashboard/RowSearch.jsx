@@ -50,7 +50,7 @@ export default function RowSearch({
         <ModalVideo
           open={isModalOpened}
           setIsModalOpened={setIsModalOpened}
-          setFlag={setRefetchVideos}
+          refetchData={setRefetchVideos}
         />
       );
     }
@@ -59,7 +59,7 @@ export default function RowSearch({
         <ModalCategory
           open={isModalOpened}
           setIsModalOpened={setIsModalOpened}
-          setRefetchCategories={setRefetchCategories}
+          refetchData={setRefetchCategories}
         />
       );
     }
@@ -67,7 +67,7 @@ export default function RowSearch({
       return (
         <ModalLanguage
           open={isModalOpened}
-          setFlag={setRefetchLanguages}
+          refetchData={setRefetchLanguages}
           setIsModalOpened={setIsModalOpened}
         />
       );
@@ -77,7 +77,7 @@ export default function RowSearch({
         <ModalGame
           open={isModalOpened}
           setIsModalOpened={setIsModalOpened}
-          setFlag={setRefetchGames}
+          refetchData={setRefetchGames}
         />
       );
     }

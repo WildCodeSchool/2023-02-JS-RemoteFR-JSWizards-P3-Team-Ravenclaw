@@ -31,8 +31,6 @@ export default function TableVideos({
   const offset = pageSize * currentPage - pageSize;
   const nextPage = offset + pageSize;
 
-  // console.log(videos);
-
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <>

@@ -17,11 +17,7 @@ import TOAST_DEFAULT_CONFIG from "../../../settings/toastify.json";
 // Style
 import styles from "../../../css/Table.module.css";
 
-export default function ModalCategory({
-  open,
-  setIsModalOpened,
-  setRefetchCategories,
-}) {
+export default function ModalCategory({ open, setIsModalOpened, refetchData }) {
   const inputRef = useRef();
 
   const handleClose = () => {
@@ -36,7 +32,7 @@ export default function ModalCategory({
       .then((res) => {
         if (res?.status === 204)
           toast.success("Category successfully added!", TOAST_DEFAULT_CONFIG);
-        setRefetchCategories((prev) => !prev);
+        refetchData((prev) => !prev);
         // reset input
         inputRef.current.value = "";
         setIsModalOpened(false);
@@ -98,11 +94,11 @@ export default function ModalCategory({
 ModalCategory.propTypes = {
   open: PropTypes.bool,
   setIsModalOpened: PropTypes.func,
-  setRefetchCategories: PropTypes.func,
+  refetchData: PropTypes.func,
 };
 
 ModalCategory.defaultProps = {
   open: null,
   setIsModalOpened: null,
-  setRefetchCategories: null,
+  refetchData: null,
 };
