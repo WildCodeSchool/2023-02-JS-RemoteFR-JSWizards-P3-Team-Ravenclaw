@@ -17,12 +17,16 @@ export default function useAxios(endpoint, refetchFlag = null) {
 
     const getData = async (url) => {
       try {
-        const res = await axios.get(`${BASE_URL}${url}`, {
-          cancelToken: source.token,
-        });
-        // if fetching videos, remove potential duplicates (multiple categories)
-        if (url.includes("videos")) setData(groupVideoCategory(res.data));
-        else setData(res.data);
+        if (url.includes("null") || url.includes("undefined")) {
+          setData([]);
+        } else {
+          const res = await axios.get(`${BASE_URL}${url}`, {
+            cancelToken: source.token,
+          });
+          // if fetching videos, remove potential duplicates (multiple categories)
+          if (url.includes("videos")) setData(groupVideoCategory(res.data));
+          else setData(res.data);
+        }
       } catch (err) {
         if (!axios.isCancel(err)) {
           if (err.response.status !== 404) {
