@@ -207,13 +207,7 @@ export default function VideoDropdown({
     setFormVideoInfo((prevVideoInfo) => ({
       ...prevVideoInfo,
       game: { id: video.game_id, name: video.game_name },
-    }));
-    setFormVideoInfo((prevVideoInfo) => ({
-      ...prevVideoInfo,
       language: { id: video.language_id, name: video.language_name },
-    }));
-    setFormVideoInfo((prevVideoInfo) => ({
-      ...prevVideoInfo,
       category: initState(video),
     }));
   };
