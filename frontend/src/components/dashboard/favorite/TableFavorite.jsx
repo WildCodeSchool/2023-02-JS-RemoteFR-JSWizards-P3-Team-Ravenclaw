@@ -92,7 +92,7 @@ TableFavorite.propTypes = {
   filterText: PropTypes.string.isRequired,
   setFilterText: PropTypes.func.isRequired,
   setFlagVideos: PropTypes.func.isRequired,
-  flagVideos: PropTypes.func,
+  flagVideos: PropTypes.bool,
 };
 
 TableFavorite.defaultProps = {
