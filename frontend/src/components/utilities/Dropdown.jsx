@@ -20,23 +20,9 @@ export default function Dropdown({
   handleDropdown,
   handleChange,
 }) {
-  const initState = (data, initialState) => {
-    const state = [];
-    items.forEach((item) =>
-      state.push({
-        id: item.id,
-        name: item.name,
-        isSelected: item.name === initialState,
-      })
-    );
-    return state;
-  };
-
-  // store the dropdown searchbar filtered text
-  const [filterOptions, setFilterOptions] = useState("");
-  // store the dropdown radio button selection
-  const [selectedItems, setSelectedItems] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [filterOptions, setFilterOptions] = useState("");
+  const [selectedItems, setSelectedItems] = useState(null);
 
   const updateSelectedItems = (selectionId) => {
     const clonedSelection = [...selectedItems];
@@ -55,6 +41,18 @@ export default function Dropdown({
     });
     setSelectedItems(updatedSelection);
     if (type !== "checkbox") handleDropdown(!isDropdownOpen); // close dropdown
+  };
+
+  const initState = (data, initialState) => {
+    const state = [];
+    items.forEach((item) =>
+      state.push({
+        id: item.id,
+        name: item.name,
+        isSelected: initialState.includes(item.name),
+      })
+    );
+    return state;
   };
 
   useEffect(() => {
@@ -111,7 +109,6 @@ export default function Dropdown({
                 selection={selectedItems}
                 onSelectionChange={updateSelectedItems}
                 handleChange={handleChange}
-                // onReset={resetSelection}
               />
             </div>
           )}
@@ -131,7 +128,10 @@ Dropdown.propTypes = {
       name: PropTypes.string,
     })
   ),
-  initialValue: PropTypes.string,
+  initialValue: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string),
+  ]),
   isDropdownOpen: PropTypes.bool.isRequired,
   handleDropdown: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
