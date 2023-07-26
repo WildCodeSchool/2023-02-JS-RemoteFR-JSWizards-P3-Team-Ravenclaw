@@ -7,53 +7,36 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../utilities/Button";
 
 // Services
-import { unfavoriteVideo } from "../../../services/videos";
+import * as Services from "../../../services/Favs.service";
+
+// Settings
+import TOAST_DEFAULT_CONFIG from "../../../settings/toastify.json";
 
 // Helpers
 import capitalizeText from "../../../helpers/capitalize";
 
 export default function RowFavorite({ video, setFlagVideos, userId }) {
-  const TOAST_DEFAULT_CONFIG = {
-    position: "bottom-right",
-    autoClose: 3000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: false,
-    progress: undefined,
-    theme: "dark",
-  };
-
   const navigate = useNavigate();
 
   const handleViewVideo = () => {
     return navigate(`/videos/${video.id}`);
   };
 
-  const handleFavoriteVideo = (videoId) => {
-    unfavoriteVideo(videoId, userId)
-      .then((res) => {
-        if (res?.status === 200) {
-          toast.success(
-            "Video successfully unfavorited!",
-            TOAST_DEFAULT_CONFIG
-          );
-          setFlagVideos((prev) => !prev);
-        } else {
-          toast.error("Unfavoriting video failed!", TOAST_DEFAULT_CONFIG);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        if (err.response.status === 404) {
-          toast.error(`${err.response.data}`, TOAST_DEFAULT_CONFIG);
-        } else {
-          toast.error(
-            "An error occurred while unfavoriting the video!",
-            TOAST_DEFAULT_CONFIG
-          );
-        }
-      });
+  const handleFavoriteVideo = async (videoId) => {
+    const data = {
+      user_id: Number(userId),
+      video_id: Number(videoId),
+    };
+    try {
+      await Services.deleteFav({ data });
+      setFlagVideos((prev) => !prev);
+    } catch (err) {
+      console.error(err);
+      toast.error(
+        "An error occurred while unfavoriting the video!",
+        TOAST_DEFAULT_CONFIG
+      );
+    }
   };
 
   return (
