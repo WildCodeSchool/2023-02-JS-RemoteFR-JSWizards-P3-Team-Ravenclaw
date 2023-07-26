@@ -203,6 +203,23 @@ export default function VideoDropdown({
     }
   };
 
+  // console.log(formVideoInfo);
+
+  const resetDropdown = () => {
+    setFormVideoInfo((prevVideoInfo) => ({
+      ...prevVideoInfo,
+      game: { id: video.game_id, name: video.game_name },
+    }));
+    setFormVideoInfo((prevVideoInfo) => ({
+      ...prevVideoInfo,
+      language: { id: video.language_id, name: video.language_name },
+    }));
+    setFormVideoInfo((prevVideoInfo) => ({
+      ...prevVideoInfo,
+      category: initState(video),
+    }));
+  };
+
   // set form focus on video title input field
   useEffect(() => {
     inputRef.current.focus();
@@ -242,6 +259,7 @@ export default function VideoDropdown({
                     isDropdownOpen={isLangDropOpened}
                     handleDropdown={setIsLangDropOpened}
                     handleChange={handleInputChange}
+                    resetLangFilters={resetDropdown}
                   />
                 </div>
                 <div className="relative flex flex-col gap-1.5">
@@ -259,6 +277,7 @@ export default function VideoDropdown({
                     isDropdownOpen={isCatDropOpened}
                     handleDropdown={setIsCatDropOpened}
                     handleChange={handleInputChange}
+                    resetCatFilters={resetDropdown}
                   />
                 </div>
                 <div className="relative flex flex-col gap-1.5">
@@ -276,6 +295,7 @@ export default function VideoDropdown({
                     isDropdownOpen={isGameDropOpened}
                     handleDropdown={setIsGameDropOpened}
                     handleChange={handleInputChange}
+                    resetGameFilters={resetDropdown}
                   />
                 </div>
                 <Input
