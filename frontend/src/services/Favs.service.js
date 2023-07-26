@@ -14,7 +14,7 @@ export const updateFavs = async (body) => {
 
 export const getOneFav = async (userId, videoId) => {
   try {
-    const url = `${baseUrl}/userVideo?user_id=${userId}&video_id=${videoId}`;
+    const url = `${baseUrl}/user-video?user_id=${userId}&video_id=${videoId}`;
     const { data } = await axios.get(url);
     return data;
   } catch (error) {
@@ -24,7 +24,7 @@ export const getOneFav = async (userId, videoId) => {
 
 export const postFav = async (newFav) => {
   try {
-    const url = `${baseUrl}/userVideo`;
+    const url = `${baseUrl}/user-video`;
     const { data } = await axios.post(url, newFav);
     return data;
   } catch (error) {
@@ -34,7 +34,7 @@ export const postFav = async (newFav) => {
 
 export const deleteFav = async (data) => {
   try {
-    const url = `${baseUrl}/userVideo`;
+    const url = `${baseUrl}/user-video`;
     return axios.delete(url, data);
   } catch (error) {
     return { data: [] };

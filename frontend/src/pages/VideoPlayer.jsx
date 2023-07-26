@@ -12,35 +12,31 @@ import {
   FacebookMessengerIcon,
   WhatsappIcon,
 } from "react-share";
-import useAxios from "../hooks/useAxios";
-import * as Services from "../service/Favs.service";
-import useAuth from "../hooks/useAuth";
+
 // Component
 import Player from "../components/video/Player";
 import Label from "../components/utilities/Label";
 import Button from "../components/utilities/Button";
 import Loader from "../components/utilities/Loader";
 
+// Custom hooks
+import useAxios from "../hooks/useAxios";
+import useAuth from "../hooks/useAuth";
+
+// Services
+import * as Services from "../services/Favs.service";
+
+// Settings
+import TOAST_DEFAULT_CONFIG from "../settings/toastify.json";
+
 export default function VideoPlayer() {
-  const [isToggled, setIsToggled] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
   const [isFav, setIsFav] = useState(false);
+  const [isToggled, setIsToggled] = useState(false);
 
   const { id } = useParams();
+  const { account } = useAuth();
   const { data: video, isLoading: isVideoLoading } = useAxios(`/videos/${id}`);
   const shareUrl = `${import.meta.env.VITE_BACKEND_URL}/videos/${id}`;
-  const { account } = useAuth();
-
-  const TOAST_DEFAULT_CONFIG = {
-    position: "bottom-right",
-    autoClose: 3000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: false,
-    progress: undefined,
-    theme: "dark",
-  };
 
   async function handleClickOnFavorite() {
     const data = {
@@ -72,14 +68,10 @@ export default function VideoPlayer() {
     }
   }, [account]);
 
-  useEffect(() => {
-    if (!isVideoLoading) setIsLoading(false);
-  }, []);
-
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
-      {isLoading ? (
+      {isVideoLoading ? (
         <Loader />
       ) : (
         <>

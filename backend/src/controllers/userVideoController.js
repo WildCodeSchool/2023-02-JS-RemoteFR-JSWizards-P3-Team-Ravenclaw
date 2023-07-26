@@ -55,7 +55,7 @@ const deleteFav = async (req, res) => {
 
 const getAllUserFavorites = async (req, res) => {
   try {
-    const [favorites] = await models.userVideo.findAllFavorites(req.params.id);
+    const [favorites] = await models.user_video.findAllFavorites(req.params.id);
     if (!favorites.length)
       return res.status(404).send("No existing favorite videos");
     return res.json(favorites);
