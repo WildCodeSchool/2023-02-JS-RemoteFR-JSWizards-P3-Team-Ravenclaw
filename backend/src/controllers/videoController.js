@@ -63,7 +63,7 @@ const editById = async (req, res) => {
 const post = async (req, res) => {
   try {
     const [result] = await models.video.create(req.body);
-    res.status(200).json({ insertId: result.insertId });
+    res.status(201).json({ insertId: result.insertId });
   } catch (err) {
     console.error(err);
     res

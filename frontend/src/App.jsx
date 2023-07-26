@@ -45,11 +45,10 @@ export default function App() {
                 <>
                   <Route path="" element={<Admin dashboard />} />
                   <Route path="edit" element={<Admin edit />} />
-                  <Route path="favorites" element={<Admin favorites />} />
                   <Route path="userList" element={<Admin userList />} />
                 </>
               ) : (
-                <Route path="user" element={<User />} />
+                <Route path="" element={<User dashboard />} />
               )}
             </Route>
           ) : (

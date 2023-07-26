@@ -23,7 +23,7 @@ const getAll = async (req, res) => {
 const post = async (req, res) => {
   try {
     await models.videoCategory.create(req.body);
-    res.sendStatus(204);
+    res.sendStatus(201);
   } catch (err) {
     console.error(err);
     res

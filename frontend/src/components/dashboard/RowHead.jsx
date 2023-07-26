@@ -39,6 +39,14 @@ export default function RowHead({ activeTab }) {
       id: 9,
       name: "Plan",
     },
+    {
+      id: 10,
+      name: "Watch",
+    },
+    {
+      id: 11,
+      name: "Unfavorite",
+    },
   ];
 
   const filteredTitles = titles.filter((title) => {
@@ -47,7 +55,9 @@ export default function RowHead({ activeTab }) {
       (title.name === "Premium" ||
         title.name === "Pseudo" ||
         title.name === "Email" ||
-        title.name === "Plan")
+        title.name === "Plan" ||
+        title.name === "Watch" ||
+        title.name === "Unfavorite")
     ) {
       return false; // Exclude "Premium" for video tab
     }
@@ -56,7 +66,9 @@ export default function RowHead({ activeTab }) {
       (title.name === "Actions" ||
         title.name === "Pseudo" ||
         title.name === "Email" ||
-        title.name === "Plan")
+        title.name === "Plan" ||
+        title.name === "Watch" ||
+        title.name === "Unfavorite")
     ) {
       return false; // Exclude "Actions" for video tab
     }
@@ -66,7 +78,9 @@ export default function RowHead({ activeTab }) {
         title.name === "Language" ||
         title.name === "Status" ||
         title.name === "Premium" ||
-        title.name === "Actions")
+        title.name === "Actions" ||
+        title.name === "Watch" ||
+        title.name === "Unfavorite")
     ) {
       return false; // Exclude "Actions" for video tab
     }
@@ -79,7 +93,9 @@ export default function RowHead({ activeTab }) {
         title.name === "Status" ||
         title.name === "Premium" ||
         title.name === "Email" ||
-        title.name === "Plan")
+        title.name === "Plan" ||
+        title.name === "Watch" ||
+        title.name === "Unfavorite")
     ) {
       return false; // Exclude headers for category, language and game tabs
     }
@@ -90,7 +106,8 @@ export default function RowHead({ activeTab }) {
         title.name === "Premium" ||
         title.name === "Pseudo" ||
         title.name === "Email" ||
-        title.name === "Plan")
+        title.name === "Plan" ||
+        title.name === "Actions")
     ) {
       return false; // Exclude "Favorite" for video tab
     }
