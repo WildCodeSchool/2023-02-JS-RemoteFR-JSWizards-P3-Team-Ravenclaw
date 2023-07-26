@@ -36,9 +36,6 @@ export default function DashboardUser() {
       .catch((err) => console.error(err));
   }, [flagVideos]);
 
-  console.info("stats", stats);
-  console.info("dbStats", dbStats);
-
   return (
     <article className="flex w-screen max-w-[calc(100vw-320px)] flex-col gap-8 px-[100px] py-8">
       <h1>Dashboard</h1>
