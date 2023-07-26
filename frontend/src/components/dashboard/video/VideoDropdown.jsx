@@ -61,21 +61,7 @@ export default function VideoDropdown({
     return [{ id: videoInfo.category_id, name: videoInfo.category_name }];
   };
 
-  // video info based on form inputs
-  // const [formVideoInfo, setFormVideoInfo] = useState({
-  //   title: "",
-  //   game: {},
-  //   isPremium: false,
-  //   isPromoted: false,
-  //   language: {},
-  //   category: [],
-  //   description: "",
-  //   thumbnail: {},
-  //   video: {},
-  //   seo: "",
-  //   status: "",
-  // });
-
+  // pre-fill form with current video data
   const [formVideoInfo, setFormVideoInfo] = useState({
     title: video.title,
     game: { id: video.game_id, name: video.game_name },
@@ -92,7 +78,6 @@ export default function VideoDropdown({
     status: video.status,
   });
 
-  // handle change in form inputs
   const handleInputChange = (e) => {
     let updatedFormData = { ...formVideoInfo };
     switch (e.target.type) {
@@ -129,105 +114,99 @@ export default function VideoDropdown({
     setFormVideoInfo(updatedFormData);
   };
 
-  // IN PROGRESS
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     // make sure all required dropdown are filled (if any)
     const { areMandatoryInputsFilled: isFormCompleted, errorMessage } =
       checkVideoFormCompleted(formVideoInfo);
+
     if (!isFormCompleted) {
       toast.error(`${errorMessage}`, TOAST_DEFAULT_CONFIG);
-    }
+    } else {
+      try {
+        let videoThumbUrl;
+        let videoUrl;
 
-    try {
-      let videoThumbUrl;
-      let videoUrl;
-
-      // a new thumnbail image has been picked
-      if (imageRef.current.value) {
-        // first delete old file (only if in backend/uploads folder)
-        await deleteVideoThumbnail({
-          data: { thumbnail: video.thumbnail },
-        });
-        // ...then upload new thumbnail file to backend public folder
-        const thumbnailFormData = new FormData();
-        thumbnailFormData.append("video_thumbnail", imageRef.current.files[0]);
-        const res = await addVideoThumbnail(thumbnailFormData);
-        videoThumbUrl = res.data.url_file;
-      }
-
-      // a new video file has been picked
-      if (videoRef.current.value) {
-        // first delete old video file (only if in backend/uploads folder)...
-        await deleteVideoFile({
-          data: { url_video: video.url_video },
-        });
-        // ...then upload new video file to backend public folder
-        const videoFormData = new FormData();
-        videoFormData.append("video", videoRef.current.files[0]);
-        const res = await addVideoMedia(videoFormData);
-        videoUrl = res.data.url_file;
-      }
-
-      // update video entry to database
-      // console.log(
-      //   "req body:",
-      //   formatVideoBodyRequest(formVideoInfo, videoUrl, videoThumbUrl)
-      // );
-      await modifyVideoById(
-        formatVideoBodyRequest(formVideoInfo, videoUrl, videoThumbUrl),
-        video.id
-      );
-
-      // delete previous video-category entries from database
-      await deleteVideoCategory(video.id);
-
-      // add relation entry for each added category (video_category) to database
-      const relationReponses = [];
-      formVideoInfo.category.forEach(async (category) => {
-        try {
-          const response = await addVideoCategory({
-            video_id: video.id,
-            category_id: category.id,
+        // a new thumnbail image has been picked
+        if (imageRef.current.value) {
+          // first delete old file (only if in backend/uploads folder)
+          await deleteVideoThumbnail({
+            data: { thumbnail: video.thumbnail },
           });
-          relationReponses.push(response);
-        } catch (err) {
-          console.error(err);
+          // ...then upload new thumbnail file to backend public folder
+          const thumbnailFormData = new FormData();
+          thumbnailFormData.append(
+            "video_thumbnail",
+            imageRef.current.files[0]
+          );
+          const res = await addVideoThumbnail(thumbnailFormData);
+          videoThumbUrl = res.data.url_file;
+        }
+
+        // a new video file has been picked
+        if (videoRef.current.value) {
+          // first delete old video file (only if in backend/uploads folder)..
+          await deleteVideoFile({
+            data: { url_video: video.url_video },
+          });
+          // ...then upload new video file to backend public folder
+          const videoFormData = new FormData();
+          videoFormData.append("video", videoRef.current.files[0]);
+          const res = await addVideoMedia(videoFormData);
+          videoUrl = res.data.url_file;
+        }
+
+        // update video entry to database
+        await modifyVideoById(
+          formatVideoBodyRequest(formVideoInfo, videoUrl, videoThumbUrl),
+          video.id
+        );
+
+        // delete previous video-category entries from database
+        await deleteVideoCategory(video.id);
+
+        // add relation entry for each added category (video_category) to database
+        const relationReponses = [];
+        formVideoInfo.category.forEach(async (category) => {
+          try {
+            const response = await addVideoCategory({
+              video_id: video.id,
+              category_id: category.id,
+            });
+            relationReponses.push(response);
+          } catch (err) {
+            console.error(err);
+            toast.error(`${err.response.statusText}!`, TOAST_DEFAULT_CONFIG);
+          }
+        });
+
+        // notify status
+        toast.success(`Video successfully updated!`, TOAST_DEFAULT_CONFIG);
+
+        // reset form inputs & state
+        setFormVideoInfo({});
+
+        // raise flag to refetch data from DB and update table view
+        refetchData((prev) => !prev);
+
+        // close modal
+        toggleRow(false);
+      } catch (err) {
+        console.error(err);
+        if (err.response?.status === 409) {
+          toast.error(`${err.response.data}`, TOAST_DEFAULT_CONFIG);
+        } else {
           toast.error(`${err.response.statusText}!`, TOAST_DEFAULT_CONFIG);
         }
-      });
-
-      // notify status
-      toast.success(`Video successfully updated!`, TOAST_DEFAULT_CONFIG);
-
-      // reset form inputs & state
-      // setTimeout(() => {
-      //   window.location.reload();
-      // }, 3000);
-      // e.target.reset();
-      setFormVideoInfo({});
-
-      // raise flag to refetch data from DB and update table view
-      refetchData((prev) => !prev);
-
-      // close modal
-      toggleRow(false);
-    } catch (err) {
-      console.error(err);
-      if (err.response?.status === 409) {
-        toast.error(`${err.response.data}`, TOAST_DEFAULT_CONFIG);
-      } else {
-        toast.error(`${err.response.statusText}!`, TOAST_DEFAULT_CONFIG);
       }
     }
   };
 
+  // set form focus on video title input field
   useEffect(() => {
     inputRef.current.focus();
   }, []);
-
-  // console.log(formVideoInfo);
 
   return (
     <tr className="border-neutral">
@@ -415,7 +394,7 @@ export default function VideoDropdown({
               </div>
             </div>
             <Input
-              title="Video Upload"
+              title="Upload Video"
               type="file"
               name="video"
               accept=".mp4, .avi, .mov, .wmv, .webm"
@@ -425,7 +404,7 @@ export default function VideoDropdown({
               handleChange={handleInputChange}
             />
             <Input
-              title="Image Upload"
+              title="Upload Thumbnail"
               type="file"
               name="thumbnail"
               accept=".jpg, .jpeg, .png, .webp"
