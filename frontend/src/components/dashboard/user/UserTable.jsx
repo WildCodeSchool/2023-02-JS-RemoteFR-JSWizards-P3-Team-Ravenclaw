@@ -17,6 +17,10 @@ import useAxios from "../../../hooks/useAxios";
 // Services
 import { getUsers } from "../../../services/users";
 
+// Settings
+import TOAST_DEFAULT_CONFIG from "../../../settings/toastify.json";
+import paginationSettings from "../../../settings/pagination.json";
+
 export default function UserTable() {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
@@ -25,22 +29,11 @@ export default function UserTable() {
   const [filterText, setFilterText] = useState("");
   const [flagUsers, setFlagUsers] = useState(false);
 
-  const { data: users } = useAxios("/users");
+  const { data: users, isLoading } = useAxios("/users");
 
   // Pagination logic
   const offset = pageSize * currentPage - pageSize;
   const nextPage = offset + pageSize;
-
-  const TOAST_DEFAULT_CONFIG = {
-    position: "bottom-right",
-    autoClose: 3000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: false,
-    progress: undefined,
-    theme: "dark",
-  };
 
   // export to CSV
   const convertToCSV = (data) => {
@@ -80,42 +73,35 @@ export default function UserTable() {
     <article className="flex w-screen max-w-[calc(100vw-320px)] flex-col gap-8 px-[100px] py-8">
       <h1>Users</h1>
 
-      <div className="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
+      <div className="relative overflow-hidden bg-gray-800 shadow-md sm:rounded-lg">
         <RowSearch
           activeTab="userList"
+          filterText={filterText}
           setFilterText={setFilterText}
           setFlagUsers={setFlagUsers}
           exportData={handleExport}
         />
+
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-base text-neutralDarkest dark:text-neutralLightest">
-            <RowHead activeTab="userList" />
-            <tbody>
-              {userList.length &&
-                filterByText(userList, "pseudo", filterText)
+          {isLoading ? (
+            <p>Loading data...</p>
+          ) : (
+            <table className="w-full text-left text-base text-neutralLightest">
+              <RowHead activeTab="userList" />
+              <tbody>
+                {filterByText(userList, "pseudo", filterText)
                   .slice(offset, nextPage)
                   .map((user) => (
                     <RowUser
-                      key={user.id}
+                      key={user.id_user}
                       user={user}
                       setFlagUsers={setFlagUsers}
                     />
                   ))}
-            </tbody>
-          </table>
-          <ConfigProvider
-            theme={{
-              token: {
-                colorPrimary: "#9596FB",
-                colorText: "#9596FB",
-                colorBgContainer: "#1f2937",
-                colorBgTextHover: "#374151",
-                colorTextPlaceholder: "#9596FB",
-                colorBorder: "#9596FB",
-                controlOutlineWidth: "0",
-              },
-            }}
-          >
+              </tbody>
+            </table>
+          )}
+          <ConfigProvider theme={paginationSettings}>
             <Pagination
               pageSizeOptions={[5, 10, 20, 50, 100]}
               className="py-2 text-center"

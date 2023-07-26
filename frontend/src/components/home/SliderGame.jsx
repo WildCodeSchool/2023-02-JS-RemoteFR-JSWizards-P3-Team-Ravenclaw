@@ -10,23 +10,20 @@ import Card from "../utilities/Card";
 
 export default function SliderGame({ games }) {
   return (
-    // eslint-disable-next-line react/jsx-no-useless-fragment
-    <>
-      <ul className={`${styles.slider} ${styles.slider__game}`}>
-        {games.map((game) => (
-          <li key={game.id}>
-            <Link to={`/videos?game=${game.name.toLowerCase()}`}>
-              <Card
-                classCSS={`${styles.card} ${styles.card__game} bg-cover`}
-                styleCSS={{
-                  backgroundImage: `url(${game.thumbnail})`,
-                }}
-              />
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </>
+    <ul className={`${styles.slider} ${styles.slider__game}`}>
+      {games.map((game) => (
+        <li key={game.id}>
+          <Link to={`/videos?game=${game.name.toLowerCase()}`}>
+            <Card
+              classCSS={`${styles.card} ${styles.card__game} bg-cover`}
+              styleCSS={{
+                backgroundImage: `url(${game.thumbnail})`,
+              }}
+            />
+          </Link>
+        </li>
+      ))}
+    </ul>
   );
 }
 

@@ -1,7 +1,10 @@
 // Packages
 import React, { useRef } from "react";
 import emailjs from "@emailjs/browser";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
+
+// Settings
+import TOAST_DEFAULT_CONFIG from "../../settings/toastify.json";
 
 // Styles
 import "react-toastify/dist/ReactToastify.css";
@@ -25,14 +28,8 @@ export default function Contact() {
           console.info("message sent");
           e.target.reset();
           toast.success("Message sent!", {
-            position: "top-right",
+            ...TOAST_DEFAULT_CONFIG,
             autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
           });
         },
         (error) => {
@@ -87,7 +84,6 @@ export default function Contact() {
       >
         Send
       </button>
-      <ToastContainer />
     </form>
   );
 }

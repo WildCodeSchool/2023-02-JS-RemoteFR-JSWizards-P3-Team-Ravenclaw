@@ -15,20 +15,14 @@ import Card from "../utilities/Card";
 // Helpers
 import capitalize from "../../helpers/capitalize";
 
+// Settings
+import TOAST_DEFAULT_CONFIG from "../../settings/toastify.json";
+
 SwiperCore.use([EffectCoverflow, Pagination, Navigation]);
 
 export default function Caroussel({ plans, billing }) {
   const handleClick = (name) => {
-    toast.success(`Plan ${name} selected!`, {
-      position: "bottom-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
+    toast.success(`Plan ${name} selected!`, TOAST_DEFAULT_CONFIG);
   };
 
   return (

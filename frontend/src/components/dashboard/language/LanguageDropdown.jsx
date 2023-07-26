@@ -45,7 +45,7 @@ export default function LanguageDropdown({
   }, []);
 
   return (
-    <tr className="border-b dark:border-neutral">
+    <tr className="border-b border-neutral">
       <td colSpan="6" className="gap-4 space-y-4 px-8 py-4">
         <form className="flex gap-4" onSubmit={handleSubmit}>
           <Input

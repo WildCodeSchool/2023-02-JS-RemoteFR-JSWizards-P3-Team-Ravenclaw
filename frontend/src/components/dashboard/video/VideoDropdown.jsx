@@ -157,13 +157,11 @@ export default function VideoDropdown({
           videoUrl = res.data.url_file;
         }
 
-        // update video entry to database
         await modifyVideoById(
           formatVideoBodyRequest(formVideoInfo, videoUrl, videoThumbUrl),
           video.id
         );
 
-        // delete previous video-category entries from database
         await deleteVideoCategory(video.id);
 
         // add relation entry for each added category (video_category) to database
@@ -181,16 +179,10 @@ export default function VideoDropdown({
           }
         });
 
-        // notify status
         toast.success(`Video successfully updated!`, TOAST_DEFAULT_CONFIG);
 
-        // reset form inputs & state
         setFormVideoInfo({});
-
-        // raise flag to refetch data from DB and update table view
         refetchData((prev) => !prev);
-
-        // close modal
         toggleRow(false);
       } catch (err) {
         console.error(err);

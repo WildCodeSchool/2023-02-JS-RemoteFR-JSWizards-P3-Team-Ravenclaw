@@ -40,7 +40,7 @@ export default function RowFavorite({ video, setFlagVideos, userId }) {
   };
 
   return (
-    <tr className="border-b dark:border-neutral">
+    <tr className="border-b border-neutral">
       <td className="px-4 py-3 text-sm">{capitalizeText(video.title)}</td>
       <td className="px-4 py-3 text-sm">
         {Array.isArray(video.category_name)

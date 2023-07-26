@@ -20,8 +20,8 @@ export default function NavTab({ setActiveTabItem }) {
   };
 
   return (
-    <div className="border-b border-gray-200 dark:border-gray-700">
-      <ul className="-mb-px flex text-center text-sm text-neutral ">
+    <div className="border-b border-gray-700">
+      <ul className="-mb-px flex text-center text-sm text-neutral">
         <li className="mr-2">
           <a
             href="#video"

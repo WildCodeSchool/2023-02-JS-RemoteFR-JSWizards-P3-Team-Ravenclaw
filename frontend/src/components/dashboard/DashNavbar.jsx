@@ -23,9 +23,8 @@ export default function DashNavbar() {
     setAccount({
       id_plan: undefined,
     });
-    // clear local storage
+
     clearUserFromLocalStorage();
-    // re-direction to HomePage
     navigate("/");
   };
 
