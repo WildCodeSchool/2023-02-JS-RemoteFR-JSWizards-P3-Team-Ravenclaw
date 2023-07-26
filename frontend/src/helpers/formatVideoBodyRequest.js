@@ -1,5 +1,5 @@
-const formatedTimestamp = () => {
-  const d = new Date();
+const formatedTimestamp = (isoDate) => {
+  const d = isoDate ? new Date(isoDate) : new Date();
   const date = d.toISOString().split("T")[0];
   const time = d.toTimeString().split(" ")[0];
   return `${date} ${time}`;
@@ -12,9 +12,7 @@ export default function formatVideoBodyRequest(
 ) {
   return {
     title: videoInfo.title,
-    upload_date:
-      new Date(videoInfo.uploadDate).toISOString().substring(0, 10) ??
-      formatedTimestamp(),
+    upload_date: formatedTimestamp(videoInfo.uploadDate),
     description: videoInfo.description,
     slug: videoInfo.slug ?? "",
     status: videoInfo.status ?? "online",
