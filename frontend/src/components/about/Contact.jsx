@@ -55,6 +55,7 @@ export default function Contact() {
           placeholder="Name"
           id="name"
           name="name"
+          autoComplete="true"
           required
         />
       </label>
@@ -66,6 +67,7 @@ export default function Contact() {
           placeholder="Email"
           id="email"
           name="user_email"
+          autoComplete="true"
           required
         />
       </label>
