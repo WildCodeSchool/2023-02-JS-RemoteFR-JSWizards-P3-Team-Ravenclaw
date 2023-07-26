@@ -94,7 +94,7 @@ export default function DashNavbar() {
           </svg>
           <button
             type="button"
-            className="text-lg text-primaryLightest group-hover:text-neutralLightest"
+            className="flex w-full text-lg text-primaryLightest group-hover:text-neutralLightest"
             onClick={handleClick}
           >
             Log Out
