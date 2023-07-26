@@ -7,7 +7,6 @@ import useAxios from "../hooks/useAxios";
 
 // Helpers
 import { filterVideos } from "../helpers/filterTable";
-import removeDuplicates from "../helpers/groupVideoCategory";
 
 // Components
 import Dropdown from "../components/utilities/Dropdown";
@@ -18,9 +17,6 @@ import SliderVideo from "../components/utilities/SliderVideo";
 import Footer from "../components/utilities/Footer";
 import Loader from "../components/utilities/Loader";
 import useAuth from "../hooks/useAuth";
-
-// Services
-import { getVideos, getFavoriteVideos } from "../services/videos";
 
 // Styles
 import styles from "../css/Slider.module.css";
@@ -38,23 +34,26 @@ export default function Videos() {
   const [filterGame, setFilterGame] = useState({});
   const [filterCategory, setFilterCategory] = useState([]);
 
-  const [freemiumVideos, setFreemiumVideos] = useState([]);
-  const [premiumVideos, setPremiumVideos] = useState([]);
-  const [favoriteVideos, setFavoriteVideos] = useState([]);
-
-  const [areVideosLoading, setAreVideosLoading] = useState(false);
-  const [areFavVideosLoading, setAreFavVideosLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const [isCatDropOpened, setIsCatDropOpened] = useState(false);
   const [isGameDropOpened, setIsGameDropOpened] = useState(false);
 
-  // fetch data from database to populate dropdown items
-  const { data: categories } = useAxios("/categories");
-  const { data: games } = useAxios("/games");
-
   // retrieve query parameters from URL
   const [searchParams] = useSearchParams();
+
+  // fetch video data from database
+  const { data: freemiumVideos, isLoading: areFreemiumVideosLoading } =
+    useAxios("/videos/freemium");
+  const { data: premiumVideos, isLoading: arePremiumVideosLoading } =
+    useAxios("/videos/premium");
+  const { data: favoriteVideos, isLoading: areFavVideosLoading } = useAxios(
+    `/user-video/${userId}`
+  );
+
+  // fetch data from database to populate dropdown items
+  const { data: games } = useAxios("/games");
+  const { data: categories } = useAxios("/categories");
 
   const isAuthenticated = userId !== undefined;
 
@@ -64,7 +63,7 @@ export default function Videos() {
 
   const handleCategoryChange = (e) => {
     const { value: name } = e.target;
-    const id = e.target.getAttribute("data-key");
+    const id = Number(e.target.getAttribute("data-key"));
 
     const clonedFilterByCategory = [...filterCategory];
     const index = clonedFilterByCategory.findIndex((el) => el.id === id);
@@ -77,45 +76,10 @@ export default function Videos() {
   };
 
   const handleGameChange = (e) => {
-    const id = e.target.getAttribute("data-key");
+    const id = Number(e.target.getAttribute("data-key"));
     const { id: name } = e.target;
     setFilterGame({ id, name });
   };
-
-  useEffect(() => {
-    setIsLoading(true);
-    setAreVideosLoading(true);
-
-    getVideos()
-      .then((res) => {
-        setFreemiumVideos(
-          removeDuplicates(res.data).filter(
-            (video) => video.visibility === 0 || video.visibility === 1
-          )
-        );
-        setPremiumVideos(
-          removeDuplicates(res.data).filter((video) => video.visibility === 2)
-        );
-        setAreVideosLoading(false);
-      })
-      .catch((err) => console.error(err));
-
-    if (userId) {
-      setAreFavVideosLoading(true);
-      getFavoriteVideos(userId)
-        .then((res) => {
-          setFavoriteVideos(removeDuplicates(res.data));
-          setAreFavVideosLoading(false);
-        })
-        .catch((err) => console.error(err));
-    } else {
-      setAreFavVideosLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (!areVideosLoading && !areFavVideosLoading) setIsLoading(false);
-  }, [areVideosLoading, areFavVideosLoading]);
 
   useEffect(() => {
     const gameName = searchParams.get("game");
@@ -124,6 +88,15 @@ export default function Videos() {
       setFilterGame({ id: requestedGame.id, name: requestedGame.name });
     }
   }, [games]);
+
+  useEffect(() => {
+    if (
+      !areFavVideosLoading &&
+      !arePremiumVideosLoading &&
+      !areFreemiumVideosLoading
+    )
+      setIsLoading(false);
+  }, [areFavVideosLoading, arePremiumVideosLoading, areFreemiumVideosLoading]);
 
   return (
     <>
