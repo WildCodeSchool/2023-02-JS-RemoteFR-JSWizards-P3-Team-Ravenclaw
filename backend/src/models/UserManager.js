@@ -57,7 +57,7 @@ class UserManager extends AbstractManager {
 
   findPlansName(id) {
     return this.database.query(
-      `SELECT p.name AS plan FROM ${this.table} AS u INNER JOIN plan AS p ON u.plan_id = p.id WHERE id = ?`,
+      `SELECT p.name AS plan FROM ${this.table} AS u INNER JOIN plan AS p ON u.plan_id = p.id WHERE u.id = ?`,
       [id]
     );
   }
