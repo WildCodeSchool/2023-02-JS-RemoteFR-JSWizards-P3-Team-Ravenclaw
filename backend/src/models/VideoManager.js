@@ -9,6 +9,18 @@ class VideoManager extends AbstractManager {
     return this.database.query(sql, [sqlDependencies]);
   }
 
+  findAllFreemium() {
+    const SQL =
+      "SELECT v.*, l.name AS language_name, g.name AS game_name, c.name AS category_name, c.id AS category_id FROM video AS v INNER JOIN language as l ON v.language_id = l.id INNER JOIN game as g ON v.game_id = g.id INNER JOIN video_category as vc ON vc.video_id = v.id INNER JOIN category as c ON vc.category_id = c.id WHERE v.visibility = 0 OR v.visibility = 1";
+    return this.database.query(SQL);
+  }
+
+  findAllPremium() {
+    const SQL =
+      "SELECT v.*, l.name AS language_name, g.name AS game_name, c.name AS category_name, c.id AS category_id FROM video AS v INNER JOIN language as l ON v.language_id = l.id INNER JOIN game as g ON v.game_id = g.id INNER JOIN video_category as vc ON vc.video_id = v.id INNER JOIN category as c ON vc.category_id = c.id WHERE v.visibility = 2";
+    return this.database.query(SQL);
+  }
+
   findAllWithRelatedContent(sql, sqlDependencies) {
     return this.database.query(sql, [sqlDependencies]);
   }

@@ -13,6 +13,7 @@ export default function DropdownList({
   selection,
   onSelectionChange,
   handleChange,
+  // onReset,
 }) {
   const handleOnValueChange = (e, id) => {
     // store current choice into parent dropdown state (allow dropwdown to be opened/closed without loosing selection)
@@ -74,4 +75,5 @@ DropdownList.propTypes = {
   ).isRequired,
   onSelectionChange: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
+  // onReset: PropTypes.func.isRequired,
 };

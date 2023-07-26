@@ -12,10 +12,10 @@ import TableGames from "./game/TableGames";
 
 export default function ManageContent({ filterText, setFilterText }) {
   const [activeTab, setActiveTab] = useState("video");
-  const [flagGames, setFlagGames] = useState(false);
-  const [flagCategories, setFlagCategories] = useState(false);
-  const [flagLanguages, setFlagLanguages] = useState(false);
-  const [flagVideos, setFlagVideos] = useState(false);
+  const [refetchGames, setRefetchGames] = useState(false);
+  const [refetchVideos, setRefetchVideos] = useState(false);
+  const [refetchLanguages, setRefetchLanguages] = useState(false);
+  const [refetchCategories, setRefetchCategories] = useState(false);
 
   const setActiveTabItem = (tab) => setActiveTab(tab);
 
@@ -30,41 +30,41 @@ export default function ManageContent({ filterText, setFilterText }) {
           activeTab={activeTab}
           filterText={filterText}
           setFilterText={setFilterText}
-          setFlagCategories={setFlagCategories}
-          setFlagLanguages={setFlagLanguages}
-          setFlagGames={setFlagGames}
-          setFlagVideos={setFlagVideos}
+          setRefetchGames={setRefetchGames}
+          setRefetchVideos={setRefetchVideos}
+          setRefetchLanguages={setRefetchLanguages}
+          setRefetchCategories={setRefetchCategories}
         />
 
         {activeTab === "video" && (
           <TableVideos
             filterText={filterText}
-            flagVideos={flagVideos}
-            setFlagVideos={setFlagVideos}
+            refetchFlag={refetchVideos}
+            setRefetchFlag={setRefetchVideos}
           />
         )}
 
         {activeTab === "category" && (
           <TableCategories
             filterText={filterText}
-            flagCategories={flagCategories}
-            setFlagCategories={setFlagCategories}
+            refetchFlag={refetchCategories}
+            setRefetchFlag={setRefetchCategories}
           />
         )}
 
         {activeTab === "language" && (
           <TableLanguages
             filterText={filterText}
-            flagLanguages={flagLanguages}
-            setFlagLanguages={setFlagLanguages}
+            refetchFlag={refetchLanguages}
+            setRefetchFlag={setRefetchLanguages}
           />
         )}
 
         {activeTab === "game" && (
           <TableGames
             filterText={filterText}
-            flagGames={flagGames}
-            setFlagGames={setFlagGames}
+            refetchFlag={refetchGames}
+            setRefetchFlag={setRefetchGames}
           />
         )}
       </div>

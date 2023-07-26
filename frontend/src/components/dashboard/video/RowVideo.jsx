@@ -11,13 +11,20 @@ import Button from "../../utilities/Button";
 import useAxios from "../../../hooks/useAxios";
 
 // Services
-import { deleteVideo } from "../../../services/videos";
+import {
+  deleteVideo,
+  deleteVideoThumbnail,
+  deleteVideoFile,
+} from "../../../services/videos";
 
 // Helpers
 import capitalizeText from "../../../helpers/capitalize";
 import checkRowStatus from "../../../helpers/checkRowStatus";
 
-export default function RowVideo({ video, setFlagVideos }) {
+// Settings
+import TOAST_DEFAULT_CONFIG from "../../../settings/toastify.json";
+
+export default function RowVideo({ video, refetchData }) {
   const [isToggled, setIsToggled] = useState(false);
 
   // fetch data from database to populate dropdown items
@@ -25,32 +32,28 @@ export default function RowVideo({ video, setFlagVideos }) {
   const { data: categories } = useAxios("/categories");
   const { data: languages } = useAxios("/languages");
 
-  const TOAST_DEFAULT_CONFIG = {
-    position: "bottom-right",
-    autoClose: 3000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: false,
-    progress: undefined,
-    theme: "dark",
-  };
-
-  const handleDeleteVideo = (id) => {
-    deleteVideo(id)
-      .then((res) => {
-        if (res?.status === 204)
-          toast.success("Video successfully deleted!", TOAST_DEFAULT_CONFIG);
-        setFlagVideos((prev) => !prev);
-      })
-      .catch((err) => {
-        console.error(err);
-        if (err.response.status === 404) {
-          toast.error(`${err.response.data}`, TOAST_DEFAULT_CONFIG);
-        } else {
-          toast.error(`${err.response.statusText}!`, TOAST_DEFAULT_CONFIG);
-        }
+  const handleDeleteVideo = async (id) => {
+    try {
+      // first delete video files from public folder...
+      await deleteVideoThumbnail({
+        data: { thumbnail: video.thumbnail },
       });
+      await deleteVideoFile({
+        data: { url_video: video.url_video },
+      });
+      // ... then delete entry from database
+      const res = await deleteVideo(id);
+      if (res?.status === 204)
+        toast.success("Video successfully deleted!", TOAST_DEFAULT_CONFIG);
+      refetchData((prev) => !prev);
+    } catch (err) {
+      console.error(err);
+      if (err.response.status === 404) {
+        toast.error(`${err.response.data}`, TOAST_DEFAULT_CONFIG);
+      } else {
+        toast.error(`${err.response.statusText}!`, TOAST_DEFAULT_CONFIG);
+      }
+    }
   };
 
   return (
@@ -59,12 +62,12 @@ export default function RowVideo({ video, setFlagVideos }) {
         <td className="px-4 py-3 text-sm">{video.id}</td>
         <td className="px-4 py-3 text-sm">{capitalizeText(video.title)}</td>
         <td className="px-4 py-3 text-sm">
-          {Array.isArray(video.category)
-            ? video.category?.join(" | ").toUpperCase() || "-"
-            : video.category?.toUpperCase() || "-"}
+          {Array.isArray(video.category_name)
+            ? video.category_name.join(" | ").toUpperCase() || "-"
+            : video.category_name.toUpperCase() || "-"}
         </td>
         <td className="px-4 py-3 text-sm">
-          {capitalizeText(video.language) || "-"}
+          {capitalizeText(video.language_name) || "-"}
         </td>
         <td className="px-4 py-3 text-sm">
           <span className={checkRowStatus(video.status)}>
@@ -116,12 +119,12 @@ export default function RowVideo({ video, setFlagVideos }) {
       </tr>
       {isToggled && (
         <VideoDropdown
-          videoId={video.id}
+          video={video}
           games={games}
           categories={categories}
           languages={languages}
           toggleRow={setIsToggled}
-          setFlagVideos={setFlagVideos}
+          refetchData={refetchData}
         />
       )}
     </>
@@ -131,14 +134,28 @@ export default function RowVideo({ video, setFlagVideos }) {
 RowVideo.propTypes = {
   video: PropTypes.shape({
     id: PropTypes.number,
-    title: PropTypes.string,
-    category: PropTypes.oneOfType([
+    category_id: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.arrayOf(PropTypes.number),
+    ]),
+    category_name: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.arrayOf(PropTypes.string),
     ]),
-    language: PropTypes.string,
-    visibility: PropTypes.number,
+    description: PropTypes.string,
+    game_id: PropTypes.number,
+    game_name: PropTypes.string,
+    is_promoted: PropTypes.number,
+    language_id: PropTypes.number,
+    language_name: PropTypes.string,
+    seo: PropTypes.string,
     status: PropTypes.string,
+    slug: PropTypes.string,
+    thumbnail: PropTypes.string,
+    title: PropTypes.string,
+    upload_date: PropTypes.string,
+    url_video: PropTypes.string,
+    visibility: PropTypes.number,
   }).isRequired,
-  setFlagVideos: PropTypes.func.isRequired,
+  refetchData: PropTypes.func.isRequired,
 };

@@ -14,29 +14,29 @@ export default function RowSearch({
   activeTab,
   filterText,
   setFilterText,
-  setFlagCategories,
-  setFlagLanguages,
-  setFlagGames,
-  setFlagVideos,
+  setRefetchGames,
+  setRefetchVideos,
+  setRefetchLanguages,
+  setRefetchCategories,
   exportData,
 }) {
   const [isModalOpened, setIsModalOpened] = useState(false);
 
   const addButton = () => {
     if (activeTab === "video") {
-      return "Add video";
+      return "New Video";
     }
     if (activeTab === "category") {
-      return "Add category";
+      return "New Category";
     }
     if (activeTab === "language") {
-      return "Add language";
+      return "New Language";
     }
     if (activeTab === "game") {
-      return "Add game";
+      return "New Game";
     }
     if (activeTab === "page") {
-      return "Add component";
+      return "New Component";
     }
     if (activeTab === "userList") {
       return "Export user list";
@@ -50,7 +50,7 @@ export default function RowSearch({
         <ModalVideo
           open={isModalOpened}
           setIsModalOpened={setIsModalOpened}
-          setFlag={setFlagVideos}
+          refetchData={setRefetchVideos}
         />
       );
     }
@@ -59,7 +59,7 @@ export default function RowSearch({
         <ModalCategory
           open={isModalOpened}
           setIsModalOpened={setIsModalOpened}
-          setFlag={setFlagCategories}
+          refetchData={setRefetchCategories}
         />
       );
     }
@@ -67,8 +67,8 @@ export default function RowSearch({
       return (
         <ModalLanguage
           open={isModalOpened}
+          refetchData={setRefetchLanguages}
           setIsModalOpened={setIsModalOpened}
-          setFlag={setFlagLanguages}
         />
       );
     }
@@ -77,7 +77,7 @@ export default function RowSearch({
         <ModalGame
           open={isModalOpened}
           setIsModalOpened={setIsModalOpened}
-          setFlag={setFlagGames}
+          refetchData={setRefetchGames}
         />
       );
     }
@@ -155,19 +155,19 @@ RowSearch.propTypes = {
   activeTab: PropTypes.string.isRequired,
   filterText: PropTypes.string,
   setFilterText: PropTypes.func,
-  setFlagCategories: PropTypes.func,
-  setFlagLanguages: PropTypes.func,
-  setFlagGames: PropTypes.func,
-  setFlagVideos: PropTypes.func,
+  setRefetchLanguages: PropTypes.func,
+  setRefetchCategories: PropTypes.func,
+  setRefetchGames: PropTypes.func,
+  setRefetchVideos: PropTypes.func,
   exportData: PropTypes.func,
 };
 
 RowSearch.defaultProps = {
   filterText: null,
   setFilterText: null,
-  setFlagCategories: null,
-  setFlagLanguages: null,
-  setFlagGames: null,
-  setFlagVideos: null,
+  setRefetchGames: null,
+  setRefetchVideos: null,
+  setRefetchLanguages: null,
+  setRefetchCategories: null,
   exportData: null,
 };

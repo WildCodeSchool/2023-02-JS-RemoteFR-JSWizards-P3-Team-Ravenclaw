@@ -15,6 +15,7 @@ const getAllWithFilters = async (req, res) => {
       sql,
       sqlDependencies
     );
+
     if (!videos.length)
       return res
         .status(404)
@@ -40,6 +41,34 @@ const getById = async (req, res) => {
     res
       .status(500)
       .send("oops...an error occured when retrieving video from database");
+  }
+};
+
+const getAllFreemium = async (req, res) => {
+  try {
+    const [videos] = await models.video.findAllFreemium();
+    if (!videos.length)
+      return res.status(404).send("No existing freemium videos");
+    return res.json(videos);
+  } catch (err) {
+    console.error(err);
+    return res
+      .status(500)
+      .send("oops...an error occured when retrieving freemium from database");
+  }
+};
+
+const getAllPremium = async (req, res) => {
+  try {
+    const [videos] = await models.video.findAllPremium();
+    if (!videos.length)
+      return res.status(404).send("No existing premium videos");
+    return res.json(videos);
+  } catch (err) {
+    console.error(err);
+    return res
+      .status(500)
+      .send("oops...an error occured when retrieving premium from database");
   }
 };
 
@@ -85,4 +114,12 @@ const remove = async (req, res) => {
   }
 };
 
-module.exports = { getAllWithFilters, getById, editById, post, remove };
+module.exports = {
+  getAllWithFilters,
+  getById,
+  getAllFreemium,
+  getAllPremium,
+  editById,
+  post,
+  remove,
+};

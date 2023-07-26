@@ -1,6 +1,6 @@
 // Packages
 import PropTypes from "prop-types";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { toast } from "react-toastify";
 
 // Components
@@ -8,40 +8,58 @@ import Button from "../../utilities/Button";
 import Input from "../../utilities/Input";
 
 // Services
-import { modifyGameById } from "../../../services/games";
+import {
+  addGameThumbnail,
+  modifyGameById,
+  deleteGameThumbnail,
+} from "../../../services/games";
+
+// Settings
+import TOAST_DEFAULT_CONFIG from "../../../settings/toastify.json";
 
 // Style
 import styles from "../../../css/Table.module.css";
 
-export default function GameDropdown({ id, toggleDropdown, setFlagGames }) {
+export default function GameDropdown({ game, toggleDropdown, refetchData }) {
   const inputRef = useRef();
+  const fileRef = useRef();
 
-  const TOAST_DEFAULT_CONFIG = {
-    position: "bottom-right",
-    autoClose: 3000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: false,
-    progress: undefined,
-    theme: "dark",
-  };
-
-  const handleSubmit = (e) => {
-    const name = inputRef.current.value.trim().toLowerCase();
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    toggleDropdown();
-    modifyGameById({ name }, id)
-      .then((res) => {
-        if (res?.status === 204)
-          toast.success("Game successfully updated!", TOAST_DEFAULT_CONFIG);
-        setFlagGames((prev) => !prev);
-      })
-      .catch((err) => {
-        console.error(err);
-        toast.error(`${err.response.statusText}!`, TOAST_DEFAULT_CONFIG);
-      });
+    const name = inputRef.current.value.trim().toLowerCase();
+    let thumbnail;
+    try {
+      // a new thumnbail image has been picked
+      if (fileRef.current.value) {
+        // first delete old file (only if in backend/uploads folder)...
+        await deleteGameThumbnail({
+          data: { thumbnail: game.thumbnail },
+        });
+        // ...then upload new thumbnail file to backend public folder
+        const formData = new FormData();
+        formData.append("game_thumbnail", fileRef.current.files[0]);
+        const res = await addGameThumbnail(formData);
+        thumbnail = res.data.url_file;
+      }
+      const res = await modifyGameById(
+        { name, thumbnail: thumbnail || game.thumbnail },
+        game.id
+      );
+      if (res?.status === 204) {
+        toast.success("Game successfully updated!", TOAST_DEFAULT_CONFIG);
+        refetchData((prev) => !prev);
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error(`${err.response.statusText}!`, TOAST_DEFAULT_CONFIG);
+    } finally {
+      toggleDropdown();
+    }
   };
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
 
   return (
     <tr className="border-b dark:border-neutral">
@@ -53,19 +71,21 @@ export default function GameDropdown({ id, toggleDropdown, setFlagGames }) {
           <div className="flex gap-4">
             <Input
               htmlFor="title"
-              title="Game Name"
+              title="Game"
               type="text"
               className={`${styles.input__style} h-full`}
-              placeholder="Type game name"
+              placeholder="Enter a game name.."
               required
               ref={inputRef}
+              value={game.name}
             />
             <Input
-              title="Game Thumbnail"
+              title="Thumbnail"
               type="file"
               accept=".jpg, .jpeg, .png, .webp"
               className="file:hover:primaryLightest file:cursor-pointer file:rounded-md file:border-none file:bg-primary file:p-3 file:text-neutralLightest"
-              required
+              required={false}
+              ref={fileRef}
             />
           </div>
           <span className="flex items-end">
@@ -83,7 +103,11 @@ export default function GameDropdown({ id, toggleDropdown, setFlagGames }) {
 }
 
 GameDropdown.propTypes = {
-  id: PropTypes.number.isRequired,
+  game: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    thumbnail: PropTypes.string,
+  }).isRequired,
   toggleDropdown: PropTypes.func.isRequired,
-  setFlagGames: PropTypes.func.isRequired,
+  refetchData: PropTypes.func.isRequired,
 };

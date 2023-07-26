@@ -17,3 +17,6 @@ export const addGameThumbnail = (form) => {
 export const addGame = (body) => axios.post(`${BASE_URL}/games`, body);
 
 export const deleteGame = (id) => axios.delete(`${BASE_URL}/games/${id}`);
+
+export const deleteGameThumbnail = (data) =>
+  axios.delete(`${BASE_URL}/upload/thumbnails/games`, data);

@@ -35,7 +35,10 @@ export default function DashNavbar() {
         <ul className="pt-6">
           {menus.map((menu) => {
             // Check if the user is an admin to show specific menu items
-            if (isAdmin && ["", "edit", "userList"].includes(menu.path)) {
+            if (
+              isAdmin &&
+              ["Dashboard", "Manage Content", "Users"].includes(menu.title)
+            ) {
               return (
                 <li key={menu.id} className={`${styles.dashList}`}>
                   <NavLink

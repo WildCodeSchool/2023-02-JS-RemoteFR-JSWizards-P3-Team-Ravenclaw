@@ -1,93 +1,80 @@
 // Packages
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Pagination, ConfigProvider } from "antd";
 
 // Components
 import RowHead from "../RowHead";
 import RowCategory from "./RowCategory";
 
+// Custom hooks
+import useAxios from "../../../hooks/useAxios";
+
 // Helpers
 import { filterByText } from "../../../helpers/filterTable";
 
-// Services
-import { getCategories } from "../../../services/categories";
+// Settings
+import paginationSettings from "../../../settings/pagination.json";
 
 export default function TableCategories({
   filterText,
-  flagCategories,
-  setFlagCategories,
+  refetchFlag,
+  setRefetchFlag,
 }) {
-  const [categories, setCategories] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
-  const [objectNumber, setObjectNumber] = useState(null);
+
+  // retrieve data from database
+  const { data: categories, isLoading } = useAxios("/categories", refetchFlag);
 
   // table pagination
   const offset = pageSize * currentPage - pageSize;
   const nextPage = offset + pageSize;
 
-  useEffect(() => {
-    const controller = new AbortController();
-    getCategories(controller)
-      .then((res) => {
-        setCategories(res.data);
-        setObjectNumber(res.data.length);
-      })
-      .catch((err) => console.error(err));
-  }, [flagCategories]);
-
   return (
+    // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
-      {categories.length && (
-        <table className="w-full overflow-x-auto text-left text-base text-neutralLightest">
-          <RowHead activeTab="category" />
-          <tbody>
-            {filterByText(categories, "name", filterText)
-              .slice(offset, nextPage)
-              .map((category) => (
-                <RowCategory
-                  key={category.id}
-                  category={category}
-                  setFlagCategories={setFlagCategories}
-                />
-              ))}
-          </tbody>
-        </table>
-      )}
+      {isLoading ? (
+        <p>Loading data...</p>
+      ) : (
+        <>
+          <table className="w-full overflow-x-auto text-left text-base text-neutralLightest">
+            <RowHead activeTab="category" />
+            <tbody>
+              {filterByText(categories, "name", filterText)
+                .slice(offset, nextPage)
+                .map((category) => (
+                  <RowCategory
+                    key={category.id}
+                    category={category}
+                    refetchData={setRefetchFlag}
+                  />
+                ))}
+            </tbody>
+          </table>
 
-      <ConfigProvider
-        theme={{
-          token: {
-            colorPrimary: "#9596FB",
-            colorText: "#9596FB",
-            colorBgContainer: "#1f2937",
-            colorBgTextHover: "#374151",
-            colorTextPlaceholder: "#9596FB",
-            colorBorder: "#9596FB",
-            controlOutlineWidth: "0",
-          },
-        }}
-      >
-        <Pagination
-          pageSizeOptions={[5, 10, 20, 50, 100]}
-          className="py-2 text-center"
-          pageSize={pageSize}
-          current={currentPage}
-          total={objectNumber}
-          onChange={(pageClicked, onPageSize) => {
-            setCurrentPage(pageClicked);
-            setPageSize(onPageSize);
-          }}
-          showSizeChanger
-        />
-      </ConfigProvider>
+          <ConfigProvider theme={paginationSettings}>
+            <Pagination
+              pageSizeOptions={[5, 10, 20, 50, 100]}
+              className="py-2 text-center"
+              pageSize={pageSize}
+              current={currentPage}
+              total={categories.length}
+              onChange={(pageClicked, onPageSize) => {
+                setCurrentPage(pageClicked);
+                setPageSize(onPageSize);
+              }}
+              showSizeChanger
+            />
+          </ConfigProvider>
+        </>
+      )}
     </>
   );
 }
 
 TableCategories.propTypes = {
   filterText: PropTypes.string.isRequired,
-  flagCategories: PropTypes.bool.isRequired,
-  setFlagCategories: PropTypes.func.isRequired,
+  refetchFlag: PropTypes.bool.isRequired,
+  setRefetchFlag: PropTypes.func.isRequired,
 };

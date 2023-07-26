@@ -40,3 +40,9 @@ export const addVideoCategory = (body) =>
 
 export const deleteVideoCategory = (id) =>
   axios.delete(`${BASE_URL}/video-category/${id}`);
+
+export const deleteVideoThumbnail = (data) =>
+  axios.delete(`${BASE_URL}/upload/thumbnails/videos`, data);
+
+export const deleteVideoFile = (data) =>
+  axios.delete(`${BASE_URL}/upload/videos`, data);

@@ -17,7 +17,7 @@ Button.propTypes = {
   ]),
   type: PropTypes.string,
   customCSS: PropTypes.string,
-  onClick: PropTypes.func,
+  onClick: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
 };
 
 Button.defaultProps = {
