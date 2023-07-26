@@ -2,6 +2,7 @@
  * Removes duplicates videos by regrouping unique video with multiple categories
  */
 export default function removeDuplicates(videos) {
+  if (!Array.isArray(videos)) return videos;
   return videos.reduce((acc, video) => {
     const index = acc.findIndex((current) => current.id === video.id);
     if (index !== -1) {
