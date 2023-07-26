@@ -9,6 +9,8 @@ const router = express.Router();
  * TODO: add authentication wall...
  */
 router.get("/", videoController.getAllWithFilters);
+router.get("/premium", videoController.getAllPremium);
+router.get("/freemium", videoController.getAllFreemium);
 router.get("/:id", videoController.getById);
 
 router.put("/:id", validateVideoInfo, videoController.editById);

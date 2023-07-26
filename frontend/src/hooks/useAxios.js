@@ -25,8 +25,10 @@ export default function useAxios(endpoint, refetchFlag = null) {
         else setData(res.data);
       } catch (err) {
         if (!axios.isCancel(err)) {
-          console.error("Error fetching data from API:", err);
-          setError(err);
+          if (err.response.status !== 404) {
+            console.error("Error fetching data from API:", err);
+            setError(err);
+          }
         }
       } finally {
         setIsLoading(false);
