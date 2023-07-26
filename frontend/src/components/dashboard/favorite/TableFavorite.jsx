@@ -15,6 +15,9 @@ import { filterByText } from "../../../helpers/filterTable";
 import useAxios from "../../../hooks/useAxios";
 import useUserContext from "../../../hooks/useUserContext";
 
+// Settings
+import paginationSettings from "../../../settings/pagination.json";
+
 export default function TableFavorite({
   filterText,
   setFilterText,
@@ -57,19 +60,7 @@ export default function TableFavorite({
               ))}
           </tbody>
         </table>
-        <ConfigProvider
-          theme={{
-            token: {
-              colorPrimary: "#9596FB",
-              colorText: "#9596FB",
-              colorBgContainer: "#1f2937",
-              colorBgTextHover: "#374151",
-              colorTextPlaceholder: "#9596FB",
-              colorBorder: "#9596FB",
-              controlOutlineWidth: "0",
-            },
-          }}
-        >
+        <ConfigProvider theme={paginationSettings}>
           <Pagination
             pageSizeOptions={[5, 10, 20, 50, 100]}
             className="py-2 text-center"
