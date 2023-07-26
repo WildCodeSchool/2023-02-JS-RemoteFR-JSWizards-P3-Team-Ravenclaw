@@ -1,93 +1,80 @@
 // Packages
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Pagination, ConfigProvider } from "antd";
 
 // Components
 import RowHead from "../RowHead";
 import RowLanguage from "./RowLanguage";
 
+// Custom hooks
+import useAxios from "../../../hooks/useAxios";
+
 // Helpers
 import { filterByText } from "../../../helpers/filterTable";
 
-// Services
-import { getLanguages } from "../../../services/languages";
+// Settings
+import paginationSettings from "../../../settings/pagination.json";
 
 export default function TableLanguages({
   filterText,
-  flagLanguages,
-  setFlagLanguages,
+  refetchFlag,
+  setRefetchFlag,
 }) {
-  const [languages, setLanguages] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
-  const [objectNumber, setObjectNumber] = useState(null);
+
+  // retrieve data from database
+  const { data: languages, isLoading } = useAxios("/languages", refetchFlag);
 
   // table pagination
   const offset = pageSize * currentPage - pageSize;
   const nextPage = offset + pageSize;
 
-  useEffect(() => {
-    const controller = new AbortController();
-    getLanguages(controller)
-      .then((res) => {
-        setLanguages(res.data);
-        setObjectNumber(res.data.length);
-      })
-      .catch((err) => console.error(err));
-  }, [flagLanguages]);
-
   return (
+    // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
-      {languages.length && (
-        <table className="w-full overflow-x-auto text-left text-base text-neutralLightest">
-          <RowHead activeTab="language" />
-          <tbody>
-            {filterByText(languages, "name", filterText)
-              .slice(offset, nextPage)
-              .map((language) => (
-                <RowLanguage
-                  key={language.id}
-                  language={language}
-                  setFlagLanguages={setFlagLanguages}
-                />
-              ))}
-          </tbody>
-        </table>
-      )}
+      {isLoading ? (
+        <p>Loading data...</p>
+      ) : (
+        <>
+          <table className="w-full overflow-x-auto text-left text-base text-neutralLightest">
+            <RowHead activeTab="language" />
+            <tbody>
+              {filterByText(languages, "name", filterText)
+                .slice(offset, nextPage)
+                .map((language) => (
+                  <RowLanguage
+                    key={language.id}
+                    language={language}
+                    refetchData={setRefetchFlag}
+                  />
+                ))}
+            </tbody>
+          </table>
 
-      <ConfigProvider
-        theme={{
-          token: {
-            colorPrimary: "#9596FB",
-            colorText: "#9596FB",
-            colorBgContainer: "#1f2937",
-            colorBgTextHover: "#374151",
-            colorTextPlaceholder: "#9596FB",
-            colorBorder: "#9596FB",
-            controlOutlineWidth: "0",
-          },
-        }}
-      >
-        <Pagination
-          pageSizeOptions={[5, 10, 20, 50, 100]}
-          className="py-2 text-center"
-          pageSize={pageSize}
-          current={currentPage}
-          total={objectNumber}
-          onChange={(pageClicked, onPageSize) => {
-            setCurrentPage(pageClicked);
-            setPageSize(onPageSize);
-          }}
-          showSizeChanger
-        />
-      </ConfigProvider>
+          <ConfigProvider theme={paginationSettings}>
+            <Pagination
+              pageSizeOptions={[5, 10, 20, 50, 100]}
+              className="py-2 text-center"
+              pageSize={pageSize}
+              current={currentPage}
+              total={languages.length}
+              onChange={(pageClicked, onPageSize) => {
+                setCurrentPage(pageClicked);
+                setPageSize(onPageSize);
+              }}
+              showSizeChanger
+            />
+          </ConfigProvider>
+        </>
+      )}
     </>
   );
 }
 
 TableLanguages.propTypes = {
   filterText: PropTypes.string.isRequired,
-  flagLanguages: PropTypes.bool.isRequired,
-  setFlagLanguages: PropTypes.func.isRequired,
+  refetchFlag: PropTypes.bool.isRequired,
+  setRefetchFlag: PropTypes.func.isRequired,
 };

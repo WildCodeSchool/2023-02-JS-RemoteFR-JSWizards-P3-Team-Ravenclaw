@@ -1,6 +1,6 @@
 // Packages
 import PropTypes from "prop-types";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { toast } from "react-toastify";
 
 // Components
@@ -10,42 +10,39 @@ import Input from "../../utilities/Input";
 // Services
 import { modifyLanguageById } from "../../../services/languages";
 
+// Settings
+import TOAST_DEFAULT_CONFIG from "../../../settings/toastify.json";
+
 // Style
 import styles from "../../../css/Table.module.css";
 
 export default function LanguageDropdown({
-  id,
+  language,
   toggleDropdown,
-  setFlagLanguages,
+  refetchData,
 }) {
   const inputRef = useRef();
 
-  const TOAST_DEFAULT_CONFIG = {
-    position: "bottom-right",
-    autoClose: 3000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: false,
-    progress: undefined,
-    theme: "dark",
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const name = inputRef.current.value.trim().toLowerCase();
+    try {
+      const res = await modifyLanguageById({ name }, language.id);
+      if (res?.status === 204) {
+        toast.success("Language successfully updated!", TOAST_DEFAULT_CONFIG);
+        refetchData((prev) => !prev);
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error(`${err.response.statusText}!`, TOAST_DEFAULT_CONFIG);
+    } finally {
+      toggleDropdown();
+    }
   };
 
-  const handleSubmit = (e) => {
-    const name = inputRef.current.value.trim().toLowerCase();
-    e.preventDefault();
-    toggleDropdown();
-    modifyLanguageById({ name }, id)
-      .then((res) => {
-        if (res?.status === 204)
-          toast.success("Language successfully updated!", TOAST_DEFAULT_CONFIG);
-        setFlagLanguages((prev) => !prev);
-      })
-      .catch((err) => {
-        console.error(err);
-        toast.error(`${err.response.statusText}!`, TOAST_DEFAULT_CONFIG);
-      });
-  };
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
 
   return (
     <tr className="border-b dark:border-neutral">
@@ -53,12 +50,13 @@ export default function LanguageDropdown({
         <form className="flex gap-4" onSubmit={handleSubmit}>
           <Input
             htmlFor="title"
-            title="Language Name"
+            title="Language"
             type="text"
             className={`${styles.input__style} h-full`}
-            placeholder="Type language name"
+            placeholder="Enter a language name.."
             required
             ref={inputRef}
+            value={language.name}
           />
           <span className="flex w-full items-end justify-end">
             <Button
@@ -75,7 +73,10 @@ export default function LanguageDropdown({
 }
 
 LanguageDropdown.propTypes = {
-  id: PropTypes.number.isRequired,
+  language: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+  }).isRequired,
   toggleDropdown: PropTypes.func.isRequired,
-  setFlagLanguages: PropTypes.func.isRequired,
+  refetchData: PropTypes.func.isRequired,
 };

@@ -11,12 +11,12 @@ export default function RowStatic({ video }) {
       <td className="px-4 py-3 text-sm">{video.id}</td>
       <td className="px-4 py-3 text-sm">{capitalizeText(video.title)}</td>
       <td className="px-4 py-3 text-sm">
-        {Array.isArray(video.category)
-          ? video.category?.join(" | ").toUpperCase() || "-"
-          : video.category?.toUpperCase() || "-"}
+        {Array.isArray(video.category_name)
+          ? video.category_name.join(" | ").toUpperCase() || "-"
+          : video.category_name.toUpperCase() || "-"}
       </td>
       <td className="px-4 py-3 text-sm">
-        {capitalizeText(video.language) || "-"}
+        {capitalizeText(video.language_name) || "-"}
       </td>
       <td className="px-4 py-3 text-sm">
         <span className={checkRowStatus(video.status)}>
@@ -33,13 +33,27 @@ export default function RowStatic({ video }) {
 RowStatic.propTypes = {
   video: PropTypes.shape({
     id: PropTypes.number,
-    title: PropTypes.string,
-    category: PropTypes.oneOfType([
+    category_id: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.arrayOf(PropTypes.number),
+    ]),
+    category_name: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.arrayOf(PropTypes.string),
     ]),
-    language: PropTypes.string,
-    visibility: PropTypes.number,
+    description: PropTypes.string,
+    game_id: PropTypes.number,
+    game_name: PropTypes.string,
+    is_promoted: PropTypes.number,
+    language_id: PropTypes.number,
+    language_name: PropTypes.string,
+    seo: PropTypes.string,
     status: PropTypes.string,
+    slug: PropTypes.string,
+    thumbnail: PropTypes.string,
+    title: PropTypes.string,
+    upload_date: PropTypes.string,
+    url_video: PropTypes.string,
+    visibility: PropTypes.number,
   }).isRequired,
 };

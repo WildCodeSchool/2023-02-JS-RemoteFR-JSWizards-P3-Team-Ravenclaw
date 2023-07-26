@@ -15,6 +15,7 @@ const getAllWithFilters = async (req, res) => {
       sql,
       sqlDependencies
     );
+
     if (!videos.length)
       return res
         .status(404)
