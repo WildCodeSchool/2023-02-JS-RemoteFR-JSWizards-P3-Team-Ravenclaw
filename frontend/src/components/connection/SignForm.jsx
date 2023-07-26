@@ -129,6 +129,7 @@ export default function SignForm({ isSignIn }) {
         <div className="relative flex w-full items-center">
           <input
             type={passwordConfType}
+            id="confirm-password"
             placeholder="Confirm password"
             className=" w-full rounded border-none bg-neutralLight p-3 outline-none dark:bg-neutralLightest"
             value={confirmationPassword}
