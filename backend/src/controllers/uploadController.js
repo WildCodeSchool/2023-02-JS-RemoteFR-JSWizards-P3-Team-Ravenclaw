@@ -14,8 +14,7 @@ const post = (req, res) => {
   const oldfileName = filename;
   const newfileName = `${uuidv4()}-${originalname}`;
 
-  // rename file
-  // fs.rename(oldPath, newPath, callback);
+  // rename file using fs.rename(oldPath, newPath, callback);
   fs.rename(
     `./public/${fileDestination}${oldfileName}`,
     `./public/${fileDestination}${newfileName}`,
@@ -28,23 +27,26 @@ const post = (req, res) => {
   );
 };
 
+// delete file (can be a thumbnail image file or a video file)
 const remove = (req, res) => {
-  const { thumbnail: thumbnailUrl } = req.body;
+  const { thumbnail, url_video: videoUrl } = req.body;
+  const fileUrl = thumbnail || videoUrl;
 
-  const isUploadFolder = thumbnailUrl.includes(FRONT_DEST);
+  const isUploadFolder = fileUrl.includes(FRONT_DEST);
 
-  // image is not in publick backend folder => do nothing
+  // file is not in public backend folder => do nothing
   if (!isUploadFolder) {
     res.status(200).json({
       message: "Private files (frontend/assets) cannot be deleted...",
     });
   } else {
-    // retrieve thumbnail relative path in backend public folder
-    const fileName = `./public/uploads${req.url}/${thumbnailUrl.replace(
+    // retrieve file relative path in backend public folder...
+    const fileName = `./public/uploads${req.url}/${fileUrl.replace(
       `${FRONT_DEST}uploads${req.url}/`,
       ""
     )}`;
-    // delete image
+
+    // ...then delete file
     fs.unlink(fileName, (err) => {
       if (err) throw err;
     });
