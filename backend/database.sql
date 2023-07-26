@@ -206,7 +206,8 @@ VALUES
 (2, 5, 1),
 (2, 8, 1),
 (2, 10, 1),
-(2, 15, 1);
+(2, 15, 1),
+(3, 1, 1);
 
 -- Create video_category
 INSERT INTO `video_category` (`video_id`, `category_id`) 
