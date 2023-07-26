@@ -183,6 +183,21 @@ export default function ModalVideo({ open, setIsModalOpened, refetchData }) {
     }
   };
 
+  const resetDropdown = () => {
+    setFormVideoInfo((prevVideoInfo) => ({
+      ...prevVideoInfo,
+      game: {},
+    }));
+    setFormVideoInfo((prevVideoInfo) => ({
+      ...prevVideoInfo,
+      language: {},
+    }));
+    setFormVideoInfo((prevVideoInfo) => ({
+      ...prevVideoInfo,
+      category: [],
+    }));
+  };
+
   return (
     <Modal
       centered
@@ -228,6 +243,7 @@ export default function ModalVideo({ open, setIsModalOpened, refetchData }) {
                 isDropdownOpen={isGameDropOpened}
                 handleDropdown={setIsGameDropOpened}
                 handleChange={handleInputChange}
+                resetGameFilters={resetDropdown}
               />
             </div>
             <Input
@@ -267,6 +283,7 @@ export default function ModalVideo({ open, setIsModalOpened, refetchData }) {
                 isDropdownOpen={isLangDropOpened}
                 handleDropdown={setIsLangDropOpened}
                 handleChange={handleInputChange}
+                resetLangFilters={resetDropdown}
               />
             </div>
             <div className="relative flex flex-col gap-1.5">
@@ -283,6 +300,7 @@ export default function ModalVideo({ open, setIsModalOpened, refetchData }) {
                 isDropdownOpen={isCatDropOpened}
                 handleDropdown={setIsCatDropOpened}
                 handleChange={handleInputChange}
+                resetCatFilters={resetDropdown}
               />
             </div>
           </div>
