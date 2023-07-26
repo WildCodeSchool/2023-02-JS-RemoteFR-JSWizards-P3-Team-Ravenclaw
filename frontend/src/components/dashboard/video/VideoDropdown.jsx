@@ -203,8 +203,6 @@ export default function VideoDropdown({
     }
   };
 
-  // console.log(formVideoInfo);
-
   const resetDropdown = () => {
     setFormVideoInfo((prevVideoInfo) => ({
       ...prevVideoInfo,
