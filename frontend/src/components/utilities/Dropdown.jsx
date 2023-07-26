@@ -121,7 +121,7 @@ export default function Dropdown({
                 handleChange={handleChange}
               />
               <Button
-                customCSS="bg-primaryLight hover:bg-primaryLightest rounded py-1 px-3 m-3"
+                customCSS="bg-primaryLight text-neutralLightest hover:bg-primaryLightest rounded py-1 px-3 m-3"
                 onClick={resetDropdown}
               >
                 Reset
