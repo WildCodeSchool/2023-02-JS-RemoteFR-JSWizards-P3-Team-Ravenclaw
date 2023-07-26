@@ -6,9 +6,6 @@ const checkForExistingCategory = require("../middlewares/catMiddleware");
 
 const router = express.Router();
 
-/**
- * TODO: add authentication wall...
- */
 router.get("/", categoryController.getAll);
 
 router.put("/:id", validateCategoryInfo, categoryController.editById);

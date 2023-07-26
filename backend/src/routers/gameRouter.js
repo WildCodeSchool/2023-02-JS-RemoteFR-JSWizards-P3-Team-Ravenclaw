@@ -6,9 +6,6 @@ const checkForExistingGame = require("../middlewares/gameMiddleware");
 
 const router = express.Router();
 
-/**
- * TODO: add authentication wall...
- */
 router.get("/", gameController.getAll);
 
 router.put("/:id", validateGameInfo, gameController.editById);
