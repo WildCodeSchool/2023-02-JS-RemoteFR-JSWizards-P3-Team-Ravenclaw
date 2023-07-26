@@ -187,15 +187,8 @@ export default function ModalVideo({ open, setIsModalOpened, refetchData }) {
     setFormVideoInfo((prevVideoInfo) => ({
       ...prevVideoInfo,
       game: {},
-    }));
-    setFormVideoInfo((prevVideoInfo) => ({
-      ...prevVideoInfo,
       language: {},
-    }));
-    setFormVideoInfo((prevVideoInfo) => ({
-      ...prevVideoInfo,
       category: [],
-    }));
   };
 
   return (
