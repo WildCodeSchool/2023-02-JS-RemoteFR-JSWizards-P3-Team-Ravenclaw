@@ -111,7 +111,7 @@ export default function Videos() {
     } else {
       setAreFavVideosLoading(false);
     }
-  }, []);
+  }, [userId]);
 
   useEffect(() => {
     if (!areVideosLoading && !areFavVideosLoading) setIsLoading(false);
