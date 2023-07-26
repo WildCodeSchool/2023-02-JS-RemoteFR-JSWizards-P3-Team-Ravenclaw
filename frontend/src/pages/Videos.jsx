@@ -81,6 +81,14 @@ export default function Videos() {
     setFilterGame({ id, name });
   };
 
+  const resetGameFilters = () => {
+    setFilterGame({});
+  };
+
+  const resetCatFilters = () => {
+    setFilterCategory([]);
+  };
+
   useEffect(() => {
     const gameName = searchParams.get("game");
     const requestedGame = games.find((game) => game.name === gameName);
@@ -120,6 +128,7 @@ export default function Videos() {
                   isDropdownOpen={isCatDropOpened}
                   handleDropdown={setIsCatDropOpened}
                   handleChange={handleCategoryChange}
+                  resetCatFilters={resetCatFilters}
                 />
               )}
             </div>
@@ -138,6 +147,7 @@ export default function Videos() {
                   isDropdownOpen={isGameDropOpened}
                   handleDropdown={setIsGameDropOpened}
                   handleChange={handleGameChange}
+                  resetGameFilters={resetGameFilters}
                 />
               )}
             </div>
