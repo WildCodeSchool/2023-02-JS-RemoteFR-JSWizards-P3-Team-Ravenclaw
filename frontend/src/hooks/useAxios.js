@@ -40,4 +40,3 @@ export default function useAxios(endpoint, refetchFlag = null) {
 
   return { data, isLoading, error };
 }
-
