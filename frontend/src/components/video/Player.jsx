@@ -6,14 +6,19 @@ export default function Player({ video }) {
   return (
     <div className="player-container">
       <div
-        className="custom-player"
         style={{
           display: "flex",
           justifyContent: "center",
           paddingTop: "2rem",
         }}
       >
-        <ReactPlayer url={video.url_video} controls playing />
+        <ReactPlayer
+          url={video.url_video}
+          width="854px"
+          height="480px"
+          controls
+          playing
+        />
       </div>
     </div>
   );
