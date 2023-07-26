@@ -1,7 +1,7 @@
 // Packages
 import PropTypes from "prop-types";
 import { Pagination, ConfigProvider } from "antd";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 // Components
 import RowStatic from "./dashboard/RowStatic";
@@ -9,12 +9,14 @@ import RowHead from "./dashboard/RowHead";
 import RowSearch from "./dashboard/RowSearch";
 import Card from "./utilities/Card";
 
+// Custom hooks
+import useAxios from "../hooks/useAxios";
+
 // Helpers
 import { filterByText } from "../helpers/filterTable";
-import groupVideoCategory from "../helpers/groupVideoCategory";
 
-// Services
-import { getVideos, getStats } from "../services/admin";
+// Settings
+import paginationSettings from "../settings/pagination.json";
 
 // Data
 import adminStats from "../data/adminStats.json";
@@ -22,40 +24,28 @@ import adminStats from "../data/adminStats.json";
 export default function Dashboard({ filterText, setFilterText }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
-  const [videos, setVideos] = useState([]);
-  const [dbStats, setDbStats] = useState([]);
 
   // table pagination
   const offset = pageSize * currentPage - pageSize;
   const nextPage = offset + pageSize;
+
+  // retrieve data from database
+  const { data: videos, areVideosLoading } = useAxios("/videos");
+  const { data: dbStats, areStatsLoading } = useAxios("/admin/stats");
 
   const stats = adminStats.map((stat, index) => ({
     ...stat,
     ...dbStats[index],
   }));
 
-  // load videos from database
-  useEffect(() => {
-    const videosController = new AbortController();
-    getVideos(videosController)
-      .then((res) => setVideos(groupVideoCategory(res.data)))
-      .catch((err) => console.error(err));
-  }, []);
-
-  // load admin stats from database
-  useEffect(() => {
-    const statsController = new AbortController();
-    getStats(statsController)
-      .then((res) => setDbStats(res.data))
-      .catch((err) => console.error(err));
-  }, []);
-
   return (
     <article className="flex w-screen max-w-[calc(100vw-320px)] flex-col gap-8 px-[100px] py-8">
       <h1>Dashboard</h1>
 
       <div className="flex flex-wrap gap-4 lg:flex-nowrap">
-        {dbStats.length &&
+        {areStatsLoading ? (
+          <p>Loading data...</p>
+        ) : (
           stats.map((stat) => (
             <Card
               classCSS="w-full bg-primary py-2 px-6 rounded-lg"
@@ -69,7 +59,8 @@ export default function Dashboard({ filterText, setFilterText }) {
                 <img src={stat.logo} alt={stat.alt} className="w-[30px]" />
               </div>
             </Card>
-          ))}
+          ))
+        )}
       </div>
 
       <div className="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
@@ -79,7 +70,9 @@ export default function Dashboard({ filterText, setFilterText }) {
           setFilterText={setFilterText}
         />
         <div className="overflow-x-auto">
-          {videos.length && (
+          {areVideosLoading ? (
+            <p>Loading data...</p>
+          ) : (
             <table className="w-full text-left text-base text-neutralDarkest dark:text-neutralLightest">
               <RowHead activeTab="dashboard" />
               <tbody>
@@ -92,19 +85,7 @@ export default function Dashboard({ filterText, setFilterText }) {
             </table>
           )}
 
-          <ConfigProvider
-            theme={{
-              token: {
-                colorPrimary: "#9596FB",
-                colorText: "#9596FB",
-                colorBgContainer: "#1f2937",
-                colorBgTextHover: "#374151",
-                colorTextPlaceholder: "#9596FB",
-                colorBorder: "#9596FB",
-                controlOutlineWidth: "0",
-              },
-            }}
-          >
+          <ConfigProvider theme={paginationSettings}>
             <Pagination
               pageSizeOptions={[5, 10, 20, 50, 100]}
               className="py-2 text-center"
