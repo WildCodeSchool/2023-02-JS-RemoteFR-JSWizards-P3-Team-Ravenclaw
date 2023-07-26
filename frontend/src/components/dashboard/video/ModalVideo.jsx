@@ -31,20 +31,23 @@ import {
   addVideoCategory,
 } from "../../../services/videos";
 
+// Settings
+import TOAST_DEFAULT_CONFIG from "../../../settings/toastify.json";
+
 // Styles
 import styles from "../../../css/Table.module.css";
 
-export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
-  const inputRef = useRef();
-  const imageRef = useRef();
-  const videoRef = useRef();
+export default function ModalVideo({ open, setIsModalOpened, refetchData }) {
+  const inputRef = useRef(null);
+  const imageRef = useRef(null);
+  const videoRef = useRef(null);
 
   const [isGameDropOpened, setIsGameDropOpened] = useState(false);
   const [isLangDropOpened, setIsLangDropOpened] = useState(false);
   const [isCatDropOpened, setIsCatDropOpened] = useState(false);
 
   // video info based on form inputs
-  const [formVideoInfo, setFormVideoInfo] = useState({
+  const initialState = {
     title: "",
     game: {},
     isPremium: false,
@@ -54,18 +57,8 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
     description: "",
     thumbnail: {},
     video: {},
-  });
-
-  const TOAST_DEFAULT_CONFIG = {
-    position: "bottom-right",
-    autoClose: 3000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: false,
-    progress: undefined,
-    theme: "dark",
   };
+  const [formVideoInfo, setFormVideoInfo] = useState(initialState);
 
   // fetch data from database to populate dropdown items
   const { data: games } = useAxios("/games");
@@ -110,6 +103,8 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
   };
 
   const handleCloseModal = () => {
+    // reset form inputs
+    setFormVideoInfo(initialState);
     // close dropdowns
     setIsGameDropOpened(false);
     setIsLangDropOpened(false);
@@ -124,77 +119,66 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
     // make sure all required dropdown are filled (if any)
     const { areMandatoryInputsFilled: isFormCompleted, errorMessage } =
       checkVideoFormCompleted(formVideoInfo);
+
     if (!isFormCompleted) {
       toast.error(`${errorMessage}`, TOAST_DEFAULT_CONFIG);
-      return;
-    }
+    } else {
+      // use the FormData constructor to create a new FormData object (instance) to convert the image file into a bunch of data and send it through the network
+      const thumbnailFormData = new FormData();
+      const videoFormData = new FormData();
+      videoFormData.append("video", videoRef.current.files[0]);
+      thumbnailFormData.append("video_thumbnail", imageRef.current.files[0]);
 
-    // use the FormData constructor to create a new FormData object (instance) to convert the image file into a bunch of data and send it through the network
-    const thumbnailFormData = new FormData();
-    const videoFormData = new FormData();
-    videoFormData.append("video", videoRef.current.files[0]);
-    thumbnailFormData.append("video_thumbnail", imageRef.current.files[0]);
+      try {
+        // upload video thumbnail to backend public folder
+        const {
+          data: { url_file: videoThumbUrl },
+        } = await addVideoThumbnail(thumbnailFormData);
 
-    try {
-      // upload video thumbnail to backend public folder
-      const {
-        data: { url_file: videoThumbUrl },
-      } = await addVideoThumbnail(thumbnailFormData);
+        // upload video to backend public folder
+        const {
+          data: { url_file: videoUrl },
+        } = await addVideoMedia(videoFormData);
 
-      // upload video to backend public folder
-      const {
-        data: { url_file: videoUrl },
-      } = await addVideoMedia(videoFormData);
+        // add video entry to database
+        const responseVideo = await addVideo(
+          formatVideoBodyRequest(formVideoInfo, videoUrl, videoThumbUrl)
+        );
 
-      // add video entry to database
-      const responseVideo = await addVideo(
-        formatVideoBodyRequest(formVideoInfo, videoUrl, videoThumbUrl)
-      );
+        // add relation entry for each added category (video_category) to database
+        const relationReponses = [];
 
-      // add relation entry for each added category (video_category) to database
-      const relationReponses = [];
+        formVideoInfo.category.forEach(async (category) => {
+          try {
+            const response = await addVideoCategory({
+              video_id: responseVideo.data.insertId,
+              category_id: category.id,
+            });
+            relationReponses.push(response);
+          } catch (err) {
+            console.error(err);
+            toast.error(`${err.response.statusText}!`, TOAST_DEFAULT_CONFIG);
+          }
+        });
 
-      formVideoInfo.category.forEach(async (category) => {
-        try {
-          const response = await addVideoCategory({
-            video_id: responseVideo.data.insertId,
-            category_id: category.id,
-          });
-          relationReponses.push(response);
-        } catch (err) {
-          console.error(err);
+        // notify status
+        toast.success(`Video successfully added!`, TOAST_DEFAULT_CONFIG);
+
+        // reset form inputs
+        setFormVideoInfo(initialState);
+
+        // raise flag to refetch data from DB and update table view
+        refetchData((prev) => !prev);
+
+        // close modal
+        setIsModalOpened(false);
+      } catch (err) {
+        console.error(err);
+        if (err.response?.status === 409) {
+          toast.error(`${err.response.data}`, TOAST_DEFAULT_CONFIG);
+        } else {
           toast.error(`${err.response.statusText}!`, TOAST_DEFAULT_CONFIG);
         }
-      });
-
-      // notify status
-      toast.success(`Video successfully added!`, TOAST_DEFAULT_CONFIG);
-
-      // reset form inputs
-      setTimeout(() => {
-        window.location.reload();
-      }, 3000);
-
-      /**
-       * !TO DO: do not refresh the page to reset form inputs
-       * use instead dedicated methods
-       * requires the dropdown states to be placed within ModalVideo...
-       */
-      // reset form inputs & state
-      // e.target.reset();
-      // setFormVideoInfo({});
-
-      // close modal
-      setIsModalOpened(false);
-
-      // raise flag to refetch data from DB and update table view
-      setFlag((prev) => !prev);
-    } catch (err) {
-      console.error(err);
-      if (err.response?.status === 409) {
-        toast.error(`${err.response.data}`, TOAST_DEFAULT_CONFIG);
-      } else {
-        toast.error(`${err.response.statusText}!`, TOAST_DEFAULT_CONFIG);
       }
     }
   };
@@ -253,6 +237,7 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
               className="m-3.5"
               title="Premium"
               required={false}
+              isDefaultChecked={formVideoInfo.isPremium}
               handleChange={handleInputChange}
             />
             <Input
@@ -262,6 +247,7 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
               className="m-3.5"
               title="Promoted"
               required={false}
+              isDefaultChecked={formVideoInfo.isPromoted}
               handleChange={handleInputChange}
             />
           </div>
@@ -366,11 +352,11 @@ export default function ModalVideo({ open, setIsModalOpened, setFlag }) {
 ModalVideo.propTypes = {
   open: PropTypes.bool,
   setIsModalOpened: PropTypes.func,
-  setFlag: PropTypes.func,
+  refetchData: PropTypes.func,
 };
 
 ModalVideo.defaultProps = {
   open: null,
   setIsModalOpened: null,
-  setFlag: null,
+  refetchData: null,
 };

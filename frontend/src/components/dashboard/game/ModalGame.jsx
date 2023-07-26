@@ -11,23 +11,15 @@ import Input from "../../utilities/Input";
 // Services
 import { addGame, addGameThumbnail } from "../../../services/games";
 
+// Settings
+import TOAST_DEFAULT_CONFIG from "../../../settings/toastify.json";
+
 // Styles
 import styles from "../../../css/Table.module.css";
 
-export default function ModalGame({ open, setIsModalOpened, setFlag }) {
+export default function ModalGame({ open, setIsModalOpened, refetchData }) {
   const inputRef = useRef();
   const fileRef = useRef();
-
-  const TOAST_DEFAULT_CONFIG = {
-    position: "bottom-right",
-    autoClose: 3000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: false,
-    progress: undefined,
-    theme: "dark",
-  };
 
   const handleClose = () => {
     inputRef.current.value = "";
@@ -58,7 +50,7 @@ export default function ModalGame({ open, setIsModalOpened, setFlag }) {
       // close modal
       setIsModalOpened(false);
       // raise flag to refetch data from DB and update table view
-      setFlag((prev) => !prev);
+      refetchData((prev) => !prev);
     } catch (err) {
       console.error(err);
       if (err.response?.status === 409) {
@@ -128,11 +120,11 @@ export default function ModalGame({ open, setIsModalOpened, setFlag }) {
 ModalGame.propTypes = {
   open: PropTypes.bool,
   setIsModalOpened: PropTypes.func,
-  setFlag: PropTypes.func,
+  refetchData: PropTypes.func,
 };
 
 ModalGame.defaultProps = {
   open: null,
   setIsModalOpened: null,
-  setFlag: null,
+  refetchData: null,
 };

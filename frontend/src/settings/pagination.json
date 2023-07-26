@@ -1,0 +1,11 @@
+{
+  "token": {
+    "colorPrimary": "#9596FB",
+    "colorText": "#9596FB",
+    "colorBgContainer": "#1f2937",
+    "colorBgTextHover": "#374151",
+    "colorTextPlaceholder": "#9596FB",
+    "colorBorder": "#9596FB",
+    "controlOutlineWidth": "0"
+  }
+}

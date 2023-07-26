@@ -7,25 +7,17 @@ import { toast } from "react-toastify";
 import CatDropdown from "./CatDropdown";
 import Button from "../../utilities/Button";
 
-// Services
-import { deleteCategory } from "../../../services/categories";
-
 // Helpers
 import capitalizeText from "../../../helpers/capitalize";
 
-export default function RowCategory({ category, setFlagCategories }) {
-  const [isToggled, setIsToggled] = useState(false);
+// Services
+import { deleteCategory } from "../../../services/categories";
 
-  const TOAST_DEFAULT_CONFIG = {
-    position: "bottom-right",
-    autoClose: 3000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: false,
-    progress: undefined,
-    theme: "dark",
-  };
+// Settings
+import TOAST_DEFAULT_CONFIG from "../../../settings/toastify.json";
+
+export default function RowCategory({ category, refetchData }) {
+  const [isToggled, setIsToggled] = useState(false);
 
   const toggleDropdown = () => setIsToggled(!isToggled);
 
@@ -34,7 +26,7 @@ export default function RowCategory({ category, setFlagCategories }) {
       .then((res) => {
         if (res?.status === 204)
           toast.success("Category successfully deleted!", TOAST_DEFAULT_CONFIG);
-        setFlagCategories((prev) => !prev);
+        refetchData((prev) => !prev);
       })
       .catch((err) => {
         console.error(err);
@@ -96,9 +88,9 @@ export default function RowCategory({ category, setFlagCategories }) {
       </tr>
       {isToggled && (
         <CatDropdown
-          id={category.id}
+          category={category}
           toggleDropdown={toggleDropdown}
-          setFlagCategories={setFlagCategories}
+          refetchData={refetchData}
         />
       )}
     </>
@@ -110,5 +102,5 @@ RowCategory.propTypes = {
     id: PropTypes.number,
     name: PropTypes.string,
   }).isRequired,
-  setFlagCategories: PropTypes.func.isRequired,
+  refetchData: PropTypes.func.isRequired,
 };

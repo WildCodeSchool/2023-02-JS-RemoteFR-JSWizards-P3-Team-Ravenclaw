@@ -24,6 +24,8 @@ router.post(
   uploadController.post
 );
 
+router.delete("/thumbnails/games", uploadController.remove);
+
 router.post(
   "/thumbnails/videos",
   uploadVideoThumbnail.single("video_thumbnail"),
@@ -31,11 +33,15 @@ router.post(
   uploadController.post
 );
 
+router.delete("/thumbnails/videos", uploadController.remove);
+
 router.post(
   "/videos",
   uploadVideo.single("video"),
   validateVideoFileInfo,
   uploadController.post
 );
+
+router.delete("/videos", uploadController.remove);
 
 module.exports = router;
