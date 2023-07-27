@@ -30,7 +30,7 @@ export default function ModalLanguage({ open, setIsModalOpened, refetchData }) {
     e.preventDefault();
     addLanguage({ name })
       .then((res) => {
-        if (res?.status === 204)
+        if (res?.status === 201)
           toast.success("Language successfully added!", TOAST_DEFAULT_CONFIG);
         refetchData((prev) => !prev);
         // reset input

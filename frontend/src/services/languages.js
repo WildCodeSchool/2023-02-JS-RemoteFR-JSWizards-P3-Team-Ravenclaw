@@ -8,9 +8,16 @@ export const getLanguages = (controller) => {
 };
 
 export const modifyLanguageById = (body, id) =>
-  axios.put(`${BASE_URL}/languages/${id}`, body);
+  axios.put(`${BASE_URL}/languages/${id}`, body, {
+    withCredentials: true,
+  });
 
-export const addLanguage = (body) => axios.post(`${BASE_URL}/languages/`, body);
+export const addLanguage = (body) =>
+  axios.post(`${BASE_URL}/languages/`, body, {
+    withCredentials: true,
+  });
 
 export const deleteLanguage = (id) =>
-  axios.delete(`${BASE_URL}/languages/${id}`);
+  axios.delete(`${BASE_URL}/languages/${id}`, {
+    withCredentials: true,
+  });

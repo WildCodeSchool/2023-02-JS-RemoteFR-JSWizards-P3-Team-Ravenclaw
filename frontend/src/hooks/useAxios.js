@@ -20,9 +20,15 @@ export default function useAxios(endpoint, refetchFlag = null) {
         if (url.includes("null") || url.includes("undefined")) {
           setData([]);
         } else {
-          const res = await axios.get(`${BASE_URL}${url}`, {
-            cancelToken: source.token,
-          });
+          const res = await axios.get(
+            `${BASE_URL}${url}`,
+            {
+              withCredentials: true,
+            },
+            {
+              cancelToken: source.token,
+            }
+          );
           // if fetching videos, remove potential duplicates (multiple categories)
           if (url.includes("videos")) setData(groupVideoCategory(res.data));
           else setData(res.data);

@@ -28,7 +28,7 @@ export default function RowGame({ game, refetchData }) {
         data: { thumbnail: game.thumbnail },
       });
       // ... then delete entry from database
-      const res = deleteGame(id);
+      const res = await deleteGame(id);
       if (res?.status === 204)
         toast.success("Game successfully deleted!", TOAST_DEFAULT_CONFIG);
       refetchData((prev) => !prev);
