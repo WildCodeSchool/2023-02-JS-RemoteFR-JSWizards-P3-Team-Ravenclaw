@@ -2,7 +2,10 @@ const fs = require("node:fs");
 const { v4: uuidv4 } = require("uuid");
 require("dotenv").config();
 
-const FRONT_DEST = `http://localhost:${process.env.APP_PORT}/`;
+// test local
+// const FRONT_DEST = `http://localhost:${process.env.APP_PORT}/`;
+// production
+const FRONT_DEST = `${process.env.FRONTEND_URL}:${process.env.APP_PORT}/`;
 
 const post = (req, res) => {
   // extract file destination (backend location)
