@@ -20,6 +20,7 @@ import {
 // Helpers
 import capitalizeText from "../../../helpers/capitalize";
 import checkRowStatus from "../../../helpers/checkRowStatus";
+import displayCategories from "../../../helpers/displayCategories";
 
 // Settings
 import TOAST_DEFAULT_CONFIG from "../../../settings/toastify.json";
@@ -62,9 +63,7 @@ export default function RowVideo({ video, refetchData }) {
         <td className="px-4 py-3 text-sm">{video.id}</td>
         <td className="px-4 py-3 text-sm">{capitalizeText(video.title)}</td>
         <td className="px-4 py-3 text-sm">
-          {Array.isArray(video.category_name)
-            ? video.category_name.join(" | ").toUpperCase() || "-"
-            : video.category_name.toUpperCase() || "-"}
+          {displayCategories(video.category_name)}
         </td>
         <td className="px-4 py-3 text-sm">
           {capitalizeText(video.language_name) || "-"}
