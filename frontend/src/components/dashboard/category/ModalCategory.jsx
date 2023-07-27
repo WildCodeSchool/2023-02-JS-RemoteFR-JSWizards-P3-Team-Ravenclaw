@@ -30,7 +30,7 @@ export default function ModalCategory({ open, setIsModalOpened, refetchData }) {
     e.preventDefault();
     addCategory({ name })
       .then((res) => {
-        if (res?.status === 204)
+        if (res?.status === 201)
           toast.success("Category successfully added!", TOAST_DEFAULT_CONFIG);
         refetchData((prev) => !prev);
         // reset input

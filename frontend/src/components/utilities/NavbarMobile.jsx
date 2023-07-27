@@ -23,12 +23,11 @@ export default function NavbarMobile({ navitems }) {
 
   const toggleNavMenu = () => setIsOpen(!isOpen);
   const handleLogOut = async () => {
-    // close burger menu
-    toggleNavMenu();
-    // request logout
-    await logoutUser();
-    // update context
-    setAccount(undefined);
+    toggleNavMenu(); // close burger menu
+    await logoutUser(); // request logout
+    setAccount({
+      id_plan: undefined, // update context
+    });
     clearUserFromLocalStorage();
     navigate("/");
   };

@@ -8,10 +8,16 @@ export const getCategories = (controller) => {
 };
 
 export const modifyCategoryById = (body, id) =>
-  axios.put(`${BASE_URL}/categories/${id}`, body);
+  axios.put(`${BASE_URL}/categories/${id}`, body, {
+    withCredentials: true,
+  });
 
 export const addCategory = (body) =>
-  axios.post(`${BASE_URL}/categories/`, body);
+  axios.post(`${BASE_URL}/categories/`, body, {
+    withCredentials: true,
+  });
 
 export const deleteCategory = (id) =>
-  axios.delete(`${BASE_URL}/categories/${id}`);
+  axios.delete(`${BASE_URL}/categories/${id}`, {
+    withCredentials: true,
+  });
