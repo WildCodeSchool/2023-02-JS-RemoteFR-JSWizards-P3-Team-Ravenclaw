@@ -1,15 +1,13 @@
 const express = require("express");
 
 const adminController = require("../controllers/adminController");
+const verifyToken = require("../middlewares/verifyToken");
 
 const router = express.Router();
 
-/**
- * TODO: POST handler with validateVideo middleware...
- * TODO: PUT handler with validateVideo middleware...
- * TODO: DELETE handler...
- * TODO: add authentication wall...
- */
+// authentication wall : verifyToken is activated for each route after this line
+router.use(verifyToken);
+
 router.get("/stats", adminController.getAllStats);
 router.get("/videos", adminController.getAllVideos);
 

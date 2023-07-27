@@ -2,6 +2,7 @@ const express = require("express");
 
 const userController = require("../controllers/userController");
 const validateUserInfo = require("../middlewares/validators/userValidator");
+const verifyToken = require("../middlewares/verifyToken");
 const {
   verifyEmail,
   checkForExistingAccount,
@@ -10,12 +11,10 @@ const {
 
 const router = express.Router();
 
-/**
- * TODO: add authentication wall...
- */
 router.get("/", userController.getAll);
-router.get("/stats", userController.getAllStats);
+router.get("/stats/:id", userController.getAllStats);
 router.get("/:id", userController.getById);
+
 router.post(
   "/",
   validateUserInfo,
@@ -23,6 +22,10 @@ router.post(
   hashPassword,
   userController.create
 );
+
+// authentication wall : verifyToken is activated for each route after this line
+router.use(verifyToken);
+
 router.put(
   "/:id",
   validateUserInfo,

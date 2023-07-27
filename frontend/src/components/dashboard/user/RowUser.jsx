@@ -6,7 +6,7 @@ import capitalizeText from "../../../helpers/capitalize";
 
 export default function RowUser({ user }) {
   return (
-    <tr className="border-b dark:border-neutral">
+    <tr className="border-b border-neutral">
       <td key={user.id_user} className="px-4 py-3 text-sm">
         {user.id_user}
       </td>

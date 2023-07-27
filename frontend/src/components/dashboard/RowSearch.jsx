@@ -39,7 +39,7 @@ export default function RowSearch({
       return "New Component";
     }
     if (activeTab === "userList") {
-      return "Export user list";
+      return "Export User List";
     }
     return null;
   };
@@ -80,9 +80,6 @@ export default function RowSearch({
           refetchData={setRefetchGames}
         />
       );
-    }
-    if (activeTab === "page") {
-      return "Add component";
     }
     return null;
   };

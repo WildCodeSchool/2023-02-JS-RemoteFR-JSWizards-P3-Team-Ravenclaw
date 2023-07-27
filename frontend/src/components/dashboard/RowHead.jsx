@@ -1,54 +1,10 @@
 // Packages
 import PropTypes from "prop-types";
 
-export default function RowHead({ activeTab }) {
-  const titles = [
-    {
-      id: 1,
-      name: "ID",
-    },
-    {
-      id: 2,
-      name: "Name",
-    },
-    {
-      id: 3,
-      name: "Category",
-    },
-    {
-      id: 4,
-      name: "Language",
-    },
-    {
-      id: 5,
-      name: "Status",
-    },
-    {
-      id: 6,
-      name: "Premium",
-    },
-    {
-      id: 7,
-      name: "Actions",
-    },
-    {
-      id: 8,
-      name: "Email",
-    },
-    {
-      id: 9,
-      name: "Plan",
-    },
-    {
-      id: 10,
-      name: "Watch",
-    },
-    {
-      id: 11,
-      name: "Unfavorite",
-    },
-  ];
+// Data
+import titles from "../../data/rowHeaders.json";
 
+export default function RowHead({ activeTab }) {
   const filteredTitles = titles.filter((title) => {
     if (
       activeTab === "video" &&

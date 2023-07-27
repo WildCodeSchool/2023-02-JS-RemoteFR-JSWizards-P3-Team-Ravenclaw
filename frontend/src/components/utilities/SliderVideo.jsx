@@ -41,9 +41,10 @@ export default function SliderVideo({
       case 2:
         hasUserAccess = account.id_plan > video.visibility;
         break;
-      // admin
+      // admin or new user
       case null:
-        hasUserAccess = true;
+        if (account.is_admin) hasUserAccess = true;
+        else hasUserAccess = video.visibility === 0 || video.visibility === 1;
         break;
       // not connected
       default:

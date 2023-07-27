@@ -1,17 +1,10 @@
-/**
- * @desc check if a request contains queries and returns the proper sql request
- * @param query is the client request query filters
- * @returns {sql} is the formatted SQL request with filters to be passed along to the dedicated model handler
- * @returns {sqlDependencies} is the SQL request parameters (array of dependencies for the mysql .query() method) to be passed along to the dedicated model handler
- */
-
 function handleVideoQuery(query, popularVideoTreshold) {
   let sql = `SELECT `;
   const sqlInitialValues = [];
 
   if (!Object.keys(query).length) {
     sql +=
-      "v.*, l.name AS language_name, g.name AS game_name, c.name AS category_name, c.id AS category_id FROM video AS v INNER JOIN language as l ON v.language_id = l.id INNER JOIN game as g ON v.game_id = g.id INNER JOIN video_category as vc ON vc.video_id = v.id INNER JOIN category as c ON vc.category_id = c.id";
+      "v.*, l.name AS language_name, g.name AS game_name, c.name AS category_name, c.id AS category_id FROM video AS v LEFT JOIN language as l ON v.language_id = l.id LEFT JOIN game as g ON v.game_id = g.id LEFT JOIN video_category as vc ON vc.video_id = v.id LEFT JOIN category as c ON vc.category_id = c.id";
     return [sql, sqlInitialValues];
   }
 

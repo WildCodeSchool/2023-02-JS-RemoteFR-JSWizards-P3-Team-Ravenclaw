@@ -23,21 +23,17 @@ export default function NavbarMobile({ navitems }) {
 
   const toggleNavMenu = () => setIsOpen(!isOpen);
   const handleLogOut = async () => {
-    // close burger menu
-    toggleNavMenu();
-    // request logout
-    await logoutUser();
-    // update context
-    setAccount(undefined);
-    // clear local storage
+    toggleNavMenu(); // close burger menu
+    await logoutUser(); // request logout
+    setAccount({
+      id_plan: undefined, // update context
+    });
     clearUserFromLocalStorage();
-    // re-direction to HomePage
     navigate("/");
   };
 
   return (
     <nav className={`${styles.navbar} ${styles.navbarMobile}`}>
-      {/* logo */}
       <NavLink to="/" className={styles.navbarMobile__logo}>
         <img
           src="../assets/icon/navbar/mobile/logo_mobile.svg"
@@ -47,7 +43,6 @@ export default function NavbarMobile({ navitems }) {
         />
       </NavLink>
 
-      {/* navitems */}
       <ul
         className={`${styles.navlistMobile} ${
           isOpen ? `${styles.navlistMobile__isOpen}` : ""
@@ -83,7 +78,6 @@ export default function NavbarMobile({ navitems }) {
         ) : null}
       </ul>
 
-      {/* navbuttons */}
       <div className={`${styles.inline__list} ${styles.navbar__btn}`}>
         {!isOpen && <MenuOpen onClick={toggleNavMenu} />}
         {isOpen && <MenuClose onClick={toggleNavMenu} />}

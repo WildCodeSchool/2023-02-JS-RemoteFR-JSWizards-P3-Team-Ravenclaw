@@ -1,6 +1,7 @@
 // Packages
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
+import { useSearchParams, useLocation } from "react-router-dom";
 
 // Components
 import Button from "./Button";
@@ -26,6 +27,9 @@ export default function Dropdown({
   const [isLoading, setIsLoading] = useState(true);
   const [filterOptions, setFilterOptions] = useState("");
   const [selectedItems, setSelectedItems] = useState(null);
+
+  const [searchParams] = useSearchParams();
+  const navigate = useLocation();
 
   const updateSelectedItems = (selectionId) => {
     const clonedSelection = [...selectedItems];
@@ -66,7 +70,10 @@ export default function Dropdown({
   };
 
   useEffect(() => {
-    if (initialValue || initialValue === "") {
+    if (navigate.pathname === "/videos" && searchParams.get("game") !== null) {
+      setSelectedItems(initState(items, searchParams.get("game")));
+      setIsLoading(false);
+    } else if (initialValue || initialValue === "") {
       setSelectedItems(initState(items, initialValue));
       setIsLoading(false);
     }

@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "img": "./assets/img/picturesForHome/cs.jpg",
+    "link": "/videos/18",
+    "alt": "counter strike"
+  },
+  {
+    "id": 2,
+    "img": "./assets/img/picturesForHome/ow.jpg",
+    "link": "/videos/1",
+    "alt": "overwatch"
+  },
+  {
+    "id": 3,
+    "img": "./assets/img/picturesForHome/valo.jpg",
+    "link": "/videos/4",
+    "alt": "valorant"
+  }
+]

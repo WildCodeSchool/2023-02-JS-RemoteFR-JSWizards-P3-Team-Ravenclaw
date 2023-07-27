@@ -28,7 +28,7 @@ export default function RowGame({ game, refetchData }) {
         data: { thumbnail: game.thumbnail },
       });
       // ... then delete entry from database
-      const res = deleteGame(id);
+      const res = await deleteGame(id);
       if (res?.status === 204)
         toast.success("Game successfully deleted!", TOAST_DEFAULT_CONFIG);
       refetchData((prev) => !prev);
@@ -44,7 +44,7 @@ export default function RowGame({ game, refetchData }) {
 
   return (
     <>
-      <tr className="w-full justify-between border-b dark:border-neutral">
+      <tr className="w-full justify-between border-b border-neutral">
         <td className="px-4 py-3 text-sm">{game.id}</td>
         <td className="flex items-center gap-5 px-4 py-3 text-sm">
           <img

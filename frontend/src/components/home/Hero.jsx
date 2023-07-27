@@ -7,26 +7,8 @@ import { useState } from "react";
 // Components
 import Button from "../utilities/Button";
 
-const displayedLinks = [
-  {
-    id: 1,
-    img: "./assets/img/picturesForHome/cs.jpg",
-    link: "/videos/18",
-    alt: "cs",
-  },
-  {
-    id: 2,
-    img: "./assets/img/picturesForHome/ow.jpg",
-    link: "/videos/1",
-    alt: "ow",
-  },
-  {
-    id: 3,
-    img: "./assets/img/picturesForHome/valo.jpg",
-    link: "/videos/4",
-    alt: "valo",
-  },
-];
+// Data
+import displayedLinks from "../../data/heroImages.json";
 
 export default function Hero() {
   const [free, setFree] = useState(true);

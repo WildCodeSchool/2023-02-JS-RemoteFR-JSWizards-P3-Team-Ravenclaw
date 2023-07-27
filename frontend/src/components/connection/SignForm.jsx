@@ -11,6 +11,9 @@ import useAuth from "../../hooks/useAuth";
 import passHide from "../../../public/assets/icon/utility/eyeSlash.svg";
 import passShow from "../../../public/assets/icon/dashboard/watch.svg";
 
+// Settings
+import TOAST_DEFAULT_CONFIG from "../../settings/toastify.json";
+
 export default function SignForm({ isSignIn }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,17 +26,6 @@ export default function SignForm({ isSignIn }) {
 
   const passwordType = passwordVisible ? "text" : "password";
   const passwordConfType = passwordConfVisible ? "text" : "password";
-
-  const TOAST_DEFAULT_CONFIG = {
-    position: "bottom-right",
-    autoClose: 3000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: false,
-    progress: undefined,
-    theme: "dark",
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -129,6 +121,7 @@ export default function SignForm({ isSignIn }) {
         <div className="relative flex w-full items-center">
           <input
             type={passwordConfType}
+            id="confirm-password"
             placeholder="Confirm password"
             className=" w-full rounded border-none bg-neutralLight p-3 outline-none dark:bg-neutralLightest"
             value={confirmationPassword}

@@ -1,9 +1,6 @@
 // Package
 import { useState, useEffect } from "react";
 
-// Style
-import styles from "../css/Slider.module.css";
-
 // Components
 import Hero from "../components/home/Hero";
 import SliderGame from "../components/home/SliderGame";
@@ -11,7 +8,12 @@ import SliderVideo from "../components/utilities/SliderVideo";
 import Partners from "../components/home/Partners";
 import Footer from "../components/utilities/Footer";
 import Loader from "../components/utilities/Loader";
+
+// Services
 import * as Services from "../services/Account.service";
+
+// Style
+import styles from "../css/Slider.module.css";
 
 export default function Home() {
   const [games, setGames] = useState([]);

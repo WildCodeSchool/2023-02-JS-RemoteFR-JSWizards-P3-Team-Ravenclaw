@@ -73,15 +73,17 @@ const remove = async (req, res) => {
 
 const getAllStats = async (req, res) => {
   try {
-    const stats = [];
+    const stat = [];
 
-    const [[isFavorite]] = await models.user.countAllFavorites();
-    stats.push(isFavorite);
+    const [[favoriteCount]] = await models.user.countAllFavorites(
+      req.params.id
+    );
+    stat.push(favoriteCount);
 
-    const [[plan]] = await models.user.findPlansName();
-    stats.push(plan);
+    const [[plan]] = await models.user.findPlansName(req.params.id);
+    stat.push(plan);
 
-    res.json(stats);
+    res.json(stat);
   } catch (err) {
     console.error(err);
     res

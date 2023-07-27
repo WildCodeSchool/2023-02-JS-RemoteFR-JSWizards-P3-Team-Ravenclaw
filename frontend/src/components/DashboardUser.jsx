@@ -5,11 +5,14 @@ import { useState, useEffect } from "react";
 import Card from "./utilities/Card";
 import TableFavorite from "./dashboard/favorite/TableFavorite";
 
+// Custom hooks
+import useAuth from "../hooks/useAuth";
+
 // Helper
 import capitalizeText from "../helpers/capitalize";
 
 // Services
-import { getStats } from "../services/users";
+import { getUserStats } from "../services/users";
 
 // Data
 import userStats from "../data/userStats.json";
@@ -18,6 +21,7 @@ export default function DashboardUser() {
   const [dbStats, setDbStats] = useState([]);
   const [filterText, setFilterText] = useState("");
   const [flagVideos, setFlagVideos] = useState(false);
+  const { account } = useAuth();
 
   const stats = userStats.map((stat, index) => ({
     ...stat,
@@ -27,7 +31,7 @@ export default function DashboardUser() {
   // load user stats from database
   useEffect(() => {
     const statsController = new AbortController();
-    getStats(statsController)
+    getUserStats(statsController, account.id_user)
       .then((res) => setDbStats(res.data))
       .catch((err) => console.error(err));
   }, [flagVideos]);
