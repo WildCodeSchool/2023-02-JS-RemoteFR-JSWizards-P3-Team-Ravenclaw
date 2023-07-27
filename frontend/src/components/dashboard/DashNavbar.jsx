@@ -23,9 +23,8 @@ export default function DashNavbar() {
     setAccount({
       id_plan: undefined,
     });
-    // clear local storage
+
     clearUserFromLocalStorage();
-    // re-direction to HomePage
     navigate("/");
   };
 
@@ -94,7 +93,7 @@ export default function DashNavbar() {
           </svg>
           <button
             type="button"
-            className="text-lg text-primaryLightest group-hover:text-neutralLightest"
+            className="flex w-full text-lg text-primaryLightest group-hover:text-neutralLightest"
             onClick={handleClick}
           >
             Log Out

@@ -1,10 +1,6 @@
 const argon2 = require("argon2");
 const models = require("../models");
 
-/**
- * @desc middleware for checking user already exists in the database, and if so, pass along user credentials to the next middleware
- * hash user password using argon2 prior writing to database
- */
 const verifyEmail = async (req, res, next) => {
   try {
     if (!Object.keys(req.body).length)
@@ -30,10 +26,6 @@ const verifyEmail = async (req, res, next) => {
   }
 };
 
-/**
- * @desc middleware to verify user password at authentication (POST login route)
- * check user redentials are valid, and if so proceed to the next handler
- */
 const verifyPassword = async (req, res, next) => {
   try {
     const isUserVerified = await argon2.verify(
@@ -56,9 +48,6 @@ const verifyPassword = async (req, res, next) => {
   }
 };
 
-/**
- * @desc checking if account (email already) exists prior adding it to the database
- */
 const checkForExistingAccount = async (req, res, next) => {
   try {
     if (!Object.keys(req.body).length)
@@ -81,9 +70,6 @@ const checkForExistingAccount = async (req, res, next) => {
   }
 };
 
-/**
- * @desc hash user password using argon2 (prior writing to database)
- */
 const hashPassword = async (req, res, next) => {
   /**
    * OWSP minimum recommendations for argon2id:

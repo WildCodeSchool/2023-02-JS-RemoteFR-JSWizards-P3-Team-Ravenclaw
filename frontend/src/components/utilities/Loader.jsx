@@ -6,7 +6,7 @@ export default function Loader() {
     >
       <svg
         aria-hidden="true"
-        className="mr-2 h-8 w-8 animate-spin fill-primaryLightest text-gray-200 dark:text-gray-600"
+        className="mr-2 h-8 w-8 animate-spin fill-primaryLightest text-gray-600"
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

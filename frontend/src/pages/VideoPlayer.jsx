@@ -74,72 +74,70 @@ export default function VideoPlayer() {
       {isVideoLoading ? (
         <Loader />
       ) : (
-        <>
+        <section className="head-infos flex flex-col justify-between md:gap-8">
           <Player video={video} />
-          <section className="head-infos flex flex-col justify-between md:gap-8">
-            <div className="flex justify-between">
-              <div className="fps-language flex gap-4 md:gap-6">
-                {video && (
-                  <>
-                    <Label
-                      htmlFor={video.category_name}
-                      className="rounded-2xl bg-primaryLightest px-4 py-1 font-bold"
-                      title={video.category_name}
-                    />
-                    <Label
-                      htmlFor={video.language_name}
-                      className="rounded-2xl bg-primaryLightest px-4 py-1 font-bold"
-                      title={video.language_name}
-                    />
-                  </>
-                )}
-              </div>
-              <div className="flex items-center gap-4 md:gap-6">
-                {account.id_user !== undefined && (
-                  <Button type="button" onClick={() => handleClickOnFavorite()}>
-                    {isFav ? (
-                      <img
-                        src="../assets/icon/utility/like_red.svg"
-                        alt="like_red button"
-                      />
-                    ) : (
-                      <img
-                        src="../assets/icon/utility/like.svg"
-                        alt="like button"
-                      />
-                    )}
-                  </Button>
-                )}
-                <Button type="button" onClick={() => setIsToggled(!isToggled)}>
-                  <img
-                    src="../assets/icon/utility/share.svg"
-                    alt="share button"
+          <div className="flex justify-between">
+            <div className="fps-language flex gap-4 md:gap-6">
+              {video && (
+                <>
+                  <Label
+                    htmlFor={video.category_name}
+                    className="rounded-2xl bg-primaryLightest px-4 py-1 font-bold"
+                    title={video.category_name}
                   />
-                </Button>
-                {isToggled && (
-                  <div className="absolute z-10 mb-56 ml-8 rounded-lg bg-neutralLightest">
-                    <div className="flex flex-col gap-2 px-2 py-2">
-                      <TwitterShareButton url={shareUrl}>
-                        <TwitterIcon size={35} round />
-                      </TwitterShareButton>
-                      <FacebookShareButton url={shareUrl}>
-                        <FacebookIcon size={35} round />
-                      </FacebookShareButton>
-                      <FacebookMessengerShareButton url={shareUrl}>
-                        <FacebookMessengerIcon size={35} round />
-                      </FacebookMessengerShareButton>
-                      <WhatsappShareButton url={shareUrl}>
-                        <WhatsappIcon size={35} round />
-                      </WhatsappShareButton>
-                    </div>
-                  </div>
-                )}
-              </div>
+                  <Label
+                    htmlFor={video.language_name}
+                    className="rounded-2xl bg-primaryLightest px-4 py-1 font-bold"
+                    title={video.language_name}
+                  />
+                </>
+              )}
             </div>
-            <h1>{video.title}</h1>
-            <p className="text-justify">{video.description}</p>
-          </section>
-        </>
+            <div className="flex items-center gap-4 md:gap-6">
+              {account.id_user !== undefined && (
+                <Button type="button" onClick={() => handleClickOnFavorite()}>
+                  {isFav ? (
+                    <img
+                      src="../assets/icon/utility/like_red.svg"
+                      alt="like_red button"
+                    />
+                  ) : (
+                    <img
+                      src="../assets/icon/utility/like.svg"
+                      alt="like button"
+                    />
+                  )}
+                </Button>
+              )}
+              <Button type="button" onClick={() => setIsToggled(!isToggled)}>
+                <img
+                  src="../assets/icon/utility/share.svg"
+                  alt="share button"
+                />
+              </Button>
+              {isToggled && (
+                <div className="absolute z-10 mb-56 ml-8 rounded-lg bg-neutralLightest">
+                  <div className="flex flex-col gap-2 px-2 py-2">
+                    <TwitterShareButton url={shareUrl}>
+                      <TwitterIcon size={35} round />
+                    </TwitterShareButton>
+                    <FacebookShareButton url={shareUrl}>
+                      <FacebookIcon size={35} round />
+                    </FacebookShareButton>
+                    <FacebookMessengerShareButton url={shareUrl}>
+                      <FacebookMessengerIcon size={35} round />
+                    </FacebookMessengerShareButton>
+                    <WhatsappShareButton url={shareUrl}>
+                      <WhatsappIcon size={35} round />
+                    </WhatsappShareButton>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+          <h1>{video.title}</h1>
+          <p className="text-justify">{video.description}</p>
+        </section>
       )}
     </>
   );

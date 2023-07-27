@@ -1,6 +1,3 @@
-/**
- * @desc automated method for server-side data validation (prior to database entry)
- */
 const Joi = require("joi");
 
 const videoSchema = Joi.object({

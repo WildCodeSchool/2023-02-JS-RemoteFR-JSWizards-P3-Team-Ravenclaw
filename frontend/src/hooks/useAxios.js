@@ -33,6 +33,9 @@ export default function useAxios(endpoint, refetchFlag = null) {
             console.error("Error fetching data from API:", err);
             setError(err);
           }
+          if (err.response.status === 404) {
+            setData([]);
+          }
         }
       } finally {
         setIsLoading(false);

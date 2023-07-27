@@ -3,9 +3,6 @@ const express = require("express");
 const userVideoController = require("../controllers/userVideoController");
 
 const router = express.Router();
-/**
- * TODO: add authentication wall...
- */
 
 router.post("/", userVideoController.postFavs);
 

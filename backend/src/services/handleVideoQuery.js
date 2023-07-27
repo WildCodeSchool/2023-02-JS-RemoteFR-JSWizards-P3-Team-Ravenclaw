@@ -1,10 +1,3 @@
-/**
- * @desc check if a request contains queries and returns the proper sql request
- * @param query is the client request query filters
- * @returns {sql} is the formatted SQL request with filters to be passed along to the dedicated model handler
- * @returns {sqlDependencies} is the SQL request parameters (array of dependencies for the mysql .query() method) to be passed along to the dedicated model handler
- */
-
 function handleVideoQuery(query, popularVideoTreshold) {
   let sql = `SELECT `;
   const sqlInitialValues = [];

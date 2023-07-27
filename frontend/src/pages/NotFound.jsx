@@ -15,7 +15,7 @@ export default function NotFound() {
           src="../assets/img/notfound/error_404.svg"
           alt="error_404"
         />
-        <p className="text-lg font-extrabold text-neutralDark dark:text-neutralLight md:text-2xl">
+        <p className="text-lg font-extrabold text-neutralLight md:text-2xl">
           Ooops... Page Not Found!
         </p>
         <p className="text-neutral md:text-lg">Looks like you lost your way</p>

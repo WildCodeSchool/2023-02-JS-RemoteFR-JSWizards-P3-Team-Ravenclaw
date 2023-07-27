@@ -40,7 +40,7 @@ export default function RowLanguage({ language, refetchData }) {
 
   return (
     <>
-      <tr className="w-full justify-between border-b dark:border-neutral">
+      <tr className="w-full justify-between border-b border-neutral">
         <td className="px-4 py-3 text-sm">{language.id}</td>
         <td className="px-4 py-3 text-sm">{capitalizeText(language.name)}</td>
         <td className="px-4 py-3 text-sm">

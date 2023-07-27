@@ -81,9 +81,6 @@ export default function RowSearch({
         />
       );
     }
-    if (activeTab === "page") {
-      return "Add component";
-    }
     return null;
   };
 

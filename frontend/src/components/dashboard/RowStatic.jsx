@@ -7,7 +7,7 @@ import checkRowStatus from "../../helpers/checkRowStatus";
 
 export default function RowStatic({ video }) {
   return (
-    <tr className="border-b dark:border-neutral">
+    <tr className="border-b border-neutral">
       <td className="px-4 py-3 text-sm">{video.id}</td>
       <td className="px-4 py-3 text-sm">{capitalizeText(video.title)}</td>
       <td className="px-4 py-3 text-sm">

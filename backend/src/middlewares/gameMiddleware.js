@@ -1,8 +1,5 @@
 const models = require("../models");
 
-/**
- * @desc check if game already exists prior adding it to database
- */
 const checkForExistingGame = async (req, res, next) => {
   try {
     if (!Object.keys(req.body).length)

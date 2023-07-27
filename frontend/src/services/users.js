@@ -7,7 +7,7 @@ export const getUsers = (controller) => {
   return axios.get(`${BASE_URL}/users`, { signal });
 };
 
-export const getStats = (controller) => {
+export const getUserStats = (controller, userId) => {
   const { signal } = controller;
-  return axios.get(`${BASE_URL}/users/stats`, { signal });
+  return axios.get(`${BASE_URL}/users/stats/${userId}`, { signal });
 };

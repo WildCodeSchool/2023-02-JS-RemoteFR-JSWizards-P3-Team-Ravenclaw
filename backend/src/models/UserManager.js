@@ -7,7 +7,7 @@ class UserManager extends AbstractManager {
 
   findByEmail(email) {
     return this.database.query(
-      `SELECT u.id AS id_user, u.email, u.password, u.pseudo, ut.is_admin, p.id AS id_plan, p.name AS plan FROM ${this.table} AS u INNER JOIN user_type AS ut ON u.user_type_id = ut.id LEFT JOIN plan AS p ON u.plan_id = p.id WHERE email = (?)`,
+      `SELECT u.id AS id_user, u.email, u.password, u.pseudo, ut.is_admin, p.id AS id_plan, p.name AS plan FROM ${this.table} AS u INNER JOIN user_type AS ut ON u.user_type_id = ut.id LEFT JOIN plan AS p ON u.plan_id = p.id WHERE email = ?`,
       [email]
     );
   }
@@ -49,15 +49,23 @@ class UserManager extends AbstractManager {
     ]);
   }
 
-  findPlansName() {
+  findAllWithPlans() {
+    return this.database
+      .query(`SELECT u.id AS id_user, u.email, u.pseudo, p.id AS id_plan, p.name AS plan FROM ${this.table} AS u
+    LEFT JOIN plan AS p ON u.plan_id = p.id`);
+  }
+
+  findPlansName(id) {
     return this.database.query(
-      `SELECT p.name AS plan FROM ${this.table} AS u INNER JOIN plan AS p ON u.plan_id = p.id`
+      `SELECT p.name AS plan FROM ${this.table} AS u INNER JOIN plan AS p ON u.plan_id = p.id WHERE u.id = ?`,
+      [id]
     );
   }
 
-  countAllFavorites() {
+  countAllFavorites(id) {
     return this.database.query(
-      `SELECT COUNT(uv.id) AS favorite_count FROM ${this.table} AS u INNER JOIN user_video AS uv ON u.id = uv.user_id WHERE uv.is_favorite = 1 GROUP BY u.id;`
+      `SELECT COUNT(uv.id) AS favorite_count FROM ${this.table} AS u INNER JOIN user_video AS uv ON u.id = uv.user_id WHERE uv.is_favorite = 1 AND u.id = ?`,
+      [id]
     );
   }
 }

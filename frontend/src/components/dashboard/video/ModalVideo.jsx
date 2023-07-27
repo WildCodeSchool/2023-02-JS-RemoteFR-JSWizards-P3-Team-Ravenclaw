@@ -161,16 +161,10 @@ export default function ModalVideo({ open, setIsModalOpened, refetchData }) {
           }
         });
 
-        // notify status
         toast.success(`Video successfully added!`, TOAST_DEFAULT_CONFIG);
 
-        // reset form inputs
         setFormVideoInfo(initialState);
-
-        // raise flag to refetch data from DB and update table view
         refetchData((prev) => !prev);
-
-        // close modal
         setIsModalOpened(false);
       } catch (err) {
         console.error(err);

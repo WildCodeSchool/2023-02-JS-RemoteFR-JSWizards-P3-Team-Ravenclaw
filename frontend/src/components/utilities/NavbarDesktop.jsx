@@ -8,7 +8,6 @@ import styles from "../../css/Navbar.module.css";
 export default function NavBarDesktop({ navitems }) {
   return (
     <nav className={`${styles.navbar} ${styles.navbarDesktop}`}>
-      {/* logo */}
       <NavLink to="/">
         <img
           src="../assets/icon/navbar/logo_desktop.svg"
@@ -18,7 +17,6 @@ export default function NavBarDesktop({ navitems }) {
       </NavLink>
 
       <div className={styles.inline__list}>
-        {/* navitems */}
         <ul className={styles.navlistDesktop}>
           {navitems.map((navitem) => (
             <li

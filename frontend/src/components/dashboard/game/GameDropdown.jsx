@@ -62,7 +62,7 @@ export default function GameDropdown({ game, toggleDropdown, refetchData }) {
   }, []);
 
   return (
-    <tr className="border-b dark:border-neutral">
+    <tr className="border-b border-neutral">
       <td colSpan="6" className="px-8 py-4">
         <form
           className="flex flex-wrap justify-between gap-4"

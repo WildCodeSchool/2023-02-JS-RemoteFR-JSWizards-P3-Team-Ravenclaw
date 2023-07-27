@@ -8,9 +8,6 @@ const {
 
 const router = express.Router();
 
-/**
- * TODO: register route...
- */
 router.post("/login", verifyEmail, verifyPassword, authController.login);
 router.get("/logout", authController.logout);
 

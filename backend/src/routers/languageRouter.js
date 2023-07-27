@@ -6,9 +6,6 @@ const checkForExistingLanguage = require("../middlewares/langMiddleware");
 
 const router = express.Router();
 
-/**
- * TODO: add authentication wall...
- */
 router.get("/", languageController.getAll);
 
 router.put("/:id", validateLanguageInfo, languageController.editById);

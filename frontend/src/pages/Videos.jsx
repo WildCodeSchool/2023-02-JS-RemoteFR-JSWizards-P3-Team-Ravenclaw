@@ -2,11 +2,12 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
-// Hooks
-import useAxios from "../hooks/useAxios";
-
 // Helpers
 import { filterVideos } from "../helpers/filterTable";
+
+// Hooks
+import useAxios from "../hooks/useAxios";
+import useAuth from "../hooks/useAuth";
 
 // Components
 import Dropdown from "../components/utilities/Dropdown";
@@ -16,7 +17,6 @@ import Button from "../components/utilities/Button";
 import SliderVideo from "../components/utilities/SliderVideo";
 import Footer from "../components/utilities/Footer";
 import Loader from "../components/utilities/Loader";
-import useAuth from "../hooks/useAuth";
 
 // Styles
 import styles from "../css/Slider.module.css";
@@ -81,13 +81,9 @@ export default function Videos() {
     setFilterGame({ id, name });
   };
 
-  const resetGameFilters = () => {
-    setFilterGame({});
-  };
+  const resetGameFilters = () => setFilterGame({});
 
-  const resetCatFilters = () => {
-    setFilterCategory([]);
-  };
+  const resetCatFilters = () => setFilterCategory([]);
 
   useEffect(() => {
     const gameName = searchParams.get("game");
@@ -111,7 +107,7 @@ export default function Videos() {
       {isLoading ? (
         <Loader />
       ) : (
-        <section className="home">
+        <section className="min-h-[calc(100vh-160px)]">
           <div className="flex flex-wrap gap-4 px-6 pt-12 md:flex-nowrap md:px-0">
             <div className="relative flex flex-col gap-1.5">
               <Label

@@ -1,8 +1,5 @@
 const models = require("../models");
 
-/**
- * @desc check if language already exists prior adding it to database
- */
 const checkForExistingLanguage = async (req, res, next) => {
   try {
     if (!Object.keys(req.body).length)

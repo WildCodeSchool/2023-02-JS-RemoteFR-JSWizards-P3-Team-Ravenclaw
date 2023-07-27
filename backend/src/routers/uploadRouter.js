@@ -14,9 +14,6 @@ const uploadGameThumbnail = multer({ dest: `${THUMB_DEST}/games/` });
 const uploadVideoThumbnail = multer({ dest: `${THUMB_DEST}/videos/` });
 const uploadVideo = multer({ dest: VIDEO_DEST });
 
-/**
- * TODO: add authentication wall...
- */
 router.post(
   "/thumbnails/games",
   uploadGameThumbnail.single("game_thumbnail"),
